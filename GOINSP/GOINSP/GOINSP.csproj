@@ -100,7 +100,6 @@
     <Compile Include="ViewModel\AccountVM.cs" />
     <Compile Include="ViewModel\InspectionVM.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="UserControl.xaml.cs">
       <DependentUpon>UserControl.xaml</DependentUpon>
     </Compile>
