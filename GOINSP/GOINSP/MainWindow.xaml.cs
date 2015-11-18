@@ -18,9 +18,9 @@ namespace GOINSP
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class MainWindow : Window
     {
-        public Login()
+        public MainWindow()
         {
             InitializeComponent();
         }
