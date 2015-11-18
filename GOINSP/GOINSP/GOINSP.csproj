@@ -103,7 +103,6 @@
     <Compile Include="UserControl.xaml.cs">
       <DependentUpon>UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MapVM.cs" />
     <Compile Include="ViewModel\OpenDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />

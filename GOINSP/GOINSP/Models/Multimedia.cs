@@ -4,12 +4,17 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOINSP.Models
 {
-    [Table("Multimedia")]
-    class Multimedia
+    public class Multimedia
     {
+        public Multimedia()
+        {
+
+        }
+
+        [Key]
+        public int MultimediaID { get; set; }
     }
 }

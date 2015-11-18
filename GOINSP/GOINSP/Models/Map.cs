@@ -4,12 +4,17 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOINSP.Models
 {
-    [Table("Map")]
-    class Map
+    public class Map
     {
+        public Map()
+        {
+
+        }
+
+        [Key]
+        public int MapID { get; set; }
     }
 }

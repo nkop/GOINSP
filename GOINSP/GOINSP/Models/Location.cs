@@ -4,12 +4,17 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOINSP.Models
 {
-    [Table("Location")]
-    class Location
+    public class Location
     {
+        public Location()
+        {
+
+        }
+
+        [Key]
+        public int LocationID { get; set; }
     }
 }
