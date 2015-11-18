@@ -21,6 +21,7 @@ namespace GOINSP.ViewModel
         /// </summary>
         public MainViewModel()
         {
+            int i = 0;
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
