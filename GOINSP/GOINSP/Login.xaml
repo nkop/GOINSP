@@ -1,0 +1,18 @@
+﻿<Window x:Class="GOINSP.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="350" Width="525">
+    <Grid>
+        <TextBlock FontSize="60" HorizontalAlignment="Center">GoInsp</TextBlock>
+            
+        <StackPanel Height="80" Width="300">
+            <TextBox FontSize="18" FontStyle="Oblique" HorizontalAlignment="Left" Height="30" Width="250">Vul hier je gebruikersnaam in:</TextBox>
+            <PasswordBox FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250"/>
+            <WrapPanel>
+                <Button Height="24" Width="100" HorizontalAlignment="Left">Login</Button>
+                <Button Height="24" Width="100">Register</Button>
+            </WrapPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
