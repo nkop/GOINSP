@@ -19,7 +19,6 @@
             <Button Height="24" Width="100" HorizontalAlignment="Center">Login</Button>
 
         </StackPanel>
-        <Label Content="sexymann" HorizontalAlignment="Left" Margin="226,239,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
