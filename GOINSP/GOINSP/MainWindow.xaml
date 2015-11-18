@@ -2,10 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" Height="350" Width="525"
+        DataContext="{Binding Account, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Grid>
-        <TextBlock FontSize="60" HorizontalAlignment="Center" VerticalAlignment="top" Height="100">GoInsp</TextBlock>
+        <TextBlock FontSize="60" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="top" Height="100">GoInsp</TextBlock>
 
         <StackPanel Height="80" Width="400">
             <WrapPanel>

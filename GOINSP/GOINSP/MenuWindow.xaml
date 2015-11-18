@@ -4,11 +4,13 @@
         Title="Login" Height="350" Width="525"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="149,110,0,0" VerticalAlignment="Top" Width="112" Height="59"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="266,110,0,0" VerticalAlignment="Top" Width="112" Height="59"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="383,110,0,0" VerticalAlignment="Top" Width="112" Height="59"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="30,110,0,0" VerticalAlignment="Top" Width="112" Height="59"/>
-        <Label Content="Menu GOINSP" HorizontalAlignment="Left" Margin="135,35,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold"/>
+        <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Menu GoInsp</TextBlock>
+        <WrapPanel Height="100" HorizontalAlignment="Center">
+            <Button Content="Button" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59"/>
+        </WrapPanel>
 
     </Grid>
 </Window>
