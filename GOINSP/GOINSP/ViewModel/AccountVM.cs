@@ -29,24 +29,24 @@ namespace GOINSP.ViewModel
         public AccountVM()
         {
             LoginCommand = new RelayCommand(Login);
-        }        
+        }
 
         //public string UserName
         //{
-        //    //get { return Models.username; }
-        //   // set { Models.login = value; }
+        //    get { return Models.Account.UserName; }
+        //    set { Models.Account.UserName = value; }
         //}
 
         //public string Password
         //{
-            
-        //    //get { return Models.password; }
-        //    //set { Models.password = value; }
+
+        //    get { return Models.Account.Password; }
+        //    set { Models.Account.Password = value; }
         //}
 
         private void Login()
         {
-            //if 
+            new MenuControl();
         }
     }
 }
