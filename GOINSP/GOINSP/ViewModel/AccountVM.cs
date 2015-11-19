@@ -46,7 +46,8 @@ namespace GOINSP.ViewModel
 
         private void Login()
         {
-            new MenuControl();
+            UserControl window = new UserControl();
+            window.Show();
         }
     }
 }

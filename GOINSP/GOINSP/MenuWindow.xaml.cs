@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace GOINSP
 {
     /// <summary>
-    /// Interaction logic for MenuControl.xaml
+    /// Interaction logic for MenuWindow.xaml
     /// </summary>
-    public partial class MenuControl : Window
+    public partial class MenuWindow : Window
     {
-        public MenuControl()
+        public MenuWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }
