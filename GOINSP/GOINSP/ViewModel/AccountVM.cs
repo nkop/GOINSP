@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace GOINSP.ViewModel
 {
-    class AccountVM
+    public class AccountVM
     {
         public ICommand LoginCommand { get; set; }
         private string _loginname { get; set; }
@@ -46,8 +46,9 @@ namespace GOINSP.ViewModel
 
         private void Login()
         {
-            UserControl window = new UserControl();
-            window.Show();
+           MenuControl menu = new MenuControl();
+           menu.Show();
+
         }
     }
 }
