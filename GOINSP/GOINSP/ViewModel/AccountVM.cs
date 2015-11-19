@@ -46,8 +46,8 @@ namespace GOINSP.ViewModel
 
         private void Login()
         {
-           MenuControl menu = new MenuControl();
-           menu.Show();
+           MenuWindow window = new MenuWindow();
+           window.Show();
 
         }
     }
