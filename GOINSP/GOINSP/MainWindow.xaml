@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Grid>
-        <TextBlock FontSize="60" Margin="0,100,0,0" Padding="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="top" Height="100">GoInsp</TextBlock>
+        <Image Source="Resources/GoInsp.jpg" Height="200" Width="200" VerticalAlignment="Top" Margin="60"></Image>
 
         <StackPanel Height="80" Width="400">
             <WrapPanel>
