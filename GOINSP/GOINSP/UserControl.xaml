@@ -7,13 +7,17 @@
     <Grid>
         <StackPanel>
         <TextBlock FontSize="25" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">Gebruikers GoInsp:</TextBlock>
-        <WrapPanel Height="20" Width="400">
-            <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}">Gebruiker Toevoegen</Button>
+            <WrapPanel Height="20" Width="400">
+                <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}">Gebruiker Toevoegen</Button>
                 <Button Height="20" Width="120" Margin="0,0,10,0">Gebruiker Wijzigen</Button>
-                <Button Height="20" Width="130">Gebruiker Verwijderen</Button>
-        </WrapPanel>
-            <DataGrid Margin="10,10,10,10">
-                
+                <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}">Gebruiker Verwijderen</Button>
+            </WrapPanel>
+            <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam"  CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedUser}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn>
+                        
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
     </Grid>

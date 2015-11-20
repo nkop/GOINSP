@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace GOINSP.ViewModel
 {
@@ -16,6 +18,8 @@ namespace GOINSP.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
         public ICommand ShowAddUserCommand { get; set; }
+        public ICommand DeleteUserCommand { get; set; }
+        
         private string _loginname { get; set; }
         public string LoginName
         {
@@ -29,8 +33,10 @@ namespace GOINSP.ViewModel
             get { return _loginpassword; }
             set { _loginpassword = value; }
         }
-       
 
+        public ObservableCollection<AccountVM> Users { get; set; }
+
+        [PreferredConstructorAttribute]
         public AccountVM()
         {
             this.account = new Models.Account();
@@ -39,11 +45,16 @@ namespace GOINSP.ViewModel
             LoginCommand = new RelayCommand(Login);
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ShowAddUserCommand = new RelayCommand(ShowAddUser);
-           
+            DeleteUserCommand = new RelayCommand(DeleteUser);
+
+            List<Models.Account> tempUsers = context.Account.ToList();
+            Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)).Distinct());
         }
 
-       
-
+        public AccountVM(Models.Account account)
+        {
+            this.account = account;
+        }
 
         public string UserName
         {
@@ -100,6 +111,11 @@ namespace GOINSP.ViewModel
             NewAccount.Password = LoginPassword;
             context.Account.Add(NewAccount);
             context.SaveChanges();
+        }
+
+        private void DeleteUser()
+        {
+            throw new NotImplementedException();
         }
     }
 
