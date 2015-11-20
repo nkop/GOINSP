@@ -18,7 +18,7 @@ namespace GOINSP
     /// Interaction logic for InspectionWindow.xaml
     /// </summary>
     public partial class InspectionWindow : Window
-    {
+    {        
         public InspectionWindow()
         {
             InitializeComponent();

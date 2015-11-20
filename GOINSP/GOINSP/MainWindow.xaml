@@ -18,6 +18,7 @@
                 <PasswordBox FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250"/>
             </WrapPanel>
             <Button Height="24" Width="100" HorizontalAlignment="Center" Command="{Binding LoginCommand}">Login</Button>
+            
 
         </StackPanel>
 

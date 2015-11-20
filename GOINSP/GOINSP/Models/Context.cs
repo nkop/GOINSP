@@ -10,7 +10,9 @@ namespace GOINSP.Models
     class Context : DbContext
     {
         public DbSet<Inspection> Inspection { get; set; }
-
+        public DbSet<Account> Account { get; set; }
+        public DbSet<Location> Location { get; set; }
+        
         public Context()
             : base()
         {
