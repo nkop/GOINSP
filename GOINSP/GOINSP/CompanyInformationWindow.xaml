@@ -4,7 +4,7 @@
         Title="CompanyInformationWindow"
         Height="{Binding SystemParameters.PrimaryScreenHeight}" 
         Width="{Binding SystemParameters.PrimaryScreenWidth}"
-        DataContext="{Binding Account, Source={StaticResource Locator}}"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         
