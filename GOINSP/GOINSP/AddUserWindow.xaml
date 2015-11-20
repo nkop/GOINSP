@@ -1,0 +1,17 @@
+﻿<Window x:Class="GOINSP.AddUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:w="clr-namespace:GOINSP"
+        DataContext="{Binding Account, Source={StaticResource Locator}}"
+        Title="AddUserWindow" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+            <TextBlock>Gebruikersnaam</TextBlock>
+            <TextBox Text="{Binding LoginName}"></TextBox>
+            <TextBlock Text="Wachtwoord"/>
+            <w:BindablePasswordBox Password="{Binding LoginPassword}"/>
+            <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}"/>
+            
+        </StackPanel>
+    </Grid>
+</Window>

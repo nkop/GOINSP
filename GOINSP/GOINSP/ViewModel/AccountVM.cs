@@ -15,6 +15,7 @@ namespace GOINSP.ViewModel
         private Models.Account account;
         public ICommand LoginCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
+        public ICommand ShowAddUserCommand { get; set; }
         private string _loginname { get; set; }
         public string LoginName
         {
@@ -37,8 +38,11 @@ namespace GOINSP.ViewModel
 
             LoginCommand = new RelayCommand(Login);
             CreateAccountCommand = new RelayCommand(CreateAccount);
+            ShowAddUserCommand = new RelayCommand(ShowAddUser);
            
         }
+
+       
 
 
         public string UserName
@@ -83,11 +87,18 @@ namespace GOINSP.ViewModel
                MessageBox.Show("Deze gebruikersnaam is niet bekend in het systeem.");
            }
         }
+        private void ShowAddUser()
+        {
+            AddUserWindow window = new AddUserWindow();
+            window.Show();               
+        }
+
         private void CreateAccount()
         {
-            this.UserName = "Admin";
-            this.Password = "123";
-            context.Account.Add(this.ToAccount());
+            Models.Account NewAccount = new Models.Account();
+            NewAccount.UserName = LoginName;
+            NewAccount.Password = LoginPassword;
+            context.Account.Add(NewAccount);
             context.SaveChanges();
         }
     }

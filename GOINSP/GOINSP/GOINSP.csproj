@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BindablePasswordBox.cs" />
     <Compile Include="CompanyInformationWindow.xaml.cs">
       <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
@@ -133,6 +136,10 @@
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
     <Compile Include="ViewModel\ReportVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CompanyInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
