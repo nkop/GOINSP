@@ -12,12 +12,8 @@
                 <Button Height="20" Width="120" Margin="0,0,10,0">Gebruiker Wijzigen</Button>
                 <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}">Gebruiker Verwijderen</Button>
             </WrapPanel>
-            <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam"  CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedUser}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn>
-                        
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
+            <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}">
+
             </DataGrid>
         </StackPanel>
     </Grid>

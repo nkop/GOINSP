@@ -43,7 +43,7 @@ namespace GOINSP.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<AccountVM>();
+            SimpleIoc.Default.Register<AccountManagementVM>();
         }
 
         public MainViewModel Main
@@ -54,11 +54,11 @@ namespace GOINSP.ViewModel
             }
         }
 
-        public AccountVM Account
+        public AccountManagementVM Account
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AccountVM>();
+                return ServiceLocator.Current.GetInstance<AccountManagementVM>();
             }
         }
         public static void Cleanup()

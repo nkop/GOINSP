@@ -116,6 +116,7 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
     <Compile Include="Models\OpenData.cs" />
