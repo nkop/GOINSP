@@ -6,52 +6,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Ioc;
+using System.Data.Entity;
 
 namespace GOINSP.ViewModel
 {
     public class AccountVM
     {
-        Models.Context context;
+        
         private Models.Account account;
-        public ICommand LoginCommand { get; set; }
-        public ICommand CreateAccountCommand { get; set; }
-        private string _loginname { get; set; }
-        public string LoginName
-        {
-            get { return _loginname; }
-            set { _loginname = value; }
-        }
+        private Models.Context context;
 
-        private string _loginpassword { get; set; }
-        public string LoginPassword
-        {
-            get { return _loginpassword; }
-            set { _loginpassword = value; }
-        }
-       
-
+        [PreferredConstructorAttribute]
         public AccountVM()
         {
             this.account = new Models.Account();
-            context = new Models.Context();
-
-            LoginCommand = new RelayCommand(Login);
-            CreateAccountCommand = new RelayCommand(CreateAccount);
-           
+            this.context = new Models.Context();
         }
 
+        public AccountVM(Models.Account account)
+        {
+            this.account = account;
+            this.context = new Models.Context();
+        }
 
         public string UserName
         {
             get { return account.UserName; }
-            set { account.UserName = value; }
+            set { account.UserName = value;
+            context.SaveChanges();
+            }
         }
 
         public string Password
         {
 
             get { return account.Password; }
-            set { account.Password = value; }
+            set { account.Password = value;
+            context.SaveChanges();
+            }
         }
 
         public Models.Account ToAccount()
@@ -59,37 +53,8 @@ namespace GOINSP.ViewModel
             return this.account;
         }
 
-        private void Login()
-        {
-           //MenuControl window = new MenuControl();
-           //window.Show();
-
-
-           Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
-           if (account.UserName != null)
-           {
-               if (LoginPassword == account.Password)
-               {
-                   MenuControl window = new MenuControl();
-                   window.Show();
-               }
-               else
-               {
-                   MessageBox.Show("De combinatie van gebruikersnaam & wachtwoord is onjuist.");
-               }
-           }
-           else
-           {
-               MessageBox.Show("Deze gebruikersnaam is niet bekend in het systeem.");
-           }
-        }
-        private void CreateAccount()
-        {
-            this.UserName = "Admin";
-            this.Password = "123";
-            context.Account.Add(this.ToAccount());
-            context.SaveChanges();
-        }
+        
+        
     }
 
 }
