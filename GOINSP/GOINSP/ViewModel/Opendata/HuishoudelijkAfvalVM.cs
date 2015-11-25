@@ -1,4 +1,5 @@
-﻿using GOINSP.Models.opendata;
+﻿using GOINSP.Models;
+using GOINSP.Models.opendata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace GOINSP.ViewModel.Opendata
     public class HuishoudelijkAfvalVM
     {
         private HuishoudelijkAfval huishoudelijkAfval;
+        private Context context;
 
         public HuishoudelijkAfvalVM()
         {
             huishoudelijkAfval = new HuishoudelijkAfval();
+            context = new Context();
         }
 
         public int ID
@@ -226,5 +229,10 @@ namespace GOINSP.ViewModel.Opendata
             set { huishoudelijkAfval.InwonersPer1Januari_32 = value.Trim(); }
         }
 
+        public void Insert()
+        {
+            context.HuishoudelijkAfval.Add(huishoudelijkAfval);
+            context.SaveChanges();
+        }
     }
 }

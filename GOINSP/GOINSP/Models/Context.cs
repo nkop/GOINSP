@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models
 {
-    class Context : DbContext
+    public class Context : DbContext
     {
-        public DbSet<Multimedia> Multimedia { get; set; }
+        public DbSet<HuishoudelijkAfval> HuishoudelijkAfval { get; set; }
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }

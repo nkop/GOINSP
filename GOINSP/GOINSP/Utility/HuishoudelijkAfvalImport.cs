@@ -30,6 +30,11 @@ namespace GOINSP.Utility
                 JToken token = property.First;
                 list.Add(JsonConvert.DeserializeObject<HuishoudelijkAfvalVM>(token.ToString()));
             }
+
+            foreach (HuishoudelijkAfvalVM vm in list)
+            {
+                vm.Insert();
+            }
         }
     }
 }

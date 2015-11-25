@@ -14,5 +14,10 @@ namespace GOINSP
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            IImport importer = new HuishoudelijkAfvalImport();
+            importer.Import();
+        }
     }
 }
