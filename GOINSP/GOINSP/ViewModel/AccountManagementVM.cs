@@ -19,11 +19,12 @@ namespace GOINSP.ViewModel
         public ICommand CreateAccountCommand { get; set; }
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
 
         public ObservableCollection<AccountVM> Users { get; set; }
 
-        public ObservableCollection<Models.Account.Rights> Rights { get; set; }
+        public ObservableCollection<String> Rights { get; set; }
 
         Models.Context context;
 
@@ -41,6 +42,8 @@ namespace GOINSP.ViewModel
             set { _loginpassword = value; }
         }
 
+        public string SearchQuota { get; set; }
+
 
         public AccountManagementVM()
         {
@@ -53,12 +56,34 @@ namespace GOINSP.ViewModel
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ShowAddUserCommand = new RelayCommand(ShowAddUser);
             DeleteUserCommand = new RelayCommand(DeleteUser);
+            SearchCommand = new RelayCommand(Search);
 
-            Rights = new ObservableCollection<Models.Account.Rights>();
-            
-           
+            Rights = new ObservableCollection<String>(Enum.GetNames(typeof(Models.Account.Rights)));
+                       
             LoadUsers();
             
+        }
+
+        private void Search()
+        {
+            if (SearchQuota.Length > 0)
+            {
+                List<Models.Account> tempUsers = context.Account.ToList();
+                List<AccountVM> tempUsersVM = new List<AccountVM>();
+                foreach (Models.Account item in tempUsers)
+                {
+                    tempUsersVM.Add(new AccountVM(item));
+                }
+                Users.Clear();
+                foreach (AccountVM item in tempUsersVM)
+                {
+                    if (item.UserName.Contains(SearchQuota) || item.Email.Contains(SearchQuota))
+                    {
+                        Users.Add(item);
+                    }
+                }
+                RaisePropertyChanged("Users");
+            }
         }
 
         private void LoadUsers()
@@ -76,16 +101,13 @@ namespace GOINSP.ViewModel
         }
 
         private void CreateAccount()
-        {
-            
-            
+        {            
             Models.Account NewAccount = new Models.Account();
             NewAccount.UserName = SelectedAccount.UserName;
             NewAccount.Password = SelectedAccount.Password;
             NewAccount.Email = SelectedAccount.Email;
-            NewAccount.AccountRights = SelectedAccount.AccountRights;
 
-            if (context.Account.Where(a => a.UserName == LoginName).FirstOrDefault<Models.Account>() == null)
+            if (context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
                 context.Account.Add(NewAccount);
                 context.SaveChanges();

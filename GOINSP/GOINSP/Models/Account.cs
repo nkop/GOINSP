@@ -16,6 +16,7 @@ namespace GOINSP.Models
 
         public enum Rights
         {
+            Default,
             ExterneInspecteur,
             Manager,
             Administrator,
