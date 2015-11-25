@@ -14,9 +14,21 @@ namespace GOINSP.Models
 
         }
 
+        public enum Rights
+        {
+            Manager,
+            Administrator,
+            InterneInspecteur,
+            ExterneInspecteur
+        }
+
         [Key]
         public string UserName { get; set; }
 
         public string Password { get; set; }
+
+        public Rights AccountRights {get; set;}
+
+        public string Email { get; set; }
     }
 }
