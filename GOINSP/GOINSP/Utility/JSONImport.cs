@@ -21,10 +21,6 @@ namespace GOINSP.Utility
 
         }
 
-        public void ParseJson() 
-        {
-        }
-
         public void LoadFromFile() 
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
