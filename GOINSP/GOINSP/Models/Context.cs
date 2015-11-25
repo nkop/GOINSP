@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOINSP.Models.opendata;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace GOINSP.Models
 {
     class Context : DbContext
     {
+        public DbSet<Multimedia> Multimedia { get; set; }
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }

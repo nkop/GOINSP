@@ -9,8 +9,7 @@ namespace GOINSP.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "GOINSP.Models.Context";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(GOINSP.Models.Context context)
