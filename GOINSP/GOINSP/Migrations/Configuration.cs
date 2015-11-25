@@ -10,6 +10,7 @@ namespace GOINSP.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(GOINSP.Models.Context context)

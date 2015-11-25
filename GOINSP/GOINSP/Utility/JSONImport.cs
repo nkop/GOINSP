@@ -31,13 +31,7 @@ namespace GOINSP.Utility
 
             if (okClicked == true)
             {
-                Stream fileStream = fileDialog.OpenFile();
-
-                using (StreamReader reader = new StreamReader(fileStream))
-                {
-                    JsonString = reader.ReadLine();
-                }
-                fileStream.Close();
+                JsonString = File.ReadAllText(fileDialog.FileName);
             }
         }
     }

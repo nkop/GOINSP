@@ -120,16 +120,18 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Multimedia.cs" />
-    <Compile Include="Models\Opendata\HuishoudelijkAfval.cs" />
+    <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
+    <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
     <Compile Include="QuestionListWindow.xaml.cs">
       <DependentUpon>QuestionListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utility\HuishoudelijkAfvalImport.cs" />
+    <Compile Include="Utility\TDataImport.cs" />
     <Compile Include="Utility\IImport.cs" />
     <Compile Include="Utility\JSONImport.cs" />
+    <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
@@ -146,7 +148,8 @@
     </Compile>
     <Compile Include="ViewModel\MapVM.cs" />
     <Compile Include="ViewModel\OpenDataVM.cs" />
-    <Compile Include="ViewModel\Opendata\HuishoudelijkAfvalVM.cs" />
+    <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\RegioSVM.cs" />
+    <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />
     <Compile Include="ViewModel\QuestionTemplateVM.cs" />
     <Compile Include="ViewModel\ReportTemplateVM.cs" />

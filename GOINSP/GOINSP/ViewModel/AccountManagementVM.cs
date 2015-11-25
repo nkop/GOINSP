@@ -44,7 +44,6 @@ namespace GOINSP.ViewModel
         {
             SelectedAccount = new AccountVM();
             context = new Models.Context();
-            context.HuishoudelijkAfval.ToList();
 
             SelectedAccount = new AccountVM();
 
