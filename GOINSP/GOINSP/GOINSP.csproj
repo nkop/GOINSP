@@ -104,6 +104,15 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511201032289_InitialCreate.cs" />
+    <Compile Include="Migrations\201511201032289_InitialCreate.Designer.cs">
+      <DependentUpon>201511201032289_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511251138038_Account Update.cs" />
+    <Compile Include="Migrations\201511251138038_Account Update.Designer.cs">
+      <DependentUpon>201511251138038_Account Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Inspection.cs" />
@@ -204,6 +213,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201511201032289_InitialCreate.resx">
+      <DependentUpon>201511201032289_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511251138038_Account Update.resx">
+      <DependentUpon>201511251138038_Account Update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

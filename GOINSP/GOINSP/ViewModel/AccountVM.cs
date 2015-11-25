@@ -35,7 +35,9 @@ namespace GOINSP.ViewModel
         {
             get { return account.UserName; }
             set { account.UserName = value;
-            context.SaveChanges();
+                var entry = this.context.Entry(account);
+                entry.State = EntityState.Modified; 
+                context.SaveChanges();                
             }
         }
 
@@ -44,7 +46,31 @@ namespace GOINSP.ViewModel
 
             get { return account.Password; }
             set { account.Password = value;
+            var entry = this.context.Entry(account);
+            entry.State = EntityState.Modified;
             context.SaveChanges();
+            }
+        }
+
+        public string Email
+        {
+            get { return account.Email; }
+            set { account.Email = value;
+            var entry = this.context.Entry(account);
+            entry.State = EntityState.Modified;
+            context.SaveChanges();
+            }
+        }
+
+        public Models.Account.Rights AccountRights
+        {
+            get { return account.AccountRights; }
+            set
+            {
+                account.AccountRights = value;
+                var entry = this.context.Entry(account);
+                entry.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
 
