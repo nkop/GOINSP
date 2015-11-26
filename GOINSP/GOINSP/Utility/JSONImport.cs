@@ -37,7 +37,7 @@ namespace GOINSP.Utility
 
         public void GetJsonByURL(string url)
         {
-            using (var webClient = new System.Net.WebClient())
+            using (WebClient webClient = new WebClient())
             {
                 JsonString = webClient.DownloadString(url);
             }
