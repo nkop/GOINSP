@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Utility
 {
-    public class ImportProgresValues
+    public class ImportProgressValues
     {
         public int MinProgress { get; set; }
         public int MaxProgress { get; set; }
         public ProgressStatus Status { get; set; }
 
-        public ImportProgresValues(int minProgress, int maxProgress, ProgressStatus status)
+        public ImportProgressValues(int minProgress, int maxProgress, ProgressStatus status)
         {
             this.MinProgress = minProgress;
             this.MaxProgress = maxProgress;
