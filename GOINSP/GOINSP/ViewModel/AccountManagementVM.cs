@@ -16,12 +16,16 @@ namespace GOINSP.ViewModel
     public class AccountManagementVM : ViewModelBase
     {
         public ICommand LoginCommand { get; set; }
+        public ICommand VergetenCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
 
         public ObservableCollection<AccountVM> Users { get; set; }
+
+        public ObservableCollection<String> Rights { get; set; }
 
         Models.Context context;
 
@@ -39,6 +43,8 @@ namespace GOINSP.ViewModel
             set { _loginpassword = value; }
         }
 
+        public string SearchQuota { get; set; }
+
 
         public AccountManagementVM()
         {
@@ -48,11 +54,38 @@ namespace GOINSP.ViewModel
             SelectedAccount = new AccountVM();
 
             LoginCommand = new RelayCommand(Login);
+            VergetenCommand = new RelayCommand(ForgottenPass);
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ShowAddUserCommand = new RelayCommand(ShowAddUser);
             DeleteUserCommand = new RelayCommand(DeleteUser);
+            SearchCommand = new RelayCommand(Search);
 
+            Rights = new ObservableCollection<String>(Enum.GetNames(typeof(Models.Account.Rights)));
+                       
             LoadUsers();
+            
+        }
+
+        private void Search()
+        {
+            if (SearchQuota.Length > 0)
+            {
+                List<Models.Account> tempUsers = context.Account.ToList();
+                List<AccountVM> tempUsersVM = new List<AccountVM>();
+                foreach (Models.Account item in tempUsers)
+                {
+                    tempUsersVM.Add(new AccountVM(item));
+                }
+                Users.Clear();
+                foreach (AccountVM item in tempUsersVM)
+                {
+                    if (item.UserName.Contains(SearchQuota) || item.Email.Contains(SearchQuota))
+                    {
+                        Users.Add(item);
+                    }
+                }
+                RaisePropertyChanged("Users");
+            }
         }
 
         private void LoadUsers()
@@ -60,6 +93,7 @@ namespace GOINSP.ViewModel
             List<Models.Account> tempUsers = context.Account.ToList();
             Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)).Distinct());
             RaisePropertyChanged("Users");
+            
         }
 
         private void ShowAddUser()
@@ -69,14 +103,13 @@ namespace GOINSP.ViewModel
         }
 
         private void CreateAccount()
-        {
-            
-            
+        {            
             Models.Account NewAccount = new Models.Account();
-            NewAccount.UserName = LoginName;
-            NewAccount.Password = LoginPassword;
+            NewAccount.UserName = SelectedAccount.UserName;
+            NewAccount.Password = SelectedAccount.Password;
+            NewAccount.Email = SelectedAccount.Email;
 
-            if (context.Account.Where(a => a.UserName == LoginName).FirstOrDefault<Models.Account>() == null)
+            if (context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
                 context.Account.Add(NewAccount);
                 context.SaveChanges();
@@ -106,24 +139,37 @@ namespace GOINSP.ViewModel
         {
             //MenuControl window = new MenuControl();
             //window.Show();
-
-            Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
-            if (account.UserName != null)
+            if (LoginName != null)
             {
-                if (LoginPassword == account.Password)
+                Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
+                if (account.UserName != null)
                 {
-                    MenuControl window = new MenuControl();
-                    window.Show();
+                    if (LoginPassword == account.Password)
+                    {
+                        MenuControl window = new MenuControl();
+                        window.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("De combinatie van gebruikersnaam & wachtwoord is onjuist.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("De combinatie van gebruikersnaam & wachtwoord is onjuist.");
-                }
+                    MessageBox.Show("Deze gebruikersnaam is niet bekend in het systeem.");
+                }                
             }
             else
             {
-                MessageBox.Show("Deze gebruikersnaam is niet bekend in het systeem.");
+                MessageBox.Show("Voer een gebruikersnaam in.");
             }
+            
+        }
+
+        private void ForgottenPass()
+        {
+            ForgottenPassword window = new ForgottenPassword();
+            window.Show();
         }
     }
 }

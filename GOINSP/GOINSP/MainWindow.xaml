@@ -9,7 +9,7 @@
     <Grid>
         <TextBlock FontSize="60" Margin="0,100,0,0" Padding="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="top" Height="100">GoInsp</TextBlock>
 
-        <StackPanel Height="80" Width="400">
+        <StackPanel Height="90" Width="400">
             <WrapPanel>
                 <TextBlock FontSize="18" FontStyle="Oblique" Width="150">Gebruikersnaam:</TextBlock>
                 <TextBox FontSize="18" HorizontalAlignment="Left" Height="30" Width="250" Text="{Binding LoginName}"></TextBox>
@@ -18,7 +18,10 @@
                 <TextBlock FontSize="18" FontStyle="Oblique" Width="150">Wachtwoord:</TextBlock>
                 <w:BindablePasswordBox Password="{Binding LoginPassword}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250"/> 
             </WrapPanel>
-            <Button Height="24" Width="100" HorizontalAlignment="Center" Command="{Binding LoginCommand}">Login</Button>  
+            <WrapPanel>
+                <Button Height="24" Width="100" HorizontalAlignment="Center" Command="{Binding LoginCommand}" Content="Login" Margin="150 10 0 0"/>
+                <Button Height="24" Width="140" HorizontalAlignment="Center" Command="{Binding VergetenCommand}" Content="Wachtwoord Vergeten" Margin="10 10 0 0"/>
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </Window>

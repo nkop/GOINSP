@@ -7,9 +7,14 @@
     <Grid>
         <StackPanel>
             <TextBlock>Gebruikersnaam</TextBlock>
-            <TextBox Text="{Binding LoginName}"></TextBox>
+            <TextBox Text="{Binding SelectedAccount.UserName}"></TextBox>
             <TextBlock Text="Wachtwoord"/>
-            <w:BindablePasswordBox Password="{Binding LoginPassword}"/>
+            <w:BindablePasswordBox Password="{Binding SelectedAccount.Password}"/>
+            <TextBlock Text="E-Mail"/>
+            <TextBox Text="{Binding SelectedAccount.Email}"></TextBox>
+            <!--<TextBlock Text="Gebruikerstype"/>
+            <ComboBox IsEditable="True" ItemsSource="{Binding Rights}"  SelectedValue="{Binding SelectedAccount.AccountRights, Mode=TwoWay}"
+                      Text="{Binding SelectedAccount.AccountRights, UpdateSourceTrigger=LostFocus}"></ComboBox>-->
             <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}"/>
             
         </StackPanel>

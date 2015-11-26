@@ -45,6 +45,7 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountManagementVM>();
             SimpleIoc.Default.Register<OpenDataImportViewModel>();
+            SimpleIoc.Default.Register<ForgottenPasswordVM>();
         }
 
         public MainViewModel Main
@@ -62,6 +63,7 @@ namespace GOINSP.ViewModel
                 return ServiceLocator.Current.GetInstance<AccountManagementVM>();
             }
         }
+
         public OpenDataImportViewModel OpenDataImport
         {
             get
@@ -69,6 +71,15 @@ namespace GOINSP.ViewModel
                 return ServiceLocator.Current.GetInstance<OpenDataImportViewModel>();
             }
         }
+
+        public ForgottenPasswordVM ForgottenPassword
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ForgottenPasswordVM>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

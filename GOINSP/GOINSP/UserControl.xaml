@@ -9,8 +9,9 @@
         <TextBlock FontSize="25" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">Gebruikers GoInsp:</TextBlock>
             <WrapPanel Height="20" Width="400">
                 <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}">Gebruiker Toevoegen</Button>
-                <Button Height="20" Width="120" Margin="0,0,10,0">Gebruiker Wijzigen</Button>
                 <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}">Gebruiker Verwijderen</Button>
+                <TextBox Text="{Binding SearchQuota}"></TextBox>
+                <Button Content="Search" Command="{Binding SearchCommand}"/>
             </WrapPanel>
             <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}">
 
