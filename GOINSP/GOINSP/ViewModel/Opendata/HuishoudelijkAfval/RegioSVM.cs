@@ -1,0 +1,46 @@
+﻿using GOINSP.Models;
+using GOINSP.Models.Opendata.HuishoudelijkAfval;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
+{
+    public class RegioSVM
+    {        
+        private RegioS regios;
+        private Context context;
+
+        public RegioSVM()
+        {
+            regios = new RegioS();
+            context = new Context();
+        }
+
+        public string Key
+        {
+            get { return regios.Key; }
+            set { regios.Key = value.Trim(); }
+        }
+
+        public string Title
+        {
+            get { return regios.Title; }
+            set { regios.Title = value.Trim(); }
+        }
+
+        public string Description
+        {
+            get { return regios.Description; }
+            set { regios.Description = value.Trim(); }
+        }
+
+        public void Insert()
+        {
+            context.HuishoudelijkAfvalRegioS.Add(regios);
+            context.SaveChanges();
+        }
+    }
+}
