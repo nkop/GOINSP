@@ -137,24 +137,31 @@ namespace GOINSP.ViewModel
         {
             //MenuControl window = new MenuControl();
             //window.Show();
-
-            Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
-            if (account.UserName != null)
+            if (LoginName != null)
             {
-                if (LoginPassword == account.Password)
+                Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
+                if (account.UserName != null)
                 {
-                    MenuControl window = new MenuControl();
-                    window.Show();
+                    if (LoginPassword == account.Password)
+                    {
+                        MenuControl window = new MenuControl();
+                        window.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("De combinatie van gebruikersnaam & wachtwoord is onjuist.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("De combinatie van gebruikersnaam & wachtwoord is onjuist.");
-                }
+                    MessageBox.Show("Deze gebruikersnaam is niet bekend in het systeem.");
+                }                
             }
             else
             {
-                MessageBox.Show("Deze gebruikersnaam is niet bekend in het systeem.");
+                MessageBox.Show("Voer een gebruikersnaam in.");
             }
+            
         }
     }
 }
