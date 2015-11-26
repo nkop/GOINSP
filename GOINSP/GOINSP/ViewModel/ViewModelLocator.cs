@@ -44,6 +44,7 @@ namespace GOINSP.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountManagementVM>();
+            SimpleIoc.Default.Register<ForgottenPasswordVM>();
         }
 
         public MainViewModel Main
@@ -61,6 +62,15 @@ namespace GOINSP.ViewModel
                 return ServiceLocator.Current.GetInstance<AccountManagementVM>();
             }
         }
+
+        public ForgottenPasswordVM ForgottenPassword
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ForgottenPasswordVM>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

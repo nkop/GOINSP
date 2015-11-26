@@ -92,6 +92,9 @@
     <Compile Include="EditInspectionWindow.xaml.cs">
       <DependentUpon>EditInspectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ForgottenPassword.xaml.cs">
+      <DependentUpon>ForgottenPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InspectionOverviewWindow.xaml.cs">
       <DependentUpon>InspectionOverviewWindow.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,7 @@
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AccountManagementVM.cs" />
+    <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
     <Compile Include="Models\OpenData.cs" />
@@ -155,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditInspectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ForgottenPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
