@@ -10,8 +10,8 @@
             <WrapPanel Height="20" Width="400">
                 <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}">Gebruiker Toevoegen</Button>
                 <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}">Gebruiker Verwijderen</Button>
-                <TextBox Text="{Binding SearchQuota}"></TextBox>
-                <Button Content="Search" Command="{Binding SearchCommand}"/>
+                <TextBox Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"></TextBox>
+
             </WrapPanel>
             <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}">
 

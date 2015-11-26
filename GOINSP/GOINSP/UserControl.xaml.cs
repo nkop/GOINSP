@@ -23,5 +23,6 @@ namespace GOINSP
         {
             InitializeComponent();
         }
+
     }
 }
