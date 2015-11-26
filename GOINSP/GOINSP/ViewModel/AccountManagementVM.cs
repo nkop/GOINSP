@@ -20,7 +20,6 @@ namespace GOINSP.ViewModel
         public ICommand CreateAccountCommand { get; set; }
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
-        public ICommand SearchCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
 
         public ObservableCollection<AccountVM> Users { get; set; }
@@ -43,7 +42,15 @@ namespace GOINSP.ViewModel
             set { _loginpassword = value; }
         }
 
-        public string SearchQuota { get; set; }
+        private string _searchQuota { get; set; }
+        public string SearchQuota
+        {
+            get { return _searchQuota; }
+            set { _searchQuota = value;
+            RaisePropertyChanged("SearchQuota");
+            Search();
+            }
+        }
 
 
         public AccountManagementVM()
@@ -58,7 +65,6 @@ namespace GOINSP.ViewModel
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ShowAddUserCommand = new RelayCommand(ShowAddUser);
             DeleteUserCommand = new RelayCommand(DeleteUser);
-            SearchCommand = new RelayCommand(Search);
 
             Rights = new ObservableCollection<String>(Enum.GetNames(typeof(Models.Account.Rights)));
                        
@@ -68,7 +74,7 @@ namespace GOINSP.ViewModel
 
         private void Search()
         {
-            if (SearchQuota.Length > 0)
+            if (SearchQuota.Length >= 0)
             {
                 List<Models.Account> tempUsers = context.Account.ToList();
                 List<AccountVM> tempUsersVM = new List<AccountVM>();
@@ -142,7 +148,7 @@ namespace GOINSP.ViewModel
             if (LoginName != null)
             {
                 Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
-                if (account.UserName != null)
+                if (account != null)
                 {
                     if (LoginPassword == account.Password)
                     {
