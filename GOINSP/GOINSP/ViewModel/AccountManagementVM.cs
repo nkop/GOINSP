@@ -54,7 +54,7 @@ namespace GOINSP.ViewModel
             SelectedAccount = new AccountVM();
 
             LoginCommand = new RelayCommand(Login);
-            VergetenCommand = new RelayCommand(Forgotten);
+            VergetenCommand = new RelayCommand(ForgottenPass);
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ShowAddUserCommand = new RelayCommand(ShowAddUser);
             DeleteUserCommand = new RelayCommand(DeleteUser);
@@ -166,7 +166,7 @@ namespace GOINSP.ViewModel
             
         }
 
-        private void Forgotten()
+        private void ForgottenPass()
         {
             ForgottenPassword window = new ForgottenPassword();
             window.Show();
