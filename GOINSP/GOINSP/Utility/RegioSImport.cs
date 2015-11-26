@@ -22,14 +22,16 @@ namespace GOINSP.Utility
             context = new Context();
         }
 
-        public void Import(IProgress<int> progress)
+        public void Import(IProgress<ImportProgresValues> progress)
         {
             jsonImporter.GetJsonByURL("http://opendata.cbs.nl/ODataApi/OData/80563ned/RegioS");
 
+            progress.Report(new ImportProgresValues(0, 0, ImportProgresValues.ProgressStatus.downloading));
             List<RegioSVM> list = new List<RegioSVM>();
             JObject jo = JObject.Parse(jsonImporter.JsonString);
             list = jo.SelectToken("value", false).ToObject<List<RegioSVM>>();
 
+            progress.Report(new ImportProgresValues(0, 0, ImportProgresValues.ProgressStatus.removing));
             context.HuishoudelijkAfvalRegioS.RemoveRange(context.HuishoudelijkAfvalRegioS);
             context.SaveChanges();
 
@@ -39,7 +41,7 @@ namespace GOINSP.Utility
             {
                 vm.Insert();
                 count++;
-                progress.Report((int)(((float)count/(float)list.Count)*100));
+                progress.Report(new ImportProgresValues(count, list.Count, ImportProgresValues.ProgressStatus.inserting));
             }
         }
     }

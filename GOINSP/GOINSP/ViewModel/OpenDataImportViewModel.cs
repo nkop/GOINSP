@@ -27,6 +27,20 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private string progressLabelText;
+        public string ProgressLabelText
+        {
+            get
+            {
+                return progressLabelText;
+            }
+            set
+            {
+                progressLabelText = value;
+                RaisePropertyChanged("ProgressLabelText");
+            }
+        }
+
         public OpenDataImportViewModel()
         {
             StartImportCommand = new RelayCommand<string>(StartImport);
@@ -37,7 +51,7 @@ namespace GOINSP.ViewModel
         {
             IImport importer = ImportFactory.GetFactory(dataType);
 
-            Progress<int> progressIndicator = new Progress<int>(ReportProgress);
+            Progress<ImportProgresValues> progressIndicator = new Progress<ImportProgresValues>(ReportProgress);
 
             Task task = Task.Factory.StartNew(() =>
             {
@@ -45,9 +59,25 @@ namespace GOINSP.ViewModel
             });
         }
 
-        private void ReportProgress(int progress)
+        private void ReportProgress(ImportProgresValues progress)
         {
-            ProgressBarPercentage = progress;
+            switch(progress.Status)
+            {
+                case ImportProgresValues.ProgressStatus.downloading:
+                    ProgressBarPercentage = 0;
+                    ProgressLabelText = "Downloading records...";
+                    break;
+                case ImportProgresValues.ProgressStatus.removing:
+                    ProgressBarPercentage = 0;
+                    ProgressLabelText = "Cleaning old records...";
+                    break;
+                case ImportProgresValues.ProgressStatus.inserting:
+                    ProgressBarPercentage = (int)(((float)progress.MinProgress/(float)progress.MaxProgress)*100);
+                    ProgressLabelText = "Importing record " + progress.MinProgress + " of " + progress.MaxProgress+"...";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

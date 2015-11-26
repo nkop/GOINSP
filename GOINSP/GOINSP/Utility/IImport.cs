@@ -12,6 +12,6 @@ namespace GOINSP.Utility
         JSONImport jsonImporter {get; set;}
         Context context { get; set; }
 
-        void Import(IProgress<int> progress);
+        void Import(IProgress<ImportProgresValues> progress);
     }
 }
