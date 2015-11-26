@@ -24,9 +24,9 @@ namespace GOINSP.Utility
 
         public void Import(IProgress<ImportProgressValues> progress)
         {
+            progress.Report(new ImportProgressValues(0, 0, ImportProgressValues.ProgressStatus.downloading));
             jsonImporter.GetJsonByURL("http://opendata.cbs.nl/ODataApi/OData/80563ned/RegioS");
 
-            progress.Report(new ImportProgressValues(0, 0, ImportProgressValues.ProgressStatus.downloading));
             List<RegioSVM> list = new List<RegioSVM>();
             JObject jo = JObject.Parse(jsonImporter.JsonString);
             list = jo.SelectToken("value", false).ToObject<List<RegioSVM>>();
