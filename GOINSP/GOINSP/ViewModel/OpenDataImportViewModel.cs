@@ -41,10 +41,25 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private bool buttonsEnabled;
+        public bool ButtonsEnabled
+        {
+            get
+            {
+                return buttonsEnabled;
+            }
+            set
+            {
+                buttonsEnabled = value;
+                RaisePropertyChanged("ButtonsEnabled");
+            }
+        }
+
         public OpenDataImportViewModel()
         {
             StartImportCommand = new RelayCommand<string>(StartImport);
             ProgressBarPercentage = 0;
+            ButtonsEnabled = true;
         }
 
         public void StartImport(string dataType)
@@ -53,10 +68,22 @@ namespace GOINSP.ViewModel
 
             Progress<ImportProgresValues> progressIndicator = new Progress<ImportProgresValues>(ReportProgress);
 
+            ButtonsEnabled = false;
             Task task = Task.Factory.StartNew(() =>
             {
                 importer.Import(progressIndicator);
             });
+
+            task.ContinueWith((doneTask) =>
+            {
+                ProgressLabelText = "Done importing!";
+                ButtonsEnabled = true;
+            });
+        }
+
+        private void ImportComplete()
+        {
+
         }
 
         private void ReportProgress(ImportProgresValues progress)
