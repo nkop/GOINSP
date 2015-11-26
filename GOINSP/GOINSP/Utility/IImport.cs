@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Utility
 {
-    interface IImport
+    public interface IImport
     {
         JSONImport jsonImporter {get; set;}
         Context context { get; set; }

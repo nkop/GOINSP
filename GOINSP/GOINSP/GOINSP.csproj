@@ -131,6 +131,7 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\TDataImport.cs" />
     <Compile Include="Utility\IImport.cs" />
     <Compile Include="Utility\JSONImport.cs" />

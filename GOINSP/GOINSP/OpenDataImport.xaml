@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding OpenDataImport, Source={StaticResource Locator}}"
-        Title="OpenDataImport" Height="300" Width="651" WindowStartupLocation="CenterScreen">
+        Title="OpenDataImport" Height="300" Width="302" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Import" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}"/>
-        <ProgressBar HorizontalAlignment="Left" Height="30" Margin="10,229,0,0" VerticalAlignment="Top" Width="623" Value="{Binding ProgressBarPercentage}"/>
+        <Button Content="Import TData" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata"/>
+        <Button Content="Import RegioS" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios"/>
+        <ProgressBar HorizontalAlignment="Left" Height="30" Margin="10,229,0,0" VerticalAlignment="Top" Width="272" Value="{Binding ProgressBarPercentage}"/>
     </Grid>
 </Window>

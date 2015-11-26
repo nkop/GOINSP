@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GOINSP.Utility
 {
-    class JSONImport
+    public class JSONImport
     {
         public string JsonString {get; set;}
 
@@ -32,6 +32,14 @@ namespace GOINSP.Utility
             if (okClicked == true)
             {
                 JsonString = File.ReadAllText(fileDialog.FileName);
+            }
+        }
+
+        public void GetJsonByURL(string url)
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                JsonString = webClient.DownloadString(url);
             }
         }
     }

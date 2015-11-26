@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Utility
 {
-    class RegioSImport : IImport
+    public class RegioSImport : IImport
     {
         public JSONImport jsonImporter { get; set; }
         public Context context { get; set; }
@@ -24,7 +24,7 @@ namespace GOINSP.Utility
 
         public void Import(IProgress<int> progress)
         {
-            jsonImporter.LoadFromFile();
+            jsonImporter.GetJsonByURL("http://opendata.cbs.nl/ODataApi/OData/80563ned/RegioS");
 
             List<RegioSVM> list = new List<RegioSVM>();
             JObject jo = JObject.Parse(jsonImporter.JsonString);

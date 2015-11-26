@@ -29,19 +29,19 @@ namespace GOINSP.ViewModel
 
         public OpenDataImportViewModel()
         {
-            StartImportCommand = new RelayCommand(StartImport);
+            StartImportCommand = new RelayCommand<string>(StartImport);
             ProgressBarPercentage = 0;
         }
 
-        public void StartImport()
+        public void StartImport(string dataType)
         {
-            IImport regioImport = new TDataImport();
+            IImport importer = ImportFactory.GetFactory(dataType);
 
             Progress<int> progressIndicator = new Progress<int>(ReportProgress);
 
             Task task = Task.Factory.StartNew(() =>
             {
-                regioImport.Import(progressIndicator);
+                importer.Import(progressIndicator);
             });
         }
 

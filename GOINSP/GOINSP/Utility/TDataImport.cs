@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Utility
 {
-    class TDataImport : IImport
+    public class TDataImport : IImport
     {
         public JSONImport jsonImporter { get; set; }
         public Context context { get; set; }
@@ -24,7 +24,7 @@ namespace GOINSP.Utility
 
         public void Import(IProgress<int> progress)
         {
-            jsonImporter.LoadFromFile();
+            jsonImporter.GetJsonByURL("http://opendata.cbs.nl/ODataApi/OData/80563ned/TypedDataSet");
 
             List<TDataVM> list = new List<TDataVM>();
             JObject jo = JObject.Parse(jsonImporter.JsonString);
