@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace GOINSP
 {
     /// <summary>
-    /// Interaction logic for UserControl.xaml
+    /// Interaction logic for OpenDataImport.xaml
     /// </summary>
-    public partial class UserControl : Window
+    public partial class OpenDataImport : Window
     {
-        public UserControl()
+        public OpenDataImport()
         {
             InitializeComponent();
         }
-
     }
 }
