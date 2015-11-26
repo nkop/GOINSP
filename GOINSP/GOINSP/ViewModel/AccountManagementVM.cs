@@ -16,6 +16,7 @@ namespace GOINSP.ViewModel
     public class AccountManagementVM : ViewModelBase
     {
         public ICommand LoginCommand { get; set; }
+        public ICommand VergetenCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
@@ -53,6 +54,7 @@ namespace GOINSP.ViewModel
             SelectedAccount = new AccountVM();
 
             LoginCommand = new RelayCommand(Login);
+            VergetenCommand = new RelayCommand(ForgottenPass);
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ShowAddUserCommand = new RelayCommand(ShowAddUser);
             DeleteUserCommand = new RelayCommand(DeleteUser);
@@ -162,6 +164,12 @@ namespace GOINSP.ViewModel
                 MessageBox.Show("Voer een gebruikersnaam in.");
             }
             
+        }
+
+        private void ForgottenPass()
+        {
+            ForgottenPassword window = new ForgottenPassword();
+            window.Show();
         }
     }
 }
