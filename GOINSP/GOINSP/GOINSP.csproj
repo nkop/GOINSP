@@ -122,6 +122,9 @@
     <Compile Include="Models\Multimedia.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
+    <Compile Include="OpenDataImport.xaml.cs">
+      <DependentUpon>OpenDataImport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QuestionListWindow.xaml.cs">
       <DependentUpon>QuestionListWindow.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,7 @@
       <DependentUpon>UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MapVM.cs" />
+    <Compile Include="ViewModel\OpenDataImportViewModel.cs" />
     <Compile Include="ViewModel\OpenDataVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\RegioSVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
@@ -192,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OpenDataImport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

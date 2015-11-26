@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOINSP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ namespace GOINSP.Utility
     interface IImport
     {
         JSONImport jsonImporter {get; set;}
+        Context context { get; set; }
 
-        void Import();
+        void Import(IProgress<int> progress);
     }
 }
