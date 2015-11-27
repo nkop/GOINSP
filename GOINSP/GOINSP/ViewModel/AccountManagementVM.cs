@@ -104,6 +104,8 @@ namespace GOINSP.ViewModel
 
         private void ShowAddUser()
         {
+            SelectedAccount = null;
+            SelectedAccount = new AccountVM();
             AddUserWindow window = new AddUserWindow();
             window.Show();
         }

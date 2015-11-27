@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201511251138038_Account Update.Designer.cs">
       <DependentUpon>201511251138038_Account Update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511271247545_Delswas update.cs" />
+    <Compile Include="Migrations\201511271247545_Delswas update.Designer.cs">
+      <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Context.cs" />
@@ -245,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511251138038_Account Update.resx">
       <DependentUpon>201511251138038_Account Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511271247545_Delswas update.resx">
+      <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
