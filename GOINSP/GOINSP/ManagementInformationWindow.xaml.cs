@@ -22,6 +22,8 @@ namespace GOINSP
         public ManagementInformationWindow()
         {
             InitializeComponent();
+            
         }
+
     }
 }

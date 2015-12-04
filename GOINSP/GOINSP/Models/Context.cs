@@ -15,6 +15,7 @@ namespace GOINSP.Models
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }
+        public DbSet<Company> Company { get; set; }
         
         public Context()
             : base()
