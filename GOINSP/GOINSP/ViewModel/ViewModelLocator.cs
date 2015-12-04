@@ -80,6 +80,14 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public InspectionManagementVM Inspection
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InspectionManagementVM>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

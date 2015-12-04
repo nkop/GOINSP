@@ -126,8 +126,13 @@
     <Compile Include="Migrations\201511271247545_Delswas update.Designer.cs">
       <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512041008486_bedrijf.cs" />
+    <Compile Include="Migrations\201512041008486_bedrijf.Designer.cs">
+      <DependentUpon>201512041008486_bedrijf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Inspection.cs" />
     <Compile Include="Models\Location.cs" />
@@ -151,7 +156,9 @@
     <Compile Include="Utility\JSONImport.cs" />
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
+    <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectionManagementVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
     <Compile Include="Models\OpenData.cs" />
@@ -258,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511271247545_Delswas update.resx">
       <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512041008486_bedrijf.resx">
+      <DependentUpon>201512041008486_bedrijf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
