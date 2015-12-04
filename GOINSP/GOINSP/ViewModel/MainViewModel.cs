@@ -11,10 +11,13 @@ namespace GOINSP.ViewModel
         public ICommand UserControlCommand { get; set; }
         public ICommand OpenDataImportCommand { get; set; }
 
+        public ICommand ManagementInfoCommand { get; set; }
+
         public MainViewModel()
         {
             _userControlWindow = new UserControl();
 
+            ManagementInfoCommand = new RelayCommand(ManagementInfo);
             UserControlCommand = new RelayCommand(ShowUserControl);
             OpenDataImportCommand = new RelayCommand(ShowOpenDataImport);
         }
@@ -24,6 +27,11 @@ namespace GOINSP.ViewModel
             _userControlWindow.Show();
         }
 
+        private void ManagementInfo()
+        {
+            ManagementInformationWindow _managementInfoWindow = new ManagementInformationWindow();
+            _managementInfoWindow.Show();
+        }
         private void ShowOpenDataImport()
         {
             OpenDataImport _openDataImportWindow = new OpenDataImport();
