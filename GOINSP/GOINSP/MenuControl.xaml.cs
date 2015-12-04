@@ -19,9 +19,33 @@ namespace GOINSP
     /// </summary>
     public partial class MenuControl : Window
     {
-        public MenuControl()
+        public MenuControl(string rights)
         {
             InitializeComponent();
+            if (rights == "Administrator")
+            {
+                
+            }
+            if (rights == "Manager")
+            {
+                UserControl.Visibility = Visibility.Collapsed;
+            }
+            if (rights == "ExterneInspecteur")
+            {
+                UserControl.Visibility = Visibility.Collapsed;
+                Management.Visibility = Visibility.Collapsed;
+            }
+            if (rights == "InterneInspecteur")
+            {
+                UserControl.Visibility = Visibility.Collapsed;
+                Management.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                UserControl.Visibility = Visibility.Collapsed;
+                Management.Visibility = Visibility.Collapsed;
+            }
+
         }
     }
 }
