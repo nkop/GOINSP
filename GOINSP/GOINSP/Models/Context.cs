@@ -1,4 +1,5 @@
-﻿using GOINSP.Models.Opendata.HuishoudelijkAfval;
+﻿using GOINSP.Models.Opendata.GemeenteGrenzen;
+using GOINSP.Models.Opendata.HuishoudelijkAfval;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,6 +16,7 @@ namespace GOINSP.Models
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }
+        public DbSet<Grenzen> Grenzen { get; set; }
         
         public Context()
             : base()

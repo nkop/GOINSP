@@ -14,6 +14,8 @@ namespace GOINSP.Utility
                 return new RegioSImport();
             if (importer.ToLower() == "tdata")
                 return new TDataImport();
+            if (importer.ToLower() == "grenzen")
+                return new GrenzenImport();
             return null;
         }
     }

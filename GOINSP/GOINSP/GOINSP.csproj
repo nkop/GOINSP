@@ -123,6 +123,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Multimedia.cs" />
+    <Compile Include="Models\Opendata\GemeenteGrenzen\Grenzen.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
     <Compile Include="OpenDataImport.xaml.cs">
@@ -136,6 +137,7 @@
     </Compile>
     <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
+    <Compile Include="Utility\GrenzenImport.cs" />
     <Compile Include="Utility\TDataImport.cs" />
     <Compile Include="Utility\IImport.cs" />
     <Compile Include="Utility\JSONImport.cs" />
