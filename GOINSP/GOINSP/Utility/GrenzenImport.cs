@@ -33,6 +33,8 @@ namespace GOINSP.Utility
 
             List<Grenzen> grenzen = new List<Grenzen>();
 
+            int itt = 0;
+
             foreach (JToken token in list)
             {
                 JObject o = (JObject)token;
@@ -40,7 +42,6 @@ namespace GOINSP.Utility
                 string GMCode = o.SelectToken("properties", false).SelectToken("GMCODE", false).ToString();
                 string GMNaam = o.SelectToken("properties", false).SelectToken("GMNAAM", false).ToString();
 
-                int itt = 0;
 
                 foreach (JToken coord in list1)
                 {
@@ -54,7 +55,7 @@ namespace GOINSP.Utility
                             grens.Longitude = test[1].ToObject<double>();
                             grens.GMCode = GMCode;
                             grens.GMNaam = GMNaam;
-                            grens.ID = itt;
+                            grens.PolygonNumber = itt;
                             grenzen.Add(grens);
                         }
                     }
@@ -68,7 +69,7 @@ namespace GOINSP.Utility
                             grens.Longitude = test[1].ToObject<double>();
                             grens.GMCode = GMCode;
                             grens.GMNaam = GMNaam;
-                            grens.ID = itt;
+                            grens.PolygonNumber = itt;
                             grenzen.Add(grens);
                         }
                     }
@@ -76,14 +77,12 @@ namespace GOINSP.Utility
                 }
             }
 
-            int count = 0;
-            foreach (Grenzen grens in grenzen)
+            for (int i = 0; i < grenzen.Count; i += 1000)
             {
-                context.Grenzen.Add(grens);
-                count++;
-                progress.Report(new ImportProgressValues(count, grenzen.Count, ImportProgressValues.ProgressStatus.inserting));
+                context.Grenzen.AddRange(grenzen.Skip(i).Take(1000));
+                context.SaveChanges();
+                progress.Report(new ImportProgressValues(i, grenzen.Count, ImportProgressValues.ProgressStatus.inserting));
             }
-            context.SaveChanges();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace GOINSP.Models.Opendata.GemeenteGrenzen
 
         [Key]
         public int ID { get; set; }
+        public int PolygonNumber { get; set; }
         public string GMCode { get; set; }
         public string GMNaam { get; set; }
         public double Longitude { get; set; }

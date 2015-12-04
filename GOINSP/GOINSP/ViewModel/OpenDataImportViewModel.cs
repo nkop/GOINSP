@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GOINSP.Models;
+using GOINSP.Models.Opendata.GemeenteGrenzen;
 using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
@@ -55,11 +57,18 @@ namespace GOINSP.ViewModel
             }
         }
 
+        Context context;
+
         public OpenDataImportViewModel()
         {
             StartImportCommand = new RelayCommand<string>(StartImport);
             ProgressBarPercentage = 0;
             ButtonsEnabled = true;
+
+            context = new Context();
+            List<Grenzen> grenzen = context.Grenzen.Where(grens => grens.GMCode == "GM0855").ToList();
+
+
         }
 
         public void StartImport(string dataType)
