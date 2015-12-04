@@ -26,16 +26,16 @@ namespace GOINSP
             {
                 
             }
-            if (rights == "Manager")
+            else if (rights == "Manager")
             {
                 UserControl.Visibility = Visibility.Collapsed;
             }
-            if (rights == "ExterneInspecteur")
+            else if (rights == "ExterneInspecteur")
             {
                 UserControl.Visibility = Visibility.Collapsed;
                 Management.Visibility = Visibility.Collapsed;
             }
-            if (rights == "InterneInspecteur")
+            else if (rights == "InterneInspecteur")
             {
                 UserControl.Visibility = Visibility.Collapsed;
                 Management.Visibility = Visibility.Collapsed;
