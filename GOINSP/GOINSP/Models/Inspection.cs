@@ -11,12 +11,19 @@ namespace GOINSP.Models
     [Table("Inspection")]
     public class Inspection
     {
-        public Inspection()
-        {
-
-        }
-
         [Key]
-        public int InspectionID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid id { get; set; }
+        public string name { get; set; }
+        public DateTime date { get; set; }
+        public double longtitude { get; set; }
+        public double latitude { get; set; }
+        public string address { get; set; }
+        [ForeignKey("inspector")]
+        public Guid inspectorid { get; set; }
+        public string description { get; set; }
+        public string image { get; set; }
+
+        public virtual Account inspector { get; set; }
     }
 }

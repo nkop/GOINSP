@@ -31,6 +31,12 @@ namespace GOINSP.ViewModel
             this.context = new Models.Context();
         }
 
+        public Guid id
+        {
+            get { return account.id; }
+            set { account.id = value; }
+        }
+
         public string UserName
         {
             get { return account.UserName; }

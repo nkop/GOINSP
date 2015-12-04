@@ -10,6 +10,7 @@ namespace GOINSP.ViewModel
         private UserControl _userControlWindow;
         public ICommand UserControlCommand { get; set; }
         public ICommand OpenDataImportCommand { get; set; }
+        public ICommand OpenInspectionCommand { get; set; }
 
         public MainViewModel()
         {
@@ -17,6 +18,7 @@ namespace GOINSP.ViewModel
 
             UserControlCommand = new RelayCommand(ShowUserControl);
             OpenDataImportCommand = new RelayCommand(ShowOpenDataImport);
+            OpenInspectionCommand = new RelayCommand(ShowInspectionOverview);
         }
 
         private void ShowUserControl()
@@ -28,6 +30,12 @@ namespace GOINSP.ViewModel
         {
             OpenDataImport _openDataImportWindow = new OpenDataImport();
             _openDataImportWindow.Show();
+        }
+
+        private void ShowInspectionOverview()
+        {
+            InspectionWindow _showInspectionOverview = new InspectionWindow();
+            _showInspectionOverview.Show();
         }
     }
 }
