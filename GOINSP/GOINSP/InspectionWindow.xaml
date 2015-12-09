@@ -11,5 +11,6 @@
                 <DataGridTextColumn Header="Longtitude" Binding="{Binding longtitude}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="391,63,0,0" Command="{Binding AddInspection}" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

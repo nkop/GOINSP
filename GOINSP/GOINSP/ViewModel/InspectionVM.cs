@@ -56,6 +56,12 @@ namespace GOINSP.ViewModel
             set { inspection.address = value; }
         }
 
+        public string zipcode
+        {
+            get { return inspection.zipcode; }
+            set { inspection.zipcode = value; }
+        }
+
         public Guid inspectorid
         {
             get { return inspection.inspectorid; }

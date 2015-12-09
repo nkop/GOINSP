@@ -19,6 +19,7 @@ namespace GOINSP.Models
         public double longtitude { get; set; }
         public double latitude { get; set; }
         public string address { get; set; }
+        public string zipcode { get; set; }
         [ForeignKey("inspector")]
         public Guid inspectorid { get; set; }
         public string description { get; set; }
