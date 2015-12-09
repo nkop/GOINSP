@@ -146,6 +146,7 @@
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
     <Compile Include="Models\OpenData.cs" />

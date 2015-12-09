@@ -7,8 +7,21 @@ using System.Threading.Tasks;
 
 namespace GOINSP.ViewModel
 {
-    class InspectionVM : ViewModelBase
+    public class InspectionVM : ViewModelBase
     {
+        private Models.Inspection inspection;
+        private Models.Context context;
 
+        public InspectionVM()
+        {
+            this.inspection = new Models.Inspection();
+            this.context = new Models.Context();
+        }
+
+        public InspectionVM(Models.Inspection inspection)
+        {
+            this.inspection = inspection;
+            this.context = new Models.Context();
+        }
     }
 }
