@@ -5,6 +5,11 @@
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Inspections}" Height="130" ColumnWidth="*" Margin="0 20 0 0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="150" />
+                <DataGridTextColumn Header="Longtitude" Binding="{Binding longtitude}" Width="150" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

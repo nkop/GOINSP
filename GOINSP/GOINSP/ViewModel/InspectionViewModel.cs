@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GOINSP.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +12,16 @@ namespace GOINSP.ViewModel
     public class InspectionViewModel : ViewModelBase
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
-        public Models.Context context;
+        public Context context;
 
         public InspectionViewModel()
         {
-            List<Models.Inspection> tempInspection = context.Inspection.ToList();
-            Inspections = new ObservableCollection<AccountVM>(tempInspection.Select(a => new InspectionVM(a)).Distinct());
+            context = new Context();
+
+            IEnumerable<Inspection> inspectie = context.Inspection;
+            IEnumerable<InspectionVM> inspectionVM = inspectie.Select(a => new InspectionVM(a));
+            Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
+            RaisePropertyChanged("Inspections");
         }
     }
 }
