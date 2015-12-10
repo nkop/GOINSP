@@ -15,6 +15,7 @@ namespace GOINSP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid id { get; set; }
         public string name { get; set; }
+        [Column(TypeName = "datetime2")]
         public DateTime date { get; set; }
         public double longtitude { get; set; }
         public double latitude { get; set; }

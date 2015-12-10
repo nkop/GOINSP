@@ -79,5 +79,10 @@ namespace GOINSP.ViewModel
             get { return inspection.image; }
             set { inspection.image = value; }
         }
+
+        public Models.Inspection toInspection()
+        {
+            return inspection;
+        }
     }
 }
