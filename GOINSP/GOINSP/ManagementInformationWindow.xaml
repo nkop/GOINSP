@@ -8,25 +8,25 @@
     <Grid>
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
-            <WrapPanel>
-                <ComboBox ItemsSource="{Binding BedrijfInspecties}" Width="100"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
-                    
-                
-                <sparrow:SparrowChart Width="500" Height="500">
-                    <sparrow:SparrowChart.XAxis>
-                        <sparrow:LinearXAxis/>
-                    </sparrow:SparrowChart.XAxis>
-                    <sparrow:SparrowChart.YAxis>
-                        <sparrow:LinearYAxis/>
-                    </sparrow:SparrowChart.YAxis>
-                    <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
-                </sparrow:SparrowChart>
+            <Grid>
+                <ComboBox ItemsSource="{Binding BedrijfInspecties.Datum}" Width="100"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>               
+                <Label>
+                    <sparrow:SparrowChart Width="500" Height="500">
+                        <sparrow:SparrowChart.XAxis>
+                            <sparrow:LinearXAxis/>
+                        </sparrow:SparrowChart.XAxis>
+                        <sparrow:SparrowChart.YAxis>
+                            <sparrow:LinearYAxis/>
+                        </sparrow:SparrowChart.YAxis>
+                        <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
+                    </sparrow:SparrowChart>
+                </Label>                
                 <DataGrid Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
                 </DataGrid.Columns>
                 </DataGrid>
-            </WrapPanel>
+            </Grid>
         </StackPanel>
         
     </Grid>

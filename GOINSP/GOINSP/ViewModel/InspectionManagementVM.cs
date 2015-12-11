@@ -26,6 +26,8 @@ namespace GOINSP.ViewModel
             }
         }
 
+
+
         
         public InspectionManagementVM()
         {
