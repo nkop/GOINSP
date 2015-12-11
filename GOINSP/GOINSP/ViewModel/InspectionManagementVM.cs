@@ -12,11 +12,21 @@ using System.Windows.Input;
 
 namespace GOINSP.ViewModel
 {
-    public class InspectionManagementVM
+    public class InspectionManagementVM : ViewModelBase
     {
         Models.Context context;
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
-        public CompanyVM SelectedBedrijf { get; set; }
+        private CompanyVM _selectedBedrijf { get; set; }
+        public CompanyVM SelectedBedrijf 
+        {
+            get { return _selectedBedrijf; }
+            set 
+            { _selectedBedrijf = value;
+            RaisePropertyChanged("SelectedBedrijf");
+            }
+        }
+
+        
         public InspectionManagementVM()
         {
             context = new Models.Context();

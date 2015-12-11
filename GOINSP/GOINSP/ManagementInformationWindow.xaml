@@ -7,9 +7,12 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <StackPanel>
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0">Management Informatie</TextBlock>
+            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
             <Grid>
-                <sparrow:SparrowChart>
+                <ComboBox ItemsSource="{Binding BedrijfInspecties}" SelectedItem="{Binding SelectedInspectie}"/>
+                    
+                
+                <sparrow:SparrowChart Theme="Grayscale"  Width="500" Height="500">
                     <sparrow:SparrowChart.XAxis>
                         <sparrow:LinearXAxis/>
                     </sparrow:SparrowChart.XAxis>
