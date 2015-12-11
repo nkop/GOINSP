@@ -9,12 +9,12 @@
         <ListView HorizontalAlignment="Left" Height="352" ItemsSource="{Binding Inspections}" Margin="10,10,0,0" VerticalAlignment="Top" Width="575">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400" />
+                    <UniformGrid Columns="3" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Width="150" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <Label Content="{Binding name}" />
                         <Label Content="{Binding date}" />
                         <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding description}"></TextBlock>
