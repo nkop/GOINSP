@@ -46,6 +46,7 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<AccountManagementVM>();
             SimpleIoc.Default.Register<OpenDataImportViewModel>();
             SimpleIoc.Default.Register<ForgottenPasswordVM>();
+            SimpleIoc.Default.Register<InspectionManagementVM>();
         }
 
         public MainViewModel Main

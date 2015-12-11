@@ -7,11 +7,13 @@
     <Grid>
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0">Management Informatie</TextBlock>
-            <DataGrid Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right" Width="517" >
+            <Grid>
+                <DataGrid Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right"  >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Bedrijfsnaam}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
                 </DataGrid.Columns>
-            </DataGrid>
+                </DataGrid>
+            </Grid>            
         </StackPanel>
         
     </Grid>
