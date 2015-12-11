@@ -9,12 +9,21 @@
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0">Management Informatie</TextBlock>
             <Grid>
+                <sparrow:SparrowChart>
+                    <sparrow:SparrowChart.XAxis>
+                        <sparrow:LinearXAxis/>
+                    </sparrow:SparrowChart.XAxis>
+                    <sparrow:SparrowChart.YAxis>
+                        <sparrow:LinearYAxis/>
+                    </sparrow:SparrowChart.YAxis>
+                    <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
+                </sparrow:SparrowChart>
                 <DataGrid Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
                 </DataGrid.Columns>
                 </DataGrid>
-            </Grid>            
+            </Grid>
         </StackPanel>
         
     </Grid>
