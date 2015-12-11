@@ -8,11 +8,11 @@
     <Grid>
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
-            <Grid>
-                <ComboBox ItemsSource="{Binding BedrijfInspecties}" SelectedItem="{Binding SelectedInspectie}"/>
+            <WrapPanel>
+                <ComboBox ItemsSource="{Binding BedrijfInspecties}" Width="100"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
                     
                 
-                <sparrow:SparrowChart Theme="Grayscale"  Width="500" Height="500">
+                <sparrow:SparrowChart Width="500" Height="500">
                     <sparrow:SparrowChart.XAxis>
                         <sparrow:LinearXAxis/>
                     </sparrow:SparrowChart.XAxis>
@@ -26,7 +26,7 @@
                     <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
                 </DataGrid.Columns>
                 </DataGrid>
-            </Grid>
+            </WrapPanel>
         </StackPanel>
         
     </Grid>
