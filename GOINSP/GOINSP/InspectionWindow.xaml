@@ -5,12 +5,26 @@
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Inspections}" Height="130" ColumnWidth="*" Margin="0 20 0 0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="150" />
-                <DataGridTextColumn Header="Longtitude" Binding="{Binding longtitude}" Width="150" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="391,63,0,0" Command="{Binding AddInspection}" VerticalAlignment="Top" Width="75"/>
+        
+        <ListView HorizontalAlignment="Left" Height="352" ItemsSource="{Binding Inspections}" Margin="10,10,0,0" VerticalAlignment="Top" Width="575">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding name}" />
+                        <Label Content="{Binding date}" />
+                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding description}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--<Button Content="Toevoegen" HorizontalAlignment="Left" Margin="391,63,0,0" Command="{Binding AddInspection}" VerticalAlignment="Top" Width="75"/>-->
+
+
     </Grid>
 </Window>
