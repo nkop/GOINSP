@@ -1,6 +1,7 @@
 ﻿<Window x:Class="GOINSP.ManagementInformationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sparrow="http://sparrowtoolkit.codeplex.com/wpf"
         Title="Login" Height="350" Width="525"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
