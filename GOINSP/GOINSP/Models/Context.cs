@@ -1,5 +1,5 @@
-﻿using GOINSP.Models.Opendata.GemeenteGrenzen;
-using GOINSP.Models.Opendata.HuishoudelijkAfval;
+﻿using GOINSP.Models.Opendata.HuishoudelijkAfval;
+using GOINSP.Models.Opendata.PostCodeData;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,12 +16,20 @@ namespace GOINSP.Models
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }
-        public DbSet<Grenzen> Grenzen { get; set; }
+        public DbSet<PostCodeData> PostCodeData { get; set; }
         
         public Context()
             : base()
         {
 
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PostCodeData>().Property(x => x.lat).HasPrecision(15, 13);
+            modelBuilder.Entity<PostCodeData>().Property(x => x.lon).HasPrecision(15, 13);
+            modelBuilder.Entity<PostCodeData>().Property(x => x.rd_x).HasPrecision(31, 20);
+            modelBuilder.Entity<PostCodeData>().Property(x => x.rd_y).HasPrecision(31, 20);
         }
     }
 }

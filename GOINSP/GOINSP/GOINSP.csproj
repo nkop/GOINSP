@@ -123,9 +123,9 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Multimedia.cs" />
-    <Compile Include="Models\Opendata\GemeenteGrenzen\Grenzen.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
+    <Compile Include="Models\Opendata\PostCodeData\PostCodeData.cs" />
     <Compile Include="OpenDataImport.xaml.cs">
       <DependentUpon>OpenDataImport.xaml</DependentUpon>
     </Compile>
@@ -135,9 +135,10 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\CSVImport.cs" />
     <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
-    <Compile Include="Utility\GrenzenImport.cs" />
+    <Compile Include="Utility\PostCodeImport.cs" />
     <Compile Include="Utility\TDataImport.cs" />
     <Compile Include="Utility\IImport.cs" />
     <Compile Include="Utility\JSONImport.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="ViewModel\OpenDataVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\RegioSVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
+    <Compile Include="ViewModel\Opendata\PostCodeDatas\PostCodeDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />
     <Compile Include="ViewModel\QuestionTemplateVM.cs" />
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
