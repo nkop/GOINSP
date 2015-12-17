@@ -5,6 +5,7 @@ using GOINSP.Models;
 using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,8 +58,16 @@ namespace GOINSP.ViewModel
             }
         }
 
-        
-        PointLatLng Point = new PointLatLng(51.6790508905935, 5.0618044538692);
+        private ObservableCollection<ListViewData> testCollection;
+        public ObservableCollection<ListViewData> TestCollection
+        {
+            get { return testCollection; }
+            set
+            {
+                testCollection = value;
+                RaisePropertyChanged("TestCollection");
+            }
+        }
 
         Context context;
 
@@ -70,7 +79,12 @@ namespace GOINSP.ViewModel
 
             context = new Context();
 
-
+            TestCollection = new ObservableCollection<ListViewData>();
+            TestCollection.Add(new ListViewData("6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9"));
+            TestCollection.Add(new ListViewData("6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9"));
+            TestCollection.Add(new ListViewData("6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9"));
+            TestCollection.Add(new ListViewData("6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9"));
+            TestCollection.Add(new ListViewData("6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9"));
         }
 
         public void StartImport(string dataType)
@@ -116,6 +130,16 @@ namespace GOINSP.ViewModel
                 default:
                     break;
             }
+        }
+    }
+
+    public class ListViewData
+    {
+        public string key { get; set; }
+
+        public ListViewData(string key)
+        {
+            this.key = key;
         }
     }
 }
