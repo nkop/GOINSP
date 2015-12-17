@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GMap.NET;
+using GMap.NET.MapProviders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,8 @@ namespace GOINSP
         public OpenDataImport()
         {
             InitializeComponent();
+            map1.MapProvider = GMapProviders.GoogleMap;
+            map1.Position = new PointLatLng(51.6790508905935, 5.0618044538692);
         }
     }
 }
