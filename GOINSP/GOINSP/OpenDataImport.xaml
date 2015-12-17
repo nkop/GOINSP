@@ -1,16 +1,32 @@
 ﻿<Window x:Class="GOINSP.OpenDataImport"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:src="clr-namespace:GOINSP.UIElements"
-        xmlns:my="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        xmlns:src="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         DataContext="{Binding OpenDataImport, Source={StaticResource Locator}}"
-        Title="Data Import" Height="300" Width="592" WindowStartupLocation="CenterScreen">
+        Title="Data Import" Height="495" Width="592" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="Import TData" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}"/>
         <Button Content="Import RegioS" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios" IsEnabled="{Binding ButtonsEnabled}"/>
         <ProgressBar HorizontalAlignment="Left" Height="30" Margin="10,229,0,0" VerticalAlignment="Top" Width="272" Value="{Binding ProgressBarPercentage}"/>
         <Label Content="{Binding ProgressLabelText}" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top"/>
         <Button Content="Import Grenzen" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="postcodes" IsEnabled="{Binding ButtonsEnabled}"/>
-        <my:GMapControl Height="484" HorizontalAlignment="Left" Margin="12,12,0,0" Name="gmapControl" VerticalAlignment="Top" Width="754" />
+        <src:Map CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="16" AllowDrop="False" IsEnabled="False" ScaleVisibility="Hidden" Margin="292,273,10,10">
+            <src:MapItemsControl ItemsSource="{Binding Pins}">
+                <src:Pushpin>
+                    <src:MapLayer.Position>
+                        <src:Location Latitude="51.6790508905935" Longitude="5.0618044538692"></src:Location>
+                    </src:MapLayer.Position>
+                </src:Pushpin>
+            </src:MapItemsControl>
+        </src:Map>
+        <src:Map CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="16" AllowDrop="False" IsEnabled="False" ScaleVisibility="Hidden" Margin="10,273,292,10">
+            <src:MapItemsControl ItemsSource="{Binding Pins}">
+                <src:Pushpin>
+                    <src:MapLayer.Position>
+                        <src:Location Latitude="51.6790508905935" Longitude="5.0618044538692"></src:Location>
+                    </src:MapLayer.Position>
+                </src:Pushpin>
+            </src:MapItemsControl>
+        </src:Map>
     </Grid>
 </Window>

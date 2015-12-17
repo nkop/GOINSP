@@ -24,8 +24,6 @@ namespace GOINSP
         public OpenDataImport()
         {
             InitializeComponent();
-            map1.MapProvider = GMapProviders.GoogleMap;
-            map1.Position = new PointLatLng(51.6790508905935, 5.0618044538692);
         }
     }
 }

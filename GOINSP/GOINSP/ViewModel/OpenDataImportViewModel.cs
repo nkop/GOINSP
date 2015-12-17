@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GMap.NET;
 using GOINSP.Models;
 using GOINSP.Utility;
 using System;
@@ -55,6 +56,9 @@ namespace GOINSP.ViewModel
                 RaisePropertyChanged("ButtonsEnabled");
             }
         }
+
+        
+        PointLatLng Point = new PointLatLng(51.6790508905935, 5.0618044538692);
 
         Context context;
 
