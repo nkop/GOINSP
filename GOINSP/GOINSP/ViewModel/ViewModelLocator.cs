@@ -47,6 +47,7 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<OpenDataImportViewModel>();
             SimpleIoc.Default.Register<ForgottenPasswordVM>();
             SimpleIoc.Default.Register<InspectionViewModel>();
+            SimpleIoc.Default.Register<InspectionSpecsViewModel>();
         }
 
         public MainViewModel Main
@@ -86,6 +87,14 @@ namespace GOINSP.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<InspectionViewModel>();
+            }
+        }
+
+        public InspectionSpecsViewModel InspectionSpecs
+        {
+            get
+            {
+                return new InspectionSpecsViewModel();
             }
         }
 

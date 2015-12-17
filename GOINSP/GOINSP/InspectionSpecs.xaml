@@ -1,0 +1,14 @@
+﻿<Window x:Class="GOINSP.InspectionSpecs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InspectionSpecs" Height="600" Width="600"
+        DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Margin="10">
+        <StackPanel DataContext="{Binding InspectionSpecs}">
+            <Label Content="{Binding name}" />
+            <RichTextBox />
+        </StackPanel>
+    </Grid>
+</Window>

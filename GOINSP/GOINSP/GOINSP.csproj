@@ -102,6 +102,9 @@
     <Compile Include="InspectionOverviewWindow.xaml.cs">
       <DependentUpon>InspectionOverviewWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InspectionSpecs.xaml.cs">
+      <DependentUpon>InspectionSpecs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InspectionWindow.xaml.cs">
       <DependentUpon>InspectionWindow.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,7 @@
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
@@ -194,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InspectionOverviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InspectionSpecs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

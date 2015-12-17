@@ -21,6 +21,9 @@ namespace GOINSP.ViewModel
         public ICommand SaveInspection { get; set; }
 
         private InspectionVM _newInspection;
+        private InspectionVM _selectedInspection;
+
+        public Guid InspectionID;
 
         public InspectionViewModel()
         {
@@ -35,12 +38,27 @@ namespace GOINSP.ViewModel
             SaveInspection = new RelayCommand(Save);
 
             _newInspection = new InspectionVM();
+            _selectedInspection = new InspectionVM();
         }
 
         public InspectionVM newInspection
         {
             get { return _newInspection; }
             set { _newInspection = value; }
+        }
+
+        public InspectionVM selectedInspection
+        {
+            get { return _selectedInspection; }
+            set
+            {
+                _selectedInspection = value;
+
+                InspectionID = selectedInspection.id;
+
+                InspectionSpecs window = new InspectionSpecs();
+                window.Show();
+            }
         }
 
         private void Add()
@@ -53,7 +71,7 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                // Set foreign key
+                // Set foreign key (NEED TO RETHINK THIS)
                 _newInspection.inspectorid = new Guid("C4A2D055-2722-4C8C-80BE-8C332B84842F");
 
                 // Add to database
@@ -67,7 +85,7 @@ namespace GOINSP.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals. " + ex);
+                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
             }
         }
     }
