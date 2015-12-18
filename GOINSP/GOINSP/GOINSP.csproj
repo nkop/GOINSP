@@ -52,12 +52,21 @@
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\..\..\..\..\Downloads\GMap.NET.WindowsPresentation\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsPresentation">
+      <HintPath>..\..\..\..\..\Downloads\GMap.NET.WindowsPresentation\GMap.NET.WindowsPresentation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Sparrow.Chart.Wpf.40">
+      <HintPath>..\packages\Sparrow.Chart.Wpf.13.1.0.118\lib\net40\Sparrow.Chart.Wpf.40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -126,8 +135,13 @@
     <Compile Include="Migrations\201511271247545_Delswas update.Designer.cs">
       <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512041008486_bedrijf.cs" />
+    <Compile Include="Migrations\201512041008486_bedrijf.Designer.cs">
+      <DependentUpon>201512041008486_bedrijf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Inspection.cs" />
     <Compile Include="Models\Location.cs" />
@@ -151,9 +165,14 @@
     <Compile Include="Utility\JSONImport.cs" />
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
+    <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
+=======
+    <Compile Include="ViewModel\InspectionManagementVM.cs" />
+>>>>>>> refs/remotes/origin/master
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
     <Compile Include="Models\OpenData.cs" />
@@ -268,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511271247545_Delswas update.resx">
       <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512041008486_bedrijf.resx">
+      <DependentUpon>201512041008486_bedrijf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

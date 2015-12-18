@@ -7,11 +7,16 @@
     <Grid>
         <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Menu GoInsp</TextBlock>
         <WrapPanel Height="100" HorizontalAlignment="Center">
+<<<<<<< HEAD
             <Button Content="User Control" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding UserControlCommand}"/>
             <Button Content="Open-Data Import" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenDataImportCommand}"/>
             <Button Content="Inspection" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenInspectionCommand}" />
+=======
+            <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding UserControlCommand}"/>
+            <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenDataImportCommand}"/>
+            <Button Name="Management" Content="Management Informatie" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding ManagementInfoCommand}"/>
+>>>>>>> refs/remotes/origin/master
             <Button Content="Button" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59"/>
         </WrapPanel>
-
     </Grid>
 </Window>

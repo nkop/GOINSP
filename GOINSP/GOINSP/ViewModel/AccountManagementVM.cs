@@ -145,8 +145,6 @@ namespace GOINSP.ViewModel
 
         private void Login()
         {
-            //MenuControl window = new MenuControl();
-            //window.Show();
             if (LoginName != null)
             {
                 Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
@@ -154,7 +152,8 @@ namespace GOINSP.ViewModel
                 {
                     if (LoginPassword == account.Password)
                     {
-                        MenuControl window = new MenuControl();
+                        
+                        MenuControl window = new MenuControl(account.AccountRights.ToString());
                         window.Show();
                     }
                     else
