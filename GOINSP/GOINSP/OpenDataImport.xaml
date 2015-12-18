@@ -3,45 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         DataContext="{Binding OpenDataImport, Source={StaticResource Locator}}"
-        Title="Data Import" Height="737" Width="592" WindowStartupLocation="CenterScreen">
+        Title="Data Import" Height="293.5" Width="295.5" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="Import TData" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}"/>
         <Button Content="Import RegioS" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios" IsEnabled="{Binding ButtonsEnabled}"/>
         <ProgressBar HorizontalAlignment="Left" Height="30" Margin="10,229,0,0" VerticalAlignment="Top" Width="272" Value="{Binding ProgressBarPercentage}"/>
         <Label Content="{Binding ProgressLabelText}" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top"/>
-        <Button Content="Import Grenzen" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="postcodes" IsEnabled="{Binding ButtonsEnabled}"/>
-
-        <src:Map CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="16" AllowDrop="False" IsEnabled="False" ScaleVisibility="Hidden">
-            <src:MapItemsControl>
-                <src:Pushpin>
-                    <src:MapLayer.Position>
-                        <src:Location Latitude="51.6790508905935" Longitude="5.0618044538692"></src:Location>
-                    </src:MapLayer.Position>
-                </src:Pushpin>
-            </src:MapItemsControl>
-        </src:Map>
-        <ListView HorizontalAlignment="Left" Height="317" Margin="10,379,0,0" VerticalAlignment="Top" Width="564" ItemsSource="{Binding TestCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal">
-                    </StackPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <src:Map CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="16" AllowDrop="False" IsEnabled="False" ScaleVisibility="Hidden">
-                            <src:MapItemsControl>
-                                <src:Pushpin>
-                                    <src:MapLayer.Position>
-                                        <src:Location Latitude="51.6790508905935" Longitude="5.0618044538692"></src:Location>
-                                    </src:MapLayer.Position>
-                                </src:Pushpin>
-                            </src:MapItemsControl>
-                        </src:Map>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Button Content="Import PostCodes" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="postcodes" IsEnabled="{Binding ButtonsEnabled}"/>
     </Grid>
 </Window>
