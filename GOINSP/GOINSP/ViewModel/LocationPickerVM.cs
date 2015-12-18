@@ -7,6 +7,7 @@ using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.SqlServer;
 using System.Device.Location;
 using System.Globalization;
 using System.Linq;
@@ -97,6 +98,19 @@ namespace GOINSP.ViewModel
                 }
             }
 
+            string GMCode = "";
+
+            if (data.postcode.Count() == 4)
+            {
+                GMCode = "GM"+String.Format("{0:0000}", context.PostCodeData.Where(entity => SqlFunctions.PatIndex(data.postcode + "%%", entity.postcode) > 0).First().municipality_id);
+            }
+            else
+            {
+                GMCode = "GM"+String.Format("{0:0000}", context.PostCodeData.Where(entity => entity.postcode == data.postcode).First().municipality_id);
+            }
+
+
+            data.municipality = context.HuishoudelijkAfvalRegioS.Where(x => x.Key == GMCode).First().Title;
             PostCode = data;
 
             //PostCode = context.PostCodeData.SqlQuery("SELECT TOP 1 [id], [postcode], [postcode_id], [pnum], [pchar],[minnumber],[maxnumber],[numbertype],[street],[city],[city_id],[municipality],[municipality_id],[province],[province_code],[lat] = (ABS(lat - " + LatDec.ToString().Replace(",", ".") + ") + ABS(lon - " + LongDec.ToString().Replace(",", ".") + ")) / 2,[lon],[rd_x],[rd_y],[location_detail],[changed_date] FROM PostCodeDatas WHERE (lat IS NOT NULL) AND (lon IS NOT NULL) ORDER BY lat").First();
