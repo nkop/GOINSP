@@ -14,5 +14,6 @@ namespace GOINSP
     /// </summary>
     public partial class App : Application
     {
+        SyncWorker sync = new SyncWorker();
     }
 }
