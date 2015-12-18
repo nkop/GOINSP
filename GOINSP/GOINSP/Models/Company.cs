@@ -12,7 +12,7 @@ namespace GOINSP.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid CompanyID { get; set; }
+        public Guid companyid { get; set; }
         public string BedrijfsNaam { get; set; }
         public string BedrijfsEmail { get; set; }
     }

@@ -25,7 +25,8 @@ namespace GOINSP.ViewModel
 
         public Guid ID
         {
-            get { return company.CompanyID; }
+            get { return company.companyid; }
+            set { company.companyid = value; }
         }
 
         public string Bedrijfsnaam

@@ -82,9 +82,13 @@ namespace GOINSP.Utility
             try
             {
                 serverDepro.DeprovisionScope("GOINSPSyncScope");
+                Console.WriteLine("Server deprovisioned");
                 clientDepro.DeprovisionScope("GOINSPSyncScope");
+                Console.WriteLine("client deprovisioned");
             }
-            catch (Exception e) { }
+            catch (Exception e) {
+                Console.WriteLine("Something went wrong");
+            }
         }
 
         public void work()

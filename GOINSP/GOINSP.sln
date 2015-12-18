@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOINSP", "GOINSP\GOINSP.csproj", "{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Class Diagram", "Class Diagram\Class Diagram.modelproj", "{5FEB5D5B-4390-44FB-AB4F-D6ECEAA838B8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FEB5D5B-4390-44FB-AB4F-D6ECEAA838B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FEB5D5B-4390-44FB-AB4F-D6ECEAA838B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FEB5D5B-4390-44FB-AB4F-D6ECEAA838B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FEB5D5B-4390-44FB-AB4F-D6ECEAA838B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,11 +10,6 @@ namespace GOINSP.Models
 {
     public class Account
     {
-        public Account()
-        {
-
-        }
-
         public enum Rights
         {
             Default,
@@ -26,7 +21,7 @@ namespace GOINSP.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
         public string UserName { get; set; }
 
         public string Password { get; set; }
