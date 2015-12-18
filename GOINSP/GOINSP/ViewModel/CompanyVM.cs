@@ -23,10 +23,10 @@ namespace GOINSP.ViewModel
             this.context = new Models.Context();
         }
 
-        public int ID
+        public Guid ID
         {
-            get { return company.ID; }
-            set { company.ID = value; }
+            get { return company.companyid; }
+            set { company.companyid = value; }
         }
 
         public string Bedrijfsnaam
