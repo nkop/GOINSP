@@ -16,6 +16,7 @@ namespace GOINSP.ViewModel
     {
         Models.Context context;
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
+        public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         private CompanyVM _selectedBedrijf { get; set; }
         public CompanyVM SelectedBedrijf 
         {
@@ -26,7 +27,16 @@ namespace GOINSP.ViewModel
             }
         }
 
-
+        private InspectionVM _selectedInspection { get; set; }
+        public InspectionVM SelectedInspection
+        {
+            get { return _selectedInspection; }
+            set
+            {
+                _selectedInspection = value;
+                RaisePropertyChanged("SelectedInspection");
+            }
+        }
 
         
         public InspectionManagementVM()
@@ -37,6 +47,15 @@ namespace GOINSP.ViewModel
             Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
 
             SelectedBedrijf = new CompanyVM();
+        }
+
+        private void LoadInspections()
+        {
+            if (SelectedBedrijf.ID != null)
+            {
+                List<Models.Inspection> inspections = context.Inspection.ToList();
+               // BedrijfInspecties = new ObservableCollection<InspectionVM>(inspections.Where(i.bedrijfsnaam = SelectedBedrijf.ID))
+            }
         }
     }
 }

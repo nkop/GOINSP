@@ -10,9 +10,7 @@
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
             <WrapPanel>
                 <ComboBox Margin="90" VerticalAlignment="Top" ItemsSource="{Binding BedrijfInspecties}" Width="100" Height="20"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
-                    
-                
-                <sparrow:SparrowChart Width="500" Height="500" Margin="90">
+                    <sparrow:SparrowChart Width="500" Height="500" Margin="90">
                     <sparrow:SparrowChart.XAxis>
                         <sparrow:LinearXAxis/>
                     </sparrow:SparrowChart.XAxis>
