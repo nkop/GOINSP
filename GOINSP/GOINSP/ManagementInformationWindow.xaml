@@ -19,11 +19,14 @@
                     </sparrow:SparrowChart.YAxis>
                     <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
                 </sparrow:SparrowChart>
-                <DataGrid Margin="90"  Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right" VerticalAlignment="Top" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
-                </DataGrid.Columns>
-                </DataGrid>
+                <StackPanel>
+                    <TextBox Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"></TextBox>
+                    <DataGrid Margin="90"  Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>               
             </WrapPanel>
         </StackPanel>
         

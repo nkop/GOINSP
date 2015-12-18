@@ -37,6 +37,18 @@ namespace GOINSP.ViewModel
         private InspectionVM _newInspection;
         private InspectionVM _selectedInspection;
 
+        private string _searchQuota { get; set; }
+        public string SearchQuota
+        {
+            get { return _searchQuota; }
+            set
+            {
+                _searchQuota = value;
+                RaisePropertyChanged("SearchQuota");
+                Search();
+            }
+        }
+
         public Guid InspectionID;
 
         public InspectionViewModel()
@@ -113,7 +125,36 @@ namespace GOINSP.ViewModel
             if (SelectedBedrijf.ID != null)
             {
                 List<Models.Inspection> inspections = context.Inspection.ToList();
-                //BedrijfInspecties = new ObservableCollection<InspectionVM>(inspections.Where(i.bedrijfsnaam = SelectedBedrijf.ID))
+
+                foreach (Models.Inspection item in inspections)
+                {
+                    if (item.companyid == SelectedBedrijf.ID)
+                    {
+                        BedrijfInspecties.Add(new InspectionVM(item));
+                    }
+                }
+            }
+        }
+
+        private void Search()
+        {
+            if (SearchQuota.Length >= 0)
+            {
+                List<Models.Company> tempBedrijven = context.Company.ToList();
+                List<CompanyVM> tempCompanyVM = new List<CompanyVM>();
+                foreach (Models.Company item in tempBedrijven)
+                {
+                    tempCompanyVM.Add(new CompanyVM(item));
+                }
+                Bedrijven.Clear();
+                foreach (CompanyVM item in tempCompanyVM)
+                {
+                    if (item.Bedrijfsnaam.Contains(SearchQuota))
+                    {
+                        Bedrijven.Add(item);
+                    }
+                }
+                RaisePropertyChanged("Bedrijven");
             }
         }
     }
