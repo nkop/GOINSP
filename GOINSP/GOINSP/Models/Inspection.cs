@@ -23,9 +23,12 @@ namespace GOINSP.Models
         public string zipcode { get; set; }
         [ForeignKey("inspector")]
         public Guid inspectorid { get; set; }
+        [ForeignKey("company")]
+        public Guid companyid { get; set; }
         public string description { get; set; }
         public string image { get; set; }
 
         public virtual Account inspector { get; set; }
+        public virtual Company company { get; set; }
     }
 }

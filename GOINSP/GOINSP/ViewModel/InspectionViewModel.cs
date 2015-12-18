@@ -15,7 +15,21 @@ namespace GOINSP.ViewModel
     public class InspectionViewModel : ViewModelBase
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
+        public ObservableCollection<CompanyVM> Bedrijven { get; set; }
+        public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
+
         public Context context;
+
+        private CompanyVM _selectedBedrijf { get; set; }
+        public CompanyVM SelectedBedrijf
+        {
+            get { return _selectedBedrijf; }
+            set
+            {
+                _selectedBedrijf = value;
+                RaisePropertyChanged("SelectedBedrijf");
+            }
+        }
 
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
@@ -34,11 +48,16 @@ namespace GOINSP.ViewModel
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
 
+            List<Models.Company> companies = context.Company.ToList();
+            Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
+
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
+
+            SelectedBedrijf = new CompanyVM();
         }
 
         public InspectionVM newInspection
@@ -86,6 +105,15 @@ namespace GOINSP.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
+            }
+        }
+
+        private void LoadInspections()
+        {
+            if (SelectedBedrijf.ID != null)
+            {
+                List<Models.Inspection> inspections = context.Inspection.ToList();
+                //BedrijfInspecties = new ObservableCollection<InspectionVM>(inspections.Where(i.bedrijfsnaam = SelectedBedrijf.ID))
             }
         }
     }
