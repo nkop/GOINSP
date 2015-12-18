@@ -7,14 +7,24 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <StackPanel>
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0">Management Informatie</TextBlock>
-            <Grid>
-                <DataGrid Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right"  >
+            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
+            <WrapPanel>
+                <ComboBox Margin="90" VerticalAlignment="Top" ItemsSource="{Binding BedrijfInspecties}" Width="100" Height="20"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
+                    <sparrow:SparrowChart Width="500" Height="500" Margin="90">
+                    <sparrow:SparrowChart.XAxis>
+                        <sparrow:LinearXAxis/>
+                    </sparrow:SparrowChart.XAxis>
+                    <sparrow:SparrowChart.YAxis>
+                        <sparrow:LinearYAxis/>
+                    </sparrow:SparrowChart.YAxis>
+                    <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
+                </sparrow:SparrowChart>
+                <DataGrid Margin="90"  Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right" VerticalAlignment="Top" >
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
                 </DataGrid.Columns>
                 </DataGrid>
-            </Grid>            
+            </WrapPanel>
         </StackPanel>
         
     </Grid>
