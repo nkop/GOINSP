@@ -4,13 +4,15 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOINSP.Models
 {
     public class Company
     {
         [Key]
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid CompanyID { get; set; }
         public string BedrijfsNaam { get; set; }
         public string BedrijfsEmail { get; set; }
     }

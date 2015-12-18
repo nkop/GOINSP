@@ -18,7 +18,7 @@ namespace GOINSP.Models
         public DbSet<Company> Company { get; set; }
         
         public Context()
-            : base()
+            : base("LocalContext")
         {
 
         }

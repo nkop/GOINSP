@@ -61,12 +61,21 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Synchronization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.Data, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.Data.Server, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.Data.SqlServer, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.Data.SqlServerCe, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.Files, Version=2.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.MetadataStorage, Version=2.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Synchronization.SimpleProviders, Version=2.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -114,22 +123,6 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511201032289_InitialCreate.cs" />
-    <Compile Include="Migrations\201511201032289_InitialCreate.Designer.cs">
-      <DependentUpon>201511201032289_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511251138038_Account Update.cs" />
-    <Compile Include="Migrations\201511251138038_Account Update.Designer.cs">
-      <DependentUpon>201511251138038_Account Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511271247545_Delswas update.cs" />
-    <Compile Include="Migrations\201511271247545_Delswas update.Designer.cs">
-      <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512041008486_bedrijf.cs" />
-    <Compile Include="Migrations\201512041008486_bedrijf.Designer.cs">
-      <DependentUpon>201512041008486_bedrijf.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
@@ -151,6 +144,8 @@
     </Compile>
     <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
+    <Compile Include="Utility\SynchronizeHelper.cs" />
+    <Compile Include="Utility\SyncWorker.cs" />
     <Compile Include="Utility\TDataImport.cs" />
     <Compile Include="Utility\IImport.cs" />
     <Compile Include="Utility\JSONImport.cs" />
@@ -257,18 +252,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201511201032289_InitialCreate.resx">
-      <DependentUpon>201511201032289_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511251138038_Account Update.resx">
-      <DependentUpon>201511251138038_Account Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511271247545_Delswas update.resx">
-      <DependentUpon>201511271247545_Delswas update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512041008486_bedrijf.resx">
-      <DependentUpon>201512041008486_bedrijf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -17,6 +17,7 @@ namespace GOINSP.Models
         }
 
         [Key]
-        public int InspectionID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid InspectionID { get; set; }
     }
 }
