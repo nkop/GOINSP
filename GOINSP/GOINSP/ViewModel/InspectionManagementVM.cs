@@ -38,7 +38,7 @@ namespace GOINSP.ViewModel
             }
         }
 
-        
+              
         public InspectionManagementVM()
         {
             context = new Models.Context();
@@ -57,5 +57,7 @@ namespace GOINSP.ViewModel
                // BedrijfInspecties = new ObservableCollection<InspectionVM>(inspections.Where(i.bedrijfsnaam = SelectedBedrijf.ID))
             }
         }
+
+       
     }
 }
