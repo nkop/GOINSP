@@ -8,7 +8,12 @@
     <Grid Margin="10">
         <StackPanel DataContext="{Binding InspectionSpecs}">
             <Label Content="{Binding name}" />
-            <RichTextBox />
+            <WrapPanel Orientation="Horizontal">
+                <Image Width="150" Source="{Binding image}" Height="150" HorizontalAlignment="Left" />
+                <WrapPanel Orientation="Vertical">
+                    
+                </WrapPanel>
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </Window>
