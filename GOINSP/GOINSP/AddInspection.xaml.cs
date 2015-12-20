@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace GOINSP
 {
     /// <summary>
-    /// Interaction logic for UserControl.xaml
+    /// Interaction logic for AddInspection.xaml
     /// </summary>
-    public partial class UserControl : Window
+    public partial class AddInspection : Window
     {
-        public UserControl()
+        public AddInspection()
         {
             InitializeComponent();
         }
-
     }
 }

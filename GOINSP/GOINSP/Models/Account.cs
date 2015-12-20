@@ -4,16 +4,12 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOINSP.Models
 {
     public class Account
     {
-        public Account()
-        {
-
-        }
-
         public enum Rights
         {
             Default,
@@ -24,6 +20,8 @@ namespace GOINSP.Models
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid id { get; set; }
         public string UserName { get; set; }
 
         public string Password { get; set; }

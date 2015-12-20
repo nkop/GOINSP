@@ -17,9 +17,10 @@ namespace GOINSP.Models
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<PostCodeData> PostCodeData { get; set; }
-        
+        public DbSet<Company> Company { get; set; }
+
         public Context()
-            : base()
+            : base("LocalContext")
         {
 
         }
@@ -31,5 +32,6 @@ namespace GOINSP.Models
             modelBuilder.Entity<PostCodeData>().Property(x => x.rd_x).HasPrecision(31, 20);
             modelBuilder.Entity<PostCodeData>().Property(x => x.rd_y).HasPrecision(31, 20);
         }
+        
     }
 }
