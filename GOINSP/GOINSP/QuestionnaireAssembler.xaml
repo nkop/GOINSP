@@ -6,13 +6,13 @@
         Title="QuestionnaireAssembler" Height="300" Width="300">
         <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestion}">
-            <StackPanel Width="200">
+            <StackPanel Width="200" Visibility="{Binding Visible}">
                 <Label Content="test1" />
                 <TextBlock Text="{Binding Answer, Mode=TwoWay}" />
                 </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type g:SimpleBoolQuestion}">
-                <StackPanel Width="200">
+                <StackPanel Width="200" Visibility="{Binding Visible}">
                 <Label Content="test2" HorizontalAlignment="Left"/>
                 <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
                 </StackPanel>
