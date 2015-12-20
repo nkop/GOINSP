@@ -16,8 +16,22 @@
                 <Label Content="test2" HorizontalAlignment="Left"/>
                 <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
                 </StackPanel>
-            </DataTemplate>
-        </Window.Resources>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type g:RadioQuestion}">
+            <StackPanel Width="200" Visibility="{Binding Visible}">
+                <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
+                <ItemsControl ItemsSource="{Binding Answers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Content="{Binding Text}" GroupName="{Binding GroupName}" IsChecked="{Binding Checked}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Label Content="Anders, " HorizontalAlignment="Left" Visibility="{Binding AlternativeAnswerVisibility}"/>
+                <TextBox  Visibility="{Binding AlternativeAnswerVisibility}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <ListBox ItemsSource="{Binding QuestionnaireCollection}"/>
     </Grid>
