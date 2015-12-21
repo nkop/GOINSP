@@ -35,7 +35,7 @@ namespace GOINSP.ViewModel
         public QuestionTemplateVM()
         {
             Context = new Context();
-            Questionnaire = new QuestionnaireVM();
+            /*Questionnaire = new QuestionnaireVM();
 
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>();
             SimpleBoolQuestionVM simpleBool = new SimpleBoolQuestionVM() { ListNumber = 1, Visible = Visibility.Visible };
@@ -55,18 +55,39 @@ namespace GOINSP.ViewModel
 
             Questionnaire.QuestionnaireCollection.Add(simpleBool);
             Questionnaire.QuestionnaireCollection.Add(simpleTextConditionBound);
-            Questionnaire.QuestionnaireCollection.Add(radioQuestion);
+            Questionnaire.QuestionnaireCollection.Add(radioQuestion);*/
+
 
             /*Questionnaire questionnaire = new Questionnaire();
-            questionnaire.QuestionnaireCollection = new List<Question>();
 
+            questionnaire.QuestionnaireCollection = new List<Question>();
             SimpleBoolQuestion simpleBoolQuestion = new SimpleBoolQuestion() { ListNumber = 1, Visible = true, Question = "Is 1 meer als 2?", Answer = true};
+            SimpleTextQuestion simpleTextQuestion = new SimpleTextQuestion() { ListNumber = 2, Visible = false, VisibleCondition = true };
+            RadioQuestion radioQuestion = new RadioQuestion() { ListNumber = 3, Question = "Reden van capaciteitvermindering:", Visible = true, AlternativeAnswerVisibility = true };
+
+            radioQuestion.Answers = new List<RadioAnswer>();
+            radioQuestion.Answers.Add(new RadioAnswer() { Text = "bouwwerkzaamheden", GroupName = "Groep1", Checked = false });
+            radioQuestion.Answers.Add(new RadioAnswer() { Text = "schoonmaakwerkzaamheden", GroupName = "Groep1", Checked = true });
+            radioQuestion.Answers.Add(new RadioAnswer() { Text = "onderhoudswerkzaamheden", GroupName = "Groep1", Checked = false });
+            radioQuestion.Answers.Add(new RadioAnswer() { Text = "heggen snoeien / tuin onderhoud", GroupName = "Groep1", Checked = false });
+            radioQuestion.Answers.Add(new RadioAnswer() { Text = "event (vb concert)", GroupName = "Groep1", Checked = false });
+            radioQuestion.Answers.Add(new RadioAnswer() { Text = "verhuizing", GroupName = "Groep1", Checked = false });
+
+            simpleBoolQuestion.ConditionBoundQuestions = new List<Question>();
+            simpleBoolQuestion.ConditionBoundQuestions.Add(simpleTextQuestion);
+
             questionnaire.QuestionnaireCollection.Add(simpleBoolQuestion);
+            questionnaire.QuestionnaireCollection.Add(simpleTextQuestion);
+            questionnaire.QuestionnaireCollection.Add(radioQuestion);
 
             Context.Questionnaire.Add(questionnaire);
             Context.SaveChanges();*/
 
-            List<Questionnaire> list = Context.Questionnaire.ToList();
+            List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
+            ObservableCollection<QuestionnaireVM> questionnaireVMs = new ObservableCollection<QuestionnaireVM>(questionnaires.Select(x => new QuestionnaireVM(x)));
+
+
+            Questionnaire = questionnaireVMs.First();
         }
     }
 
@@ -87,6 +108,8 @@ namespace GOINSP.ViewModel
 
     public class QuestionnaireVM : ViewModelBase
     {
+        private Questionnaire questionnaire;
+
         private ObservableCollection<QuestionVM> questionnaireCollection;
         public ObservableCollection<QuestionVM> QuestionnaireCollection
         {
@@ -98,6 +121,30 @@ namespace GOINSP.ViewModel
             {
                 questionnaireCollection = value;
                 RaisePropertyChanged("QuestionnaireCollection");
+            }
+        }
+
+        public QuestionnaireVM()
+        {
+
+        }
+
+        public QuestionnaireVM(Questionnaire questionnaire)
+        {
+            this.questionnaire = questionnaire;
+
+            this.QuestionnaireCollection = new ObservableCollection<QuestionVM>();
+
+            foreach (SimpleTextQuestion simpleTextQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleTextQuestion>())
+            {
+
+            }
+            foreach (SimpleBoolQuestion simpleBoolQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleBoolQuestion>())
+            {
+                this.QuestionnaireCollection.Add(new SimpleBoolQuestionVM(simpleBoolQuestion));
+            }
+            foreach (RadioQuestion radioQuestion in questionnaire.QuestionnaireCollection.OfType<RadioQuestion>())
+            {
             }
         }
     }
@@ -161,6 +208,8 @@ namespace GOINSP.ViewModel
 
     public class SimpleBoolQuestionVM : QuestionVM
     {
+        private SimpleBoolQuestion simpleBoolQuestion;
+
         private string question;
         public string Question
         {
@@ -197,6 +246,23 @@ namespace GOINSP.ViewModel
                 else
                     question.Visible = Visibility.Collapsed;
             }
+        }
+
+        public SimpleBoolQuestionVM()
+        {
+
+        }
+
+        public SimpleBoolQuestionVM(SimpleBoolQuestion simpleBoolQuestion)
+            : base(simpleBoolQuestion)
+        {
+            this.simpleBoolQuestion = simpleBoolQuestion;
+
+            this.ConditionBoundQuestions = new List<QuestionVM>();
+
+            this.Question = simpleBoolQuestion.Question;
+            this.Answer = simpleBoolQuestion.Answer;
+
         }
     }
 
@@ -329,6 +395,8 @@ namespace GOINSP.ViewModel
 
     public class QuestionVM : ViewModelBase
     {
+        private Question question;
+
         public int ListNumber { get; set; }
 
         public Visibility visible;
@@ -346,5 +414,35 @@ namespace GOINSP.ViewModel
 
         public List<QuestionVM> ConditionBoundQuestions { get; set; }
         public bool VisibleCondition { get; set; }
+
+        public QuestionVM()
+        {
+
+        }
+
+        public QuestionVM(Question question)
+        {
+            this.question = question;
+
+            this.ListNumber = question.ListNumber;
+            this.Visible = ConversionHelper.BoolToVisibility(question.Visible);
+        }
+    }
+
+    public class ConversionHelper
+    {
+        public static bool VisibilityToBool(Visibility visibility)
+        {
+            if (visibility == Visibility.Visible)
+                return true;
+            return false;
+        }
+
+        public static Visibility BoolToVisibility(bool visibility)
+        {
+            if (visibility)
+                return Visibility.Visible;
+            return Visibility.Collapsed;
+        }
     }
 }
