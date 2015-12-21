@@ -5,19 +5,19 @@
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
         Title="QuestionnaireAssembler" Height="300" Width="300">
         <Window.Resources>
-        <DataTemplate DataType="{x:Type g:SimpleTextQuestion}">
+        <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
             <StackPanel Width="200" Visibility="{Binding Visible}">
                 <Label Content="test1" />
                 <TextBlock Text="{Binding Answer, Mode=TwoWay}" />
                 </StackPanel>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type g:SimpleBoolQuestion}">
+        <DataTemplate DataType="{x:Type g:SimpleBoolQuestionVM}">
                 <StackPanel Width="200" Visibility="{Binding Visible}">
                 <Label Content="test2" HorizontalAlignment="Left"/>
                 <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
                 </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type g:RadioQuestion}">
+        <DataTemplate DataType="{x:Type g:RadioQuestionVM}">
             <StackPanel Width="200" Visibility="{Binding Visible}">
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <ItemsControl ItemsSource="{Binding Answers}">
@@ -33,6 +33,6 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding QuestionnaireCollection}"/>
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}"/>
     </Grid>
 </Window>

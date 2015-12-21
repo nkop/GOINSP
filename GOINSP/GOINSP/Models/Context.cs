@@ -19,6 +19,13 @@ namespace GOINSP.Models
         public DbSet<PostCodeData> PostCodeData { get; set; }
         public DbSet<Company> Company { get; set; }
 
+        public DbSet<GOINSP.ViewModel.Questionnaire> Questionnaire { get; set; }
+        public DbSet<GOINSP.ViewModel.Question> Question { get; set; }
+        public DbSet<GOINSP.ViewModel.RadioAnswer> RadioAnswer { get; set; }
+        public DbSet<GOINSP.ViewModel.SimpleBoolQuestion> SimpleBoolQuestion { get; set; }
+        public DbSet<GOINSP.ViewModel.SimpleTextQuestion> SimpleTextQuestion { get; set; }
+        public DbSet<GOINSP.ViewModel.RadioQuestion> RadioQuestion { get; set; }
+
         public Context()
             : base("LocalContext")
         {
