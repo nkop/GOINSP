@@ -6,19 +6,19 @@
         Title="QuestionnaireAssembler" Height="334" Width="300">
         <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible}">
+            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />
                 <TextBox Text="{Binding Answer, Mode=TwoWay}" />
                 </StackPanel>
             </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleBoolQuestionVM}">
-                <StackPanel Width="200" Visibility="{Binding Visible}">
+            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
                 </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:RadioQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible}">
+            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <ItemsControl ItemsSource="{Binding Answers}">
                     <ItemsControl.ItemTemplate>
