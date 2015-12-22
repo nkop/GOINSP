@@ -40,7 +40,7 @@ namespace GOINSP.ViewModel
         public QuestionTemplateVM()
         {
             Context = new Context();
-            /*Questionnaire = new QuestionnaireVM();
+            Questionnaire = new QuestionnaireVM();
 
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>();
             SimpleBoolQuestionVM simpleBool = new SimpleBoolQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Ga jij vaak naar de bios?" };
@@ -58,10 +58,10 @@ namespace GOINSP.ViewModel
 
             simpleBool.ConditionBoundQuestions.Add(simpleTextConditionBound);
 
+            Questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion);
             Questionnaire.QuestionnaireCollection.Add(simpleBool);
             Questionnaire.QuestionnaireCollection.Add(simpleTextConditionBound);
             Questionnaire.QuestionnaireCollection.Add(radioQuestion);
-            Questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion);*/
 
 
             /*Questionnaire questionnaire = new Questionnaire();
@@ -87,7 +87,7 @@ namespace GOINSP.ViewModel
             questionnaire.QuestionnaireCollection.Add(radioQuestion);
 
             Context.Questionnaire.Add(questionnaire);
-            Context.SaveChanges();*/
+            Context.SaveChanges();
 
             List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
             ObservableCollection<QuestionnaireVM> questionnaireVMs = new ObservableCollection<QuestionnaireVM>(questionnaires.Select(x => new QuestionnaireVM(x)));
@@ -95,7 +95,7 @@ namespace GOINSP.ViewModel
 
             Questionnaire = questionnaireVMs.First();
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
-            Questionnaire.Context = Context;
+            Questionnaire.Context = Context;*/
 
             AddNewQuestionCommand = new RelayCommand(AddNewQuestion);
         }
