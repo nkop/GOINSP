@@ -3,17 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:g="clr-namespace:GOINSP.ViewModel"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="300" Width="300">
+        Title="QuestionnaireAssembler" Height="334" Width="300">
         <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
             <StackPanel Width="200" Visibility="{Binding Visible}">
-                <Label Content="test1" />
-                <TextBlock Text="{Binding Answer, Mode=TwoWay}" />
+                <Label Content="{Binding Question}" />
+                <TextBox Text="{Binding Answer, Mode=TwoWay}" />
                 </StackPanel>
             </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleBoolQuestionVM}">
                 <StackPanel Width="200" Visibility="{Binding Visible}">
-                <Label Content="test2" HorizontalAlignment="Left"/>
+                <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
                 </StackPanel>
         </DataTemplate>
@@ -33,6 +33,7 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}"/>
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Margin="0,0,0,31"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="0,272,0,0" VerticalAlignment="Top" Width="292" Height="31" Command="{Binding AddNewQuestionCommand}"/>
     </Grid>
 </Window>

@@ -11,11 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace GOINSP.ViewModel
 {
     public class QuestionTemplateVM : ViewModelBase
     {
+        public ICommand AddNewQuestionCommand { get; set; }
+
         private QuestionnaireVM questionnaire;
         public QuestionnaireVM Questionnaire
         {
@@ -38,8 +41,8 @@ namespace GOINSP.ViewModel
             /*Questionnaire = new QuestionnaireVM();
 
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>();
-            SimpleBoolQuestionVM simpleBool = new SimpleBoolQuestionVM() { ListNumber = 1, Visible = Visibility.Visible };
-            SimpleTextQuestionVM simpleTextConditionBound = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Collapsed, VisibleCondition = true };
+            SimpleBoolQuestionVM simpleBool = new SimpleBoolQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Ga jij vaak naar de bios?" };
+            SimpleTextQuestionVM simpleTextConditionBound = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, VisibleCondition = false, Question = "Waarom niet?" };
             RadioQuestionVM radioQuestion = new RadioQuestionVM() { ListNumber = 3, Question = "Reden van capaciteitvermindering:", Visible = Visibility.Visible, AlternativeAnswerVisibility = Visibility.Visible };
 
             radioQuestion.Answers = new List<RadioAnswerVM>();
@@ -50,7 +53,6 @@ namespace GOINSP.ViewModel
             radioQuestion.Answers.Add(new RadioAnswerVM() { Text = "event (vb concert)", GroupName = "group1", Checked = false });
             radioQuestion.Answers.Add(new RadioAnswerVM() { Text = "verhuizing", GroupName = "group1", Checked = false });
 
-            simpleBool.ConditionBoundQuestions = new List<QuestionVM>();
             simpleBool.ConditionBoundQuestions.Add(simpleTextConditionBound);
 
             Questionnaire.QuestionnaireCollection.Add(simpleBool);
@@ -89,6 +91,13 @@ namespace GOINSP.ViewModel
 
             Questionnaire = questionnaireVMs.First();
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
+
+            AddNewQuestionCommand = new RelayCommand(AddNewQuestion);
+        }
+
+        public void AddNewQuestion() 
+        {
+            Questionnaire.Insert();
         }
     }
 
@@ -109,6 +118,7 @@ namespace GOINSP.ViewModel
 
     public class QuestionnaireVM : ViewModelBase
     {
+        private Context context;
         private Questionnaire questionnaire;
 
         private ObservableCollection<QuestionVM> questionnaireCollection;
@@ -127,7 +137,8 @@ namespace GOINSP.ViewModel
 
         public QuestionnaireVM()
         {
-
+            questionnaire = new Questionnaire();
+            questionnaire.QuestionnaireCollection = new List<Question>();
         }
 
         public QuestionnaireVM(Questionnaire questionnaire)
@@ -149,6 +160,27 @@ namespace GOINSP.ViewModel
                 this.QuestionnaireCollection.Add(new RadioQuestionVM(radioQuestion));
             }
         }
+
+        public void Insert()
+        {
+            context = new Context();
+
+            foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
+            }
+            foreach (SimpleBoolQuestionVM simpleBoolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(simpleBoolQuestion.Insert());
+            }
+            foreach (RadioQuestionVM radioQuestion in QuestionnaireCollection.OfType<RadioQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(radioQuestion.Insert());
+            }
+
+            context.Questionnaire.Add(questionnaire);
+            context.SaveChanges();
+        }
     }
 
     public class SimpleTextQuestion : Question
@@ -169,35 +201,36 @@ namespace GOINSP.ViewModel
     {
         private SimpleTextQuestion simpleTextQuestion;
 
-        private string question;
         public string Question
         {
             get
             {
-                return question;
+                return simpleTextQuestion.Question;
             }
             set
             {
-                question = value;
+                simpleTextQuestion.Question = value;
+                RaisePropertyChanged("Question");
             }
         }
 
-        private string answer;
         public string Answer
         {
             get
             {
-                return answer;
+                return simpleTextQuestion.Answer;
             }
             set
             {
-                answer = value;
+                simpleTextQuestion.Answer = value;
+                RaisePropertyChanged("Answer");
             }
         }
 
         public SimpleTextQuestionVM()
         {
-
+            simpleTextQuestion = new SimpleTextQuestion();
+            base.question = simpleTextQuestion;
         }
 
         public SimpleTextQuestionVM(SimpleTextQuestion simpleTextQuestion)
@@ -207,7 +240,11 @@ namespace GOINSP.ViewModel
 
             this.Question = simpleTextQuestion.Question;
             this.Answer = simpleTextQuestion.Answer;
+        }
 
+        public SimpleTextQuestion Insert() 
+        {
+            return simpleTextQuestion;
         }
     }
 
@@ -229,29 +266,29 @@ namespace GOINSP.ViewModel
     {
         private SimpleBoolQuestion simpleBoolQuestion;
 
-        private string question;
         public string Question
         {
             get
             {
-                return question;
+                return simpleBoolQuestion.Question;
             }
             set
             {
-                question = value;
+                simpleBoolQuestion.Question = value;
+                RaisePropertyChanged("Question");
             }
         }
 
-        private bool answer;
         public bool Answer
         {
             get
             {
-                return answer;
+                return simpleBoolQuestion.Answer;
             }
             set
             {
-                answer = value;
+                simpleBoolQuestion.Answer = value;
+                RaisePropertyChanged("Answer");
                 CheckConditionBoundQuestions();
             }
         }
@@ -263,7 +300,7 @@ namespace GOINSP.ViewModel
 
             foreach (QuestionVM question in ConditionBoundQuestions)
             {
-                if (question.VisibleCondition == answer)
+                if (question.VisibleCondition == Answer)
                     question.Visible = Visibility.Visible;
                 else
                     question.Visible = Visibility.Collapsed;
@@ -272,7 +309,8 @@ namespace GOINSP.ViewModel
 
         public SimpleBoolQuestionVM()
         {
-
+            simpleBoolQuestion = new SimpleBoolQuestion();
+            base.question = simpleBoolQuestion;
         }
 
         public SimpleBoolQuestionVM(SimpleBoolQuestion simpleBoolQuestion)
@@ -280,9 +318,13 @@ namespace GOINSP.ViewModel
         {
             this.simpleBoolQuestion = simpleBoolQuestion;
 
-            this.Question = simpleBoolQuestion.Question;
-            this.Answer = simpleBoolQuestion.Answer;
+            Question = simpleBoolQuestion.Question;
+            Answer = simpleBoolQuestion.Answer;
+        }
 
+        public SimpleBoolQuestion Insert()
+        {
+            return simpleBoolQuestion;
         }
     }
 
@@ -307,16 +349,16 @@ namespace GOINSP.ViewModel
     {
         private RadioQuestion radioQuestion;
 
-        private string question;
         public string Question
         {
             get
             {
-                return question;
+                return radioQuestion.Question;
             }
             set
             {
-                question = value;
+                radioQuestion.Question = value;
+                RaisePropertyChanged("Question");
             }
         }
 
@@ -330,32 +372,33 @@ namespace GOINSP.ViewModel
             set
             {
                 answers = value;
+                RaisePropertyChanged("Answers");
             }
         }
 
-        private string selectedAnswer;
         public string SelectedAnswer
         {
             get
             {
-                return selectedAnswer;
+                return radioQuestion.SelectedAnswer;
             }
             set
             {
-                selectedAnswer = value;
+                radioQuestion.SelectedAnswer = value;
+                RaisePropertyChanged("SelectedAnswer");
             }
         }
 
-        private string alternativeAnswer;
         public string AlternativeAnswer
         {
             get
             {
-                return alternativeAnswer;
+                return radioQuestion.AlternativeAnswer;
             }
             set
             {
-                alternativeAnswer = value;
+                radioQuestion.AlternativeAnswer = value;
+                RaisePropertyChanged("AlternativeAnswer");
             }
         }
 
@@ -364,18 +407,19 @@ namespace GOINSP.ViewModel
         {
             get
             {
-                return alternativeAnswerVisibility;
+                return ConversionHelper.BoolToVisibility(radioQuestion.AlternativeAnswerVisibility);
             }
             set
             {
-                alternativeAnswerVisibility = value;
+                radioQuestion.AlternativeAnswerVisibility = ConversionHelper.VisibilityToBool(value);
                 RaisePropertyChanged("AlternativeAnswerVisibility");
             }
         }
 
         public RadioQuestionVM()
         {
-
+            radioQuestion = new RadioQuestion();
+            base.question = radioQuestion;
         }
 
         public RadioQuestionVM(RadioQuestion radioQuestion)
@@ -393,6 +437,11 @@ namespace GOINSP.ViewModel
             {
                 Answers.Add(new RadioAnswerVM(answer));
             }
+        }
+
+        public RadioQuestion Insert()
+        {
+            return radioQuestion;
         }
     }
 
@@ -414,11 +463,49 @@ namespace GOINSP.ViewModel
 
     public class RadioAnswerVM : QuestionVM
     {
-        private RadioAnswer radioAnswer;
+        public RadioAnswer radioAnswer { get; set; }
 
-        public string Text { get; set; }
-        public bool Checked { get; set; }
-        public string GroupName { get; set; }
+        private string text;
+        public string Text
+        {
+            get
+            {
+                return text;
+            }
+            set
+            {
+                text = value;
+                RaisePropertyChanged("Text");
+            }
+        }
+
+        private bool _checked;
+        public bool Checked
+        {
+            get
+            {
+                return _checked;
+            }
+            set
+            {
+                _checked = value;
+                RaisePropertyChanged("Checked");
+            }
+        }
+
+        private string groupName;
+        public string GroupName
+        {
+            get
+            {
+                return groupName;
+            }
+            set
+            {
+                groupName = value;
+                RaisePropertyChanged("GroupName");
+            }
+        }
 
         public RadioAnswerVM()
         {
@@ -455,19 +542,19 @@ namespace GOINSP.ViewModel
 
     public class QuestionVM : ViewModelBase
     {
-        private Question question;
+        public Question question { get; set; }
 
         public int ListNumber { get; set; }
 
-        public Visibility visible;
-        public Visibility Visible {
+        public Visibility Visible 
+        {
             get
             {
-                return visible;
+                return ConversionHelper.BoolToVisibility(question.Visible);
             }
             set
             {
-                visible = value;
+                question.Visible = ConversionHelper.VisibilityToBool(value);
                 RaisePropertyChanged("Visible");
             } 
         }
@@ -486,11 +573,22 @@ namespace GOINSP.ViewModel
             }
         }
 
-        public bool VisibleCondition { get; set; }
+        public bool VisibleCondition
+        {
+            get
+            {
+                return question.VisibleCondition;
+            }
+            set
+            {
+                question.VisibleCondition = value;
+                RaisePropertyChanged("VisibleCondition");
+            }
+        }
 
         public QuestionVM()
         {
-
+            ConditionBoundQuestions = new List<QuestionVM>();
         }
 
         public QuestionVM(Question question)
@@ -502,23 +600,8 @@ namespace GOINSP.ViewModel
 
             this.VisibleCondition = question.VisibleCondition;
 
-            this.ConditionBoundQuestions = new List<QuestionVM>();
-
             if (question.ConditionBoundQuestions != null)
-            {
-                foreach (SimpleTextQuestion simpleTextQuestion in question.ConditionBoundQuestions.OfType<SimpleTextQuestion>())
-                {
-                    this.ConditionBoundQuestions.Add(new SimpleTextQuestionVM(simpleTextQuestion));
-                }
-                foreach (SimpleBoolQuestion simpleBoolQuestion in question.ConditionBoundQuestions.OfType<SimpleBoolQuestion>())
-                {
-                    this.ConditionBoundQuestions.Add(new SimpleBoolQuestionVM(simpleBoolQuestion));
-                }
-                foreach (RadioQuestion radioQuestion in question.ConditionBoundQuestions.OfType<RadioQuestion>())
-                {
-                    this.ConditionBoundQuestions.Add(new RadioQuestionVM(radioQuestion));
-                }
-            }
+                this.ConditionBoundQuestions = question.ConditionBoundQuestions.Select(x => new QuestionVM(x)).ToList();
         }
     }
 
