@@ -146,6 +146,12 @@
     <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
     <Compile Include="Models\Opendata\PostCodeData\PostCodeData.cs" />
+    <Compile Include="Models\QuestionnaireModels\Question.cs" />
+    <Compile Include="Models\QuestionnaireModels\Questionnaire.cs" />
+    <Compile Include="Models\QuestionnaireModels\RadioAnswer.cs" />
+    <Compile Include="Models\QuestionnaireModels\RadioQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleBoolQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleTextQuestion.cs" />
     <Compile Include="OpenDataImport.xaml.cs">
       <DependentUpon>OpenDataImport.xaml</DependentUpon>
     </Compile>
@@ -158,6 +164,7 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ConversionHelper.cs" />
     <Compile Include="Utility\CSVImport.cs" />
     <Compile Include="Utility\GmapAPIImport.cs" />
     <Compile Include="Utility\ImportFactory.cs" />
@@ -195,6 +202,12 @@
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
     <Compile Include="ViewModel\Opendata\PostCodeDatas\PostCodeDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\QuestionnaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\QuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\RadioAnswerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\RadioQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleBoolQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionTemplateVM.cs" />
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
     <Compile Include="ViewModel\ReportVM.cs" />

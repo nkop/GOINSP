@@ -1,5 +1,6 @@
 ﻿using GOINSP.Models.Opendata.HuishoudelijkAfval;
 using GOINSP.Models.Opendata.PostCodeData;
+using GOINSP.Models.QuestionnaireModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,12 +20,12 @@ namespace GOINSP.Models
         public DbSet<PostCodeData> PostCodeData { get; set; }
         public DbSet<Company> Company { get; set; }
 
-        public DbSet<GOINSP.ViewModel.Questionnaire> Questionnaire { get; set; }
-        public DbSet<GOINSP.ViewModel.Question> Question { get; set; }
-        public DbSet<GOINSP.ViewModel.RadioAnswer> RadioAnswer { get; set; }
-        public DbSet<GOINSP.ViewModel.SimpleBoolQuestion> SimpleBoolQuestion { get; set; }
-        public DbSet<GOINSP.ViewModel.SimpleTextQuestion> SimpleTextQuestion { get; set; }
-        public DbSet<GOINSP.ViewModel.RadioQuestion> RadioQuestion { get; set; }
+        public DbSet<Questionnaire> Questionnaire { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<RadioAnswer> RadioAnswer { get; set; }
+        public DbSet<SimpleBoolQuestion> SimpleBoolQuestion { get; set; }
+        public DbSet<SimpleTextQuestion> SimpleTextQuestion { get; set; }
+        public DbSet<RadioQuestion> RadioQuestion { get; set; }
 
         public Context()
             : base("LocalContext")
