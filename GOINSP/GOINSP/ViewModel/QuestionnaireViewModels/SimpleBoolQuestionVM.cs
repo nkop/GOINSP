@@ -112,6 +112,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 simpleBoolQuestion.ConditionBoundQuestions.Add(radioQuestion.Insert());
             }
+            foreach (SimpleIntegerQuestionVM simpleIntegerQuestionVM in ConditionBoundQuestions.OfType<SimpleIntegerQuestionVM>())
+            {
+                simpleBoolQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
+            }
 
             return simpleBoolQuestion;
         }

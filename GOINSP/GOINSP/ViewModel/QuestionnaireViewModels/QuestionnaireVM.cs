@@ -53,6 +53,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 this.QuestionnaireCollection.Add(new RadioQuestionVM(radioQuestion));
             }
+            foreach (SimpleIntegerQuestion simpleIntegerQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleIntegerQuestion>())
+            {
+                this.QuestionnaireCollection.Add(new SimpleIntegerQuestionVM(simpleIntegerQuestion));
+            }
 
             foreach (SimpleBoolQuestionVM boolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
             {
@@ -60,7 +64,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
-        public void Update()
+        public void PrepareForCRUD()
         {
             questionnaire.QuestionnaireCollection = new List<Question>();
             foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
@@ -75,27 +79,22 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 questionnaire.QuestionnaireCollection.Add(radioQuestion.Insert());
             }
+            foreach (SimpleIntegerQuestionVM simpleIntegerQuestion in QuestionnaireCollection.OfType<SimpleIntegerQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion.Insert());
+            }
+        }
 
+        public void Update()
+        {
+            PrepareForCRUD();
             Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Modified;
             Context.SaveChanges();
         }
 
         public void Insert()
         {
-            questionnaire.QuestionnaireCollection = new List<Question>();
-            foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
-            {
-                questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
-            }
-            foreach (SimpleBoolQuestionVM simpleBoolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
-            {
-                questionnaire.QuestionnaireCollection.Add(simpleBoolQuestion.Insert());
-            }
-            foreach (RadioQuestionVM radioQuestion in QuestionnaireCollection.OfType<RadioQuestionVM>())
-            {
-                questionnaire.QuestionnaireCollection.Add(radioQuestion.Insert());
-            }
-
+            PrepareForCRUD();
             Context.Questionnaire.Add(questionnaire);
             Context.SaveChanges();
         }

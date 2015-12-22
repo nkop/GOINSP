@@ -46,6 +46,7 @@ namespace GOINSP.ViewModel
             SimpleBoolQuestionVM simpleBool = new SimpleBoolQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Ga jij vaak naar de bios?" };
             SimpleTextQuestionVM simpleTextConditionBound = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, VisibleCondition = false, Question = "Waarom niet?" };
             RadioQuestionVM radioQuestion = new RadioQuestionVM() { ListNumber = 3, Question = "Reden van capaciteitvermindering:", Visible = Visibility.Visible, AlternativeAnswerVisibility = Visibility.Visible };
+            SimpleIntegerQuestionVM simpleIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 4, Question = "Aantal autos:", Visible = Visibility.Visible };
 
             radioQuestion.Answers = new List<RadioAnswerVM>();
             radioQuestion.Answers.Add(new RadioAnswerVM() { Text = "bouwwerkzaamheden", GroupName = "group1", Checked = false });
@@ -59,7 +60,8 @@ namespace GOINSP.ViewModel
 
             Questionnaire.QuestionnaireCollection.Add(simpleBool);
             Questionnaire.QuestionnaireCollection.Add(simpleTextConditionBound);
-            Questionnaire.QuestionnaireCollection.Add(radioQuestion);*/
+            Questionnaire.QuestionnaireCollection.Add(radioQuestion);
+            Questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion);*/
 
 
             /*Questionnaire questionnaire = new Questionnaire();
@@ -100,7 +102,7 @@ namespace GOINSP.ViewModel
 
         public void AddNewQuestion()
         {
-            Questionnaire.Update();
+            Questionnaire.Insert();
         }
     }
 }

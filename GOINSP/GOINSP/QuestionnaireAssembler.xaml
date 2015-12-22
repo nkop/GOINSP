@@ -2,9 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
         Title="QuestionnaireAssembler" Height="334" Width="300">
         <Window.Resources>
+        <DataTemplate DataType="{x:Type g:SimpleIntegerQuestionVM}">
+            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+                <Label Content="{Binding Question}" />
+                <xctk:DecimalUpDown Value="{Binding Answer, Mode=TwoWay}"></xctk:DecimalUpDown>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
             <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />
