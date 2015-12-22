@@ -93,14 +93,14 @@ namespace GOINSP.ViewModel
 
             Questionnaire = questionnaireVMs.First();
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
+            Questionnaire.Context = Context;
 
             AddNewQuestionCommand = new RelayCommand(AddNewQuestion);
         }
 
-        public void AddNewQuestion() 
+        public void AddNewQuestion()
         {
-            //Questionnaire.Insert();
-            ((SimpleBoolQuestionVM)Questionnaire.QuestionnaireCollection[0]).ConditionBoundQuestions[0].Visible = Visibility.Collapsed;
+            Questionnaire.Update();
         }
     }
 }

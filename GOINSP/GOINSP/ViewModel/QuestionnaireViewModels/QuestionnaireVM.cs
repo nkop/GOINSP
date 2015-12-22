@@ -12,7 +12,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
     public class QuestionnaireVM : ViewModelBase
     {
-        private Context context;
+        public Context Context { get; set; }
         private Questionnaire questionnaire;
 
         private ObservableCollection<QuestionVM> questionnaireCollection;
@@ -60,10 +60,9 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
-        public void Insert()
+        public void Update()
         {
-            context = new Context();
-
+            questionnaire.QuestionnaireCollection = new List<Question>();
             foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
             {
                 questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
@@ -77,8 +76,28 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                 questionnaire.QuestionnaireCollection.Add(radioQuestion.Insert());
             }
 
-            context.Questionnaire.Add(questionnaire);
-            context.SaveChanges();
+            Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Modified;
+            Context.SaveChanges();
+        }
+
+        public void Insert()
+        {
+            questionnaire.QuestionnaireCollection = new List<Question>();
+            foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
+            }
+            foreach (SimpleBoolQuestionVM simpleBoolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(simpleBoolQuestion.Insert());
+            }
+            foreach (RadioQuestionVM radioQuestion in QuestionnaireCollection.OfType<RadioQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(radioQuestion.Insert());
+            }
+
+            Context.Questionnaire.Add(questionnaire);
+            Context.SaveChanges();
         }
     }
 }
