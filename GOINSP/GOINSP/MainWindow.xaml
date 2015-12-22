@@ -2,26 +2,34 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:w="clr-namespace:GOINSP"
-        Title="Login" Height="350" Width="525"
+        Title="Login" Height="1920" Width="1200"
+        Background="#3598dc"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Grid>
         <TextBlock FontSize="60" Margin="0,100,0,0" Padding="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="top" Height="100">GoInsp</TextBlock>
 
-        <StackPanel Height="90" Width="400">
-            <WrapPanel>
-                <TextBlock FontSize="18" FontStyle="Oblique" Width="150">Gebruikersnaam:</TextBlock>
-                <TextBox FontSize="18" HorizontalAlignment="Left" Height="30" Width="250" Text="{Binding LoginName}"></TextBox>
-            </WrapPanel>
-            <WrapPanel>
-                <TextBlock FontSize="18" FontStyle="Oblique" Width="150">Wachtwoord:</TextBlock>
-                <w:BindablePasswordBox Password="{Binding LoginPassword}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250"/> 
-            </WrapPanel>
-            <WrapPanel>
-                <Button IsDefault="True" Height="24" Width="100" HorizontalAlignment="Center" Command="{Binding LoginCommand}" Content="Login" Margin="150 10 0 0"/>
-                <Button Height="24" Width="140" HorizontalAlignment="Center" Command="{Binding VergetenCommand}" Content="Wachtwoord Vergeten" Margin="10 10 0 0"/>
-            </WrapPanel>
-        </StackPanel>
+
+        <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2" Height="200" Width="400">
+            <StackPanel Height="200" Width="400" Background="White">
+                <TextBlock FontSize="18" TextAlignment="Center" Padding="10">Login</TextBlock>
+                <WrapPanel>
+                    <TextBox FontSize="18" HorizontalAlignment="Center" Height="25" Width="200" Margin="100,0,0,5" Text="{Binding LoginName}"></TextBox>
+                </WrapPanel>
+                <WrapPanel>
+                    <w:BindablePasswordBox Password="{Binding LoginPassword}" HorizontalAlignment="Left" Margin="100,0,0,5" VerticalAlignment="Bottom" Width="200" Height="25"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Button IsDefault="True" Height="24" Width="150" HorizontalAlignment="Center" Command="{Binding LoginCommand}" Content="Login" Margin="120 10 0 0"/>
+                </WrapPanel>
+               
+                <TextBlock Text="Wachtwoord vergeten?" TextDecorations="Underline" Margin="135 10 0 0">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding VergetenCommand}" MouseAction="LeftClick" />
+                    </TextBlock.InputBindings>
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
