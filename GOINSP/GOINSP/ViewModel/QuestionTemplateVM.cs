@@ -88,6 +88,7 @@ namespace GOINSP.ViewModel
 
 
             Questionnaire = questionnaireVMs.First();
+            Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
         }
     }
 
@@ -137,7 +138,7 @@ namespace GOINSP.ViewModel
 
             foreach (SimpleTextQuestion simpleTextQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleTextQuestion>())
             {
-
+                this.QuestionnaireCollection.Add(new SimpleTextQuestionVM(simpleTextQuestion));
             }
             foreach (SimpleBoolQuestion simpleBoolQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleBoolQuestion>())
             {
@@ -145,6 +146,7 @@ namespace GOINSP.ViewModel
             }
             foreach (RadioQuestion radioQuestion in questionnaire.QuestionnaireCollection.OfType<RadioQuestion>())
             {
+                this.QuestionnaireCollection.Add(new RadioQuestionVM(radioQuestion));
             }
         }
     }
@@ -165,6 +167,8 @@ namespace GOINSP.ViewModel
 
     public class SimpleTextQuestionVM : QuestionVM
     {
+        private SimpleTextQuestion simpleTextQuestion;
+
         private string question;
         public string Question
         {
@@ -189,6 +193,21 @@ namespace GOINSP.ViewModel
             {
                 answer = value;
             }
+        }
+
+        public SimpleTextQuestionVM()
+        {
+
+        }
+
+        public SimpleTextQuestionVM(SimpleTextQuestion simpleTextQuestion)
+            : base(simpleTextQuestion)
+        {
+            this.simpleTextQuestion = simpleTextQuestion;
+
+            this.Question = simpleTextQuestion.Question;
+            this.Answer = simpleTextQuestion.Answer;
+
         }
     }
 
@@ -239,6 +258,9 @@ namespace GOINSP.ViewModel
 
         public void CheckConditionBoundQuestions()
         {
+            if (ConditionBoundQuestions == null)
+                return;
+
             foreach (QuestionVM question in ConditionBoundQuestions)
             {
                 if (question.VisibleCondition == answer)
@@ -257,8 +279,6 @@ namespace GOINSP.ViewModel
             : base(simpleBoolQuestion)
         {
             this.simpleBoolQuestion = simpleBoolQuestion;
-
-            this.ConditionBoundQuestions = new List<QuestionVM>();
 
             this.Question = simpleBoolQuestion.Question;
             this.Answer = simpleBoolQuestion.Answer;
@@ -285,6 +305,8 @@ namespace GOINSP.ViewModel
 
     public class RadioQuestionVM : QuestionVM
     {
+        private RadioQuestion radioQuestion;
+
         private string question;
         public string Question
         {
@@ -350,6 +372,28 @@ namespace GOINSP.ViewModel
                 RaisePropertyChanged("AlternativeAnswerVisibility");
             }
         }
+
+        public RadioQuestionVM()
+        {
+
+        }
+
+        public RadioQuestionVM(RadioQuestion radioQuestion)
+            : base(radioQuestion)
+        {
+            this.radioQuestion = radioQuestion;
+
+            Question = radioQuestion.Question;
+            SelectedAnswer = radioQuestion.SelectedAnswer;
+            AlternativeAnswer = radioQuestion.AlternativeAnswer;
+            AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(radioQuestion.AlternativeAnswerVisibility);
+
+            Answers = new List<RadioAnswerVM>();
+            foreach(RadioAnswer answer in radioQuestion.Answers)
+            {
+                Answers.Add(new RadioAnswerVM(answer));
+            }
+        }
     }
 
     public class RadioAnswer : Question
@@ -368,11 +412,27 @@ namespace GOINSP.ViewModel
     }
 
 
-    public class RadioAnswerVM
+    public class RadioAnswerVM : QuestionVM
     {
+        private RadioAnswer radioAnswer;
+
         public string Text { get; set; }
         public bool Checked { get; set; }
         public string GroupName { get; set; }
+
+        public RadioAnswerVM()
+        {
+
+        }
+
+        public RadioAnswerVM(RadioAnswer radioAnswer)
+            : base(radioAnswer)
+        {
+            this.radioAnswer = radioAnswer;
+            Text = radioAnswer.Text;
+            Checked = radioAnswer.Checked;
+            GroupName = radioAnswer.GroupName;
+        }
     }
 
     //---------------------------------------
@@ -412,7 +472,20 @@ namespace GOINSP.ViewModel
             } 
         }
 
-        public List<QuestionVM> ConditionBoundQuestions { get; set; }
+        private List<QuestionVM> conditionBoundQuestions;
+        public List<QuestionVM> ConditionBoundQuestions
+        {
+            get
+            {
+                return conditionBoundQuestions;
+            }
+            set
+            {
+                conditionBoundQuestions = value;
+                RaisePropertyChanged("ConditionBoundQuestions");
+            }
+        }
+
         public bool VisibleCondition { get; set; }
 
         public QuestionVM()
@@ -426,6 +499,26 @@ namespace GOINSP.ViewModel
 
             this.ListNumber = question.ListNumber;
             this.Visible = ConversionHelper.BoolToVisibility(question.Visible);
+
+            this.VisibleCondition = question.VisibleCondition;
+
+            this.ConditionBoundQuestions = new List<QuestionVM>();
+
+            if (question.ConditionBoundQuestions != null)
+            {
+                foreach (SimpleTextQuestion simpleTextQuestion in question.ConditionBoundQuestions.OfType<SimpleTextQuestion>())
+                {
+                    this.ConditionBoundQuestions.Add(new SimpleTextQuestionVM(simpleTextQuestion));
+                }
+                foreach (SimpleBoolQuestion simpleBoolQuestion in question.ConditionBoundQuestions.OfType<SimpleBoolQuestion>())
+                {
+                    this.ConditionBoundQuestions.Add(new SimpleBoolQuestionVM(simpleBoolQuestion));
+                }
+                foreach (RadioQuestion radioQuestion in question.ConditionBoundQuestions.OfType<RadioQuestion>())
+                {
+                    this.ConditionBoundQuestions.Add(new RadioQuestionVM(radioQuestion));
+                }
+            }
         }
     }
 
