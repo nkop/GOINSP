@@ -116,6 +116,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 simpleBoolQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
             }
+            foreach (SimpleDateQuestionVM simpleDateQuestionVM in ConditionBoundQuestions.OfType<SimpleDateQuestionVM>())
+            {
+                simpleBoolQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
+            }
 
             return simpleBoolQuestion;
         }

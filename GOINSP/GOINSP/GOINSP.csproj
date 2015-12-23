@@ -154,6 +154,7 @@
     <Compile Include="Models\QuestionnaireModels\RadioAnswer.cs" />
     <Compile Include="Models\QuestionnaireModels\RadioQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleBoolQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleDateQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleIntegerQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleTextQuestion.cs" />
     <Compile Include="OpenDataImport.xaml.cs">
@@ -211,6 +212,7 @@
     <Compile Include="ViewModel\QuestionnaireViewModels\RadioAnswerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\RadioQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleBoolQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleDateQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleIntegerQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionTemplateVM.cs" />

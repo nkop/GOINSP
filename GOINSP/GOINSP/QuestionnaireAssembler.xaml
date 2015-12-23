@@ -5,7 +5,13 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
         Title="QuestionnaireAssembler" Height="334" Width="300">
-        <Window.Resources>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type g:SimpleDateQuestionVM}">
+            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+                <Label Content="{Binding Question}" />
+                <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="ShortDate"/>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleIntegerQuestionVM}">
             <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />

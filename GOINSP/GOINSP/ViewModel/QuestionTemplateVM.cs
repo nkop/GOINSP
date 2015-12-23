@@ -40,13 +40,14 @@ namespace GOINSP.ViewModel
         public QuestionTemplateVM()
         {
             Context = new Context();
-            Questionnaire = new QuestionnaireVM();
+            /*Questionnaire = new QuestionnaireVM();
 
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>();
             SimpleBoolQuestionVM simpleBool = new SimpleBoolQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Ga jij vaak naar de bios?" };
             SimpleTextQuestionVM simpleTextConditionBound = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, VisibleCondition = false, Question = "Waarom niet?" };
             RadioQuestionVM radioQuestion = new RadioQuestionVM() { ListNumber = 3, Question = "Reden van capaciteitvermindering:", Visible = Visibility.Visible, AlternativeAnswerVisibility = Visibility.Visible };
             SimpleIntegerQuestionVM simpleIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 4, Question = "Aantal autos:", Visible = Visibility.Visible };
+            SimpleDateQuestionVM simpleDateQuestion = new SimpleDateQuestionVM() { ListNumber = 5, Question = "Welke dag is het vandaag?", Answer = DateTime.Now, Visible = Visibility.Visible };
 
             radioQuestion.Answers = new List<RadioAnswerVM>();
             radioQuestion.Answers.Add(new RadioAnswerVM() { Text = "bouwwerkzaamheden", GroupName = "group1", Checked = false });
@@ -58,10 +59,11 @@ namespace GOINSP.ViewModel
 
             simpleBool.ConditionBoundQuestions.Add(simpleTextConditionBound);
 
-            Questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion);
             Questionnaire.QuestionnaireCollection.Add(simpleBool);
             Questionnaire.QuestionnaireCollection.Add(simpleTextConditionBound);
             Questionnaire.QuestionnaireCollection.Add(radioQuestion);
+            Questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion);
+            Questionnaire.QuestionnaireCollection.Add(simpleDateQuestion);*/
 
 
             /*Questionnaire questionnaire = new Questionnaire();
@@ -87,7 +89,7 @@ namespace GOINSP.ViewModel
             questionnaire.QuestionnaireCollection.Add(radioQuestion);
 
             Context.Questionnaire.Add(questionnaire);
-            Context.SaveChanges();
+            Context.SaveChanges();*/
 
             List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
             ObservableCollection<QuestionnaireVM> questionnaireVMs = new ObservableCollection<QuestionnaireVM>(questionnaires.Select(x => new QuestionnaireVM(x)));
@@ -95,7 +97,7 @@ namespace GOINSP.ViewModel
 
             Questionnaire = questionnaireVMs.First();
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
-            Questionnaire.Context = Context;*/
+            Questionnaire.Context = Context;
 
             AddNewQuestionCommand = new RelayCommand(AddNewQuestion);
         }

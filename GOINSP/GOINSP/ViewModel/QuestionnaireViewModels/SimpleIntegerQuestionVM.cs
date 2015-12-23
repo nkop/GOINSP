@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
-    class SimpleIntegerQuestionVM : QuestionVM
+    public class SimpleIntegerQuestionVM : QuestionVM
     {
         private SimpleIntegerQuestion simpleIntegerQuestion;
 
