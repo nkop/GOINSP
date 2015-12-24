@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
-    public class SimpleDateQuestionVM : QuestionVM
+    public class SimpleDateTimeQuestionVM : QuestionVM
     {
-        private SimpleDateQuestion simpleDateQuestion;
+        private SimpleDateTimeQuestion simpleDateQuestion;
 
         public string Question
         {
@@ -37,13 +37,13 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
-        public SimpleDateQuestionVM()
+        public SimpleDateTimeQuestionVM()
         {
-            simpleDateQuestion = new SimpleDateQuestion();
+            simpleDateQuestion = new SimpleDateTimeQuestion();
             base.question = simpleDateQuestion;
         }
 
-        public SimpleDateQuestionVM(SimpleDateQuestion simpleDateQuestion)
+        public SimpleDateTimeQuestionVM(SimpleDateTimeQuestion simpleDateQuestion)
             : base(simpleDateQuestion)
         {
             this.simpleDateQuestion = simpleDateQuestion;
@@ -52,7 +52,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             this.Answer = simpleDateQuestion.Answer;
         }
 
-        public SimpleDateQuestion Insert()
+        public SimpleDateTimeQuestion Insert()
         {
             return simpleDateQuestion;
         }

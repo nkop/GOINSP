@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class SimpleDateQuestion : Question
+    public class SimpleDateTimeQuestion : Question
     {
-        public SimpleDateQuestion()
+        public SimpleDateTimeQuestion()
         {
 
         }

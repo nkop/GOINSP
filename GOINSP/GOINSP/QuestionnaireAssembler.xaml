@@ -4,34 +4,34 @@
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="334" Width="300">
+        Title="QuestionnaireAssembler" Height="485" Width="372">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type g:SimpleDateQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+        <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />
-                <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="ShortDate"/>
+                <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="FullDateTime"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleIntegerQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />
                 <xctk:DecimalUpDown Value="{Binding Answer, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />
                 <TextBox Text="{Binding Answer, Mode=TwoWay}" />
-                </StackPanel>
-            </DataTemplate>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleBoolQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
-                </StackPanel>
+            </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:RadioQuestionVM}">
-            <StackPanel Width="200" Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <ItemsControl ItemsSource="{Binding Answers}">
                     <ItemsControl.ItemTemplate>
@@ -46,7 +46,13 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Margin="0,0,0,31"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="0,272,0,0" VerticalAlignment="Top" Width="292" Height="31" Command="{Binding AddNewQuestionCommand}"/>
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Margin="0,0,0,31">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="0,423,0,0" VerticalAlignment="Top" Width="364" Height="31" Command="{Binding AddNewQuestionCommand}"/>
     </Grid>
 </Window>

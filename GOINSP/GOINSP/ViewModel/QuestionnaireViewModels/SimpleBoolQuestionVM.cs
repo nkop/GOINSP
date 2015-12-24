@@ -81,6 +81,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             this.simpleBoolQuestion = simpleBoolQuestion;
 
+            ConditionBoundQuestions = new List<QuestionVM>();
             Question = simpleBoolQuestion.Question;
             Answer = simpleBoolQuestion.Answer;
         }
@@ -116,7 +117,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 simpleBoolQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
             }
-            foreach (SimpleDateQuestionVM simpleDateQuestionVM in ConditionBoundQuestions.OfType<SimpleDateQuestionVM>())
+            foreach (SimpleDateTimeQuestionVM simpleDateQuestionVM in ConditionBoundQuestions.OfType<SimpleDateTimeQuestionVM>())
             {
                 simpleBoolQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
             }

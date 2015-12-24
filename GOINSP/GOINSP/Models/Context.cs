@@ -26,7 +26,7 @@ namespace GOINSP.Models
         public DbSet<SimpleBoolQuestion> SimpleBoolQuestion { get; set; }
         public DbSet<SimpleTextQuestion> SimpleTextQuestion { get; set; }
         public DbSet<RadioQuestion> RadioQuestion { get; set; }
-        public DbSet<SimpleDateQuestion> SimpleDateQuestion { get; set; }
+        public DbSet<SimpleDateTimeQuestion> SimpleDateQuestion { get; set; }
 
         public Context()
             : base("LocalContext")

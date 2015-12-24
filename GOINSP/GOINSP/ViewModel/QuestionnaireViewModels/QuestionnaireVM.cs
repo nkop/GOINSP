@@ -33,6 +33,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             questionnaire = new Questionnaire();
             questionnaire.QuestionnaireCollection = new List<Question>();
+            QuestionnaireCollection = new ObservableCollection<QuestionVM>();
         }
 
         public QuestionnaireVM(Questionnaire questionnaire)
@@ -57,9 +58,9 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 this.QuestionnaireCollection.Add(new SimpleIntegerQuestionVM(simpleIntegerQuestion));
             }
-            foreach (SimpleDateQuestion simpleDateQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleDateQuestion>())
+            foreach (SimpleDateTimeQuestion simpleDateQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleDateTimeQuestion>())
             {
-                this.QuestionnaireCollection.Add(new SimpleDateQuestionVM(simpleDateQuestion));
+                this.QuestionnaireCollection.Add(new SimpleDateTimeQuestionVM(simpleDateQuestion));
             }
 
             foreach (SimpleBoolQuestionVM boolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
@@ -87,7 +88,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 questionnaire.QuestionnaireCollection.Add(simpleIntegerQuestion.Insert());
             }
-            foreach (SimpleDateQuestionVM simpleDateQuestion in QuestionnaireCollection.OfType<SimpleDateQuestionVM>())
+            foreach (SimpleDateTimeQuestionVM simpleDateQuestion in QuestionnaireCollection.OfType<SimpleDateTimeQuestionVM>())
             {
                 questionnaire.QuestionnaireCollection.Add(simpleDateQuestion.Insert());
             }
