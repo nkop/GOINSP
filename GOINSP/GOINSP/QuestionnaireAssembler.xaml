@@ -24,10 +24,10 @@
                 <TextBox Text="{Binding Answer, Mode=TwoWay}" />
             </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type g:SimpleBoolQuestionVM}">
+        <DataTemplate DataType="{x:Type g:DropDownQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
-                <CheckBox HorizontalAlignment="Right" IsChecked="{Binding Answer, Mode=TwoWay}"/>
+                <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding SelectedAnswer, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:RadioQuestionVM}">

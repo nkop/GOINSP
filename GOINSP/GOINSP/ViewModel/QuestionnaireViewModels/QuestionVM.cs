@@ -40,21 +40,23 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
-        public bool VisibleCondition
+        public List<string> visibleConditions;
+        public List<string> VisibleConditions
         {
             get
             {
-                return question.VisibleCondition;
+                return visibleConditions;
             }
             set
             {
-                question.VisibleCondition = value;
+                visibleConditions = value;
                 RaisePropertyChanged("VisibleCondition");
             }
         }
 
         public QuestionVM()
         {
+            VisibleConditions = new List<string>();
         }
 
         public QuestionVM(Question question)
@@ -64,7 +66,8 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             this.ListNumber = question.ListNumber;
             this.Visible = ConversionHelper.BoolToVisibility(question.Visible);
 
-            this.VisibleCondition = question.VisibleCondition;
+            if (question.VisibleConditions != null)
+                this.VisibleConditions = question.VisibleConditions.Split(',').ToList();
         }
     }
 }

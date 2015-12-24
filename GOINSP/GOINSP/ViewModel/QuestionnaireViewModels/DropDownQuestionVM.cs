@@ -8,34 +8,48 @@ using System.Windows;
 
 namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
-    public class SimpleBoolQuestionVM : QuestionVM
+    public class DropDownQuestionVM : QuestionVM
     {
-        private SimpleBoolQuestion simpleBoolQuestion;
+        private DropDownQuestion dropDownQuestion;
 
         public string Question
         {
             get
             {
-                return simpleBoolQuestion.Question;
+                return dropDownQuestion.Question;
             }
             set
             {
-                simpleBoolQuestion.Question = value;
+                dropDownQuestion.Question = value;
                 RaisePropertyChanged("Question");
             }
         }
 
-        public bool Answer
+        private List<string> answers;
+        public List<string> Answers
         {
             get
             {
-                return simpleBoolQuestion.Answer;
+                return answers;
             }
             set
             {
-                simpleBoolQuestion.Answer = value;
-                RaisePropertyChanged("Answer");
+                answers = value;
+                RaisePropertyChanged("Answers");
+            }
+        }
+
+        public string SelectedAnswer
+        {
+            get
+            {
+                return dropDownQuestion.SelectedAnswer;
+            }
+            set
+            {
+                dropDownQuestion.SelectedAnswer = value;
                 CheckConditionBoundQuestions();
+                RaisePropertyChanged("SelectedAnswer");
             }
         }
 
@@ -60,69 +74,75 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
             foreach (QuestionVM question in ConditionBoundQuestions)
             {
-                if (question.VisibleCondition == Answer)
+                if (question.VisibleConditions.FirstOrDefault(x => x == SelectedAnswer) != null)
                     question.Visible = Visibility.Visible;
                 else
                     question.Visible = Visibility.Collapsed;
             }
         }
-
-        public SimpleBoolQuestionVM()
+        
+        public DropDownQuestionVM()
         {
-            simpleBoolQuestion = new SimpleBoolQuestion();
-            simpleBoolQuestion.ConditionBoundQuestions = new List<Question>();
+            dropDownQuestion = new DropDownQuestion();
+            dropDownQuestion.ConditionBoundQuestions = new List<Question>();
 
             ConditionBoundQuestions = new List<QuestionVM>();
-            base.question = simpleBoolQuestion;
+            Answers = new List<string>();
+            base.question = dropDownQuestion;
         }
 
-        public SimpleBoolQuestionVM(SimpleBoolQuestion simpleBoolQuestion)
-            : base(simpleBoolQuestion)
+        public DropDownQuestionVM(DropDownQuestion dropDownQuestion)
+            : base(dropDownQuestion)
         {
-            this.simpleBoolQuestion = simpleBoolQuestion;
-
-            ConditionBoundQuestions = new List<QuestionVM>();
-            Question = simpleBoolQuestion.Question;
-            Answer = simpleBoolQuestion.Answer;
+            this.dropDownQuestion = dropDownQuestion;
+            Answers = dropDownQuestion.Answers.Split(',').ToList();
         }
 
         public void CompileConditionBoundQuestions(List<QuestionVM> originalQuestionList)
         {
-            if (simpleBoolQuestion.ConditionBoundQuestions != null)
+            if (dropDownQuestion.ConditionBoundQuestions != null)
             {
                 ConditionBoundQuestions = new List<QuestionVM>();
 
-                foreach (Question question in simpleBoolQuestion.ConditionBoundQuestions)
+                foreach (Question question in dropDownQuestion.ConditionBoundQuestions)
                 {
                     ConditionBoundQuestions.Add(originalQuestionList.Where(x => x.question == question).First());
                 }
             }
         }
 
-        public SimpleBoolQuestion Insert()
+
+        public DropDownQuestion Insert()
         {
             foreach (SimpleTextQuestionVM simpleTextQuestion in ConditionBoundQuestions.OfType<SimpleTextQuestionVM>())
             {
-                simpleBoolQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
+                dropDownQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
             }
-            foreach (SimpleBoolQuestionVM _simpleBoolQuestion in ConditionBoundQuestions.OfType<SimpleBoolQuestionVM>())
+            foreach (DropDownQuestionVM _dropDownQuestion in ConditionBoundQuestions.OfType<DropDownQuestionVM>())
             {
-                simpleBoolQuestion.ConditionBoundQuestions.Add(_simpleBoolQuestion.Insert());
+                dropDownQuestion.ConditionBoundQuestions.Add(_dropDownQuestion.Insert());
             }
             foreach (RadioQuestionVM radioQuestion in ConditionBoundQuestions.OfType<RadioQuestionVM>())
             {
-                simpleBoolQuestion.ConditionBoundQuestions.Add(radioQuestion.Insert());
+                dropDownQuestion.ConditionBoundQuestions.Add(radioQuestion.Insert());
             }
             foreach (SimpleIntegerQuestionVM simpleIntegerQuestionVM in ConditionBoundQuestions.OfType<SimpleIntegerQuestionVM>())
             {
-                simpleBoolQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
+                dropDownQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
             }
             foreach (SimpleDateTimeQuestionVM simpleDateQuestionVM in ConditionBoundQuestions.OfType<SimpleDateTimeQuestionVM>())
             {
-                simpleBoolQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
+                dropDownQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
             }
 
-            return simpleBoolQuestion;
+            foreach (QuestionVM question in ConditionBoundQuestions)
+            {
+                question.question.VisibleConditions = question.VisibleConditions.Aggregate((c, n) => c + "," + n);
+            }
+
+            dropDownQuestion.Answers = Answers.Aggregate((c, n) => c + "," + n);
+
+            return dropDownQuestion;
         }
     }
 }

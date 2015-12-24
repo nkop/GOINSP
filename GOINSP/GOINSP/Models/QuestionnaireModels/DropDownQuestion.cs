@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class SimpleBoolQuestion : Question
+    public class DropDownQuestion : Question
     {
-        public SimpleBoolQuestion()
+        public DropDownQuestion()
         {
 
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid SimpleBoolQuestionID { get; set; }
-        public List<Question> ConditionBoundQuestions { get; set; }
+        public Guid DropDownQuestionID { get; set; }
         public string Question { get; set; }
-        public bool Answer { get; set; }
+        public string Answers { get; set; }
+        public string SelectedAnswer { get; set; }
+        public virtual List<Question> ConditionBoundQuestions { get; set; }
     }
 }

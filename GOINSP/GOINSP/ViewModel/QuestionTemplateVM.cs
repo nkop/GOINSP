@@ -41,17 +41,17 @@ namespace GOINSP.ViewModel
         {
             Context = new Context();
 
-            List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
+            /*List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
             ObservableCollection<QuestionnaireVM> questionnaireVMs = new ObservableCollection<QuestionnaireVM>(questionnaires.Select(x => new QuestionnaireVM(x)));
 
 
             Questionnaire = questionnaireVMs.First();
-            Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
+            Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));*/
 
 
             // Project Questionnaire
 
-            /*Questionnaire = new QuestionnaireVM();
+            Questionnaire = new QuestionnaireVM();
 
             SimpleTextQuestionVM locationTextQuestion = new SimpleTextQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Locatie naam:" };
             SimpleTextQuestionVM addressTextQuestion = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, Question = "Locatie adres:" };
@@ -64,14 +64,28 @@ namespace GOINSP.ViewModel
             SimpleTextQuestionVM specialTextQuestion = new SimpleTextQuestionVM() { ListNumber = 8, Visible = Visibility.Visible, Question = "Bijzonderheden:" };
             RadioQuestionVM reasonRadioQuestion = new RadioQuestionVM() { ListNumber = 9, Question = "Reden van capaciteitvermindering:", Visible = Visibility.Visible, AlternativeAnswerVisibility = Visibility.Visible };
 
-            SimpleBoolQuestionVM carsOutsideBoolQuestion = new SimpleBoolQuestionVM() { ListNumber = 10, Visible = Visibility.Visible, Question = "Staan er auto's buiten de vakken?" };
-            SimpleIntegerQuestionVM carsOutsideCountIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 11, VisibleCondition = true, Question = "Hoeveel auto's staan buiten de vakken?", Visible = Visibility.Collapsed };
-            SimpleBoolQuestionVM unsafeBoolQuestion = new SimpleBoolQuestionVM() { ListNumber = 12, Visible = Visibility.Collapsed, VisibleCondition = true, Question = "Is er hierdoor sprake van een onveilige situatie?" };
-           
-            SimpleBoolQuestionVM blockBoolQuestion = new SimpleBoolQuestionVM() { ListNumber = 13, Visible = Visibility.Visible, Question = "Blokkeren of gebruiken er autos meerdere vakken?" };
-            SimpleIntegerQuestionVM multipleCountIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 14, VisibleCondition = true, Question = "Hoeveel auto's gebruiken er meerdere vakken?", Visible = Visibility.Collapsed };
-            SimpleIntegerQuestionVM CountIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 15, VisibleCondition = true, Question = "Hoeveel vakken betreft dit?", Visible = Visibility.Collapsed };
+            DropDownQuestionVM carsOutsideDropDownQuestion = new DropDownQuestionVM() { ListNumber = 10, Visible = Visibility.Visible, Question = "Staan er auto's buiten de vakken?"};
+            carsOutsideDropDownQuestion.Answers.Add("Ja");
+            carsOutsideDropDownQuestion.Answers.Add("Nee");
+            carsOutsideDropDownQuestion.Answers.Add("Nvt");
 
+            SimpleIntegerQuestionVM carsOutsideCountIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 11, VisibleConditions = new List<string>(), Question = "Hoeveel auto's staan buiten de vakken?", Visible = Visibility.Collapsed };
+            carsOutsideCountIntegerQuestion.VisibleConditions.Add("Ja");
+
+            DropDownQuestionVM unsafeDropDownQuestion = new DropDownQuestionVM() { ListNumber = 12, VisibleConditions = new List<string>(), Visible = Visibility.Hidden, Question = "Is er hierdoor sprake van een onveilige situatie?" };
+            unsafeDropDownQuestion.Answers.Add("Ja");
+            unsafeDropDownQuestion.Answers.Add("Nee");
+            unsafeDropDownQuestion.Answers.Add("Nvt");
+            unsafeDropDownQuestion.VisibleConditions.Add("Ja");
+
+            DropDownQuestionVM blockDropDownQuestion = new DropDownQuestionVM() { ListNumber = 13, Visible = Visibility.Visible, Question = "Blokkeren of gebruiken er autos meerdere vakken?" };
+            blockDropDownQuestion.Answers.Add("Ja");
+            blockDropDownQuestion.Answers.Add("Nee");
+            blockDropDownQuestion.Answers.Add("Nvt");
+            SimpleIntegerQuestionVM multipleCountIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 14, VisibleConditions = new List<string>(), Question = "Hoeveel auto's gebruiken er meerdere vakken?", Visible = Visibility.Collapsed };
+            multipleCountIntegerQuestion.VisibleConditions.Add("Ja");
+            SimpleIntegerQuestionVM CountIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 15, VisibleConditions = new List<string>(), Question = "Hoeveel vakken betreft dit?", Visible = Visibility.Collapsed };
+            CountIntegerQuestion.VisibleConditions.Add("Ja");
             SimpleIntegerQuestionVM whiteCarsIntegerQuestion = new SimpleIntegerQuestionVM() { ListNumber = 16, Question = "Hoeveel witte auto's staan er?", Visible = Visibility.Visible };
 
             locationTypeRadioQuestion.Answers = new List<RadioAnswerVM>();
@@ -88,10 +102,11 @@ namespace GOINSP.ViewModel
             reasonRadioQuestion.Answers.Add(new RadioAnswerVM() { Text = "event (vb concert)", GroupName = "group2", Checked = false });
             reasonRadioQuestion.Answers.Add(new RadioAnswerVM() { Text = "verhuizing", GroupName = "group2", Checked = false });
 
-            carsOutsideBoolQuestion.ConditionBoundQuestions.Add(carsOutsideCountIntegerQuestion);
-            carsOutsideBoolQuestion.ConditionBoundQuestions.Add(unsafeBoolQuestion);
-            blockBoolQuestion.ConditionBoundQuestions.Add(multipleCountIntegerQuestion);
-            blockBoolQuestion.ConditionBoundQuestions.Add(CountIntegerQuestion);
+
+            carsOutsideDropDownQuestion.ConditionBoundQuestions.Add(carsOutsideCountIntegerQuestion);
+            carsOutsideDropDownQuestion.ConditionBoundQuestions.Add(unsafeDropDownQuestion);
+            blockDropDownQuestion.ConditionBoundQuestions.Add(multipleCountIntegerQuestion);
+            blockDropDownQuestion.ConditionBoundQuestions.Add(CountIntegerQuestion);
 
             questionnaire.QuestionnaireCollection.Add(locationTextQuestion);
             questionnaire.QuestionnaireCollection.Add(addressTextQuestion);
@@ -102,13 +117,13 @@ namespace GOINSP.ViewModel
             questionnaire.QuestionnaireCollection.Add(capacityTakenIntegerQuestion);
             questionnaire.QuestionnaireCollection.Add(specialTextQuestion);
             questionnaire.QuestionnaireCollection.Add(reasonRadioQuestion);
-            questionnaire.QuestionnaireCollection.Add(carsOutsideBoolQuestion);
+            questionnaire.QuestionnaireCollection.Add(carsOutsideDropDownQuestion);
             questionnaire.QuestionnaireCollection.Add(carsOutsideCountIntegerQuestion);
-            questionnaire.QuestionnaireCollection.Add(unsafeBoolQuestion);
-            questionnaire.QuestionnaireCollection.Add(blockBoolQuestion);
+            questionnaire.QuestionnaireCollection.Add(unsafeDropDownQuestion);
+            questionnaire.QuestionnaireCollection.Add(blockDropDownQuestion);
             questionnaire.QuestionnaireCollection.Add(multipleCountIntegerQuestion);
             questionnaire.QuestionnaireCollection.Add(CountIntegerQuestion);
-            questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);*/
+            questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);
 
             Questionnaire.Context = Context;
 
@@ -117,7 +132,7 @@ namespace GOINSP.ViewModel
 
         public void AddNewQuestion()
         {
-            Questionnaire.Update();
+            Questionnaire.Insert();
         }
     }
 }

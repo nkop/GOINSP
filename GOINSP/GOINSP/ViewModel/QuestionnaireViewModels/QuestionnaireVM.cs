@@ -46,9 +46,9 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 this.QuestionnaireCollection.Add(new SimpleTextQuestionVM(simpleTextQuestion));
             }
-            foreach (SimpleBoolQuestion simpleBoolQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleBoolQuestion>())
+            foreach (DropDownQuestion dropDownQuestion in questionnaire.QuestionnaireCollection.OfType<DropDownQuestion>())
             {
-                this.QuestionnaireCollection.Add(new SimpleBoolQuestionVM(simpleBoolQuestion));
+                this.QuestionnaireCollection.Add(new DropDownQuestionVM(dropDownQuestion));
             }
             foreach (RadioQuestion radioQuestion in questionnaire.QuestionnaireCollection.OfType<RadioQuestion>())
             {
@@ -63,9 +63,9 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                 this.QuestionnaireCollection.Add(new SimpleDateTimeQuestionVM(simpleDateQuestion));
             }
 
-            foreach (SimpleBoolQuestionVM boolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
+            foreach (DropDownQuestionVM dropDownQuestion in QuestionnaireCollection.OfType<DropDownQuestionVM>())
             {
-                boolQuestion.CompileConditionBoundQuestions(QuestionnaireCollection.ToList());
+                dropDownQuestion.CompileConditionBoundQuestions(QuestionnaireCollection.ToList());
             }
         }
 
@@ -76,9 +76,9 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
             }
-            foreach (SimpleBoolQuestionVM simpleBoolQuestion in QuestionnaireCollection.OfType<SimpleBoolQuestionVM>())
+            foreach (DropDownQuestionVM dropDownQuestion in QuestionnaireCollection.OfType<DropDownQuestionVM>())
             {
-                questionnaire.QuestionnaireCollection.Add(simpleBoolQuestion.Insert());
+                questionnaire.QuestionnaireCollection.Add(dropDownQuestion.Insert());
             }
             foreach (RadioQuestionVM radioQuestion in QuestionnaireCollection.OfType<RadioQuestionVM>())
             {

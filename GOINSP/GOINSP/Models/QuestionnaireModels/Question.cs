@@ -20,6 +20,6 @@ namespace GOINSP.Models.QuestionnaireModels
         public Guid QuestionID { get; set; }
         public int ListNumber { get; set; }
         public bool Visible { get; set; }
-        public bool VisibleCondition { get; set; }
+        public string VisibleConditions { get; set; }
     }
 }

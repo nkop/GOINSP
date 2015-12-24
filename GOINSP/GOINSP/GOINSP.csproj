@@ -149,11 +149,11 @@
     <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
     <Compile Include="Models\Opendata\PostCodeData\PostCodeData.cs" />
+    <Compile Include="Models\QuestionnaireModels\DropDownQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\Question.cs" />
     <Compile Include="Models\QuestionnaireModels\Questionnaire.cs" />
     <Compile Include="Models\QuestionnaireModels\RadioAnswer.cs" />
     <Compile Include="Models\QuestionnaireModels\RadioQuestion.cs" />
-    <Compile Include="Models\QuestionnaireModels\SimpleBoolQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleDateTimeQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleIntegerQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleTextQuestion.cs" />
@@ -207,11 +207,11 @@
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
     <Compile Include="ViewModel\Opendata\PostCodeDatas\PostCodeDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\DropDownQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionnaireVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\RadioAnswerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\RadioQuestionVM.cs" />
-    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleBoolQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleDateTimeQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleIntegerQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextQuestionVM.cs" />
