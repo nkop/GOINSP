@@ -68,6 +68,12 @@ namespace GOINSP.ViewModel
             set { inspection.inspectorid = value; }
         }
 
+        public Guid companyid
+        {
+            get { return inspection.companyid; }
+            set { inspection.companyid = value; }
+        }
+
         public string description
         {
             get { return inspection.description; }

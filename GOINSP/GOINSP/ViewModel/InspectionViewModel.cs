@@ -20,22 +20,12 @@ namespace GOINSP.ViewModel
 
         public Context context;
 
-        private CompanyVM _selectedBedrijf { get; set; }
-        public CompanyVM SelectedBedrijf
-        {
-            get { return _selectedBedrijf; }
-            set
-            {
-                _selectedBedrijf = value;
-                RaisePropertyChanged("SelectedBedrijf");
-            }
-        }
-
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
 
         private InspectionVM _newInspection;
         private InspectionVM _selectedInspection;
+        private CompanyVM _selectedBedrijf;
 
         public Guid InspectionID;
 
@@ -56,8 +46,7 @@ namespace GOINSP.ViewModel
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
-
-            SelectedBedrijf = new CompanyVM();
+            _selectedBedrijf = new CompanyVM();
         }
 
         public InspectionVM newInspection
@@ -80,6 +69,16 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public CompanyVM SelectedBedrijf
+        {
+            get { return _selectedBedrijf; }
+            set
+            {
+                _selectedBedrijf = value;
+                RaisePropertyChanged("SelectedBedrijf");
+            }
+        }
+
         private void Add()
         {
             AddInspection window = new AddInspection();
@@ -91,7 +90,8 @@ namespace GOINSP.ViewModel
             try
             {
                 // Set foreign key (NEED TO RETHINK THIS)
-                _newInspection.inspectorid = new Guid("C4A2D055-2722-4C8C-80BE-8C332B84842F");
+                _newInspection.inspectorid = new Guid("EC63BB1D-70A5-E511-9BD7-001C4205EA00");
+                _newInspection.companyid = _selectedBedrijf.ID;
 
                 // Add to database
                 context.Inspection.Add(_newInspection.toInspection());
@@ -101,10 +101,12 @@ namespace GOINSP.ViewModel
                 Inspections.Add(_newInspection);
                 newInspection = new InspectionVM();
                 RaisePropertyChanged("Inspections");
+
+                MessageBox.Show("Toevoegen is geslaagd");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
+                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals. " + ex);
             }
         }
 
