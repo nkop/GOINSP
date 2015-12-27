@@ -103,7 +103,7 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                // Set foreign key
+                // Set foreign keys
                 _newInspection.inspectorid = selectedUser.id;
                 _newInspection.companyid = SelectedBedrijf.ID;
 

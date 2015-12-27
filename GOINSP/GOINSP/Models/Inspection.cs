@@ -26,7 +26,7 @@ namespace GOINSP.Models
         [ForeignKey("company")]
         public Guid companyid { get; set; }
         public string description { get; set; }
-        public string image { get; set; }
+        public byte[] image { get; set; }
 
         public virtual Account inspector { get; set; }
         public virtual Company company { get; set; }

@@ -80,7 +80,7 @@ namespace GOINSP.ViewModel
             set { inspection.description = value; }
         }
 
-        public string image
+        public byte[] image
         {
             get { return inspection.image; }
             set { inspection.image = value; }
