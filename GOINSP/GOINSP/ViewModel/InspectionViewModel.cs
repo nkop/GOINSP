@@ -17,6 +17,7 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
+        public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
         public Context context;
 
@@ -26,6 +27,7 @@ namespace GOINSP.ViewModel
         private InspectionVM _newInspection;
         private InspectionVM _selectedInspection;
         private CompanyVM _selectedBedrijf;
+        private AccountVM _selectedUser;
 
         public Guid InspectionID;
 
@@ -41,12 +43,18 @@ namespace GOINSP.ViewModel
             List<Models.Company> companies = context.Company.ToList();
             Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
 
+            IEnumerable<Account> inspecteurs = context.Account;
+            IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Distinct();
+            Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
+            RaisePropertyChanged("Inspecteurs");
+
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
             _selectedBedrijf = new CompanyVM();
+            _selectedUser = new AccountVM();
         }
 
         public InspectionVM newInspection
@@ -69,6 +77,12 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public AccountVM selectedUser
+        {
+            get { return _selectedUser; }
+            set { _selectedUser = value; }
+        }
+
         public CompanyVM SelectedBedrijf
         {
             get { return _selectedBedrijf; }
@@ -89,9 +103,9 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                // Set foreign key (NEED TO RETHINK THIS)
-                _newInspection.inspectorid = new Guid("EC63BB1D-70A5-E511-9BD7-001C4205EA00");
-                _newInspection.companyid = _selectedBedrijf.ID;
+                // Set foreign key
+                _newInspection.inspectorid = selectedUser.id;
+                _newInspection.companyid = SelectedBedrijf.ID;
 
                 // Add to database
                 context.Inspection.Add(_newInspection.toInspection());

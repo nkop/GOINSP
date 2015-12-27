@@ -9,26 +9,27 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Ioc;
 using System.Data.Entity;
+using GOINSP.Models;
 
 namespace GOINSP.ViewModel
 {
     public class AccountVM
     {
         
-        private Models.Account account;
-        private Models.Context context;
+        private Account account;
+        private Context context;
 
         [PreferredConstructorAttribute]
         public AccountVM()
         {
-            this.account = new Models.Account();
-            this.context = new Models.Context();
+            this.account = new Account();
+            this.context = new Context();
         }
 
-        public AccountVM(Models.Account account)
+        public AccountVM(Account account)
         {
             this.account = account;
-            this.context = new Models.Context();
+            this.context = new Context();
         }
 
         public Guid id
@@ -41,7 +42,7 @@ namespace GOINSP.ViewModel
         {
             get { return account.UserName; }
             set { account.UserName = value;
-            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Models.Account.Rights.Default)
+            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
             {
                 var entry = this.context.Entry(account);
                 entry.State = EntityState.Modified;
@@ -55,7 +56,7 @@ namespace GOINSP.ViewModel
 
             get { return account.Password; }
             set { account.Password = value;
-            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Models.Account.Rights.Default)
+            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
             {
                 var entry = this.context.Entry(account);
                 entry.State = EntityState.Modified;
@@ -68,7 +69,7 @@ namespace GOINSP.ViewModel
         {
             get { return account.Email; }
             set { account.Email = value;
-            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Models.Account.Rights.Default)
+            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
             {
                 var entry = this.context.Entry(account);
                 entry.State = EntityState.Modified;
