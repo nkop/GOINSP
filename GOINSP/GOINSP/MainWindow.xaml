@@ -11,12 +11,14 @@
         <TextBlock FontSize="60" Margin="0,100,0,0" Padding="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="top" Height="100">GoInsp</TextBlock>
 
 
-        <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2" Height="200" Width="400">
-            <StackPanel Height="200" Width="400" Background="White">
+        <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2" Height="250" Width="400">
+            <StackPanel Height="250" Width="400" Background="White">
                 <TextBlock FontSize="18" TextAlignment="Center" Padding="10">Login</TextBlock>
+                <TextBlock Margin="100, 0, 0, 5">Gebruikersnaam:</TextBlock>
                 <WrapPanel>
                     <TextBox FontSize="18" HorizontalAlignment="Center" Height="25" Width="200" Margin="100,0,0,5" Text="{Binding LoginName}"></TextBox>
                 </WrapPanel>
+                <TextBlock Margin="100, 0, 0, 5">Wachtwoord:</TextBlock>
                 <WrapPanel>
                     <w:BindablePasswordBox Password="{Binding LoginPassword}" HorizontalAlignment="Left" Margin="100,0,0,5" VerticalAlignment="Bottom" Width="200" Height="25"/>
                 </WrapPanel>
