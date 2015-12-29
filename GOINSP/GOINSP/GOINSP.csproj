@@ -207,6 +207,7 @@
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
     <Compile Include="ViewModel\Opendata\PostCodeDatas\PostCodeDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\RadioQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\DropDownQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionnaireVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionVM.cs" />

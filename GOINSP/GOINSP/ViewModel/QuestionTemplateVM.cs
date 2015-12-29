@@ -14,12 +14,14 @@ using System.Windows.Data;
 using System.Windows.Input;
 using GOINSP.Models.QuestionnaireModels;
 using GOINSP.ViewModel.QuestionnaireViewModels;
+using GOINSP.ViewModel.QuestionnaireAssemblerViewModels;
 
 namespace GOINSP.ViewModel
 {
     public class QuestionTemplateVM : ViewModelBase
     {
         public ICommand AddNewQuestionCommand { get; set; }
+        public ICommand AddRadioQuestionCommand { get; set; }
 
         private QuestionnaireVM questionnaire;
         public QuestionnaireVM Questionnaire
@@ -35,10 +37,26 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private RadioQuestionAssemblerVM radioQuestionAssemblerVM;
+        public RadioQuestionAssemblerVM RadioQuestionAssemblerVM
+        {
+            get
+            {
+                return radioQuestionAssemblerVM;
+            }
+            set
+            {
+                radioQuestionAssemblerVM = value;
+                RaisePropertyChanged("RadioQuestionAssemblerVM");
+            }
+        }
+
         public Context Context { get; set; }
 
         public QuestionTemplateVM()
         {
+            RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
+
             Context = new Context();
 
             /*List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
@@ -53,7 +71,7 @@ namespace GOINSP.ViewModel
 
             Questionnaire = new QuestionnaireVM();
 
-            SimpleTextQuestionVM locationTextQuestion = new SimpleTextQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Locatie naam:" };
+            /*SimpleTextQuestionVM locationTextQuestion = new SimpleTextQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Locatie naam:" };
             SimpleTextQuestionVM addressTextQuestion = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, Question = "Locatie adres:" };
             RadioQuestionVM locationTypeRadioQuestion = new RadioQuestionVM() { ListNumber = 3, Question = "Locatie type:", Visible = Visibility.Visible, AlternativeAnswerVisibility = Visibility.Collapsed };
 
@@ -123,16 +141,26 @@ namespace GOINSP.ViewModel
             questionnaire.QuestionnaireCollection.Add(blockDropDownQuestion);
             questionnaire.QuestionnaireCollection.Add(multipleCountIntegerQuestion);
             questionnaire.QuestionnaireCollection.Add(CountIntegerQuestion);
-            questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);
+            questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);*/
 
             Questionnaire.Context = Context;
 
             AddNewQuestionCommand = new RelayCommand(AddNewQuestion);
+            AddRadioQuestionCommand = new RelayCommand(AddRadioQuestion);
         }
 
         public void AddNewQuestion()
         {
             Questionnaire.Insert();
+        }
+
+        public void AddRadioQuestion()
+        {
+            RadioQuestionVM newRadioQuestion = RadioQuestionAssemblerVM.Create();
+            questionnaire.QuestionnaireCollection.Add(newRadioQuestion);
+            RadioQuestionAssemblerVM = null;
+            RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
+
         }
     }
 }
