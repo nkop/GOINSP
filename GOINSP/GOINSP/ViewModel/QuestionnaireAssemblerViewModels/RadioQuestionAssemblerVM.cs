@@ -11,8 +11,24 @@ using System.Windows;
 
 namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
-    public class RadioQuestionAssemblerVM : ViewModelBase
+    public class RadioQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
+        private Visibility visibility;
+        public Visibility Visibility
+        {
+            get
+            {
+                return visibility;
+            }
+            set
+            {
+                visibility = value;
+                RaisePropertyChanged("Visibility");
+            }
+        }
+
+        public string AssemblerName { get; set; }
+
         private string question;
         public string Question
         {
@@ -74,6 +90,9 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public RadioQuestionAssemblerVM()
         {
+            Visibility = Visibility.Collapsed;
+            AssemblerName = "Radio Lijst Vraag";
+
             AnswerCount = 0;
             RadioAnswers = new ObservableCollection<RadioAnswerVM>();
             EmptyField = false;
@@ -86,7 +105,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             if (RadioAnswers == null)
                 return;
 
-            if(AnswerCount < RadioAnswers.Count)
+            if(AnswerCount < RadioAnswers.Count && AnswerCount >= 0)
             {
                 RadioAnswers.Remove(RadioAnswers.Last());
             } 
@@ -98,7 +117,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public RadioQuestionVM Create()
         {
-            RadioQuestionVM tempRadioQuestion = new RadioQuestionVM() { ListNumber = 1, Question = Question, Visible = Visibility.Visible, AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(EmptyField) };
+            RadioQuestionVM tempRadioQuestion = new RadioQuestionVM() { Question = Question, Visible = Visibility.Visible, AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(EmptyField) };
             tempRadioQuestion.Answers = RadioAnswers.ToList();
 
             return tempRadioQuestion;

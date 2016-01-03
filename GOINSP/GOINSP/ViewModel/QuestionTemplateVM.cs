@@ -21,7 +21,25 @@ namespace GOINSP.ViewModel
     public class QuestionTemplateVM : ViewModelBase
     {
         public ICommand AddNewQuestionCommand { get; set; }
+
         public ICommand AddRadioQuestionCommand { get; set; }
+        public ICommand AddSimpleTextQuestionCommand { get; set; }
+        public ICommand AddSimpleIntegerQuestionCommand { get; set; }
+
+        private IAssemblerVM selectedAssembler;
+        public IAssemblerVM SelectedAssembler
+        {
+            get
+            {
+                return selectedAssembler;
+            }
+            set
+            {
+                selectedAssembler = value;
+                RaisePropertyChanged("SelectedAssembler");
+                ChangeAssemblerVisibility();
+            }
+        }
 
         private QuestionnaireVM questionnaire;
         public QuestionnaireVM Questionnaire
@@ -51,11 +69,57 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private SimpleTextQuestionAssemblerVM simpleTextQuestionAssemblerVM;
+        public SimpleTextQuestionAssemblerVM SimpleTextQuestionAssemblerVM
+        {
+            get
+            {
+                return simpleTextQuestionAssemblerVM;
+            }
+            set
+            {
+                simpleTextQuestionAssemblerVM = value;
+                RaisePropertyChanged("SimpleTextQuestionAssemblerVM");
+            }
+        }
+
+        private SimpleIntegerQuestionAssemblerVM simpleIntegerQuestionAssemblerVM;
+        public SimpleIntegerQuestionAssemblerVM SimpleIntegerQuestionAssemblerVM
+        {
+            get
+            {
+                return simpleIntegerQuestionAssemblerVM;
+            }
+            set
+            {
+                simpleIntegerQuestionAssemblerVM = value;
+                RaisePropertyChanged("SimpleIntegerQuestionAssemblerVM");
+            }
+        }
+
+        private ObservableCollection<IAssemblerVM> assemblerVMList;
+        public ObservableCollection<IAssemblerVM> AssemblerVMList
+        {
+            get
+            {
+                return assemblerVMList;
+            }
+            set
+            {
+                assemblerVMList = value;
+                RaisePropertyChanged("AssemblerVMList");
+            }
+        }
+
         public Context Context { get; set; }
 
         public QuestionTemplateVM()
         {
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
+            SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
+            SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
+
+            CreateInterfaceList();
 
             Context = new Context();
 
@@ -145,8 +209,18 @@ namespace GOINSP.ViewModel
 
             Questionnaire.Context = Context;
 
-            AddNewQuestionCommand = new RelayCommand(AddNewQuestion);
             AddRadioQuestionCommand = new RelayCommand(AddRadioQuestion);
+            AddSimpleTextQuestionCommand = new RelayCommand(AddSimpleTextQuestion);
+            AddSimpleIntegerQuestionCommand = new RelayCommand(AddSimpleIntegerQuestion);
+        }
+
+        public void CreateInterfaceList()
+        {
+            AssemblerVMList = new ObservableCollection<IAssemblerVM>();
+
+            AssemblerVMList.Add(RadioQuestionAssemblerVM);
+            AssemblerVMList.Add(SimpleTextQuestionAssemblerVM);
+            AssemblerVMList.Add(SimpleIntegerQuestionAssemblerVM);
         }
 
         public void AddNewQuestion()
@@ -156,11 +230,44 @@ namespace GOINSP.ViewModel
 
         public void AddRadioQuestion()
         {
-            RadioQuestionVM newRadioQuestion = RadioQuestionAssemblerVM.Create();
-            questionnaire.QuestionnaireCollection.Add(newRadioQuestion);
-            RadioQuestionAssemblerVM = null;
+            AddNewQuestionToQuestionnaire(RadioQuestionAssemblerVM.Create());
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
+            CreateInterfaceList();
+            SelectedAssembler = RadioQuestionAssemblerVM;
 
+        }
+
+        public void AddSimpleTextQuestion()
+        {
+            AddNewQuestionToQuestionnaire(SimpleTextQuestionAssemblerVM.Create());
+            SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
+            CreateInterfaceList();
+            SelectedAssembler = SimpleTextQuestionAssemblerVM;
+        }
+
+        public void AddSimpleIntegerQuestion()
+        {
+            AddNewQuestionToQuestionnaire(SimpleIntegerQuestionAssemblerVM.Create());
+            SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
+            CreateInterfaceList();
+            SelectedAssembler = SimpleIntegerQuestionAssemblerVM;
+        }
+
+        public void AddNewQuestionToQuestionnaire(QuestionVM question)
+        {
+            int count = questionnaire.QuestionnaireCollection.Count;
+            question.ListNumber = count;
+            questionnaire.QuestionnaireCollection.Add(question);
+        }
+
+        public void ChangeAssemblerVisibility()
+        {
+            foreach(IAssemblerVM assembler in AssemblerVMList)
+            {
+                assembler.Visibility = Visibility.Collapsed;
+            }
+            if(SelectedAssembler != null)
+                SelectedAssembler.Visibility = Visibility.Visible;
         }
     }
 }
