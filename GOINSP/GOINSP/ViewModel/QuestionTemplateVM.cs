@@ -20,11 +20,13 @@ namespace GOINSP.ViewModel
 {
     public class QuestionTemplateVM : ViewModelBase
     {
-        public ICommand AddNewQuestionCommand { get; set; }
+        public ICommand MoveSelectedQuestionDownCommand { get; set; }
+        public ICommand MoveSelectedQuestionUpCommand { get; set; }
 
         public ICommand AddRadioQuestionCommand { get; set; }
         public ICommand AddSimpleTextQuestionCommand { get; set; }
         public ICommand AddSimpleIntegerQuestionCommand { get; set; }
+        public ICommand AddSimpleDateTimeQuestionCommand { get; set; }
 
         private IAssemblerVM selectedAssembler;
         public IAssemblerVM SelectedAssembler
@@ -38,6 +40,20 @@ namespace GOINSP.ViewModel
                 selectedAssembler = value;
                 RaisePropertyChanged("SelectedAssembler");
                 ChangeAssemblerVisibility();
+            }
+        }
+
+        private QuestionVM selectedQuestion;
+        public QuestionVM SelectedQuestion
+        {
+            get
+            {
+                return selectedQuestion;
+            }
+            set
+            {
+                selectedQuestion = value;
+                RaisePropertyChanged("SelectedQuestion");
             }
         }
 
@@ -97,6 +113,20 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private SimpleDateTimeQuestionAssemblerVM simpleDateTimeQuestionAssemblerVM;
+        public SimpleDateTimeQuestionAssemblerVM SimpleDateTimeQuestionAssemblerVM
+        {
+            get
+            {
+                return simpleDateTimeQuestionAssemblerVM;
+            }
+            set
+            {
+                simpleDateTimeQuestionAssemblerVM = value;
+                RaisePropertyChanged("SimpleDateTimeQuestionAssemblerVM");
+            }
+        }
+
         private ObservableCollection<IAssemblerVM> assemblerVMList;
         public ObservableCollection<IAssemblerVM> AssemblerVMList
         {
@@ -118,6 +148,7 @@ namespace GOINSP.ViewModel
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
             SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
+            simpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
 
             CreateInterfaceList();
 
@@ -209,9 +240,13 @@ namespace GOINSP.ViewModel
 
             Questionnaire.Context = Context;
 
+            MoveSelectedQuestionDownCommand = new RelayCommand(MoveSelectedQuestionDown);
+            MoveSelectedQuestionUpCommand = new RelayCommand(MoveSelectedQuestionUp);
+
             AddRadioQuestionCommand = new RelayCommand(AddRadioQuestion);
             AddSimpleTextQuestionCommand = new RelayCommand(AddSimpleTextQuestion);
             AddSimpleIntegerQuestionCommand = new RelayCommand(AddSimpleIntegerQuestion);
+            AddSimpleDateTimeQuestionCommand = new RelayCommand(AddSimpleDateTimeQuestion);
         }
 
         public void CreateInterfaceList()
@@ -221,11 +256,29 @@ namespace GOINSP.ViewModel
             AssemblerVMList.Add(RadioQuestionAssemblerVM);
             AssemblerVMList.Add(SimpleTextQuestionAssemblerVM);
             AssemblerVMList.Add(SimpleIntegerQuestionAssemblerVM);
+            assemblerVMList.Add(simpleDateTimeQuestionAssemblerVM);
         }
 
-        public void AddNewQuestion()
+        public void MoveSelectedQuestionDown()
         {
-            Questionnaire.Insert();
+            if (SelectedQuestion.ListNumber < Questionnaire.QuestionnaireCollection.Count-1)
+            {
+                QuestionVM downQuestion = questionnaire.QuestionnaireCollection.Where(x => x.ListNumber == SelectedQuestion.ListNumber + 1).First();
+                downQuestion.ListNumber -= 1;
+                SelectedQuestion.ListNumber += 1;
+                Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
+            }
+        }
+
+        public void MoveSelectedQuestionUp()
+        {
+            if (SelectedQuestion.ListNumber > 0)
+            {
+                QuestionVM upQuestion = questionnaire.QuestionnaireCollection.Where(x => x.ListNumber == SelectedQuestion.ListNumber - 1).First();
+                upQuestion.ListNumber += 1;
+                SelectedQuestion.ListNumber -= 1;
+                Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
+            }
         }
 
         public void AddRadioQuestion()
@@ -234,7 +287,6 @@ namespace GOINSP.ViewModel
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             CreateInterfaceList();
             SelectedAssembler = RadioQuestionAssemblerVM;
-
         }
 
         public void AddSimpleTextQuestion()
@@ -251,6 +303,14 @@ namespace GOINSP.ViewModel
             SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
             CreateInterfaceList();
             SelectedAssembler = SimpleIntegerQuestionAssemblerVM;
+        }
+
+        public void AddSimpleDateTimeQuestion()
+        {
+            AddNewQuestionToQuestionnaire(SimpleDateTimeQuestionAssemblerVM.Create());
+            SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
+            CreateInterfaceList();
+            SelectedAssembler = SimpleDateTimeQuestionAssemblerVM;
         }
 
         public void AddNewQuestionToQuestionnaire(QuestionVM question)

@@ -224,6 +224,7 @@
     <Compile Include="ViewModel\QuestionListVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\IAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\RadioQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleDateTimeQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleIntegerQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\DropDownQuestionVM.cs" />

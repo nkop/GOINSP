@@ -4,7 +4,7 @@
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="844" Width="689">
+        Title="QuestionnaireAssembler" Height="858" Width="689">
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
@@ -45,8 +45,8 @@
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
-    <Grid>
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="360">
+    <Grid Margin="0,0,0,29">
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" SelectedItem="{Binding SelectedQuestion}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="360">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -69,6 +69,12 @@
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextQuestionCommand}"/>
         </StackPanel>
 
+        <StackPanel Name="SimpleDateTimeQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleDateTimeQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag"/>
+            <TextBox Text="{Binding SimpleDateTimeQuestionAssemblerVM.Question}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleDateTimeQuestionCommand}"/>
+        </StackPanel>
+
         <StackPanel Name="RadioQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding RadioQuestionAssemblerVM.Visibility}">
             <Label Content="Vraag"/>
             <TextBox Text="{Binding RadioQuestionAssemblerVM.Question}"/>
@@ -84,5 +90,7 @@
             </ListBox>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddRadioQuestionCommand}"/>
         </StackPanel>
+        <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="0,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}"/>
+        <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="180,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}"/>
     </Grid>
 </Window>
