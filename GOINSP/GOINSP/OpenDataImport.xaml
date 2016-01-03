@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         DataContext="{Binding OpenDataImport, Source={StaticResource Locator}}"
-        Title="Data Import" Height="293.5" Width="295.5" WindowStartupLocation="CenterScreen">
+        Title="Data Import" Height="300" Width="302" WindowStartupLocation="CenterScreen"
+        Background="#3598dc">
     <Grid>
         <Button Content="Import TData" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}"/>
         <Button Content="Import RegioS" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios" IsEnabled="{Binding ButtonsEnabled}"/>
