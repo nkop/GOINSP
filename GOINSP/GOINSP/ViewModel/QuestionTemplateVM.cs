@@ -24,6 +24,7 @@ namespace GOINSP.ViewModel
         public ICommand MoveSelectedQuestionUpCommand { get; set; }
         public ICommand DeleteSelectedQuestionCommand { get; set; }
 
+        public ICommand AddDropDownQuestionCommand { get; set; }
         public ICommand AddRadioQuestionCommand { get; set; }
         public ICommand AddSimpleTextQuestionCommand { get; set; }
         public ICommand AddSimpleIntegerQuestionCommand { get; set; }
@@ -128,6 +129,20 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private DropDownQuestionAssemblerVM dropDownQuestionAssemblerVM;
+        public DropDownQuestionAssemblerVM DropDownQuestionAssemblerVM
+        {
+            get
+            {
+                return dropDownQuestionAssemblerVM;
+            }
+            set
+            {
+                dropDownQuestionAssemblerVM = value;
+                RaisePropertyChanged("DropDownQuestionAssemblerVM");
+            }
+        }
+
         private ObservableCollection<IAssemblerVM> assemblerVMList;
         public ObservableCollection<IAssemblerVM> AssemblerVMList
         {
@@ -146,10 +161,11 @@ namespace GOINSP.ViewModel
 
         public QuestionTemplateVM()
         {
+            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM();
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
             SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
-            simpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
+            SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
 
             CreateInterfaceList();
 
@@ -245,6 +261,7 @@ namespace GOINSP.ViewModel
             MoveSelectedQuestionUpCommand = new RelayCommand(MoveSelectedQuestionUp);
             DeleteSelectedQuestionCommand = new RelayCommand(DeleteSelectedQuestion);
 
+            AddDropDownQuestionCommand = new RelayCommand(AddDropDownQuestion);
             AddRadioQuestionCommand = new RelayCommand(AddRadioQuestion);
             AddSimpleTextQuestionCommand = new RelayCommand(AddSimpleTextQuestion);
             AddSimpleIntegerQuestionCommand = new RelayCommand(AddSimpleIntegerQuestion);
@@ -258,7 +275,8 @@ namespace GOINSP.ViewModel
             AssemblerVMList.Add(RadioQuestionAssemblerVM);
             AssemblerVMList.Add(SimpleTextQuestionAssemblerVM);
             AssemblerVMList.Add(SimpleIntegerQuestionAssemblerVM);
-            assemblerVMList.Add(simpleDateTimeQuestionAssemblerVM);
+            AssemblerVMList.Add(SimpleDateTimeQuestionAssemblerVM);
+            AssemblerVMList.Add(DropDownQuestionAssemblerVM);
         }
 
         public void MoveSelectedQuestionDown()
@@ -323,6 +341,13 @@ namespace GOINSP.ViewModel
             SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
             CreateInterfaceList();
             SelectedAssembler = SimpleDateTimeQuestionAssemblerVM;
+        }
+        public void AddDropDownQuestion()
+        {
+            AddNewQuestionToQuestionnaire(DropDownQuestionAssemblerVM.Create());
+            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM();
+            CreateInterfaceList();
+            SelectedAssembler = DropDownQuestionAssemblerVM;
         }
 
         public void AddNewQuestionToQuestionnaire(QuestionVM question)
