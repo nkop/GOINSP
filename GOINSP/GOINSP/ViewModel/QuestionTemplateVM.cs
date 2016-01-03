@@ -22,6 +22,7 @@ namespace GOINSP.ViewModel
     {
         public ICommand MoveSelectedQuestionDownCommand { get; set; }
         public ICommand MoveSelectedQuestionUpCommand { get; set; }
+        public ICommand DeleteSelectedQuestionCommand { get; set; }
 
         public ICommand AddRadioQuestionCommand { get; set; }
         public ICommand AddSimpleTextQuestionCommand { get; set; }
@@ -242,6 +243,7 @@ namespace GOINSP.ViewModel
 
             MoveSelectedQuestionDownCommand = new RelayCommand(MoveSelectedQuestionDown);
             MoveSelectedQuestionUpCommand = new RelayCommand(MoveSelectedQuestionUp);
+            DeleteSelectedQuestionCommand = new RelayCommand(DeleteSelectedQuestion);
 
             AddRadioQuestionCommand = new RelayCommand(AddRadioQuestion);
             AddSimpleTextQuestionCommand = new RelayCommand(AddSimpleTextQuestion);
@@ -279,6 +281,16 @@ namespace GOINSP.ViewModel
                 SelectedQuestion.ListNumber -= 1;
                 Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(x => x.ListNumber));
             }
+        }
+
+        public void DeleteSelectedQuestion()
+        {
+            List<QuestionVM> list = Questionnaire.QuestionnaireCollection.Where(x => x.ListNumber > SelectedQuestion.ListNumber).ToList();
+            foreach(QuestionVM question in list)
+            {
+                question.ListNumber -= 1;
+            }
+            Questionnaire.QuestionnaireCollection.Remove(SelectedQuestion);
         }
 
         public void AddRadioQuestion()

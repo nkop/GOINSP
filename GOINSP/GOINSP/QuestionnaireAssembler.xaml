@@ -4,7 +4,7 @@
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="858" Width="689">
+        Title="QuestionnaireAssembler" Height="889" Width="689">
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
@@ -45,8 +45,8 @@
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
-    <Grid Margin="0,0,0,29">
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" SelectedItem="{Binding SelectedQuestion}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="360">
+    <Grid Margin="0,0,0,1">
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" SelectedItem="{Binding SelectedQuestion}" Margin="0,0,0,83" HorizontalAlignment="Left" Width="360">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -92,5 +92,6 @@
         </StackPanel>
         <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="0,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}"/>
         <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="180,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}"/>
+        <Button Content="Verwijder" HorizontalAlignment="Left" Margin="0,803,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding DeleteSelectedQuestionCommand}"/>
     </Grid>
 </Window>
