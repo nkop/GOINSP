@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GOINSP.ViewModel.QuestionnaireViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
     public class DropDownQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
         DropDownQuestionVM attachedQuestion;
+        public ICommand AddBindableQuestionCommand { get; set; }
 
         private Visibility visibility;
         public Visibility Visibility
@@ -137,6 +140,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
             AnswerCount = 0;
             question = "";
+
+            AddBindableQuestionCommand = new RelayCommand(AddBindableQuestion);
         }
 
         public void ChangeRadioAnswerCount()
@@ -151,6 +156,15 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             else if (AnswerCount > Answers.Count)
             {
                 Answers.Add(new ObservableString(""));
+            }
+        }
+
+        public void AddBindableQuestion()
+        {
+            if(SelectedBindableQuestion != null)
+            {
+                if(!ConditionBoundQuestions.Contains(SelectedBindableQuestion))
+                    ConditionBoundQuestions.Add(SelectedBindableQuestion);
             }
         }
 
