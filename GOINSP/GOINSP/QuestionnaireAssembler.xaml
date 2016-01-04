@@ -103,6 +103,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Label Content="Bindbare Vragen" Margin="0,10,0,0"/>
+            <ComboBox ItemsSource="{Binding DropDownQuestionAssemblerVM.PossibleQuestions}" SelectedItem="{Binding DropDownQuestionAssemblerVM.SelectedBindableQuestion}" DisplayMemberPath="Question"/>
+            <Label Content="Gebonde Vragen" Margin="0,10,0,0"/>
+            <ComboBox ItemsSource="{Binding DropDownQuestionAssemblerVM.ConditionBoundQuestions}" SelectedItem="{Binding DropDownQuestionAssemblerVM.SelectedBoundQuestion}" DisplayMemberPath="Question"/>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddDropDownQuestionCommand}"/>
             <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateDropDownQuestionCommand}"/>
         </StackPanel>

@@ -73,6 +73,62 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
+        private ObservableCollection<QuestionVM> conditionBoundQuestions;
+        public ObservableCollection<QuestionVM> ConditionBoundQuestions
+        {
+            get
+            {
+                return conditionBoundQuestions;
+            }
+            set
+            {
+                conditionBoundQuestions = value;
+                RaisePropertyChanged("ConditionBoundQuestions");
+            }
+        }
+
+        private ObservableCollection<QuestionVM> possibleQuestions;
+        public ObservableCollection<QuestionVM> PossibleQuestions
+        {
+            get
+            {
+                return possibleQuestions;
+            }
+            set
+            {
+                possibleQuestions = value;
+                RaisePropertyChanged("PossibleQuestions");
+            }
+        }
+
+        private QuestionVM selectedBindableQuestion;
+        public QuestionVM SelectedBindableQuestion
+        {
+            get
+            {
+                return selectedBindableQuestion;
+            }
+            set
+            {
+                selectedBindableQuestion = value;
+                RaisePropertyChanged("SelectedBindableQuestion");
+            }
+        }
+
+        private QuestionVM selectedBoundQuestion;
+        public QuestionVM SelectedBoundQuestion
+        {
+            get
+            {
+                return selectedBoundQuestion;
+            }
+            set
+            {
+                selectedBoundQuestion = value;
+                RaisePropertyChanged("SelectedBoundQuestion");
+            }
+        }
+
         public DropDownQuestionAssemblerVM()
         {
             Visibility = Visibility.Collapsed;
@@ -98,12 +154,14 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
-        public void Attach(DropDownQuestionVM question)
+        public void Attach(DropDownQuestionVM question, QuestionnaireVM questionnaire)
         {
             attachedQuestion = question;
             Question = attachedQuestion.Question;
             Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x)).ToList());
             AnswerCount = attachedQuestion.Answers.Count;
+            PossibleQuestions = new ObservableCollection<QuestionVM>(questionnaire.QuestionnaireCollection.Where(x => x.GetType() != typeof(DropDownQuestionVM)));
+            ConditionBoundQuestions = new ObservableCollection<QuestionVM>(attachedQuestion.ConditionBoundQuestions);
         }
 
         public void Update()

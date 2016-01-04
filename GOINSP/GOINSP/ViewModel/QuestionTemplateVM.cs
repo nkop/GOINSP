@@ -490,7 +490,7 @@ namespace GOINSP.ViewModel
                 else if (SelectedQuestion.GetType() == typeof(DropDownQuestionVM))
                 {
                     SelectedAssembler = DropDownQuestionAssemblerVM;
-                    DropDownQuestionAssemblerVM.Attach((DropDownQuestionVM)SelectedQuestion);
+                    DropDownQuestionAssemblerVM.Attach((DropDownQuestionVM)SelectedQuestion, Questionnaire);
                 }
                 else if (SelectedQuestion.GetType() == typeof(RadioQuestionVM))
                 {
