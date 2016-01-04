@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GOINSP.Models.QuestionnaireModels;
+using System.Data.Entity.Infrastructure;
 
 namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
@@ -106,6 +107,14 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             PrepareForCRUD();
             Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Modified;
+            Context.SaveChanges();
+        }
+
+        public void Duplicate()
+        {
+            PrepareForCRUD();
+            Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Detached;
+            Context.Questionnaire.Add(questionnaire);
             Context.SaveChanges();
         }
 

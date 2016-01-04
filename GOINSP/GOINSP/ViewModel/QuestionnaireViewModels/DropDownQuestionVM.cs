@@ -106,7 +106,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
                 foreach (Question question in dropDownQuestion.ConditionBoundQuestions)
                 {
-                    ConditionBoundQuestions.Add(originalQuestionList.Where(x => x.question == question).First());
+                    ConditionBoundQuestions.Add(originalQuestionList.Where(x => x.question.ListNumber == question.ListNumber).First());
                 }
             }
         }
