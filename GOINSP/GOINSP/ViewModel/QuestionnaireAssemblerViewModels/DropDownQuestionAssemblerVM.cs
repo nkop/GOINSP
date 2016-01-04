@@ -155,8 +155,13 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
             else if (AnswerCount > Answers.Count)
             {
-                Answers.Add(new ObservableString(""));
+                Answers.Add(new ObservableString("", ObservableStringCallback));
             }
+        }
+
+        public int ObservableStringCallback()
+        {
+            return 0;
         }
 
         public void AddBindableQuestion()
@@ -172,7 +177,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         {
             attachedQuestion = question;
             Question = attachedQuestion.Question;
-            Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x)).ToList());
+            Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x, ObservableStringCallback)).ToList());
             AnswerCount = attachedQuestion.Answers.Count;
             PossibleQuestions = new ObservableCollection<QuestionVM>(questionnaire.QuestionnaireCollection.Where(x => x.GetType() != typeof(DropDownQuestionVM)));
             ConditionBoundQuestions = new ObservableCollection<QuestionVM>(attachedQuestion.ConditionBoundQuestions);
@@ -205,13 +210,30 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         }
     }
 
-    public class ObservableString
+    public class ObservableString : ViewModelBase
     {
-        public string StringObservable { get; set; }
+        Func<int> ObservableStringCallback;
 
-        public ObservableString(string observableString)
+        private string stringObservable;
+        public string StringObservable
+        {
+            get
+            {
+                return stringObservable;
+            }
+            set
+            {
+                stringObservable = value;
+                RaisePropertyChanged("StringObservable");
+                if (ObservableStringCallback != null)
+                    ObservableStringCallback();
+            }
+        }
+
+        public ObservableString(string observableString, Func<int> ObservableStringCallback)
         {
             this.StringObservable = observableString;
+            this.ObservableStringCallback = ObservableStringCallback;
         }
 
         public override string ToString()
