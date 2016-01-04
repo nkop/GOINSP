@@ -1,17 +1,38 @@
 ﻿<Window x:Class="GOINSP.InspectionSpecs"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="InspectionSpecs" Height="600" Width="600"
+        Title="InspectionSpecs" Height="600" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen">
     
     <Grid Margin="10">
         <StackPanel DataContext="{Binding InspectionSpecs}">
-            <Label Content="{Binding name}" />
+            <Label FontWeight="Bold" FontSize="15px" Content="{Binding name}" />
             <WrapPanel Orientation="Horizontal">
-                <Image Width="150" Source="{Binding image}" Height="150" HorizontalAlignment="Left" />
-                <WrapPanel Orientation="Vertical">
-                    
+                <!--<Image Width="150" Source="{Binding image}" Height="150" HorizontalAlignment="Left" />-->
+                <Image Width="150" Source="http://icons.iconarchive.com/icons/iconshow/construction/128/House-icon.png" Height="150" HorizontalAlignment="Left" />
+                
+                <WrapPanel Margin="30 0 30 0" Orientation="Vertical">
+                    <Label Content="Inspecteur: "  />
+                    <Label Content="{Binding date}" />
+                    <Label Content="{Binding address}" />
+                    <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding OpenQuestionnaire}" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding OpenRapportage}" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </WrapPanel>
+
+                <Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />
+                
+                <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
+                    <Button Content="Aanpassen" Margin="0 0 0 5" Command="" Width="100"></Button>
+                    <Button Content="Verwijderen" Command="" Width="100"></Button>
                 </WrapPanel>
             </WrapPanel>
         </StackPanel>
