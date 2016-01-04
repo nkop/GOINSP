@@ -288,7 +288,6 @@ namespace GOINSP.ViewModel
             s.Context = Context;
             s.Insert();
 
-            /*var x = Context.Questionnaire.ToList().Last();*/
             Questionnaire = s;
             
             Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(xy => xy.ListNumber));

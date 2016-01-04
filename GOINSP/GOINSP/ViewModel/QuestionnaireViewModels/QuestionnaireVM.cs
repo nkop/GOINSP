@@ -30,17 +30,31 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
+        public bool IsTemplate
+        {
+            get
+            {
+                return questionnaire.IsTemplate;
+            }
+            set
+            {
+                questionnaire.IsTemplate = value;
+                RaisePropertyChanged("IsTemplate");
+            }
+        } 
+
         public QuestionnaireVM()
         {
             questionnaire = new Questionnaire();
             questionnaire.QuestionnaireCollection = new List<Question>();
+            questionnaire.IsTemplate = false;
             QuestionnaireCollection = new ObservableCollection<QuestionVM>();
         }
 
         public QuestionnaireVM(Questionnaire questionnaire)
         {
             this.questionnaire = questionnaire;
-
+            this.IsTemplate = questionnaire.IsTemplate;
             this.QuestionnaireCollection = new ObservableCollection<QuestionVM>();
 
             foreach (SimpleTextQuestion simpleTextQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleTextQuestion>())
