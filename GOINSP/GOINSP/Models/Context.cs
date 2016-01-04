@@ -24,6 +24,7 @@ namespace GOINSP.Models
         public DbSet<Question> Question { get; set; }
         public DbSet<RadioAnswer> RadioAnswer { get; set; }
         public DbSet<DropDownQuestion> DropDownQuestion { get; set; }
+        public DbSet<SimpleTextQuestion> SimpleTextBlockQuestion { get; set; }
         public DbSet<SimpleTextQuestion> SimpleTextQuestion { get; set; }
         public DbSet<RadioQuestion> RadioQuestion { get; set; }
         public DbSet<SimpleDateTimeQuestion> SimpleDateQuestion { get; set; }

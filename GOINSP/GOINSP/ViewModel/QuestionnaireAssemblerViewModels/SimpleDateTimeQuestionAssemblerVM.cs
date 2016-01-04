@@ -11,6 +11,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
     public class SimpleDateTimeQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
+        SimpleDateTimeQuestionVM attachedQuestion;
+
         private Visibility visibility;
         public Visibility Visibility
         {
@@ -47,6 +49,20 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             AssemblerName = "Datum en Tijd Vraag";
 
             question = "";
+        }
+
+        public void Attach(SimpleDateTimeQuestionVM question)
+        {
+            attachedQuestion = question;
+            Question = attachedQuestion.Question;
+        }
+
+        public void Update()
+        {
+            if(attachedQuestion != null)
+            {
+                attachedQuestion.Question = Question;
+            }
         }
 
         public SimpleDateTimeQuestionVM Create()

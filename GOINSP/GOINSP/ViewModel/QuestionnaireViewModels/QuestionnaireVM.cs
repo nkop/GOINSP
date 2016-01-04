@@ -46,6 +46,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 this.QuestionnaireCollection.Add(new SimpleTextQuestionVM(simpleTextQuestion));
             }
+            foreach (SimpleTextBlockQuestion simpleTextBlockQuestion in questionnaire.QuestionnaireCollection.OfType<SimpleTextBlockQuestion>())
+            {
+                this.QuestionnaireCollection.Add(new SimpleTextBlockQuestionVM(simpleTextBlockQuestion));
+            }
             foreach (DropDownQuestion dropDownQuestion in questionnaire.QuestionnaireCollection.OfType<DropDownQuestion>())
             {
                 this.QuestionnaireCollection.Add(new DropDownQuestionVM(dropDownQuestion));
@@ -75,6 +79,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
             {
                 questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
+            }
+            foreach (SimpleTextBlockQuestionVM simpleTextBlockQuestion in QuestionnaireCollection.OfType<SimpleTextBlockQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(simpleTextBlockQuestion.Insert());
             }
             foreach (DropDownQuestionVM dropDownQuestion in QuestionnaireCollection.OfType<DropDownQuestionVM>())
             {

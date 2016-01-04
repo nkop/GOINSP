@@ -171,6 +171,7 @@
     <Compile Include="Models\QuestionnaireModels\RadioQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleDateTimeQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleIntegerQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleTextBlockQuestion.cs" />
     <Compile Include="Models\QuestionnaireModels\SimpleTextQuestion.cs" />
     <Compile Include="OpenDataImport.xaml.cs">
       <DependentUpon>OpenDataImport.xaml</DependentUpon>
@@ -227,6 +228,7 @@
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleDateTimeQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\DropDownQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleIntegerQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextBlockQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\DropDownQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionnaireVM.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="ViewModel\QuestionnaireViewModels\RadioQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleDateTimeQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleIntegerQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextBlockQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionTemplateVM.cs" />
     <Compile Include="ViewModel\ReportTemplateVM.cs" />

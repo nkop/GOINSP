@@ -18,10 +18,16 @@
                 <xctk:DecimalUpDown Value="{Binding Answer, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type g:SimpleTextBlockQuestionVM}">
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+                <Label Content="{Binding Question}" />
+                <TextBox Text="{Binding Answer, Mode=TwoWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Width="330"/>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
                 <Label Content="{Binding Question}" />
-                <TextBox Text="{Binding Answer, Mode=TwoWay}" />
+                <TextBox Text="{Binding Answer, Mode=TwoWay}" Width="330"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:DropDownQuestionVM}">
@@ -61,21 +67,31 @@
             <Label Content="Vraag"/>
             <TextBox Text="{Binding SimpleIntegerQuestionAssemblerVM.Question}"/>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleIntegerQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleIntegerQuestionCommand}"/>
         </StackPanel>
 
+        <StackPanel Name="SimpleTextBlockQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleTextBlockQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag"/>
+            <TextBox Text="{Binding SimpleTextBlockQuestionAssemblerVM.Question}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextBlockQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextBlockQuestionCommand}"/>
+        </StackPanel>
+        
         <StackPanel Name="SimpleTextQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleTextQuestionAssemblerVM.Visibility}">
             <Label Content="Vraag"/>
             <TextBox Text="{Binding SimpleTextQuestionAssemblerVM.Question}"/>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextQuestionCommand}"/>
         </StackPanel>
 
         <StackPanel Name="SimpleDateTimeQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleDateTimeQuestionAssemblerVM.Visibility}">
             <Label Content="Vraag"/>
             <TextBox Text="{Binding SimpleDateTimeQuestionAssemblerVM.Question}"/>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleDateTimeQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleDateTimeQuestionCommand}"/>
         </StackPanel>
 
-        <StackPanel Name="DropDownQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="Visible">
+        <StackPanel Name="DropDownQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding DropDownQuestionAssemblerVM.Visibility}">
             <Label Content="Vraag"/>
             <TextBox Text="{Binding DropDownQuestionAssemblerVM.Question}"/>
             <Label Content="Aantal Opties" Margin="0,10,0,0"/>
@@ -104,6 +120,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddRadioQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateRadioQuestionCommand}"/>
         </StackPanel>
         <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="0,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}"/>
         <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="180,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}"/>

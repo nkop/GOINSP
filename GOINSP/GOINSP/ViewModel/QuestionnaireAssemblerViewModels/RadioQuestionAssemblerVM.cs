@@ -13,6 +13,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
     public class RadioQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
+        RadioQuestionVM attachedQuestion;
+
         private Visibility visibility;
         public Visibility Visibility
         {
@@ -112,6 +114,32 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             else if(AnswerCount > RadioAnswers.Count)
             {
                 RadioAnswers.Add(new RadioAnswerVM() { Text = "", GroupName = guidString, Checked = false });
+            }
+        }
+
+        public void Attach(RadioQuestionVM question)
+        {
+            attachedQuestion = question;
+            Question = attachedQuestion.Question;
+            EmptyField = ConversionHelper.VisibilityToBool(attachedQuestion.AlternativeAnswerVisibility);
+            AnswerCount = attachedQuestion.Answers.Count;
+
+            RadioAnswers = new ObservableCollection<RadioAnswerVM>();
+
+            foreach(RadioAnswerVM answer in attachedQuestion.Answers)
+            {
+                guidString = answer.GroupName;
+                RadioAnswers.Add(new RadioAnswerVM() { Text = answer.Text, GroupName = guidString, Checked = false });
+            }
+        }
+
+        public void Update()
+        {
+            if (attachedQuestion != null)
+            {
+                attachedQuestion.Question = Question;
+                attachedQuestion.Answers = RadioAnswers.ToList();
+                attachedQuestion.AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(EmptyField);
             }
         }
 

@@ -9,9 +9,9 @@ using System.Windows;
 
 namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
-    public class SimpleTextQuestionAssemblerVM : ViewModelBase, IAssemblerVM
+    public class SimpleTextBlockQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
-        SimpleTextQuestionVM attachedQuestion;
+        SimpleTextBlockQuestionVM attachedQuestion;
 
         private Visibility visibility;
         public Visibility Visibility
@@ -43,15 +43,15 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
-        public SimpleTextQuestionAssemblerVM()
+        public SimpleTextBlockQuestionAssemblerVM()
         {
             Visibility = Visibility.Collapsed;
-            AssemblerName = "Tekst Vraag";
+            AssemblerName = "Tekstblok Vraag";
 
             question = "";
         }
 
-        public void Attach(SimpleTextQuestionVM question)
+        public void Attach(SimpleTextBlockQuestionVM question)
         {
             attachedQuestion = question;
             Question = attachedQuestion.Question;
@@ -65,11 +65,11 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
-        public SimpleTextQuestionVM Create()
+        public SimpleTextBlockQuestionVM Create()
         {
-            SimpleTextQuestionVM tempSimpleTextQuestion = new SimpleTextQuestionVM() { Question = Question, Visible = Visibility.Visible };
+            SimpleTextBlockQuestionVM tempSimpleTextBlockQuestion = new SimpleTextBlockQuestionVM() { Question = Question, Visible = Visibility.Visible };
 
-            return tempSimpleTextQuestion;
+            return tempSimpleTextBlockQuestion;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
     public class SimpleIntegerQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
+        SimpleIntegerQuestionVM attachedQuestion;
+
         private Visibility visibility;
         public Visibility Visibility
         {
@@ -47,6 +49,20 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             AssemblerName = "Nummer Vraag";
 
             question = "";
+        }
+
+        public void Attach(SimpleIntegerQuestionVM question)
+        {
+            attachedQuestion = question;
+            Question = attachedQuestion.Question;
+        }
+
+        public void Update()
+        {
+            if (attachedQuestion != null)
+            {
+                attachedQuestion.Question = Question;
+            }
         }
 
         public SimpleIntegerQuestionVM Create()

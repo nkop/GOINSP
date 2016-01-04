@@ -118,6 +118,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 dropDownQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
             }
+            foreach (SimpleTextBlockQuestionVM simpleTextBlockQuestion in ConditionBoundQuestions.OfType<SimpleTextBlockQuestionVM>())
+            {
+                dropDownQuestion.ConditionBoundQuestions.Add(simpleTextBlockQuestion.Insert());
+            }
             foreach (DropDownQuestionVM _dropDownQuestion in ConditionBoundQuestions.OfType<DropDownQuestionVM>())
             {
                 dropDownQuestion.ConditionBoundQuestions.Add(_dropDownQuestion.Insert());
