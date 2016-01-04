@@ -31,6 +31,7 @@ namespace GOINSP.ViewModel
         public ICommand AddSimpleIntegerQuestionCommand { get; set; }
         public ICommand AddSimpleDateTimeQuestionCommand { get; set; }
 
+        public ICommand UpdateDropDownQuestionCommand { get; set; }
         public ICommand UpdateRadioQuestionCommand { get; set; }
         public ICommand UpdateSimpleTextBlockQuestionCommand { get; set; }
         public ICommand UpdateSimpleTextQuestionCommand { get; set; }
@@ -291,6 +292,7 @@ namespace GOINSP.ViewModel
             AddSimpleIntegerQuestionCommand = new RelayCommand(AddSimpleIntegerQuestion);
             AddSimpleDateTimeQuestionCommand = new RelayCommand(AddSimpleDateTimeQuestion);
 
+            UpdateDropDownQuestionCommand = new RelayCommand(UpdateDropDownQuestion);
             UpdateRadioQuestionCommand = new RelayCommand(UpdateRadioQuestion);
             UpdateSimpleTextBlockQuestionCommand = new RelayCommand(UpdateSimpleTextBlockQuestion);
             UpdateSimpleTextQuestionCommand = new RelayCommand(UpdateSimpleTextQuestion);
@@ -394,6 +396,14 @@ namespace GOINSP.ViewModel
 
         //Update
 
+        public void UpdateDropDownQuestion()
+        {
+            DropDownQuestionAssemblerVM.Update();
+            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM();
+            CreateInterfaceList();
+            SelectedAssembler = DropDownQuestionAssemblerVM;
+        }
+
         public void UpdateRadioQuestion()
         {
             RadioQuestionAssemblerVM.Update();
@@ -468,7 +478,8 @@ namespace GOINSP.ViewModel
                 }
                 else if (SelectedQuestion.GetType() == typeof(DropDownQuestionVM))
                 {
-
+                    SelectedAssembler = DropDownQuestionAssemblerVM;
+                    DropDownQuestionAssemblerVM.Attach((DropDownQuestionVM)SelectedQuestion);
                 }
                 else if (SelectedQuestion.GetType() == typeof(RadioQuestionVM))
                 {

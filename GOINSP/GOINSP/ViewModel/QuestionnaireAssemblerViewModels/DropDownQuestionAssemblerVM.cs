@@ -12,6 +12,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 {
     public class DropDownQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
+        DropDownQuestionVM attachedQuestion;
+
         private Visibility visibility;
         public Visibility Visibility
         {
@@ -93,6 +95,28 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             else if (AnswerCount > Answers.Count)
             {
                 Answers.Add(new ObservableString(""));
+            }
+        }
+
+        public void Attach(DropDownQuestionVM question)
+        {
+            attachedQuestion = question;
+            Question = attachedQuestion.Question;
+            Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x)).ToList());
+            AnswerCount = attachedQuestion.Answers.Count;
+        }
+
+        public void Update()
+        {
+            if (attachedQuestion != null)
+            {
+                attachedQuestion.Question = Question;
+                List<string> stringList = new List<string>();
+                foreach (ObservableString obsString in Answers)
+                {
+                    stringList.Add(obsString.ToString());
+                }
+                attachedQuestion.Answers = stringList;
             }
         }
 
