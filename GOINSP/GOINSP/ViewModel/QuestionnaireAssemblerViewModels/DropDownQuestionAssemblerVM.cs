@@ -57,8 +57,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
-        private ObservableCollection<string> answers;
-        public ObservableCollection<string> Answers
+        private ObservableCollection<ObservableString> answers;
+        public ObservableCollection<ObservableString> Answers
         {
             get
             {
@@ -75,7 +75,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         {
             Visibility = Visibility.Collapsed;
             AssemblerName = "Meerkeuze Vraag";
-            Answers = new ObservableCollection<string>();
+            Answers = new ObservableCollection<ObservableString>();
 
             AnswerCount = 0;
             question = "";
@@ -92,15 +92,35 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
             else if (AnswerCount > Answers.Count)
             {
-                Answers.Add("");
+                Answers.Add(new ObservableString(""));
             }
         }
 
         public DropDownQuestionVM Create()
         {
-            DropDownQuestionVM tempDropDownQuestion = new DropDownQuestionVM() { Question = Question, Answers = Answers.ToList(), Visible = Visibility.Visible };
+            List<string> stringList = new List<string>();
+            foreach(ObservableString obsString in Answers)
+            {
+                stringList.Add(obsString.ToString());
+            }
+            DropDownQuestionVM tempDropDownQuestion = new DropDownQuestionVM() { Question = Question, Answers = stringList, Visible = Visibility.Visible };
 
             return tempDropDownQuestion;
+        }
+    }
+
+    public class ObservableString
+    {
+        public string StringObservable { get; set; }
+
+        public ObservableString(string observableString)
+        {
+            this.StringObservable = observableString;
+        }
+
+        public override string ToString()
+        {
+            return StringObservable;
         }
     }
 }
