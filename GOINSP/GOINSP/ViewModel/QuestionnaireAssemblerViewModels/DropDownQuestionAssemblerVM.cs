@@ -104,6 +104,21 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
+        private ObservableCollection<BoolAndString> checkBoxAnswers;
+        public ObservableCollection<BoolAndString> CheckBoxAnswers
+        {
+            get
+            {
+                return checkBoxAnswers;
+            }
+            set
+            {
+                checkBoxAnswers = value;
+                RaisePropertyChanged("CheckBoxAnswers");
+            }
+        }
+        
+
         private QuestionVM selectedBindableQuestion;
         public QuestionVM SelectedBindableQuestion
         {
@@ -129,10 +144,11 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             {
                 selectedBoundQuestion = value;
                 RaisePropertyChanged("SelectedBoundQuestion");
+                CreateBoundQuestionBoxes();
             }
         }
 
-        public DropDownQuestionAssemblerVM()
+        public DropDownQuestionAssemblerVM(QuestionnaireVM questionnaire)
         {
             Visibility = Visibility.Collapsed;
             AssemblerName = "Meerkeuze Vraag";
@@ -142,6 +158,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             question = "";
 
             AddBindableQuestionCommand = new RelayCommand(AddBindableQuestion);
+            if(questionnaire != null)
+                PossibleQuestions = new ObservableCollection<QuestionVM>(questionnaire.QuestionnaireCollection.Where(x => x.GetType() != typeof(DropDownQuestionVM)));
         }
 
         public void ChangeRadioAnswerCount()
@@ -152,6 +170,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             if (AnswerCount < Answers.Count && AnswerCount >= 0)
             {
                 Answers.Remove(Answers.Last());
+                CreateBoundQuestionBoxes();
             }
             else if (AnswerCount > Answers.Count)
             {
@@ -161,6 +180,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public int ObservableStringCallback()
         {
+            CreateBoundQuestionBoxes();
             return 0;
         }
 
@@ -173,13 +193,53 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             }
         }
 
-        public void Attach(DropDownQuestionVM question, QuestionnaireVM questionnaire)
+        public void CreateBoundQuestionBoxes()
+        {
+            if (SelectedBoundQuestion != null)
+            {
+                CheckBoxAnswers = new ObservableCollection<BoolAndString>();
+
+                foreach (ObservableString answer in Answers)
+                {
+                    BoolAndString boolAndString = new BoolAndString(answer.ToString(), false, CheckBoxAnswerCallback);
+                    if (SelectedBoundQuestion.VisibleConditions != null && SelectedBoundQuestion.VisibleConditions.Contains(answer.ToString()))
+                    {
+                        boolAndString.BoolObservable = true;
+                    }
+                    boolAndString.currentQuestion = SelectedBoundQuestion;
+                    CheckBoxAnswers.Add(boolAndString);
+                }
+            }
+        }
+
+        public int CheckBoxAnswerCallback()
+        {
+            bool go = false;
+            foreach(BoolAndString boolAndString in CheckBoxAnswers)
+            {
+                if (boolAndString.currentQuestion == SelectedBoundQuestion)
+                    go = true;
+            }
+
+            if (SelectedBoundQuestion != null && CheckBoxAnswers.Count > 0 && go)
+            {
+                List<string> conditionList = new List<string>();
+                foreach(BoolAndString boolAndString in CheckBoxAnswers)
+                {
+                    if (boolAndString.BoolObservable)
+                        conditionList.Add(boolAndString.StringObservable);
+                }
+                SelectedBoundQuestion.VisibleConditions = conditionList;
+            }
+            return 0;
+        }
+
+        public void Attach(DropDownQuestionVM question)
         {
             attachedQuestion = question;
             Question = attachedQuestion.Question;
             Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x, ObservableStringCallback)).ToList());
             AnswerCount = attachedQuestion.Answers.Count;
-            PossibleQuestions = new ObservableCollection<QuestionVM>(questionnaire.QuestionnaireCollection.Where(x => x.GetType() != typeof(DropDownQuestionVM)));
             ConditionBoundQuestions = new ObservableCollection<QuestionVM>(attachedQuestion.ConditionBoundQuestions);
         }
 
@@ -194,6 +254,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
                     stringList.Add(obsString.ToString());
                 }
                 attachedQuestion.Answers = stringList;
+                attachedQuestion.ConditionBoundQuestions = new List<QuestionVM>(ConditionBoundQuestions.ToList());
             }
         }
 
@@ -234,6 +295,57 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         {
             this.StringObservable = observableString;
             this.ObservableStringCallback = ObservableStringCallback;
+        }
+
+        public override string ToString()
+        {
+            return StringObservable;
+        }
+    }
+
+    public class BoolAndString : ViewModelBase
+    {
+        Func<int> ObservableBoolStringCallback;
+        public QuestionVM currentQuestion { get; set; }
+        bool initialized;
+
+        private string stringObservable;
+        public string StringObservable
+        {
+            get
+            {
+                return stringObservable;
+            }
+            set
+            {
+                stringObservable = value;
+                RaisePropertyChanged("StringObservable");
+            }
+        }
+
+        private bool boolObservable;
+        public bool BoolObservable
+        {
+            get
+            {
+                return boolObservable;
+            }
+            set
+            {
+                boolObservable = value;
+                RaisePropertyChanged("BoolObservable");
+                if (ObservableBoolStringCallback != null && currentQuestion != null)
+                    ObservableBoolStringCallback();
+            }
+        }
+
+        public BoolAndString(string observableString, bool observableBool, Func<int> ObservableStringCallback)
+        {
+            initialized = false;
+            this.StringObservable = observableString;
+            this.BoolObservable = observableBool;
+            this.ObservableBoolStringCallback = ObservableStringCallback;
+            initialized = true;
         }
 
         public override string ToString()

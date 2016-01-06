@@ -184,7 +184,7 @@ namespace GOINSP.ViewModel
 
         public QuestionTemplateVM()
         {
-            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM();
+            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
             SimpleTextBlockQuestionAssemblerVM = new SimpleTextBlockQuestionAssemblerVM();
@@ -207,7 +207,7 @@ namespace GOINSP.ViewModel
 
             Questionnaire = new QuestionnaireVM();
 
-            SimpleTextQuestionVM locationTextQuestion = new SimpleTextQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Locatie naam:" };
+            /*SimpleTextQuestionVM locationTextQuestion = new SimpleTextQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Locatie naam:" };
             SimpleTextQuestionVM addressTextQuestion = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, Question = "Locatie adres:" };
             RadioQuestionVM locationTypeRadioQuestion = new RadioQuestionVM() { ListNumber = 3, Question = "Locatie type:", Visible = Visibility.Visible, AlternativeAnswerVisibility = Visibility.Collapsed };
 
@@ -277,20 +277,20 @@ namespace GOINSP.ViewModel
             questionnaire.QuestionnaireCollection.Add(blockDropDownQuestion);
             questionnaire.QuestionnaireCollection.Add(multipleCountIntegerQuestion);
             questionnaire.QuestionnaireCollection.Add(CountIntegerQuestion);
-            questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);
+            questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);*/
 
             Questionnaire.Context = Context;
 
-            var test = new Guid("8F8E96EE-E9B2-E511-9BE4-AC293A96C9CA");
+            /*var test = new Guid("8F8E96EE-E9B2-E511-9BE4-AC293A96C9CA");
             var cb = from c in Context.Questionnaire.AsNoTracking().Include("QuestionnaireCollection") where c.QuestionnaireID == test select c;
             var q = cb.First();
             var s = new QuestionnaireVM(q);
             s.Context = Context;
             s.Insert();
 
-            Questionnaire = s;
+            Questionnaire = s;*/
             
-            Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(xy => xy.ListNumber));
+            //Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(xy => xy.ListNumber));
 
             MoveSelectedQuestionDownCommand = new RelayCommand(MoveSelectedQuestionDown);
             MoveSelectedQuestionUpCommand = new RelayCommand(MoveSelectedQuestionUp);
@@ -400,7 +400,7 @@ namespace GOINSP.ViewModel
         public void AddDropDownQuestion()
         {
             AddNewQuestionToQuestionnaire(DropDownQuestionAssemblerVM.Create());
-            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM();
+            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             CreateInterfaceList();
             SelectedAssembler = DropDownQuestionAssemblerVM;
         }
@@ -410,7 +410,7 @@ namespace GOINSP.ViewModel
         public void UpdateDropDownQuestion()
         {
             DropDownQuestionAssemblerVM.Update();
-            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM();
+            DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             CreateInterfaceList();
             SelectedAssembler = DropDownQuestionAssemblerVM;
         }
@@ -490,7 +490,7 @@ namespace GOINSP.ViewModel
                 else if (SelectedQuestion.GetType() == typeof(DropDownQuestionVM))
                 {
                     SelectedAssembler = DropDownQuestionAssemblerVM;
-                    DropDownQuestionAssemblerVM.Attach((DropDownQuestionVM)SelectedQuestion, Questionnaire);
+                    DropDownQuestionAssemblerVM.Attach((DropDownQuestionVM)SelectedQuestion);
                 }
                 else if (SelectedQuestion.GetType() == typeof(RadioQuestionVM))
                 {
