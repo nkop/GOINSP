@@ -45,10 +45,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public SimpleIntegerQuestionAssemblerVM()
         {
-            Visibility = Visibility.Collapsed;
             AssemblerName = "Nummer Vraag";
-
-            question = "";
+            Clean();
         }
 
         public void Attach(SimpleIntegerQuestionVM question)
@@ -62,14 +60,29 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             if (attachedQuestion != null)
             {
                 attachedQuestion.Question = Question;
+                Clean();
             }
         }
 
         public SimpleIntegerQuestionVM Create()
         {
             SimpleIntegerQuestionVM tempIntegerTextQuestion = new SimpleIntegerQuestionVM() { Question = Question, Visible = Visibility.Visible };
+            Clean();
 
             return tempIntegerTextQuestion;
+        }
+
+        public void Clean()
+        {
+            Visibility = Visibility.Collapsed;
+            Question = "";
+            attachedQuestion = null;
+        }
+
+        public void OnFocus()
+        {
+            Clean();
+            Visibility = Visibility.Visible;
         }
     }
 }

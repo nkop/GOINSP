@@ -45,10 +45,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public SimpleTextQuestionAssemblerVM()
         {
-            Visibility = Visibility.Collapsed;
             AssemblerName = "Tekst Vraag";
-
-            question = "";
+            Clean();
         }
 
         public void Attach(SimpleTextQuestionVM question)
@@ -62,14 +60,30 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             if (attachedQuestion != null)
             {
                 attachedQuestion.Question = Question;
+                Clean();
             }
         }
 
         public SimpleTextQuestionVM Create()
         {
             SimpleTextQuestionVM tempSimpleTextQuestion = new SimpleTextQuestionVM() { Question = Question, Visible = Visibility.Visible };
+            Clean();
 
             return tempSimpleTextQuestion;
+        }
+
+
+        public void OnFocus()
+        {
+            Clean();
+            Visibility = Visibility.Visible;
+        }
+
+        public void Clean()
+        {
+            Visibility = Visibility.Collapsed;
+            Question = "";
+            attachedQuestion = null;
         }
     }
 }

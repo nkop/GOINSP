@@ -11,5 +11,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
     {
         Visibility Visibility { get; set; }
         string AssemblerName { get; set; }
+        void OnFocus();
+        void Clean();
     }
 }

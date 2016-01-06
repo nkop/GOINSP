@@ -45,10 +45,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public SimpleDateTimeQuestionAssemblerVM()
         {
-            Visibility = Visibility.Collapsed;
             AssemblerName = "Datum en Tijd Vraag";
-
-            question = "";
+            Clean();
         }
 
         public void Attach(SimpleDateTimeQuestionVM question)
@@ -63,13 +61,28 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             {
                 attachedQuestion.Question = Question;
             }
+            Clean();
         }
 
         public SimpleDateTimeQuestionVM Create()
         {
             SimpleDateTimeQuestionVM tempIntegerTextQuestion = new SimpleDateTimeQuestionVM() { Question = Question, Answer = DateTime.Now, Visible = Visibility.Visible };
+            Clean();
 
             return tempIntegerTextQuestion;
+        }
+
+        public void OnFocus()
+        {
+            Clean();
+            Visibility = Visibility.Visible;
+        }
+
+        public void Clean()
+        {
+            Visibility = Visibility.Collapsed;
+            Question = "";
+            attachedQuestion = null;
         }
     }
 }

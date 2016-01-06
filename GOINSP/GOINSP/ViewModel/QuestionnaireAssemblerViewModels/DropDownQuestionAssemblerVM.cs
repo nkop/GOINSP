@@ -15,6 +15,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
     public class DropDownQuestionAssemblerVM : ViewModelBase, IAssemblerVM
     {
         DropDownQuestionVM attachedQuestion;
+        QuestionnaireVM questionnaire;
         public ICommand AddBindableQuestionCommand { get; set; }
 
         private Visibility visibility;
@@ -150,16 +151,11 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public DropDownQuestionAssemblerVM(QuestionnaireVM questionnaire)
         {
-            Visibility = Visibility.Collapsed;
             AssemblerName = "Meerkeuze Vraag";
-            Answers = new ObservableCollection<ObservableString>();
-
-            AnswerCount = 0;
-            question = "";
+            Clean();
 
             AddBindableQuestionCommand = new RelayCommand(AddBindableQuestion);
-            if(questionnaire != null)
-                PossibleQuestions = new ObservableCollection<QuestionVM>(questionnaire.QuestionnaireCollection.Where(x => x.GetType() != typeof(DropDownQuestionVM)));
+            this.questionnaire = questionnaire;
         }
 
         public void ChangeRadioAnswerCount()
@@ -255,7 +251,25 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
                 }
                 attachedQuestion.Answers = stringList;
                 attachedQuestion.ConditionBoundQuestions = new List<QuestionVM>(ConditionBoundQuestions.ToList());
+                Clean();
             }
+        }
+
+        public void Clean()
+        {
+            Visibility = Visibility.Collapsed;
+            Answers = new ObservableCollection<ObservableString>();
+            AnswerCount = 0;
+            Question = "";
+            ConditionBoundQuestions = new ObservableCollection<QuestionVM>();
+            attachedQuestion = null;
+        }
+
+        public void OnFocus()
+        {
+            Clean();
+            PossibleQuestions = new ObservableCollection<QuestionVM>(questionnaire.QuestionnaireCollection.Where(x => x.GetType() != typeof(DropDownQuestionVM)));
+            Visibility = Visibility.Visible;
         }
 
         public DropDownQuestionVM Create()
@@ -266,6 +280,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
                 stringList.Add(obsString.ToString());
             }
             DropDownQuestionVM tempDropDownQuestion = new DropDownQuestionVM() { Question = Question, Answers = stringList, Visible = Visibility.Visible };
+            tempDropDownQuestion.ConditionBoundQuestions = new List<QuestionVM>(ConditionBoundQuestions.ToList());
+            Clean();
 
             return tempDropDownQuestion;
         }

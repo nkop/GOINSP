@@ -184,6 +184,8 @@ namespace GOINSP.ViewModel
 
         public QuestionTemplateVM()
         {
+            Questionnaire = new QuestionnaireVM();
+
             DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
@@ -205,7 +207,6 @@ namespace GOINSP.ViewModel
 
             // Project Questionnaire
 
-            Questionnaire = new QuestionnaireVM();
 
             /*SimpleTextQuestionVM locationTextQuestion = new SimpleTextQuestionVM() { ListNumber = 1, Visible = Visibility.Visible, Question = "Locatie naam:" };
             SimpleTextQuestionVM addressTextQuestion = new SimpleTextQuestionVM() { ListNumber = 2, Visible = Visibility.Visible, Question = "Locatie adres:" };
@@ -353,6 +354,7 @@ namespace GOINSP.ViewModel
                 question.ListNumber -= 1;
             }
             Questionnaire.QuestionnaireCollection.Remove(SelectedQuestion);
+            SelectedQuestion = null;
         }
 
         // Add
@@ -362,7 +364,6 @@ namespace GOINSP.ViewModel
             AddNewQuestionToQuestionnaire(RadioQuestionAssemblerVM.Create());
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = RadioQuestionAssemblerVM;
         }
 
         public void AddSimpleTextBlockQuestion()
@@ -370,7 +371,6 @@ namespace GOINSP.ViewModel
             AddNewQuestionToQuestionnaire(SimpleTextBlockQuestionAssemblerVM.Create());
             SimpleTextBlockQuestionAssemblerVM = new SimpleTextBlockQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleTextBlockQuestionAssemblerVM;
         }
 
         public void AddSimpleTextQuestion()
@@ -378,7 +378,6 @@ namespace GOINSP.ViewModel
             AddNewQuestionToQuestionnaire(SimpleTextQuestionAssemblerVM.Create());
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleTextQuestionAssemblerVM;
         }
 
         public void AddSimpleIntegerQuestion()
@@ -386,7 +385,6 @@ namespace GOINSP.ViewModel
             AddNewQuestionToQuestionnaire(SimpleIntegerQuestionAssemblerVM.Create());
             SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleIntegerQuestionAssemblerVM;
         }
 
         public void AddSimpleDateTimeQuestion()
@@ -394,7 +392,6 @@ namespace GOINSP.ViewModel
             AddNewQuestionToQuestionnaire(SimpleDateTimeQuestionAssemblerVM.Create());
             SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleDateTimeQuestionAssemblerVM;
         }
 
         public void AddDropDownQuestion()
@@ -402,7 +399,6 @@ namespace GOINSP.ViewModel
             AddNewQuestionToQuestionnaire(DropDownQuestionAssemblerVM.Create());
             DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             CreateInterfaceList();
-            SelectedAssembler = DropDownQuestionAssemblerVM;
         }
 
         //Update
@@ -412,7 +408,6 @@ namespace GOINSP.ViewModel
             DropDownQuestionAssemblerVM.Update();
             DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             CreateInterfaceList();
-            SelectedAssembler = DropDownQuestionAssemblerVM;
         }
 
         public void UpdateRadioQuestion()
@@ -420,7 +415,6 @@ namespace GOINSP.ViewModel
             RadioQuestionAssemblerVM.Update();
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = RadioQuestionAssemblerVM;
         }
 
         public void UpdateSimpleTextBlockQuestion()
@@ -428,7 +422,6 @@ namespace GOINSP.ViewModel
             SimpleTextBlockQuestionAssemblerVM.Update();
             SimpleTextBlockQuestionAssemblerVM = new SimpleTextBlockQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleTextBlockQuestionAssemblerVM;
         }
 
         public void UpdateSimpleTextQuestion()
@@ -436,7 +429,6 @@ namespace GOINSP.ViewModel
             SimpleTextQuestionAssemblerVM.Update();
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleTextQuestionAssemblerVM;
         }
 
         public void UpdateSimpleIntegerQuestion()
@@ -444,7 +436,6 @@ namespace GOINSP.ViewModel
             SimpleIntegerQuestionAssemblerVM.Update();
             SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleIntegerQuestionAssemblerVM;
         }
 
         public void UpdateSimpleDateTimeQuestion()
@@ -452,7 +443,6 @@ namespace GOINSP.ViewModel
             SimpleDateTimeQuestionAssemblerVM.Update();
             SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
             CreateInterfaceList();
-            SelectedAssembler = SimpleDateTimeQuestionAssemblerVM;
         }
 
         public void AddNewQuestionToQuestionnaire(QuestionVM question)
@@ -460,6 +450,7 @@ namespace GOINSP.ViewModel
             int count = questionnaire.QuestionnaireCollection.Count;
             question.ListNumber = count;
             questionnaire.QuestionnaireCollection.Add(question);
+            SelectedAssembler = null;
         }
 
         public void ParseQuestionToAssembler()
@@ -507,7 +498,7 @@ namespace GOINSP.ViewModel
                 assembler.Visibility = Visibility.Collapsed;
             }
             if(SelectedAssembler != null)
-                SelectedAssembler.Visibility = Visibility.Visible;
+                SelectedAssembler.OnFocus();
         }
     }
 }

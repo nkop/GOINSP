@@ -92,14 +92,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
 
         public RadioQuestionAssemblerVM()
         {
-            Visibility = Visibility.Collapsed;
             AssemblerName = "Radio Lijst Vraag";
-
-            AnswerCount = 0;
-            RadioAnswers = new ObservableCollection<RadioAnswerVM>();
-            EmptyField = false;
-            guidString = Guid.NewGuid().ToString();
-            question = "";
+            Clean();
         }
 
         public void ChangeRadioAnswerCount()
@@ -140,6 +134,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
                 attachedQuestion.Question = Question;
                 attachedQuestion.Answers = RadioAnswers.ToList();
                 attachedQuestion.AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(EmptyField);
+                Clean();
             }
         }
 
@@ -147,8 +142,28 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         {
             RadioQuestionVM tempRadioQuestion = new RadioQuestionVM() { Question = Question, Visible = Visibility.Visible, AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(EmptyField) };
             tempRadioQuestion.Answers = RadioAnswers.ToList();
+            Clean();
 
             return tempRadioQuestion;
+        }
+
+        public void Clean()
+        {
+            Visibility = Visibility.Collapsed;
+
+            AnswerCount = 0;
+            RadioAnswers = new ObservableCollection<RadioAnswerVM>();
+            EmptyField = false;
+            guidString = Guid.NewGuid().ToString();
+            Question = "";
+
+            attachedQuestion = null;
+        }
+
+        public void OnFocus()
+        {
+            Clean();
+            Visibility = Visibility.Visible;
         }
     }
 }
