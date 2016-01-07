@@ -1,17 +1,17 @@
 ﻿<Window x:Class="GOINSP.QuestionListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="QuestionListWindow" Height="538" Width="580"
-        DataContext="{Binding QuestionList, Source={StaticResource Locator}}">
+        Title="QuestionListWindow" Height="562" Width="580"
+        DataContext="{Binding QuestionList, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="507" Width="290" ItemsSource="{Binding ObservableQuestionnaireCollection}" SelectedItem="{Binding SelectedQuestionnaire}" AutoGenerateColumns="False">
+        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="531" Width="290" ItemsSource="{Binding ObservableQuestionnaireCollection}" CanUserAddRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Template" Binding="{Binding IsTemplate}"/>
                 <DataGridTextColumn Header="Aantal Vragen" Binding="{Binding QuestionCount}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel HorizontalAlignment="Left" Height="507" Margin="290,0,0,0" VerticalAlignment="Top" Width="282">
+        <StackPanel HorizontalAlignment="Left" Height="466" Margin="290,0,0,0" VerticalAlignment="Top" Width="282">
             <Label Content="Geselecteerde Vragenlijst" FontWeight="Bold"/>
             <Label Content="Naam"/>
             <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Name}" Width="274"/>
@@ -19,5 +19,6 @@
             <TextBox Height="100" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Description}" VerticalScrollBarVisibility="Visible" Width="274"/>
             <Button Height="29" Margin="0, 10, 0, 0" Content="Aanpassen" Command="{Binding EditQuestionnaireCommand}"/>
         </StackPanel>
+        <Button Height="29" Margin="290,466,0,12" Content="Nieuwe Vragenlijst" Command="{Binding AddNewQuestionnaireCommand}"/>
     </Grid>
 </Window>

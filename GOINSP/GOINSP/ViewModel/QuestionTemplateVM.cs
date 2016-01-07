@@ -39,6 +39,8 @@ namespace GOINSP.ViewModel
         public ICommand UpdateSimpleIntegerQuestionCommand { get; set; }
         public ICommand UpdateSimpleDateTimeQuestionCommand { get; set; }
 
+        public ICommand UpdateQuestionnaireCommand { get; set; }
+
         private IAssemblerVM selectedAssembler;
         public IAssemblerVM SelectedAssembler
         {
@@ -183,10 +185,16 @@ namespace GOINSP.ViewModel
 
         public Context Context { get; set; }
 
-        public QuestionTemplateVM()
+        public void SetQuestionnaire(QuestionnaireVM questionnaireVM)
         {
-            Questionnaire = new QuestionnaireVM();
+            this.Questionnaire = questionnaireVM;
+            this.Questionnaire.Context = Context;
+            this.Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(xy => xy.ListNumber));
+            SetUpQuestionnaireAssembler();
+        }
 
+        public void SetUpQuestionnaireAssembler()
+        {
             DropDownQuestionAssemblerVM = new DropDownQuestionAssemblerVM(Questionnaire);
             RadioQuestionAssemblerVM = new RadioQuestionAssemblerVM();
             SimpleTextQuestionAssemblerVM = new SimpleTextQuestionAssemblerVM();
@@ -195,7 +203,16 @@ namespace GOINSP.ViewModel
             SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
 
             CreateInterfaceList();
+        }
 
+        public void Show()
+        {
+            QuestionnaireAssembler questionnaireAssembler = new QuestionnaireAssembler();
+            questionnaireAssembler.Show();
+        }
+
+        public QuestionTemplateVM()
+        {
             Context = new Context();
 
             /*List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
@@ -281,8 +298,6 @@ namespace GOINSP.ViewModel
             questionnaire.QuestionnaireCollection.Add(CountIntegerQuestion);
             questionnaire.QuestionnaireCollection.Add(whiteCarsIntegerQuestion);*/
 
-            Questionnaire.Context = Context;
-
             /*var test = new Guid("8F8E96EE-E9B2-E511-9BE4-AC293A96C9CA");
             var cb = from c in Context.Questionnaire.AsNoTracking().Include("QuestionnaireCollection") where c.QuestionnaireID == test select c;
             var q = cb.First();
@@ -311,6 +326,13 @@ namespace GOINSP.ViewModel
             UpdateSimpleTextQuestionCommand = new RelayCommand(UpdateSimpleTextQuestion);
             UpdateSimpleIntegerQuestionCommand = new RelayCommand(UpdateSimpleIntegerQuestion);
             UpdateSimpleDateTimeQuestionCommand = new RelayCommand(UpdateSimpleDateTimeQuestion);
+
+            UpdateQuestionnaireCommand = new RelayCommand(UpdateQuestionnaire);
+        }
+
+        public void UpdateQuestionnaire()
+        {
+            Questionnaire.Update();
         }
 
         public void CreateInterfaceList()
