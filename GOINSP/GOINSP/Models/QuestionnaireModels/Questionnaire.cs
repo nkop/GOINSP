@@ -21,5 +21,7 @@ namespace GOINSP.Models.QuestionnaireModels
 
         public virtual List<Question> QuestionnaireCollection { get; set; }
         public bool IsTemplate { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

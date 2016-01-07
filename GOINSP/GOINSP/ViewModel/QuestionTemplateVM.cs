@@ -15,6 +15,7 @@ using System.Windows.Input;
 using GOINSP.Models.QuestionnaireModels;
 using GOINSP.ViewModel.QuestionnaireViewModels;
 using GOINSP.ViewModel.QuestionnaireAssemblerViewModels;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace GOINSP.ViewModel
 {

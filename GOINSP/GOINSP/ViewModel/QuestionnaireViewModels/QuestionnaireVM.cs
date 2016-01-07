@@ -30,6 +30,17 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
+        public Guid QuestionnaireID
+        {
+            get
+            {
+                return questionnaire.QuestionnaireID;
+            }
+            set
+            {
+            }
+        } 
+
         public bool IsTemplate
         {
             get
@@ -42,6 +53,43 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                 RaisePropertyChanged("IsTemplate");
             }
         } 
+
+        public string Description
+        {
+            get
+            {
+                return questionnaire.Description;
+            }
+            set
+            {
+                questionnaire.Description = value;
+                RaisePropertyChanged("Description");
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return questionnaire.Name;
+            }
+            set
+            {
+                questionnaire.Name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+
+        public int QuestionCount
+        {
+            get
+            {
+                return questionnaire.QuestionnaireCollection.Count;
+            }
+            set
+            {
+            }
+        }
 
         public QuestionnaireVM()
         {

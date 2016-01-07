@@ -16,9 +16,9 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<ForgottenPasswordVM>();
             SimpleIoc.Default.Register<LocationPickerVM>();
             SimpleIoc.Default.Register<QuestionTemplateVM>();
+            SimpleIoc.Default.Register<QuestionListVM>();
             SimpleIoc.Default.Register<InspectionViewModel>();
             SimpleIoc.Default.Register<InspectionSpecsViewModel>();
-
         }
 
         public MainViewModel Main
@@ -66,6 +66,14 @@ namespace GOINSP.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<QuestionTemplateVM>();
+            }
+        }
+
+        public QuestionListVM QuestionList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuestionListVM>();
             }
         }
 
