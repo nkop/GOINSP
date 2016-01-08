@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" Height="350" Width="525"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Background="#3598dc">
     <Grid>
         <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Menu GoInsp</TextBlock>
         <WrapPanel Height="100" HorizontalAlignment="Center">
