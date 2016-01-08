@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace GOINSP
 {
-    /// <summary>
-    /// Interaction logic for BedrijfInfo.xaml
-    /// </summary>
+
     public partial class BedrijfInfo : Window
     {
         private Guid guid;
