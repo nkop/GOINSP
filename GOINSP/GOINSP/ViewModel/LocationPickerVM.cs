@@ -2,8 +2,10 @@
 using GalaSoft.MvvmLight.Command;
 using GOINSP.Models;
 using GOINSP.Models.Opendata;
+using GOINSP.Models.Opendata.HuishoudelijkAfval;
 using GOINSP.Models.Opendata.PostCodeData;
 using GOINSP.Utility;
+using GOINSP.ViewModel.Opendata.PostCodeDatas;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +15,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GOINSP.ViewModel
@@ -20,6 +23,34 @@ namespace GOINSP.ViewModel
     public class LocationPickerVM : ViewModelBase
     {
         private Context context;
+
+        private ObservableCollection<RegioS> observableRegios;
+        public ObservableCollection<RegioS> ObservableRegios
+        {
+            get
+            {
+                return observableRegios;
+            }
+            set
+            {
+                observableRegios = value;
+                RaisePropertyChanged("ObservableRegios");
+            }
+        }
+
+        private string test;
+        public string Test
+        {
+            get
+            {   
+                return test;
+            }
+            set
+            {
+                test = value;
+                RaisePropertyChanged("Test");
+            }
+        }
 
         public ICommand AddPushPinCommand { get; set; }
 
@@ -46,20 +77,21 @@ namespace GOINSP.ViewModel
             }
         }
 
-        private PostCodeData postCode;
-        public PostCodeData PostCode
+        private PostCodeDataVM postCode;
+        public PostCodeDataVM PostCode
         {
             get { return postCode; }
             set
             {
                 postCode = value;
-                RaisePropertyChanged("postCode");
+                RaisePropertyChanged("PostCode");
             }
         }
 
         public LocationPickerVM()
         {
             context = new Context();
+            ObservableRegios = new ObservableCollection<RegioS>(context.HuishoudelijkAfvalRegioS.OrderBy(xy => xy.Title));
         }
 
         public void GetClosestMapPoint()
@@ -74,7 +106,7 @@ namespace GOINSP.ViewModel
 
             List<GmapAPI> mapApiList = gmap.list;
 
-            PostCodeData data = new PostCodeData();
+            PostCodeDataVM data = new PostCodeDataVM();
 
             foreach (GmapAPI mapApi in mapApiList)
             {
@@ -94,26 +126,36 @@ namespace GOINSP.ViewModel
                         {
                             data.city = address_component.short_name;
                         }
+                        if (type == "street_number" && data.street_number == null)
+                        {
+                            try
+                            {
+                                data.street_number = Convert.ToInt32(address_component.short_name);
+                            }
+                            catch(Exception exc)
+                            {
+
+                            }
+                        }
+                        if (type == "administrative_area_level_2" && data.municipality == null)
+                        {
+                            data.municipality = address_component.short_name;
+                        }
                     }
                 }
             }
 
-            string GMCode = "";
-
-            if (data.postcode.Count() == 4)
+            try
             {
-                GMCode = "GM"+String.Format("{0:0000}", context.PostCodeData.Where(entity => SqlFunctions.PatIndex(data.postcode + "%%", entity.postcode) > 0).First().municipality_id);
+                RegioS regio = context.HuishoudelijkAfvalRegioS.Where(x => x.Title == data.municipality).First();
+                data.municipality = regio.Title;
+                data.municipality_id = regio.Key;
+                PostCode = data;
             }
-            else
+            catch(Exception ex)
             {
-                GMCode = "GM"+String.Format("{0:0000}", context.PostCodeData.Where(entity => entity.postcode == data.postcode).First().municipality_id);
+                MessageBox.Show("Hier is geen adres gevonden");
             }
-
-
-            data.municipality = context.HuishoudelijkAfvalRegioS.Where(x => x.Key == GMCode).First().Title;
-            PostCode = data;
-
-            //PostCode = context.PostCodeData.SqlQuery("SELECT TOP 1 [id], [postcode], [postcode_id], [pnum], [pchar],[minnumber],[maxnumber],[numbertype],[street],[city],[city_id],[municipality],[municipality_id],[province],[province_code],[lat] = (ABS(lat - " + LatDec.ToString().Replace(",", ".") + ") + ABS(lon - " + LongDec.ToString().Replace(",", ".") + ")) / 2,[lon],[rd_x],[rd_y],[location_detail],[changed_date] FROM PostCodeDatas WHERE (lat IS NOT NULL) AND (lon IS NOT NULL) ORDER BY lat").First();
         }
     }
 }

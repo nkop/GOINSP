@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ namespace GOINSP.Models.Opendata.PostCodeData
         }
 
         [Key]
-        public int id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid PostCodeID { get; set; }
         public string postcode { get; set; }
         public int postcode_id { get; set; }
         public int pnum { get; set; }
@@ -27,13 +29,14 @@ namespace GOINSP.Models.Opendata.PostCodeData
         public string city { get; set; }
         public int city_id { get; set; }
         public string municipality { get; set; }
-        public int municipality_id { get; set; }
+        public string municipality_id { get; set; }
         public string province { get; set; }
         public string province_code { get; set; }
         public decimal lat { get; set; }
         public decimal lon { get; set; }
         public decimal rd_x { get; set; }
         public decimal rd_y { get; set; }
+        public int? street_number { get; set; }
         public string location_detail { get; set; }
         public DateTime changed_date { get; set; }
     }
