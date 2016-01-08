@@ -11,7 +11,7 @@
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
             <WrapPanel>
                 <ComboBox Margin="90" VerticalAlignment="Top" ItemsSource="{Binding BedrijfInspecties}" Width="100" Height="20"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
-                    <sparrow:SparrowChart Width="500" Height="500" Margin="90">
+                    <sparrow:SparrowChart Width="500" Height="500" Margin="90,10,0,10" Background="White">
                     <sparrow:SparrowChart.XAxis>
                         <sparrow:LinearXAxis/>
                     </sparrow:SparrowChart.XAxis>
@@ -20,6 +20,7 @@
                     </sparrow:SparrowChart.YAxis>
                     <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
                 </sparrow:SparrowChart>
+
                 <StackPanel>
                     <TextBox Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"></TextBox>
                     <DataGrid Margin="90"  Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right" VerticalAlignment="Top" >
@@ -29,6 +30,7 @@
                     </DataGrid>
                     <Button Command="{Binding WeergeefBedrijfCommand}" Content="Weergeef bedrijf"/>
                 </StackPanel>               
+
             </WrapPanel>
         </StackPanel>
         

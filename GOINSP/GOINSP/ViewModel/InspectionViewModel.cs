@@ -17,25 +17,16 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
+        public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
         public Context context;
-
-        private CompanyVM _selectedBedrijf { get; set; }
-        public CompanyVM SelectedBedrijf
-        {
-            get { return _selectedBedrijf; }
-            set
-            {
-                _selectedBedrijf = value;
-                RaisePropertyChanged("SelectedBedrijf");
-            }
-        }
 
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
         public ICommand WeergeefBedrijfCommand { get; set; }
 
         private InspectionVM _newInspection;
+
         private InspectionVM _selectedInspection;
 
         private string _searchQuota { get; set; }
@@ -49,6 +40,10 @@ namespace GOINSP.ViewModel
                 Search();
             }
         }
+
+        private CompanyVM _selectedBedrijf;
+        private AccountVM _selectedUser;
+
 
         public Guid InspectionID;
 
@@ -64,6 +59,11 @@ namespace GOINSP.ViewModel
             List<Models.Company> companies = context.Company.ToList();
             Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
 
+            IEnumerable<Account> inspecteurs = context.Account;
+            IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Distinct();
+            Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
+            RaisePropertyChanged("Inspecteurs");
+
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
             WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
@@ -71,8 +71,10 @@ namespace GOINSP.ViewModel
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
 
-            SelectedBedrijf = new CompanyVM();
+            _selectedBedrijf = new CompanyVM();
+            _selectedUser = new AccountVM();
         }
+
 
         public InspectionVM newInspection
         {
@@ -94,6 +96,22 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public AccountVM selectedUser
+        {
+            get { return _selectedUser; }
+            set { _selectedUser = value; }
+        }
+
+        public CompanyVM SelectedBedrijf
+        {
+            get { return _selectedBedrijf; }
+            set
+            {
+                _selectedBedrijf = value;
+                RaisePropertyChanged("SelectedBedrijf");
+            }
+        }
+
         private void Add()
         {
             AddInspection window = new AddInspection();
@@ -104,8 +122,9 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                // Set foreign key (NEED TO RETHINK THIS)
-                _newInspection.inspectorid = new Guid("C4A2D055-2722-4C8C-80BE-8C332B84842F");
+                // Set foreign keys
+                _newInspection.inspectorid = selectedUser.id;
+                _newInspection.companyid = SelectedBedrijf.ID;
 
                 // Add to database
                 context.Inspection.Add(_newInspection.toInspection());
@@ -115,10 +134,12 @@ namespace GOINSP.ViewModel
                 Inspections.Add(_newInspection);
                 newInspection = new InspectionVM();
                 RaisePropertyChanged("Inspections");
+
+                MessageBox.Show("Toevoegen is geslaagd");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
+                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals. " + ex);
             }
         }
 

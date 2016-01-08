@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOINSP.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,18 +10,19 @@ namespace GOINSP.ViewModel
 {
     public class CompanyVM
     {
-        private Models.Company company;
-        private Models.Context context;
+        private Company company;
+        private Context context;
+
         public CompanyVM()
         {
-            company = new Models.Company();
-            this.context = new Models.Context();
+            company = new Company();
+            this.context = new Context();
         }
 
-        public CompanyVM(Models.Company company)
+        public CompanyVM(Company company)
         {
             this.company = company;
-            this.context = new Models.Context();
+            this.context = new Context();
         }
 
         public Guid ID
@@ -34,10 +36,10 @@ namespace GOINSP.ViewModel
             get { return company.BedrijfsNaam; }
             set 
             { 
-            company.BedrijfsNaam = value;
-            var entry = this.context.Entry(company);
-            entry.State = EntityState.Modified;
-            context.SaveChanges();
+                company.BedrijfsNaam = value;
+                var entry = this.context.Entry(company);
+                entry.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
 
