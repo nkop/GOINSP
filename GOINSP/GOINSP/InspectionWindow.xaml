@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
     <Grid>
-
+        <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2">
         <ListView HorizontalAlignment="Left" Height="352" ItemsSource="{Binding Inspections}" SelectedItem="{Binding selectedInspection}" Margin="10,10,0,0" VerticalAlignment="Top" Width="490">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -23,7 +23,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        </Border>
         <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="510,10,0,0" Command="{Binding AddInspection}" VerticalAlignment="Top" Width="75"/>
 
 

@@ -21,6 +21,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Inspectie naam:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
+        
         <TextBox Text="{Binding Path=newInspection.name}" Grid.Column="1" Grid.Row="0" Margin="10"></TextBox>
 
         <TextBlock Text="Inspectie datum:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>

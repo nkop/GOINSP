@@ -6,6 +6,7 @@
         Title="AddUserWindow" Height="300" Width="300"
         Background="#3598dc">
     <Grid>
+        <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2">
         <StackPanel>
             <TextBlock>Gebruikersnaam</TextBlock>
             <TextBox Text="{Binding SelectedAccount.UserName}"></TextBox>
@@ -19,5 +20,6 @@
             <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}"/>
             
         </StackPanel>
+        </Border>
     </Grid>
 </Window>

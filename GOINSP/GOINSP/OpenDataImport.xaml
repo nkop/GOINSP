@@ -4,10 +4,12 @@
         DataContext="{Binding OpenDataImport, Source={StaticResource Locator}}"
         Title="Data Import" Height="300" Width="302" WindowStartupLocation="CenterScreen"
         Background="#3598dc">
-    <Grid>
-        <Button Content="Import TData" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}"/>
+    <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2">
+        <Grid>
+            <Button Content="Import TData" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}"/>
         <Button Content="Import RegioS" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios" IsEnabled="{Binding ButtonsEnabled}"/>
         <ProgressBar HorizontalAlignment="Left" Height="30" Margin="10,229,0,0" VerticalAlignment="Top" Width="272" Value="{Binding ProgressBarPercentage}"/>
         <Label Content="{Binding ProgressLabelText}" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top"/>
     </Grid>
+    </Border>
 </Window>

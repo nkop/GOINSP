@@ -7,11 +7,12 @@
         Background="#3598dc">
     <Grid>
         <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Menu GoInsp</TextBlock>
-        <WrapPanel Height="100" HorizontalAlignment="Center">
-            <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding UserControlCommand}"/>
-            <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenDataImportCommand}"/>
-            <Button Name="Management" Content="Management Informatie" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding ManagementInfoCommand}"/>
-            <Button Content="Inspection" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenInspectionCommand}"/>
+        <Border Margin="0,110,0,109" BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2"></Border>
+        <WrapPanel Height="100" HorizontalAlignment="Center" Background="White">
+            <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding UserControlCommand}"/>
+            <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenDataImportCommand}"/>
+            <Button Name="Management" Content="Management Informatie" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding ManagementInfoCommand}"/>
+            <Button Content="Inspection" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenInspectionCommand}"/>
         </WrapPanel>
     </Grid>
 </Window>
