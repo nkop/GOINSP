@@ -4,7 +4,8 @@
         xmlns:sparrow="http://sparrowtoolkit.codeplex.com/wpf"
         Title="Login" Height="350" Width="525"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Background="#3598dc">
     <Grid>
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:w="clr-namespace:GOINSP"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
-        Title="AddUserWindow" Height="300" Width="300">
+        Title="AddUserWindow" Height="300" Width="300"
+        Background="#3598dc">
     <Grid>
         <StackPanel>
             <TextBlock>Gebruikersnaam</TextBlock>
