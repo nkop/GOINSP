@@ -21,19 +21,11 @@ namespace GOINSP.Utility
 
         public void SaveLoginId(Guid id)
         {
-            if (!File.Exists(_path))
+            using (StreamWriter sw = new StreamWriter(_path, true))
             {
-                File.Create(_path);
-                TextWriter tw = new StreamWriter(_path);
-                tw.WriteLine(id);
-                tw.Close();
-            }
-            else if (File.Exists(_path))
-            {
-                TextWriter tw = new StreamWriter(_path);
-                tw.WriteLine(id);
-                tw.Close();
-            }            
+                sw.WriteLine(id);
+                sw.Close();
+            }           
         }
 
         public Guid ReadLoginId()
