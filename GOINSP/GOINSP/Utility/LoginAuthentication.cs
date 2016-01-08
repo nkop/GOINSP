@@ -21,8 +21,10 @@ namespace GOINSP.Utility
 
         public void SaveLoginId(Guid id)
         {
+            File.WriteAllText(_path, String.Empty);
             using (StreamWriter sw = new StreamWriter(_path, true))
             {
+                
                 sw.WriteLine(id);
                 sw.Close();
             }           
