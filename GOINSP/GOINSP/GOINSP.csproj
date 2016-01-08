@@ -135,6 +135,9 @@
     <Compile Include="AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BedrijfInfo.xaml.cs">
+      <DependentUpon>BedrijfInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BindablePasswordBox.cs" />
     <Compile Include="CompanyInformationWindow.xaml.cs">
       <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
@@ -163,7 +166,6 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Utility\RichTextboxAssistant.cs" />
     <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
+    <Compile Include="Utility\LoginAuthentication.cs" />
     <Compile Include="Utility\SynchronizeHelper.cs" />
     <Compile Include="Utility\SyncWorker.cs" />
     <Compile Include="Utility\TDataImport.cs" />
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BedrijfInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

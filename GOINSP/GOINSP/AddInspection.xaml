@@ -5,7 +5,8 @@
         xmlns:w="clr-namespace:GOINSP.Utility"
         Title="Inspectie toevoegen" Height="650" Width="800"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="#3598dc">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"></ColumnDefinition>
