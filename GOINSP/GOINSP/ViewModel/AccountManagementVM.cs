@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using GOINSP.Utility;
 
 
 namespace GOINSP.ViewModel
@@ -52,11 +53,13 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private LoginAuthentication _loginauth;
 
         public AccountManagementVM()
         {
             SelectedAccount = new AccountVM();
             context = new Models.Context();
+            _loginauth = new LoginAuthentication();
 
             SelectedAccount = new AccountVM();
 
@@ -152,7 +155,7 @@ namespace GOINSP.ViewModel
                 {
                     if (LoginPassword == account.Password)
                     {
-                        
+                        _loginauth.SaveLoginId(account.id);
                         MenuControl window = new MenuControl(account.AccountRights.ToString());
                         window.Show();
                     }
