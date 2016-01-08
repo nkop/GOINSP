@@ -33,6 +33,7 @@ namespace GOINSP.ViewModel
 
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
+        public ICommand WeergeefBedrijfCommand { get; set; }
 
         private InspectionVM _newInspection;
         private InspectionVM _selectedInspection;
@@ -65,6 +66,7 @@ namespace GOINSP.ViewModel
 
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
+            WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
@@ -156,6 +158,11 @@ namespace GOINSP.ViewModel
                 }
                 RaisePropertyChanged("Bedrijven");
             }
+        }
+
+        private void ShowBedrijf()
+        {
+            BedrijfInfo window = new BedrijfInfo(SelectedBedrijf.ID);
         }
     }
 }

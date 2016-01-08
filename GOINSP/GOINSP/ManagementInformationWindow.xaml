@@ -27,6 +27,7 @@
                             <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Command="{Binding WeergeefBedrijfCommand}" Content="Weergeef bedrijf"/>
                 </StackPanel>               
             </WrapPanel>
         </StackPanel>

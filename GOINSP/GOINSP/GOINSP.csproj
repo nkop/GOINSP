@@ -107,6 +107,9 @@
     <Compile Include="AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BedrijfInfo.xaml.cs">
+      <DependentUpon>BedrijfInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BindablePasswordBox.cs" />
     <Compile Include="CompanyInformationWindow.xaml.cs">
       <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
@@ -193,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BedrijfInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
