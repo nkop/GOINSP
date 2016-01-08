@@ -23,11 +23,27 @@ namespace GOINSP.ViewModel
 
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
+        public ICommand WeergeefBedrijfCommand { get; set; }
 
         private InspectionVM _newInspection;
+
         private InspectionVM _selectedInspection;
+
+        private string _searchQuota { get; set; }
+        public string SearchQuota
+        {
+            get { return _searchQuota; }
+            set
+            {
+                _searchQuota = value;
+                RaisePropertyChanged("SearchQuota");
+                Search();
+            }
+        }
+
         private CompanyVM _selectedBedrijf;
         private AccountVM _selectedUser;
+
 
         public Guid InspectionID;
 
@@ -50,12 +66,15 @@ namespace GOINSP.ViewModel
 
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
+            WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
+
             _selectedBedrijf = new CompanyVM();
             _selectedUser = new AccountVM();
         }
+
 
         public InspectionVM newInspection
         {
@@ -129,8 +148,42 @@ namespace GOINSP.ViewModel
             if (SelectedBedrijf.ID != null)
             {
                 List<Models.Inspection> inspections = context.Inspection.ToList();
-                //BedrijfInspecties = new ObservableCollection<InspectionVM>(inspections.Where(i.bedrijfsnaam = SelectedBedrijf.ID))
+
+                foreach (Models.Inspection item in inspections)
+                {
+                    if (item.companyid == SelectedBedrijf.ID)
+                    {
+                        BedrijfInspecties.Add(new InspectionVM(item));
+                    }
+                }
             }
+        }
+
+        private void Search()
+        {
+            if (SearchQuota.Length >= 0)
+            {
+                List<Models.Company> tempBedrijven = context.Company.ToList();
+                List<CompanyVM> tempCompanyVM = new List<CompanyVM>();
+                foreach (Models.Company item in tempBedrijven)
+                {
+                    tempCompanyVM.Add(new CompanyVM(item));
+                }
+                Bedrijven.Clear();
+                foreach (CompanyVM item in tempCompanyVM)
+                {
+                    if (item.Bedrijfsnaam.Contains(SearchQuota))
+                    {
+                        Bedrijven.Add(item);
+                    }
+                }
+                RaisePropertyChanged("Bedrijven");
+            }
+        }
+
+        private void ShowBedrijf()
+        {
+            BedrijfInfo window = new BedrijfInfo(SelectedBedrijf.ID);
         }
     }
 }
