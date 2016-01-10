@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Background="#3598dc">
     <Grid>
-        <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Menu GoInsp</TextBlock>
+        <TextBlock FontSize="64" HorizontalAlignment="Center" Margin="69,19,68,81" Foreground="White">Menu GoInsp</TextBlock>
         <WrapPanel Height="100" HorizontalAlignment="Center">
             <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding UserControlCommand}"/>
             <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenDataImportCommand}"/>

@@ -112,6 +112,34 @@
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WpfRichText, Version=1.0.16.0, Culture=neutral, PublicKeyToken=75ccead1e6af2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfRichText2.1.0.17\lib\net45\WpfRichText.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -124,9 +152,15 @@
     <Compile Include="AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BedrijfInfo.xaml.cs">
+      <DependentUpon>BedrijfInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BindablePasswordBox.cs" />
     <Compile Include="CompanyInformationWindow.xaml.cs">
       <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RichTextEditor.xaml.cs">
+      <DependentUpon>RichTextEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditInspectionWindow.xaml.cs">
       <DependentUpon>EditInspectionWindow.xaml</DependentUpon>
@@ -152,7 +186,6 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
@@ -192,6 +225,10 @@
     <Compile Include="Utility\ImportProgressValues.cs" />
     <Compile Include="Utility\INavigatableViewModel.cs" />
     <Compile Include="Utility\PostCodeImport.cs" />
+    <Compile Include="Utility\RichTextboxAssistant.cs" />
+    <Compile Include="Utility\ImportFactory.cs" />
+    <Compile Include="Utility\ImportProgressValues.cs" />
+    <Compile Include="Utility\LoginAuthentication.cs" />
     <Compile Include="Utility\SynchronizeHelper.cs" />
     <Compile Include="Utility\SyncWorker.cs" />
     <Compile Include="Utility\TDataImport.cs" />
@@ -244,6 +281,13 @@
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
     <Compile Include="ViewModel\ReportVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlCssParser.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlFromXamlConverter.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlLexicalAnalyzer.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlParser.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlSchema.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlTokenType.cs" />
+    <Compile Include="XamlToHtmlParser\HtmlToXamlConverter.cs" />
     <Page Include="AddInspection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,7 +296,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BedrijfInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CompanyInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RichTextEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -352,6 +404,25 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Images\charactergrowfont.png" />
+    <Resource Include="Controls\Images\charactershrinkfont.png" />
+    <Resource Include="Controls\Images\editcopy.png" />
+    <Resource Include="Controls\Images\editcut.png" />
+    <Resource Include="Controls\Images\editpaste.png" />
+    <Resource Include="Controls\Images\editredo.png" />
+    <Resource Include="Controls\Images\editundo.png" />
+    <Resource Include="Controls\Images\fileopen.png" />
+    <Resource Include="Controls\Images\filesave.png" />
+    <Resource Include="Controls\Images\listbullets.png" />
+    <Resource Include="Controls\Images\listnumbering.png" />
+    <Resource Include="Controls\Images\paragraphcenterjustify.png" />
+    <Resource Include="Controls\Images\paragraphdecreaseindentation.png" />
+    <Resource Include="Controls\Images\paragraphfulljustify.png" />
+    <Resource Include="Controls\Images\paragraphincreaseindentation.png" />
+    <Resource Include="Controls\Images\paragraphleftjustify.png" />
+    <Resource Include="Controls\Images\paragraphrightjustify.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
