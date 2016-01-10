@@ -16,7 +16,7 @@ namespace GOINSP.Utility
         public LoginAuthentication()
         {
             _fileName = "LoginId.txt";
-            _path = Path.Combine(Environment.CurrentDirectory, @"Utility\", _fileName);
+            _path = Path.Combine(Environment.CurrentDirectory, @"\", _fileName);
         }
 
         public void SaveLoginId(Guid id)
