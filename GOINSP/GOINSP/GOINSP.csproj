@@ -186,6 +186,12 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512180817109_Init.Designer.cs" />
+    <Compile Include="Migrations\201601101042229_InitialCreate.cs" />
+    <Compile Include="Migrations\201601101042229_InitialCreate.Designer.cs">
+      <DependentUpon>201601101042229_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
@@ -221,13 +227,10 @@
     <Compile Include="Utility\ConversionHelper.cs" />
     <Compile Include="Utility\CSVImport.cs" />
     <Compile Include="Utility\GmapAPIImport.cs" />
-    <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
     <Compile Include="Utility\INavigatableViewModel.cs" />
-    <Compile Include="Utility\PostCodeImport.cs" />
     <Compile Include="Utility\RichTextboxAssistant.cs" />
     <Compile Include="Utility\ImportFactory.cs" />
-    <Compile Include="Utility\ImportProgressValues.cs" />
     <Compile Include="Utility\LoginAuthentication.cs" />
     <Compile Include="Utility\SynchronizeHelper.cs" />
     <Compile Include="Utility\SyncWorker.cs" />
@@ -387,6 +390,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201512180817109_Init.resx" />
+    <EmbeddedResource Include="Migrations\201601101042229_InitialCreate.resx">
+      <DependentUpon>201601101042229_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
