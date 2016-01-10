@@ -156,6 +156,12 @@ namespace GOINSP.ViewModel
                     if (LoginPassword == account.Password)
                     {
                         _loginauth.SaveLoginId(account.id);
+
+                        foreach (Window w in Application.Current.Windows)
+                        {
+                            w.Hide();
+                        }
+
                         MenuControl window = new MenuControl(account.AccountRights.ToString());
                         window.Show();
                     }
