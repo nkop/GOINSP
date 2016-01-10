@@ -20,7 +20,7 @@ namespace GOINSP.ViewModel
     {
         private Context context;
         public ICommand EditQuestionnaireCommand { get; set; }
-        public ICommand AddNewQuestionnaireCommand { get; set; }
+        public ICommand AddNewTemplateQuestionnaireCommand { get; set; }
         
 
         private ObservableCollection<QuestionnaireVM> observableQuestionnaireCollection;
@@ -55,18 +55,23 @@ namespace GOINSP.ViewModel
         {
             context = new Context();
 
-            ObservableQuestionnaireCollection = new ObservableCollection<QuestionnaireVM>(context.Questionnaire.ToList().Select(x => new QuestionnaireVM(x)));
+            CreateQuestionnaireList();
 
             EditQuestionnaireCommand = new RelayCommand(EditQuestionnaire);
-            AddNewQuestionnaireCommand = new RelayCommand(AddNewQuestionnaire);
+            AddNewTemplateQuestionnaireCommand = new RelayCommand(AddNewTemplateQuestionnaire);
         }
 
-        public void AddNewQuestionnaire()
+        public void AddNewTemplateQuestionnaire()
         {
-            QuestionnaireVM tempQuestionnaire = new QuestionnaireVM() { Name = "Nieuwe Vragenlijst", Description = "Een compleet nieuwe vragenlijst.", IsTemplate = false};
+            QuestionnaireVM tempQuestionnaire = new QuestionnaireVM() { Name = "Nieuwe Vragenlijst", Description = "Een compleet nieuwe vragenlijst.", IsTemplate = true};
             tempQuestionnaire.Context = context;
             tempQuestionnaire.Insert();
-            ObservableQuestionnaireCollection = new ObservableCollection<QuestionnaireVM>(context.Questionnaire.ToList().Select(x => new QuestionnaireVM(x)));
+            CreateQuestionnaireList();
+        }
+
+        public void CreateQuestionnaireList()
+        {
+            ObservableQuestionnaireCollection = new ObservableCollection<QuestionnaireVM>(context.Questionnaire.Where(y => y.IsTemplate == true).ToList().Select(x => new QuestionnaireVM(x)));
         }
 
         public void Show(INavigatableViewModel sender = null)

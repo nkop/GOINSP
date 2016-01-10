@@ -14,8 +14,6 @@ namespace GOINSP.Utility
                 return new RegioSImport();
             if (importer.ToLower() == "tdata")
                 return new TDataImport();
-            if (importer.ToLower() == "postcodes")
-                return new PostCodeImport();
             return null;
         }
     }

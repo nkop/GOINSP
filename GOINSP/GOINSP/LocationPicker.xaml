@@ -3,19 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         DataContext="{Binding LocationPickerModel, Source={StaticResource Locator}}"
-        Title="LocationPicker" Height="482" Width="475.5">
+        Title="LocationPicker" Height="500" Width="475.5">
     <Grid>
         <TextBox x:Name="hiddenTextBoxLong" Text="{Binding Longitude}" Width="0" Height="0" VerticalAlignment="Top"/>
         <TextBox x:Name="hiddenTextBoxLat" Text="{Binding Latitude}" Width="0" Height="0" VerticalAlignment="Top"/>
         <TextBox x:Name="hiddenTextBoxConfirm" Text="" Width="0" Height="0" VerticalAlignment="Top"/>
-        <m:Map x:Name="PickerMap" CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="10" AllowDrop="True" ScaleVisibility="Hidden" MouseDoubleClick="PickerMap_MouseDoubleClick" Margin="0,0,0.5,215.5"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="235,260,0,0" TextWrapping="Wrap" Text="{Binding PostCode.city}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="235,287,0,0" TextWrapping="Wrap" Text="{Binding PostCode.postcode}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Wijk" HorizontalAlignment="Left" Margin="192,260,0,0" VerticalAlignment="Top"/>
-        <Label Content="Postcode" HorizontalAlignment="Left" Margin="166,283,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="235,314,0,0" TextWrapping="Wrap" Text="{Binding PostCode.street}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Straat" HorizontalAlignment="Left" Margin="184,310,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="235,340,0,0" TextWrapping="Wrap" Text="{Binding PostCode.municipality}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Gemeente" HorizontalAlignment="Left" Margin="160,336,0,0" VerticalAlignment="Top"/>
+        <m:Map x:Name="PickerMap" CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="10" AllowDrop="True" ScaleVisibility="Hidden" MouseDoubleClick="PickerMap_MouseDoubleClick" Margin="0,0,0.667,258.667"/>
+        <StackPanel Height="259" Margin="0,212,0.667,-0.333" Width="468" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="Straat" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.street}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Nummer" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.street_number}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Postcode" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.postcode}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Wijk" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.city}" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Gemeente" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox HorizontalAlignment="Center" Height="22" DisplayMemberPath="Title" SelectedValue="{Binding PostCode.municipality}" SelectedValuePath="Title" ItemsSource="{Binding ObservableRegios}" VerticalAlignment="Top" Width="120"/>
+        </StackPanel>
     </Grid>
 </Window>

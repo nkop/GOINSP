@@ -1,4 +1,5 @@
-﻿using GOINSP.Models;
+﻿using GalaSoft.MvvmLight;
+using GOINSP.Models;
 using GOINSP.Models.Opendata.PostCodeData;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.ViewModel.Opendata.PostCodeDatas
 {
-    public class PostCodeDataVM
+    public class PostCodeDataVM : ViewModelBase
     {
         private PostCodeData postCodeData;
         private Context context;
@@ -19,10 +20,10 @@ namespace GOINSP.ViewModel.Opendata.PostCodeDatas
             context = new Context();
         }
 
-        public int id
+        public Guid PostCodeID
         {
-            get { return postCodeData.id; }
-            set { postCodeData.id = value; }
+            get { return postCodeData.PostCodeID; }
+            set { postCodeData.PostCodeID = value; }
         }
 
         public string postcode
@@ -88,10 +89,14 @@ namespace GOINSP.ViewModel.Opendata.PostCodeDatas
         public string municipality
         {
             get { return postCodeData.municipality; }
-            set { postCodeData.municipality = value; }
+            set 
+            { 
+                postCodeData.municipality = value; 
+                RaisePropertyChanged("municipality"); 
+            }
         }
 
-        public int municipality_id
+        public string municipality_id
         {
             get { return postCodeData.municipality_id; }
             set { postCodeData.municipality_id = value; }
@@ -137,6 +142,11 @@ namespace GOINSP.ViewModel.Opendata.PostCodeDatas
         {
             get { return postCodeData.location_detail; }
             set { postCodeData.location_detail = value; }
+        }
+        public int? street_number
+        {
+            get { return postCodeData.street_number; }
+            set { postCodeData.street_number = value; }
         }
 
         public DateTime changed_date
