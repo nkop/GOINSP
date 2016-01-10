@@ -150,12 +150,12 @@ namespace GOINSP.ViewModel
                 RegioS regio = context.HuishoudelijkAfvalRegioS.Where(x => x.Title == data.municipality).First();
                 data.municipality = regio.Title;
                 data.municipality_id = regio.Key;
-                PostCode = data;
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Hier is geen adres gevonden");
             }
+
+            PostCode = data;
         }
     }
 }
