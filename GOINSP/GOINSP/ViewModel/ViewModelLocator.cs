@@ -89,7 +89,7 @@ namespace GOINSP.ViewModel
         {
             get
             {
-                return new InspectionSpecsViewModel();
+                return ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
             }
         }
 

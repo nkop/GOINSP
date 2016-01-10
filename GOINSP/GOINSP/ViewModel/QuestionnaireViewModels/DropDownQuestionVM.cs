@@ -114,37 +114,41 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
         public DropDownQuestion Insert()
         {
-            foreach (SimpleTextQuestionVM simpleTextQuestion in ConditionBoundQuestions.OfType<SimpleTextQuestionVM>())
+            if (ConditionBoundQuestions.Count != 0)
             {
-                dropDownQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
-            }
-            foreach (SimpleTextBlockQuestionVM simpleTextBlockQuestion in ConditionBoundQuestions.OfType<SimpleTextBlockQuestionVM>())
-            {
-                dropDownQuestion.ConditionBoundQuestions.Add(simpleTextBlockQuestion.Insert());
-            }
-            foreach (DropDownQuestionVM _dropDownQuestion in ConditionBoundQuestions.OfType<DropDownQuestionVM>())
-            {
-                dropDownQuestion.ConditionBoundQuestions.Add(_dropDownQuestion.Insert());
-            }
-            foreach (RadioQuestionVM radioQuestion in ConditionBoundQuestions.OfType<RadioQuestionVM>())
-            {
-                dropDownQuestion.ConditionBoundQuestions.Add(radioQuestion.Insert());
-            }
-            foreach (SimpleIntegerQuestionVM simpleIntegerQuestionVM in ConditionBoundQuestions.OfType<SimpleIntegerQuestionVM>())
-            {
-                dropDownQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
-            }
-            foreach (SimpleDateTimeQuestionVM simpleDateQuestionVM in ConditionBoundQuestions.OfType<SimpleDateTimeQuestionVM>())
-            {
-                dropDownQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
+                foreach (SimpleTextQuestionVM simpleTextQuestion in ConditionBoundQuestions.OfType<SimpleTextQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
+                }
+                foreach (SimpleTextBlockQuestionVM simpleTextBlockQuestion in ConditionBoundQuestions.OfType<SimpleTextBlockQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(simpleTextBlockQuestion.Insert());
+                }
+                foreach (DropDownQuestionVM _dropDownQuestion in ConditionBoundQuestions.OfType<DropDownQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(_dropDownQuestion.Insert());
+                }
+                foreach (RadioQuestionVM radioQuestion in ConditionBoundQuestions.OfType<RadioQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(radioQuestion.Insert());
+                }
+                foreach (SimpleIntegerQuestionVM simpleIntegerQuestionVM in ConditionBoundQuestions.OfType<SimpleIntegerQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(simpleIntegerQuestionVM.Insert());
+                }
+                foreach (SimpleDateTimeQuestionVM simpleDateQuestionVM in ConditionBoundQuestions.OfType<SimpleDateTimeQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
+                }
+
+                foreach (QuestionVM question in ConditionBoundQuestions)
+                {
+                    question.question.VisibleConditions = question.VisibleConditions.Aggregate((c, n) => c + "," + n);
+                }
             }
 
-            foreach (QuestionVM question in ConditionBoundQuestions)
-            {
-                question.question.VisibleConditions = question.VisibleConditions.Aggregate((c, n) => c + "," + n);
-            }
-
-            dropDownQuestion.Answers = Answers.Aggregate((c, n) => c + "," + n);
+            if(Answers.Count != 0)
+                dropDownQuestion.Answers = Answers.Aggregate((c, n) => c + "," + n);
 
             return dropDownQuestion;
         }

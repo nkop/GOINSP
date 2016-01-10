@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GOINSP.Models;
+using GOINSP.Utility;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +14,7 @@ using System.Windows.Input;
 
 namespace GOINSP.ViewModel
 {
-    public class InspectionViewModel : ViewModelBase
+    public class InspectionViewModel : ViewModelBase, INavigatableViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
@@ -88,11 +90,7 @@ namespace GOINSP.ViewModel
             set
             {
                 _selectedInspection = value;
-
-                InspectionID = selectedInspection.id;
-
-                InspectionSpecs window = new InspectionSpecs();
-                window.Show();
+                OpenInspection();
             }
         }
 
@@ -181,9 +179,27 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public void OpenInspection()
+        {
+            InspectionSpecsViewModel InspectionVMInstance = ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
+            InspectionVMInstance.context = context;
+            InspectionVMInstance.SetInspection(_selectedInspection.id);
+            InspectionVMInstance.Show(this);
+        }
+
         private void ShowBedrijf()
         {
             BedrijfInfo window = new BedrijfInfo(SelectedBedrijf.ID);
+        }
+
+        public void Show(INavigatableViewModel sender = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CloseView()
+        {
+            throw new NotImplementedException();
         }
     }
 }

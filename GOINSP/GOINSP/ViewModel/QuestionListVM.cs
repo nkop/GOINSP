@@ -21,7 +21,6 @@ namespace GOINSP.ViewModel
         private Context context;
         public ICommand EditQuestionnaireCommand { get; set; }
         public ICommand AddNewTemplateQuestionnaireCommand { get; set; }
-        
 
         private ObservableCollection<QuestionnaireVM> observableQuestionnaireCollection;
         public ObservableCollection<QuestionnaireVM> ObservableQuestionnaireCollection

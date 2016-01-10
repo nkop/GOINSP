@@ -7,7 +7,7 @@
         Background="#3598dc">
     
     <Grid Margin="10">
-        <StackPanel DataContext="{Binding InspectionSpecs}">
+        <StackPanel>
             <Label FontWeight="Bold" FontSize="15px" Content="{Binding name}" />
             <WrapPanel Orientation="Horizontal">
                 <!--<Image Width="150" Source="{Binding image}" Height="150" HorizontalAlignment="Left" />-->
@@ -17,11 +17,7 @@
                     <Label Content="Inspecteur: "  />
                     <Label Content="{Binding date}" />
                     <Label Content="{Binding address}" />
-                    <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Command="{Binding OpenQuestionnaire}" MouseAction="LeftClick" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
+                    <Button Content="Vragenlijst" Margin="6 0 0 0" Command="{Binding OpenQuestionnaireCommand}"></Button>
                     <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenRapportage}" MouseAction="LeftClick" />
