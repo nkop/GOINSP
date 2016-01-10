@@ -190,6 +190,7 @@
     <Compile Include="Utility\GmapAPIImport.cs" />
     <Compile Include="Utility\ImportFactory.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
+    <Compile Include="Utility\INavigatableViewModel.cs" />
     <Compile Include="Utility\PostCodeImport.cs" />
     <Compile Include="Utility\SynchronizeHelper.cs" />
     <Compile Include="Utility\SyncWorker.cs" />

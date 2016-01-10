@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GOINSP.Models;
+using GOINSP.Utility;
 using GOINSP.ViewModel.QuestionnaireViewModels;
 using Microsoft.Practices.ServiceLocation;
 using System;
@@ -15,7 +16,7 @@ using System.Windows.Navigation;
 
 namespace GOINSP.ViewModel
 {
-    public class QuestionListVM : ViewModelBase
+    public class QuestionListVM : ViewModelBase, INavigatableViewModel
     {
         private Context context;
         public ICommand EditQuestionnaireCommand { get; set; }
@@ -68,6 +69,12 @@ namespace GOINSP.ViewModel
             ObservableQuestionnaireCollection = new ObservableCollection<QuestionnaireVM>(context.Questionnaire.ToList().Select(x => new QuestionnaireVM(x)));
         }
 
+        public void Show(INavigatableViewModel sender = null)
+        {
+            QuestionListWindow questionListWindow = new QuestionListWindow();
+            questionListWindow.Show();
+        }
+
         public void EditQuestionnaire()
         {
             if(SelectedQuestionnaire != null)
@@ -75,8 +82,16 @@ namespace GOINSP.ViewModel
                 QuestionTemplateVM questionTemplateVM = ServiceLocator.Current.GetInstance<QuestionTemplateVM>();
                 questionTemplateVM.Context = context;
                 questionTemplateVM.SetQuestionnaire(SelectedQuestionnaire);
-                questionTemplateVM.Show();
+                questionTemplateVM.Show(this);
+                CloseView();
             }
+        }
+
+        public void CloseView()
+        {
+            Messenger.Default.Send<NotificationMessage>(
+                new NotificationMessage(this, "CloseView")
+            );
         }
     }
 }

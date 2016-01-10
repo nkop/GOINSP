@@ -16,10 +16,11 @@ using GOINSP.Models.QuestionnaireModels;
 using GOINSP.ViewModel.QuestionnaireViewModels;
 using GOINSP.ViewModel.QuestionnaireAssemblerViewModels;
 using GalaSoft.MvvmLight.Messaging;
+using GOINSP.Utility;
 
 namespace GOINSP.ViewModel
 {
-    public class QuestionTemplateVM : ViewModelBase
+    public class QuestionTemplateVM : ViewModelBase, INavigatableViewModel
     {
         public ICommand MoveSelectedQuestionDownCommand { get; set; }
         public ICommand MoveSelectedQuestionUpCommand { get; set; }
@@ -40,6 +41,8 @@ namespace GOINSP.ViewModel
         public ICommand UpdateSimpleDateTimeQuestionCommand { get; set; }
 
         public ICommand UpdateQuestionnaireCommand { get; set; }
+
+        public INavigatableViewModel LastSender { get; set; }
 
         private IAssemblerVM selectedAssembler;
         public IAssemblerVM SelectedAssembler
@@ -205,8 +208,9 @@ namespace GOINSP.ViewModel
             CreateInterfaceList();
         }
 
-        public void Show()
+        public void Show(INavigatableViewModel sender = null)
         {
+            LastSender = sender;
             QuestionnaireAssembler questionnaireAssembler = new QuestionnaireAssembler();
             questionnaireAssembler.Show();
         }
@@ -333,6 +337,8 @@ namespace GOINSP.ViewModel
         public void UpdateQuestionnaire()
         {
             Questionnaire.Update();
+            LastSender.Show(this);
+            CloseView();
         }
 
         public void CreateInterfaceList()
@@ -371,13 +377,16 @@ namespace GOINSP.ViewModel
 
         public void DeleteSelectedQuestion()
         {
-            List<QuestionVM> list = Questionnaire.QuestionnaireCollection.Where(x => x.ListNumber > SelectedQuestion.ListNumber).ToList();
-            foreach(QuestionVM question in list)
+            if (SelectedQuestion != null)
             {
-                question.ListNumber -= 1;
+                List<QuestionVM> list = Questionnaire.QuestionnaireCollection.Where(x => x.ListNumber > SelectedQuestion.ListNumber).ToList();
+                foreach (QuestionVM question in list)
+                {
+                    question.ListNumber -= 1;
+                }
+                Questionnaire.QuestionnaireCollection.Remove(SelectedQuestion);
+                SelectedQuestion = null;
             }
-            Questionnaire.QuestionnaireCollection.Remove(SelectedQuestion);
-            SelectedQuestion = null;
         }
 
         // Add
@@ -522,6 +531,13 @@ namespace GOINSP.ViewModel
             }
             if(SelectedAssembler != null)
                 SelectedAssembler.OnFocus();
+        }
+
+        public void CloseView()
+        {
+            Messenger.Default.Send<NotificationMessage>(
+                new NotificationMessage(this, "CloseView")
+            );
         }
     }
 }
