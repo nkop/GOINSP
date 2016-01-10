@@ -57,7 +57,8 @@ namespace GOINSP.ViewModel
 
         public void OpenQuestionnaire()
         {
-
+            QuestionListVM questionListVM = ServiceLocator.Current.GetInstance<QuestionListVM>();
+            questionListVM.Show(this);
         }
 
         public void CloseView()

@@ -41,6 +41,7 @@ namespace GOINSP.ViewModel
         public ICommand UpdateSimpleDateTimeQuestionCommand { get; set; }
 
         public ICommand UpdateQuestionnaireCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public INavigatableViewModel LastSender { get; set; }
 
@@ -332,6 +333,7 @@ namespace GOINSP.ViewModel
             UpdateSimpleDateTimeQuestionCommand = new RelayCommand(UpdateSimpleDateTimeQuestion);
 
             UpdateQuestionnaireCommand = new RelayCommand(UpdateQuestionnaire);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
         }
 
         public void UpdateQuestionnaire()
@@ -531,6 +533,11 @@ namespace GOINSP.ViewModel
             }
             if(SelectedAssembler != null)
                 SelectedAssembler.OnFocus();
+        }
+
+        public void CloseWindow()
+        {
+            LastSender.Show();
         }
 
         public void CloseView()

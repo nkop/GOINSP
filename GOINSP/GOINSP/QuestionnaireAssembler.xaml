@@ -3,8 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
         Title="QuestionnaireAssembler" Height="911" Width="689" WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
