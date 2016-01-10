@@ -18,9 +18,12 @@ namespace GOINSP.ViewModel
 {
     public class QuestionListVM : ViewModelBase, INavigatableViewModel
     {
-        private Context context;
+        public Context context { get; set; }
         public ICommand EditQuestionnaireCommand { get; set; }
         public ICommand AddNewTemplateQuestionnaireCommand { get; set; }
+        public ICommand AddNewQuestionnaireCommand { get; set; }
+        
+        public InspectionVM BoundInspection { get; set; }
 
         private ObservableCollection<QuestionnaireVM> observableQuestionnaireCollection;
         public ObservableCollection<QuestionnaireVM> ObservableQuestionnaireCollection
@@ -58,6 +61,7 @@ namespace GOINSP.ViewModel
 
             EditQuestionnaireCommand = new RelayCommand(EditQuestionnaire);
             AddNewTemplateQuestionnaireCommand = new RelayCommand(AddNewTemplateQuestionnaire);
+            AddNewQuestionnaireCommand = new RelayCommand(AddNewQuestionnaire);
         }
 
         public void AddNewTemplateQuestionnaire()
@@ -66,6 +70,21 @@ namespace GOINSP.ViewModel
             tempQuestionnaire.Context = context;
             tempQuestionnaire.Insert();
             CreateQuestionnaireList();
+        }
+
+        public void AddNewQuestionnaire()
+        {
+            if (BoundInspection != null)
+            {
+                QuestionnaireVM tempQuestionnaire = new QuestionnaireVM() { Name = "Nieuwe Vragenlijst", Description = "Een compleet nieuwe vragenlijst.", IsTemplate = false };
+                tempQuestionnaire.Context = context;
+                tempQuestionnaire.Insert();
+                SelectedQuestionnaire = tempQuestionnaire;
+                BoundInspection.questionnaire = tempQuestionnaire;
+                context.Entry(BoundInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+                EditQuestionnaire();
+            }
         }
 
         public void CreateQuestionnaireList()

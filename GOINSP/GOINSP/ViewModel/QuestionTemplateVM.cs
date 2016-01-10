@@ -339,7 +339,6 @@ namespace GOINSP.ViewModel
         public void UpdateQuestionnaire()
         {
             Questionnaire.Update();
-            LastSender.Show(this);
             CloseView();
         }
 
@@ -531,13 +530,15 @@ namespace GOINSP.ViewModel
             {
                 assembler.Visibility = Visibility.Collapsed;
             }
+
             if(SelectedAssembler != null)
                 SelectedAssembler.OnFocus();
         }
 
         public void CloseWindow()
         {
-            LastSender.Show();
+            if(Questionnaire.IsTemplate == true)
+                LastSender.Show();
         }
 
         public void CloseView()

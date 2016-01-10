@@ -91,6 +91,11 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
         }
 
+        public Questionnaire GetQuestionnaire()
+        {
+            return questionnaire;
+        }
+
         public QuestionnaireVM()
         {
             questionnaire = new Questionnaire();
@@ -100,7 +105,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         }
 
         public QuestionnaireVM(Questionnaire questionnaire)
-        {
+        { 
             this.questionnaire = questionnaire;
             this.IsTemplate = questionnaire.IsTemplate;
             this.QuestionnaireCollection = new ObservableCollection<QuestionVM>();

@@ -4,21 +4,26 @@
         Title="QuestionListWindow" Height="562" Width="580"
         DataContext="{Binding QuestionList, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="531" Width="290" ItemsSource="{Binding ObservableQuestionnaireCollection}" CanUserAddRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire}" AutoGenerateColumns="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid ItemsSource="{Binding ObservableQuestionnaireCollection}" CanUserAddRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire}" AutoGenerateColumns="False" Margin="0,0,0,29">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naam" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Template" Binding="{Binding IsTemplate}"/>
-                <DataGridTextColumn Header="Aantal Vragen" Binding="{Binding QuestionCount}"/>
+                <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Aantal Vragen" Binding="{Binding QuestionCount}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel HorizontalAlignment="Left" Height="466" Margin="290,0,0,0" VerticalAlignment="Top" Width="282">
+        <StackPanel Grid.Column="1" Margin="0,0,0,58">
             <Label Content="Geselecteerde Vragenlijst" FontWeight="Bold"/>
             <Label Content="Naam"/>
             <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Name}" Width="274"/>
             <Label Content="Omschrijving"/>
             <TextBox Height="100" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Description}" VerticalScrollBarVisibility="Visible" Width="274"/>
-            <Button Height="29" Margin="0, 10, 0, 0" Content="Aanpassen" Command="{Binding EditQuestionnaireCommand}"/>
+            <Button Height="29" Margin="0, 10, 0, 0" Content="Pas De Geselecteerde Vragenlijs Aan" Command="{Binding EditQuestionnaireCommand}"/>
         </StackPanel>
-        <Button Height="29" Margin="290,466,0,12" Content="Nieuwe Template Vragenlijst" Command="{Binding AddNewTemplateQuestionnaireCommand}"/>
+        <Button Height="29" Content="Maak Nieuwe Template Vragenlijst" Command="{Binding AddNewTemplateQuestionnaireCommand}" VerticalAlignment="Bottom"/>
+        <Button Height="29" Content="Gebruik De Geselecteerde Vragenlijst" Command="{Binding AddNewQuestionnaireCommand}" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,0,29"/>
+        <Button Height="29" Content="Maak Nieuwe Vragenlijst Voor De Inspectie" Command="{Binding AddNewQuestionnaireCommand}" Grid.Column="1" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

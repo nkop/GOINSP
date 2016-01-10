@@ -57,8 +57,13 @@ namespace GOINSP.ViewModel
 
         public void OpenQuestionnaire()
         {
-            QuestionListVM questionListVM = ServiceLocator.Current.GetInstance<QuestionListVM>();
-            questionListVM.Show(this);
+            if(inspectionSpecs.questionnaire == null)
+            {
+                QuestionListVM questionListVM = ServiceLocator.Current.GetInstance<QuestionListVM>();
+                questionListVM.context = context;
+                questionListVM.BoundInspection = InspectionSpecs;
+                questionListVM.Show(this);
+            }
         }
 
         public void CloseView()
