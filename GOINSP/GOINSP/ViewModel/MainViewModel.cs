@@ -15,8 +15,6 @@ namespace GOINSP.ViewModel
 
         public MainViewModel()
         {
-            _userControlWindow = new UserControl();
-
             ManagementInfoCommand = new RelayCommand(ManagementInfo);
             UserControlCommand = new RelayCommand(ShowUserControl);
             OpenDataImportCommand = new RelayCommand(ShowOpenDataImport);
@@ -25,6 +23,7 @@ namespace GOINSP.ViewModel
 
         private void ShowUserControl()
         {
+            _userControlWindow = new UserControl();
             _userControlWindow.Show();
         }
 
