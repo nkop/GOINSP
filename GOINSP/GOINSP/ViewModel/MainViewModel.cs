@@ -27,6 +27,7 @@ namespace GOINSP.ViewModel
 
         private void ShowUserControl()
         {
+            _userControlWindow = new UserControl();
             _userControlWindow.Show();
         }
 

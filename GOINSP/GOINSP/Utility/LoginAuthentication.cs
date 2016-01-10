@@ -10,13 +10,23 @@ namespace GOINSP.Utility
 {
     public class LoginAuthentication
     {
-        private string _fileName;
-        private string _path;
+        private string _fileName, _path, _folder, _specificFolder;
 
         public LoginAuthentication()
         {
             _fileName = "LoginId.txt";
-            _path = Path.Combine(Environment.CurrentDirectory, @"\", _fileName);
+
+            // The folder for the roaming current user 
+            _folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            _specificFolder = Path.Combine(_folder, "GOINSPGroepB");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(_specificFolder))
+                Directory.CreateDirectory(_specificFolder);
+
+            _path = Path.Combine(_specificFolder, _fileName);
         }
 
         public void SaveLoginId(Guid id)

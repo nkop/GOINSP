@@ -1,7 +1,7 @@
 ﻿<Window x:Class="GOINSP.InspectionSpecs"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="InspectionSpecs" Height="600" Width="700"
+        Title="GoInsp - Inspectie details" Height="600" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
