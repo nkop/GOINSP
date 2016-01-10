@@ -27,9 +27,6 @@ namespace GOINSP.Utility
                 Directory.CreateDirectory(_specificFolder);
 
             _path = Path.Combine(_specificFolder, _fileName);
-
-            System.Console.WriteLine(_specificFolder);
-
         }
 
         public void SaveLoginId(Guid id)
