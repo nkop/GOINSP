@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:w="clr-namespace:GOINSP.Utility"
-        Title="Inspectie toevoegen" Height="650" Width="800"
+        Title="GoInsp - Inspectie toevoegen" Height="650" Width="800"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
