@@ -3,19 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="UserControl" Height="350" Width="525"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Background="#3598dc">
     <Grid>
         <StackPanel>
-        <TextBlock FontSize="25" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">Gebruikers GoInsp:</TextBlock>
+            <TextBlock FontSize="50.667" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,0,45,0" Foreground="White" RenderTransformOrigin="0.7,0.597" Text="Gebruikers GoInsp"/>
             <WrapPanel Height="20" Width="400">
-                <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}">Gebruiker Toevoegen</Button>
-                <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}">Gebruiker Verwijderen</Button>
-                <TextBox Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"></TextBox>
+                <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}" Content="Gebruiker Toevoegen"/>
+                <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}" Content="Gebruiker Verwijderen"/>
+                <TextBox x:Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
 
             </WrapPanel>
-            <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}">
-
-            </DataGrid>
+            <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}"/>
         </StackPanel>
     </Grid>
 </Window>
