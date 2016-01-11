@@ -22,6 +22,12 @@ namespace GOINSP
         public AddCompanyWindow()
         {
             InitializeComponent();
+            Closing += AddCompanyWindow_Closing;
+        }
+
+        void AddCompanyWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+           
         }
     }
 }

@@ -1,8 +1,18 @@
 ﻿<Window x:Class="GOINSP.AddCompanyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddCompanyWindow" Height="300" Width="300">
-    <Grid>
-        <TextBlock>hoi</TextBlock>
-    </Grid>
+        Title="AddCompanyWindow" Height="300" Width="300"
+        x:Name="AddCompany"
+        DataContext="{Binding AddCompany, Source={StaticResource Locator}}"
+        WindowStartupLocation="CenterScreen"
+        Background="#3598dc">
+    <StackPanel Margin="20">
+        <TextBlock>Naam:</TextBlock>
+        <TextBox Text="{Binding txtName}" Margin="0 0 0 10" Height="30"></TextBox>
+        
+        <TextBlock>Bedrijfs email:</TextBlock>
+        <TextBox Text="{Binding txtEmail}" Margin="0 0 0 10" Height="30"></TextBox>
+
+        <Button Content="Toevoegen" Command="{Binding btnSave}" Height="30"></Button>
+    </StackPanel>
 </Window>

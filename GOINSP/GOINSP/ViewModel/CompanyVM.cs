@@ -54,5 +54,10 @@ namespace GOINSP.ViewModel
                 context.SaveChanges();
             }
         }
+
+        public Company toCompany()
+        {
+            return company;
+        }
     }
 }
