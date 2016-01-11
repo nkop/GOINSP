@@ -19,6 +19,7 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<QuestionListVM>();
             SimpleIoc.Default.Register<InspectionViewModel>();
             SimpleIoc.Default.Register<InspectionSpecsViewModel>();
+            SimpleIoc.Default.Register<QuestionnaireAnswerViewModel>();
         }
 
         public MainViewModel Main
@@ -90,6 +91,14 @@ namespace GOINSP.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
+            }
+        }
+
+        public QuestionnaireAnswerViewModel QuestionnaireAnswerViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
             }
         }
 

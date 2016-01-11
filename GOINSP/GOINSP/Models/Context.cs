@@ -12,6 +12,7 @@ namespace GOINSP.Models
 {
     public class Context : DbContext
     {
+
         public DbSet<TData> HuishoudelijkAfvalTData { get; set; }
         public DbSet<RegioS> HuishoudelijkAfvalRegioS { get; set; }
         public DbSet<Inspection> Inspection { get; set; }
@@ -19,7 +20,6 @@ namespace GOINSP.Models
         public DbSet<Location> Location { get; set; }
         public DbSet<PostCodeData> PostCodeData { get; set; }
         public DbSet<Company> Company { get; set; }
-
         public DbSet<Questionnaire> Questionnaire { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<RadioAnswer> RadioAnswer { get; set; }
@@ -28,6 +28,7 @@ namespace GOINSP.Models
         public DbSet<SimpleTextQuestion> SimpleTextQuestion { get; set; }
         public DbSet<RadioQuestion> RadioQuestion { get; set; }
         public DbSet<SimpleDateTimeQuestion> SimpleDateQuestion { get; set; }
+
 
         public Context()
             : base("LocalContext")

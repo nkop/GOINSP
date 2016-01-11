@@ -11,7 +11,6 @@ namespace GOINSP.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "GOINSP.Models.Context";
         }
 
         protected override void Seed(GOINSP.Models.Context context)

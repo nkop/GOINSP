@@ -138,6 +138,15 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             foreach (DropDownQuestionVM dropDownQuestion in QuestionnaireCollection.OfType<DropDownQuestionVM>())
             {
                 dropDownQuestion.CompileConditionBoundQuestions(QuestionnaireCollection.ToList());
+                dropDownQuestion.CheckConditionBoundQuestions();
+            }
+        }
+
+        public void CheckConditionBoundQuestions()
+        {
+            foreach (DropDownQuestionVM dropDownQuestion in QuestionnaireCollection.OfType<DropDownQuestionVM>())
+            {
+                dropDownQuestion.CheckConditionBoundQuestions();
             }
         }
 

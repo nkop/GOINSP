@@ -22,7 +22,9 @@ namespace GOINSP.ViewModel
         public ICommand EditQuestionnaireCommand { get; set; }
         public ICommand AddNewTemplateQuestionnaireCommand { get; set; }
         public ICommand AddNewQuestionnaireCommand { get; set; }
+        public ICommand DuplicateCurrentTemplateCommand { get; set; }
         
+
         public InspectionVM BoundInspection { get; set; }
 
         private ObservableCollection<QuestionnaireVM> observableQuestionnaireCollection;
@@ -62,6 +64,8 @@ namespace GOINSP.ViewModel
             EditQuestionnaireCommand = new RelayCommand(EditQuestionnaire);
             AddNewTemplateQuestionnaireCommand = new RelayCommand(AddNewTemplateQuestionnaire);
             AddNewQuestionnaireCommand = new RelayCommand(AddNewQuestionnaire);
+            DuplicateCurrentTemplateCommand = new RelayCommand(DuplicateCurrentTemplate);
+            
         }
 
         public void AddNewTemplateQuestionnaire()
@@ -84,6 +88,25 @@ namespace GOINSP.ViewModel
                 context.Entry(BoundInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 EditQuestionnaire();
+                BoundInspection = null;
+            }
+        }
+
+        public void DuplicateCurrentTemplate()
+        {
+            if(SelectedQuestionnaire != null)
+            {
+                var cb = from c in context.Questionnaire.AsNoTracking().Include("QuestionnaireCollection") where c.QuestionnaireID == SelectedQuestionnaire.QuestionnaireID select c;
+                var q = cb.First();
+                var s = new QuestionnaireVM(q);
+                s.Context = context;
+                s.IsTemplate = false;
+                s.Insert();
+                BoundInspection.questionnaire = s;
+                context.Entry(BoundInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+                BoundInspection = null;
+                CloseView();
             }
         }
 

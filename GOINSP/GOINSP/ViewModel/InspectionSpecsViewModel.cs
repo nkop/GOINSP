@@ -64,6 +64,14 @@ namespace GOINSP.ViewModel
                 questionListVM.BoundInspection = InspectionSpecs;
                 questionListVM.Show(this);
             }
+            else
+            {
+                QuestionnaireAnswerViewModel questionnaireAnswerViewModel = ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
+                questionnaireAnswerViewModel.context = context;
+                questionnaireAnswerViewModel.QuestionnaireVM = inspectionSpecs.questionnaire;
+                questionnaireAnswerViewModel.QuestionnaireVM.CheckConditionBoundQuestions();
+                questionnaireAnswerViewModel.Show(this);
+            }
         }
 
         public void CloseView()
