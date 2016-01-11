@@ -34,11 +34,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -52,11 +54,9 @@
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GMap.NET.Core">
-      <HintPath>..\..\..\..\..\Downloads\GMap.NET.WindowsPresentation\GMap.NET.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="GMap.NET.WindowsPresentation">
-      <HintPath>..\..\..\..\..\Downloads\GMap.NET.WindowsPresentation\GMap.NET.WindowsPresentation.dll</HintPath>
+    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -80,6 +80,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -95,9 +96,23 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WpfRichText, Version=1.0.16.0, Culture=neutral, PublicKeyToken=75ccead1e6af2af3, processorArchitecture=MSIL">
-      <HintPath>..\packages\WpfRichText2.1.0.17\lib\net45\WpfRichText.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
@@ -121,6 +136,10 @@
     </Reference>
     <Reference Include="Xceed.Wpf.Toolkit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WpfRichText, Version=1.0.16.0, Culture=neutral, PublicKeyToken=75ccead1e6af2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfRichText2.1.0.17\lib\net45\WpfRichText.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -160,12 +179,16 @@
     <Compile Include="InspectionWindow.xaml.cs">
       <DependentUpon>InspectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LocationPicker.xaml.cs">
+      <DependentUpon>LocationPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManagementInformationWindow.xaml.cs">
       <DependentUpon>ManagementInformationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
@@ -173,20 +196,41 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Multimedia.cs" />
+    <Compile Include="Models\Opendata\GmapAPI.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\RegioS.cs" />
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
+    <Compile Include="Models\Opendata\PostCodeData\PostCodeData.cs" />
+    <Compile Include="Models\QuestionnaireModels\DropDownQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\Question.cs" />
+    <Compile Include="Models\QuestionnaireModels\Questionnaire.cs" />
+    <Compile Include="Models\QuestionnaireModels\RadioAnswer.cs" />
+    <Compile Include="Models\QuestionnaireModels\RadioQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleDateTimeQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleIntegerQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleTextBlockQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\SimpleTextQuestion.cs" />
     <Compile Include="OpenDataImport.xaml.cs">
       <DependentUpon>OpenDataImport.xaml</DependentUpon>
     </Compile>
     <Compile Include="QuestionListWindow.xaml.cs">
       <DependentUpon>QuestionListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuestionnaireAnswerView.xaml.cs">
+      <DependentUpon>QuestionnaireAnswerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionnaireAssembler.xaml.cs">
+      <DependentUpon>QuestionnaireAssembler.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ConversionHelper.cs" />
+    <Compile Include="Utility\CSVImport.cs" />
+    <Compile Include="Utility\GmapAPIImport.cs" />
+    <Compile Include="Utility\ImportProgressValues.cs" />
+    <Compile Include="Utility\INavigatableViewModel.cs" />
     <Compile Include="Utility\RichTextboxAssistant.cs" />
     <Compile Include="Utility\ImportFactory.cs" />
-    <Compile Include="Utility\ImportProgressValues.cs" />
     <Compile Include="Utility\LoginAuthentication.cs" />
     <Compile Include="Utility\SynchronizeHelper.cs" />
     <Compile Include="Utility\SyncWorker.cs" />
@@ -197,6 +241,7 @@
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\LocationPickerVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -217,7 +262,25 @@
     <Compile Include="ViewModel\OpenDataVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\RegioSVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\TDataVM.cs" />
+    <Compile Include="ViewModel\Opendata\PostCodeDatas\PostCodeDataVM.cs" />
     <Compile Include="ViewModel\QuestionListVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAnswerViewModel.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\IAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\RadioQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleDateTimeQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\DropDownQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleIntegerQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextBlockQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextQuestionAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\DropDownQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\QuestionnaireVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\QuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\RadioAnswerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\RadioQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleDateTimeQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleIntegerQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextBlockQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\SimpleTextQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionTemplateVM.cs" />
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
     <Compile Include="ViewModel\ReportVM.cs" />
@@ -269,6 +332,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LocationPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -294,6 +361,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="QuestionListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuestionnaireAnswerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuestionnaireAssembler.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

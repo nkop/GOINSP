@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using GOINSP.Models.QuestionnaireModels;
 
 namespace GOINSP.Models
 {
@@ -30,5 +31,6 @@ namespace GOINSP.Models
 
         public virtual Account inspector { get; set; }
         public virtual Company company { get; set; }
+        public virtual Questionnaire questionnaire { get; set; }
     }
 }

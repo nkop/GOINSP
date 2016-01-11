@@ -14,6 +14,7 @@ namespace GOINSP.Utility
     public class TDataImport : IImport
     {
         public JSONImport jsonImporter { get; set; }
+        public CSVImport csvImporter { get; set; }
         public Context context { get; set; }
 
         public TDataImport()

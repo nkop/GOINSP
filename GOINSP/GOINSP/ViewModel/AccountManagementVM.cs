@@ -102,7 +102,6 @@ namespace GOINSP.ViewModel
             List<Models.Account> tempUsers = context.Account.ToList();
             Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)).Distinct());
             RaisePropertyChanged("Users");
-            
         }
 
         private void ShowAddUser()

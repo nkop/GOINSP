@@ -7,19 +7,19 @@
         Background="#3598dc">
     
     <Grid Margin="10">
-        <StackPanel DataContext="{Binding InspectionSpecs}">
-            <Label FontWeight="Bold" FontSize="15px" Content="{Binding name}" />
+        <StackPanel>
+            <Label FontWeight="Bold" FontSize="15px" Content="{Binding InspectionSpecs.name}" />
             <WrapPanel Orientation="Horizontal">
                 <!--<Image Width="150" Source="{Binding image}" Height="150" HorizontalAlignment="Left" />-->
                 <Image Width="150" Source="http://icons.iconarchive.com/icons/iconshow/construction/128/House-icon.png" Height="150" HorizontalAlignment="Left" />
                 
                 <WrapPanel Margin="30 0 30 0" Orientation="Vertical">
                     <Label Content="Inspecteur: "  />
-                    <Label Content="{Binding date}" />
-                    <Label Content="{Binding address}" />
+                    <Label Content="{Binding InspectionSpecs.date}" />
+                    <Label Content="{Binding InspectionSpecs.address}" />
                     <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0">
                         <TextBlock.InputBindings>
-                            <MouseBinding Command="{Binding OpenQuestionnaire}" MouseAction="LeftClick" />
+                            <MouseBinding Command="{Binding OpenQuestionnaireCommand}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
                     <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0">

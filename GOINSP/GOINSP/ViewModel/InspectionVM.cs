@@ -1,4 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using GOINSP.Models;
+using GOINSP.Models.QuestionnaireModels;
+using GOINSP.ViewModel.QuestionnaireViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,9 +89,20 @@ namespace GOINSP.ViewModel
             set { inspection.image = value; }
         }
 
-        public Models.Inspection toInspection()
+        public Inspection toInspection()
         {
             return inspection;
         }
+
+        public QuestionnaireVM questionnaire
+        {
+            get {
+                if (inspection.questionnaire == null)
+                    return null;
+                return new QuestionnaireVM(inspection.questionnaire);
+            }
+            set { inspection.questionnaire = value.GetQuestionnaire(); }
+        }
+
     }
 }
