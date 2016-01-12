@@ -105,6 +105,9 @@
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BindablePasswordBox.cs" />
+    <Compile Include="CompanyCrudWindow.xaml.cs">
+      <DependentUpon>CompanyCrudWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CompanyInformationWindow.xaml.cs">
       <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
     </Compile>
@@ -157,7 +160,7 @@
     <Compile Include="Utility\JSONImport.cs" />
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
-    <Compile Include="ViewModel\AddCompanyViewModel.cs" />
+    <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
@@ -195,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompanyCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

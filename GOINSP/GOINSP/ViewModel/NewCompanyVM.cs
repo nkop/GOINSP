@@ -7,7 +7,7 @@ using GOINSP.Models;
 
 namespace GOINSP.ViewModel
 {
-    class NewCompanyVM
+    public class NewCompanyVM
     {
         private Company company;
 
