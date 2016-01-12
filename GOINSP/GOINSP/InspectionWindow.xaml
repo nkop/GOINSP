@@ -18,7 +18,8 @@
                     <StackPanel Width="145" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <Label Content="{Binding name}" />
                         <Label Content="{Binding date}" />
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding description}"></TextBlock>
+                        <Label Content="{Binding address}" />
+                        <Label Content="{Binding zipcode}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

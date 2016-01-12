@@ -32,7 +32,7 @@
                 <Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />
                 
                 <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
-                    <Button Content="Aanpassen" Margin="0 0 0 5" Command="" Width="100"></Button>
+                    <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Width="100"></Button>
                     <Button Content="Verwijderen" Command="" Width="100"></Button>
                 </WrapPanel>
             </WrapPanel>

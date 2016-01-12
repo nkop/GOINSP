@@ -25,6 +25,7 @@ namespace GOINSP.ViewModel
 
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
+        public ICommand UpdateInspection { get; set; }
         public ICommand WeergeefBedrijfCommand { get; set; }
 
         private InspectionVM _newInspection;
@@ -45,7 +46,6 @@ namespace GOINSP.ViewModel
 
         private CompanyVM _selectedBedrijf;
         private AccountVM _selectedUser;
-
 
         public Guid InspectionID;
 
@@ -68,6 +68,7 @@ namespace GOINSP.ViewModel
 
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
+            UpdateInspection = new RelayCommand(Update);
             WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
 
             _newInspection = new InspectionVM();
@@ -106,6 +107,9 @@ namespace GOINSP.ViewModel
             set
             {
                 _selectedBedrijf = value;
+                newInspection.address = SelectedBedrijf.BedrijfsAdres;
+                newInspection.zipcode = SelectedBedrijf.BedrijfsPostcode;
+                RaisePropertyChanged("newInspection");
                 RaisePropertyChanged("SelectedBedrijf");
             }
         }
@@ -138,6 +142,21 @@ namespace GOINSP.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals. " + ex);
+            }
+        }
+
+        private void Update()
+        {
+            try
+            {
+                context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+                MessageBox.Show("Opslaan is geslaagd");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
             }
         }
 

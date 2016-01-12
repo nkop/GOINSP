@@ -149,6 +149,9 @@
     <Compile Include="Controls\RichTextEditor.xaml.cs">
       <DependentUpon>RichTextEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditInspection.xaml.cs">
+      <DependentUpon>EditInspection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditInspectionWindow.xaml.cs">
       <DependentUpon>EditInspectionWindow.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
     </Compile>
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121914537_companyaddress.cs" />
+    <Compile Include="Migrations\201601121914537_companyaddress.Designer.cs">
+      <DependentUpon>201601121914537_companyaddress.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -301,6 +308,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditInspectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,6 +395,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201601121914537_companyaddress.resx">
+      <DependentUpon>201601121914537_companyaddress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

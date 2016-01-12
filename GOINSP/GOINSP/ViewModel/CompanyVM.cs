@@ -54,5 +54,17 @@ namespace GOINSP.ViewModel
                 context.SaveChanges();
             }
         }
+
+        public string BedrijfsAdres
+        {
+            get { return company.BedrijfsAdres; }
+            set { company.BedrijfsAdres = value; }
+        }
+
+        public string BedrijfsPostcode
+        {
+            get { return company.BedrijfsPostcode; }
+            set { company.BedrijfsPostcode = value; }
+        }
     }
 }
