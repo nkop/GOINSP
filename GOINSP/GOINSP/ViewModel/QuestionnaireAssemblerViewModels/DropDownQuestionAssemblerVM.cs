@@ -236,6 +236,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             Question = attachedQuestion.Question;
             Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x, ObservableStringCallback)).ToList());
             AnswerCount = attachedQuestion.Answers.Count;
+            ConditionBoundQuestions = null;
+            ConditionBoundQuestions = new ObservableCollection<QuestionVM>();
             ConditionBoundQuestions = new ObservableCollection<QuestionVM>(attachedQuestion.ConditionBoundQuestions);
         }
 
@@ -250,6 +252,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
                     stringList.Add(obsString.ToString());
                 }
                 attachedQuestion.Answers = stringList;
+                attachedQuestion.ConditionBoundQuestions = null;
                 attachedQuestion.ConditionBoundQuestions = new List<QuestionVM>(ConditionBoundQuestions.ToList());
                 Clean();
             }
@@ -261,6 +264,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             Answers = new ObservableCollection<ObservableString>();
             AnswerCount = 0;
             Question = "";
+            ConditionBoundQuestions = null;
             ConditionBoundQuestions = new ObservableCollection<QuestionVM>();
             attachedQuestion = null;
         }

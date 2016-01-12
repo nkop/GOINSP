@@ -74,10 +74,13 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
             foreach (QuestionVM question in ConditionBoundQuestions)
             {
-                if (question.VisibleConditions.FirstOrDefault(x => x == SelectedAnswer) != null)
-                    question.Visible = Visibility.Visible;
-                else
-                    question.Visible = Visibility.Collapsed;
+                if (question.VisibleConditions != null)
+                {
+                    if (question.VisibleConditions.FirstOrDefault(x => x == SelectedAnswer) != null)
+                        question.Visible = Visibility.Visible;
+                    else
+                        question.Visible = Visibility.Collapsed;
+                }
             }
         }
         
@@ -106,11 +109,12 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
                 foreach (Question question in dropDownQuestion.ConditionBoundQuestions)
                 {
-                    ConditionBoundQuestions.Add(originalQuestionList.Where(x => x.question.ListNumber == question.ListNumber).First());
+                    List<QuestionVM> tempList = originalQuestionList.Where(x => x.question.QuestionID == question.QuestionID).ToList();
+                    if(tempList.Count > 0)
+                        ConditionBoundQuestions.Add(tempList.First());
                 }
             }
         }
-
 
         public DropDownQuestion Insert()
         {

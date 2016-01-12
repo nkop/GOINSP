@@ -218,8 +218,6 @@ namespace GOINSP.ViewModel
 
         public QuestionTemplateVM()
         {
-            Context = new Context();
-
             /*List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
             ObservableCollection<QuestionnaireVM> questionnaireVMs = new ObservableCollection<QuestionnaireVM>(questionnaires.Select(x => new QuestionnaireVM(x)));
 
