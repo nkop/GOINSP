@@ -78,8 +78,8 @@
     </Window.Resources>
     <Grid>
         <StackPanel Margin="0" VerticalAlignment="Center">
-            <Border VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="7" BorderThickness="2,2,2,2" Background="White">
-                <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border CornerRadius="7" BorderThickness="2,2,2,2" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20" BorderBrush="{x:Null}" Height="600" Width="740" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
                             <Setter Property="Focusable" Value="False"/>
