@@ -12,7 +12,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
     public class QuestionVM : ViewModelBase
     {
-        public Question question { get; set; }
+        public QuestionBase question { get; set; }
 
         public int ListNumber
         {
@@ -59,7 +59,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             VisibleConditions = new List<string>();
         }
 
-        public QuestionVM(Question question)
+        public QuestionVM(QuestionBase question)
         {
             this.question = question;
 

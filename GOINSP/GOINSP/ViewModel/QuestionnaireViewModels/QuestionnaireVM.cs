@@ -99,7 +99,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         public QuestionnaireVM()
         {
             questionnaire = new Questionnaire();
-            questionnaire.QuestionnaireCollection = new List<Question>();
+            questionnaire.QuestionnaireCollection = new List<QuestionBase>();
             questionnaire.IsTemplate = false;
             QuestionnaireCollection = new ObservableCollection<QuestionVM>();
         }
@@ -134,6 +134,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 this.QuestionnaireCollection.Add(new SimpleDateTimeQuestionVM(simpleDateQuestion));
             }
+            foreach (InspectorDropDownQuestion inspectorDropDownQuestion in questionnaire.QuestionnaireCollection.OfType<InspectorDropDownQuestion>())
+            {
+                this.QuestionnaireCollection.Add(new InspectorDropDownQuestionVM(inspectorDropDownQuestion));
+            }
 
             foreach (DropDownQuestionVM dropDownQuestion in QuestionnaireCollection.OfType<DropDownQuestionVM>())
             {
@@ -152,7 +156,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
         public void PrepareForCRUD()
         {
-            questionnaire.QuestionnaireCollection = new List<Question>();
+            questionnaire.QuestionnaireCollection = new List<QuestionBase>();
             foreach (SimpleTextQuestionVM simpleTextQuestion in QuestionnaireCollection.OfType<SimpleTextQuestionVM>())
             {
                 questionnaire.QuestionnaireCollection.Add(simpleTextQuestion.Insert());
@@ -176,6 +180,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             foreach (SimpleDateTimeQuestionVM simpleDateQuestion in QuestionnaireCollection.OfType<SimpleDateTimeQuestionVM>())
             {
                 questionnaire.QuestionnaireCollection.Add(simpleDateQuestion.Insert());
+            }
+            foreach (InspectorDropDownQuestionVM inspectorDropDownQuestion in QuestionnaireCollection.OfType<InspectorDropDownQuestionVM>())
+            {
+                questionnaire.QuestionnaireCollection.Add(inspectorDropDownQuestion.Insert());
             }
         }
 

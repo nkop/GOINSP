@@ -47,6 +47,18 @@
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type g:InspectorDropDownQuestionVM}">
+            <StackPanel>
+                <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Width="350" >
+                        <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Width="350">
+                        <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding Answer, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:DropDownQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <StackPanel Orientation="Vertical" Width="350" >

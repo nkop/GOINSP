@@ -42,6 +42,12 @@
                 <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding SelectedAnswer, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type g:InspectorDropDownQuestionVM}">
+            <StackPanel>
+                <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
+                <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding Answer, Mode=TwoWay}"/>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:RadioQuestionVM}">
             <StackPanel>
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
@@ -88,6 +94,13 @@
             <TextBox Text="{Binding SimpleTextQuestionAssemblerVM.Question}"/>
             <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextQuestionCommand}"/>
             <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextQuestionCommand}"/>
+        </StackPanel>
+
+        <StackPanel Name="InspectorDropDownQuestionAssemblerVM" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding InspectorDropDownQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag"/>
+            <TextBox Text="{Binding InspectorDropDownQuestionAssemblerVM.Question}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddInspectorDropDownQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateInspectorDropDownQuestionCommand}"/>
         </StackPanel>
 
         <StackPanel Name="SimpleDateTimeQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleDateTimeQuestionAssemblerVM.Visibility}">

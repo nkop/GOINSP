@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class RadioAnswer : Question
+    public class RadioAnswer : QuestionBase
     {
         public RadioAnswer()
         {

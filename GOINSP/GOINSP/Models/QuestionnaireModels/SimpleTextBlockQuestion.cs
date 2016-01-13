@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class SimpleTextBlockQuestion : Question
+    public class SimpleTextBlockQuestion : QuestionBase
     {
         public SimpleTextBlockQuestion()
         {
@@ -18,7 +18,7 @@ namespace GOINSP.Models.QuestionnaireModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid SimpleTextBlockQuestionID { get; set; }
-        public string Question { get; set; }
+        //public string Question { get; set; }
         public string Answer { get; set; }
     }
 }

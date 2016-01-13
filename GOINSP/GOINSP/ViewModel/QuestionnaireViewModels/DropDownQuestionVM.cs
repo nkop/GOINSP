@@ -87,7 +87,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         public DropDownQuestionVM()
         {
             dropDownQuestion = new DropDownQuestion();
-            dropDownQuestion.ConditionBoundQuestions = new List<Question>();
+            dropDownQuestion.ConditionBoundQuestions = new List<QuestionBase>();
 
             ConditionBoundQuestions = new List<QuestionVM>();
             Answers = new List<string>();
@@ -107,7 +107,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 ConditionBoundQuestions = new List<QuestionVM>();
 
-                foreach (Question question in dropDownQuestion.ConditionBoundQuestions)
+                foreach (QuestionBase question in dropDownQuestion.ConditionBoundQuestions)
                 {
                     List<QuestionVM> tempList = originalQuestionList.Where(x => x.question.QuestionID == question.QuestionID).ToList();
                     if(tempList.Count > 0)
@@ -120,7 +120,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             if (ConditionBoundQuestions.Count != 0)
             {
-                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.Question>();
+                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.QuestionBase>();
 
                 foreach (SimpleTextQuestionVM simpleTextQuestion in ConditionBoundQuestions.OfType<SimpleTextQuestionVM>())
                 {
@@ -146,6 +146,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                 {
                     dropDownQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
                 }
+                foreach (InspectorDropDownQuestionVM inspectorDropDownQuestionVM in ConditionBoundQuestions.OfType<InspectorDropDownQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(inspectorDropDownQuestionVM.Insert());
+                }
 
                 foreach (QuestionVM question in ConditionBoundQuestions)
                 {
@@ -154,7 +158,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             }
             else
             {
-                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.Question>();
+                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.QuestionBase>();
             }
 
             if(Answers.Count != 0)
