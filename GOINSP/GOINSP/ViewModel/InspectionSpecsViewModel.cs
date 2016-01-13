@@ -68,6 +68,7 @@ namespace GOINSP.ViewModel
                 QuestionnaireAnswerViewModel questionnaireAnswerViewModel = ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
                 questionnaireAnswerViewModel.context = context;
                 questionnaireAnswerViewModel.QuestionnaireVM = inspectionSpecs.questionnaire;
+                questionnaireAnswerViewModel.QuestionnaireVM.Context = context;
                 questionnaireAnswerViewModel.QuestionnaireVM.CheckConditionBoundQuestions();
                 questionnaireAnswerViewModel.Show(this);
             }

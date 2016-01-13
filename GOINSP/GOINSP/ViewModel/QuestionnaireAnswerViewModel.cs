@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace GOINSP.ViewModel
@@ -19,7 +20,9 @@ namespace GOINSP.ViewModel
     {
         public Context context { get; set; }
 
+        public ICommand SaveQuestionnaireCommand { get; set; }
         public ICommand EditQuestionnaireCommand { get; set; }
+        public ICommand DeleteQuestionnaireCommand { get; set; }
 
         private QuestionnaireVM questionnaireVM;
         public QuestionnaireVM QuestionnaireVM {
@@ -37,7 +40,32 @@ namespace GOINSP.ViewModel
 
         public QuestionnaireAnswerViewModel()
         {
+            SaveQuestionnaireCommand = new RelayCommand(SaveQuestionnaire);
             EditQuestionnaireCommand = new RelayCommand(EditQuestionnaire);
+            DeleteQuestionnaireCommand = new RelayCommand(DeleteQuestionnaire);
+        }
+
+        private void DeleteQuestionnaire()
+        {
+            DialogResult result = MessageBox.Show("Weet u zeker dat de vragenlijst verwijdert moet worden? Dit kan niet ongedaan gemaakt worden.", "Let op!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                if (QuestionnaireVM != null)
+                {
+                    context.Questionnaire.Remove(questionnaireVM.GetQuestionnaire());
+                    context.SaveChanges();
+                    CloseView();
+                }
+            }
+        }
+
+        private void SaveQuestionnaire()
+        {
+            if (QuestionnaireVM != null)
+            {
+                QuestionnaireVM.Update();
+                CloseView();
+            }
         }
 
         private void EditQuestionnaire()

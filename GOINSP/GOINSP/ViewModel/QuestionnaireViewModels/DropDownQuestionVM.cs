@@ -120,6 +120,8 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             if (ConditionBoundQuestions.Count != 0)
             {
+                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.Question>();
+
                 foreach (SimpleTextQuestionVM simpleTextQuestion in ConditionBoundQuestions.OfType<SimpleTextQuestionVM>())
                 {
                     dropDownQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
