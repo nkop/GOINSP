@@ -196,6 +196,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         {
             if (SelectedBoundQuestion != null)
             {
+                SelectedBoundQuestion.Visible = Visibility.Visible;
                 ConditionBoundQuestions.Remove(SelectedBoundQuestion);
             }
         }

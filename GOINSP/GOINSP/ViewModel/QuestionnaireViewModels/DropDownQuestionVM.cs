@@ -152,6 +152,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                     question.question.VisibleConditions = question.VisibleConditions.Aggregate((c, n) => c + "," + n);
                 }
             }
+            else
+            {
+                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.Question>();
+            }
 
             if(Answers.Count != 0)
                 dropDownQuestion.Answers = Answers.Aggregate((c, n) => c + "," + n);
