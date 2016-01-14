@@ -35,10 +35,12 @@ namespace GOINSP.ViewModel
         }
 
         public ICommand OpenQuestionnaireCommand { get; set; }
+        public ICommand OpenEditInspection { get; set; }
 
         public InspectionSpecsViewModel()
         {
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
+            OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
         }
 
         public void SetInspection(Guid id)
@@ -72,6 +74,13 @@ namespace GOINSP.ViewModel
                 questionnaireAnswerViewModel.QuestionnaireVM.CheckConditionBoundQuestions();
                 questionnaireAnswerViewModel.Show(this);
             }
+        }
+
+        public void OpenEditInspectionWindow()
+        {
+            EditInspection window = new EditInspection();
+            window.Show();
+            CloseView();
         }
 
         public void CloseView()

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GOINSP
 {
     /// <summary>
-    /// Interaction logic for EditInspectionWindow.xaml
+    /// Interaction logic for EditInspection.xaml
     /// </summary>
-    public partial class EditInspectionWindow : Window
+    public partial class EditInspection : Window
     {
-        public EditInspectionWindow()
+        public EditInspection()
         {
             InitializeComponent();
         }

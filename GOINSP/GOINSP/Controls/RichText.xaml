@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="GOINSP.Controls.RichText" x:Name="uxRichText"    
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:asis="clr-namespace:GOINSP.Utility">
+    <Grid>
+        <StackPanel >
+            <RichTextBox Name="mainRTB" AcceptsTab="True" IsReadOnly="True" Height="350"
+                             asis:RichTextboxAssistant.BoundDocument="{Binding Path=Text, ElementName=uxRichText}"
+                             VerticalScrollBarVisibility="Visible" />
+        </StackPanel>
+    </Grid>
+</UserControl>

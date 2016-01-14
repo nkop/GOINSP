@@ -81,10 +81,9 @@
             </ToolBar>
 
             <StackPanel >
-                <RichTextBox Name="mainRTB" AcceptsTab="True"  Height="160"
+                <RichTextBox Name="mainRTB" AcceptsTab="True"  Height="140"
                              asis:RichTextboxAssistant.BoundDocument="{Binding Path=Text, ElementName=uxRichTextEditor}"
                              VerticalScrollBarVisibility="Visible" />
-                <!--<TextBox Text="{Binding Path=Text, ElementName=uxRichTextEditor}" Height="25" />-->
             </StackPanel>
 
         </DockPanel>

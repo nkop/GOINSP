@@ -2,6 +2,7 @@
 using GOINSP.Models;
 using GOINSP.Models.QuestionnaireModels;
 using GOINSP.ViewModel.QuestionnaireViewModels;
+using GOINSP.XamlToHtmlParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,66 +33,68 @@ namespace GOINSP.ViewModel
         public string name
         {
             get { return inspection.name; }
-            set { inspection.name = value; }
+            set
+            {
+                inspection.name = value;
+                RaisePropertyChanged("name");
+            }
         }
 
         public DateTime date
         {
             get { return inspection.date; }
-            set { inspection.date = value; }
-        }
-
-        public double longtitude
-        {
-            get { return inspection.longtitude; }
-            set { inspection.longtitude = value; }
-        }
-
-        public double latitude
-        {
-            get { return inspection.latitude; }
-            set { inspection.latitude = value; }
-        }
-
-        public string address
-        {
-            get { return inspection.address; }
-            set { inspection.address = value; }
-        }
-
-        public string zipcode
-        {
-            get { return inspection.zipcode; }
-            set { inspection.zipcode = value; }
-        }
-
-        public Guid inspectorid
-        {
-            get { return inspection.inspectorid; }
-            set { inspection.inspectorid = value; }
-        }
-
-        public Guid companyid
-        {
-            get { return inspection.companyid; }
-            set { inspection.companyid = value; }
+            set
+            {
+                inspection.date = value;
+                RaisePropertyChanged("date");
+            }
         }
 
         public string description
         {
             get { return inspection.description; }
-            set { inspection.description = value; }
+            set
+            {
+                inspection.description = value;
+                RaisePropertyChanged("description");
+            }
         }
 
         public byte[] image
         {
             get { return inspection.image; }
-            set { inspection.image = value; }
+            set
+            {
+                inspection.image = value;
+                RaisePropertyChanged("image");
+            }
         }
 
         public Inspection toInspection()
         {
             return inspection;
+        }
+
+        public CompanyVM company
+        {
+            get
+            {
+                if (inspection.company == null)
+                    return null;
+                return new CompanyVM(inspection.company);
+            }
+            set { inspection.company = value.ToCompany(); }
+        }
+
+        public AccountVM accountVM
+        {
+            get
+            {
+                if (inspection.inspector == null)
+                    return null;
+                return new AccountVM(inspection.inspector);
+            }
+            set { inspection.inspector = value.ToAccount(); }
         }
 
         public QuestionnaireVM questionnaire

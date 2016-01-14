@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GOINSP
 {
     /// <summary>
-    /// Interaction logic for InspectionOverviewWindow.xaml
+    /// Interaction logic for CompanyInformationWindow.xaml
     /// </summary>
-    public partial class InspectionOverviewWindow : Window
+    public partial class CompanyInformationWindow : Window
     {
-        public InspectionOverviewWindow()
+        public CompanyInformationWindow()
         {
             InitializeComponent();
         }
