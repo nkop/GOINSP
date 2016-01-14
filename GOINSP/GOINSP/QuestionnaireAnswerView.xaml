@@ -4,7 +4,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         DataContext="{Binding QuestionnaireAnswerViewModel, Source={StaticResource Locator}}"
-        Title="QuestionnaireAnswerView" Height="700" Width="1200" Background="#FF3598DC">
+        Title="QuestionnaireAnswerView" Height="700" Width="1200" Background="#FF3598DC" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
@@ -47,6 +47,18 @@
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type g:InspectorDropDownQuestionVM}">
+            <StackPanel>
+                <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Width="350" >
+                        <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Width="350">
+                        <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding Answer, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:DropDownQuestionVM}">
             <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <StackPanel Orientation="Vertical" Width="350" >
@@ -79,27 +91,34 @@
     <Grid>
         <StackPanel Margin="0" VerticalAlignment="Center">
             <Border CornerRadius="7" BorderThickness="2,2,2,2" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20" BorderBrush="{x:Null}" Height="600" Width="740" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Focusable" Value="False"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Height="24" Content="Opslaan" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding SaveQuestionnaireCommand}"/>
+                        <Button Height="24" Content="Aanpassen" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding EditQuestionnaireCommand}"/>
+                        <Button Height="24" Content="Verwijder" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding DeleteQuestionnaireCommand}"/>
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20,0,20,20" BorderBrush="{x:Null}" Height="585" Width="740" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
             </Border>
         </StackPanel>
     </Grid>

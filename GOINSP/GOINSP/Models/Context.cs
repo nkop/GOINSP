@@ -21,7 +21,8 @@ namespace GOINSP.Models
         public DbSet<PostCodeData> PostCodeData { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<Questionnaire> Questionnaire { get; set; }
-        public DbSet<Question> Question { get; set; }
+        public DbSet<QuestionBase> Question { get; set; }
+        public DbSet<InspectorDropDownQuestion> InspectorDropDownQuestion { get; set; }
         public DbSet<RadioAnswer> RadioAnswer { get; set; }
         public DbSet<DropDownQuestion> DropDownQuestion { get; set; }
         public DbSet<SimpleTextBlockQuestion> SimpleTextBlockQuestion { get; set; }

@@ -32,6 +32,7 @@ namespace GOINSP.ViewModel
         public ICommand AddSimpleTextQuestionCommand { get; set; }
         public ICommand AddSimpleIntegerQuestionCommand { get; set; }
         public ICommand AddSimpleDateTimeQuestionCommand { get; set; }
+        public ICommand AddInspectorDropDownQuestionCommand { get; set; }
 
         public ICommand UpdateDropDownQuestionCommand { get; set; }
         public ICommand UpdateRadioQuestionCommand { get; set; }
@@ -39,6 +40,7 @@ namespace GOINSP.ViewModel
         public ICommand UpdateSimpleTextQuestionCommand { get; set; }
         public ICommand UpdateSimpleIntegerQuestionCommand { get; set; }
         public ICommand UpdateSimpleDateTimeQuestionCommand { get; set; }
+        public ICommand UpdateInspectorDropDownQuestionCommand { get; set; }
 
         public ICommand UpdateQuestionnaireCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
@@ -173,6 +175,20 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private InspectorDropDownQuestionAssemblerVM inspectorDropDownQuestionAssemblerVM;
+        public InspectorDropDownQuestionAssemblerVM InspectorDropDownQuestionAssemblerVM
+        {
+            get
+            {
+                return inspectorDropDownQuestionAssemblerVM;
+            }
+            set
+            {
+                inspectorDropDownQuestionAssemblerVM = value;
+                RaisePropertyChanged("InspectorDropDownQuestionAssemblerVM");
+            }
+        }
+
         private ObservableCollection<IAssemblerVM> assemblerVMList;
         public ObservableCollection<IAssemblerVM> AssemblerVMList
         {
@@ -205,6 +221,7 @@ namespace GOINSP.ViewModel
             SimpleTextBlockQuestionAssemblerVM = new SimpleTextBlockQuestionAssemblerVM();
             SimpleIntegerQuestionAssemblerVM = new SimpleIntegerQuestionAssemblerVM();
             SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
+            InspectorDropDownQuestionAssemblerVM = new InspectorDropDownQuestionAssemblerVM();
 
             CreateInterfaceList();
         }
@@ -218,8 +235,6 @@ namespace GOINSP.ViewModel
 
         public QuestionTemplateVM()
         {
-            Context = new Context();
-
             /*List<Questionnaire> questionnaires = Context.Questionnaire.ToList();
             ObservableCollection<QuestionnaireVM> questionnaireVMs = new ObservableCollection<QuestionnaireVM>(questionnaires.Select(x => new QuestionnaireVM(x)));
 
@@ -324,6 +339,7 @@ namespace GOINSP.ViewModel
             AddSimpleTextQuestionCommand = new RelayCommand(AddSimpleTextQuestion);
             AddSimpleIntegerQuestionCommand = new RelayCommand(AddSimpleIntegerQuestion);
             AddSimpleDateTimeQuestionCommand = new RelayCommand(AddSimpleDateTimeQuestion);
+            AddInspectorDropDownQuestionCommand = new RelayCommand(AddInspectorDropDownQuestion);
 
             UpdateDropDownQuestionCommand = new RelayCommand(UpdateDropDownQuestion);
             UpdateRadioQuestionCommand = new RelayCommand(UpdateRadioQuestion);
@@ -331,6 +347,7 @@ namespace GOINSP.ViewModel
             UpdateSimpleTextQuestionCommand = new RelayCommand(UpdateSimpleTextQuestion);
             UpdateSimpleIntegerQuestionCommand = new RelayCommand(UpdateSimpleIntegerQuestion);
             UpdateSimpleDateTimeQuestionCommand = new RelayCommand(UpdateSimpleDateTimeQuestion);
+            UpdateInspectorDropDownQuestionCommand = new RelayCommand(UpdateInspectorDropDownQuestion);
 
             UpdateQuestionnaireCommand = new RelayCommand(UpdateQuestionnaire);
             CloseWindowCommand = new RelayCommand(CloseWindow);
@@ -352,6 +369,7 @@ namespace GOINSP.ViewModel
             AssemblerVMList.Add(SimpleIntegerQuestionAssemblerVM);
             AssemblerVMList.Add(SimpleDateTimeQuestionAssemblerVM);
             AssemblerVMList.Add(DropDownQuestionAssemblerVM);
+            AssemblerVMList.Add(InspectorDropDownQuestionAssemblerVM);
         }
 
         public void MoveSelectedQuestionDown()
@@ -434,6 +452,13 @@ namespace GOINSP.ViewModel
             CreateInterfaceList();
         }
 
+        public void AddInspectorDropDownQuestion()
+        {
+            AddNewQuestionToQuestionnaire(InspectorDropDownQuestionAssemblerVM.Create());
+            InspectorDropDownQuestionAssemblerVM = new InspectorDropDownQuestionAssemblerVM();
+            CreateInterfaceList();
+        }
+
         //Update
 
         public void UpdateDropDownQuestion()
@@ -475,6 +500,13 @@ namespace GOINSP.ViewModel
         {
             SimpleDateTimeQuestionAssemblerVM.Update();
             SimpleDateTimeQuestionAssemblerVM = new SimpleDateTimeQuestionAssemblerVM();
+            CreateInterfaceList();
+        }
+
+        public void UpdateInspectorDropDownQuestion()
+        {
+            InspectorDropDownQuestionAssemblerVM.Update();
+            InspectorDropDownQuestionAssemblerVM = new InspectorDropDownQuestionAssemblerVM();
             CreateInterfaceList();
         }
 

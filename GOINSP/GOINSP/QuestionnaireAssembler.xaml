@@ -13,37 +13,43 @@
     </i:Interaction.Triggers>
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel>
                 <Label Content="{Binding Question}" />
                 <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="FullDateTime"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleIntegerQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel>
                 <Label Content="{Binding Question}" />
                 <xctk:DecimalUpDown Value="{Binding Answer, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextBlockQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel>
                 <Label Content="{Binding Question}" />
                 <TextBox Text="{Binding Answer, Mode=TwoWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Width="330"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel>
                 <Label Content="{Binding Question}" />
                 <TextBox Text="{Binding Answer, Mode=TwoWay}" Width="330"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:DropDownQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel>
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding SelectedAnswer, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type g:InspectorDropDownQuestionVM}">
+            <StackPanel>
+                <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
+                <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding Answer, Mode=TwoWay}"/>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type g:RadioQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
+            <StackPanel>
                 <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
                 <ItemsControl ItemsSource="{Binding Answers}">
                     <ItemsControl.ItemTemplate>
@@ -90,6 +96,13 @@
             <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextQuestionCommand}"/>
         </StackPanel>
 
+        <StackPanel Name="InspectorDropDownQuestionAssemblerVM" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding InspectorDropDownQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag"/>
+            <TextBox Text="{Binding InspectorDropDownQuestionAssemblerVM.Question}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddInspectorDropDownQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateInspectorDropDownQuestionCommand}"/>
+        </StackPanel>
+
         <StackPanel Name="SimpleDateTimeQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleDateTimeQuestionAssemblerVM.Visibility}">
             <Label Content="Vraag"/>
             <TextBox Text="{Binding SimpleDateTimeQuestionAssemblerVM.Question}"/>
@@ -114,7 +127,7 @@
             <Button Height="30" Margin="0,10,0,0" Content="Bind Vraag" VerticalAlignment="Bottom" Command="{Binding DropDownQuestionAssemblerVM.AddBindableQuestionCommand}"/>
             <Label Content="Gebonde Vragen" Margin="0,10,0,0"/>
             <ComboBox ItemsSource="{Binding DropDownQuestionAssemblerVM.ConditionBoundQuestions}" SelectedItem="{Binding DropDownQuestionAssemblerVM.SelectedBoundQuestion}" DisplayMemberPath="Question"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Verwijder Geselecteerde" VerticalAlignment="Bottom" Command="{Binding UpdateDropDownQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Verwijder Geselecteerde" VerticalAlignment="Bottom" Command="{Binding DropDownQuestionAssemblerVM.RemoveBoundDropDownQuestionCommand}"/>
             <Label Content="Zichtbaar Condities" Margin="0,10,0,0"/>
             <ItemsControl ItemsSource="{Binding DropDownQuestionAssemblerVM.CheckBoxAnswers}">
                 <ItemsControl.ItemTemplate>

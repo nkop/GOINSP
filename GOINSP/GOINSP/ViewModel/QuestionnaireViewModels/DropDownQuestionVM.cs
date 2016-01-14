@@ -74,17 +74,20 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
             foreach (QuestionVM question in ConditionBoundQuestions)
             {
-                if (question.VisibleConditions.FirstOrDefault(x => x == SelectedAnswer) != null)
-                    question.Visible = Visibility.Visible;
-                else
-                    question.Visible = Visibility.Collapsed;
+                if (question.VisibleConditions != null)
+                {
+                    if (question.VisibleConditions.FirstOrDefault(x => x == SelectedAnswer) != null)
+                        question.Visible = Visibility.Visible;
+                    else
+                        question.Visible = Visibility.Collapsed;
+                }
             }
         }
         
         public DropDownQuestionVM()
         {
             dropDownQuestion = new DropDownQuestion();
-            dropDownQuestion.ConditionBoundQuestions = new List<Question>();
+            dropDownQuestion.ConditionBoundQuestions = new List<QuestionBase>();
 
             ConditionBoundQuestions = new List<QuestionVM>();
             Answers = new List<string>();
@@ -104,18 +107,21 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             {
                 ConditionBoundQuestions = new List<QuestionVM>();
 
-                foreach (Question question in dropDownQuestion.ConditionBoundQuestions)
+                foreach (QuestionBase question in dropDownQuestion.ConditionBoundQuestions)
                 {
-                    ConditionBoundQuestions.Add(originalQuestionList.Where(x => x.question.ListNumber == question.ListNumber).First());
+                    List<QuestionVM> tempList = originalQuestionList.Where(x => x.question.QuestionID == question.QuestionID).ToList();
+                    if(tempList.Count > 0)
+                        ConditionBoundQuestions.Add(tempList.First());
                 }
             }
         }
-
 
         public DropDownQuestion Insert()
         {
             if (ConditionBoundQuestions.Count != 0)
             {
+                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.QuestionBase>();
+
                 foreach (SimpleTextQuestionVM simpleTextQuestion in ConditionBoundQuestions.OfType<SimpleTextQuestionVM>())
                 {
                     dropDownQuestion.ConditionBoundQuestions.Add(simpleTextQuestion.Insert());
@@ -140,11 +146,19 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                 {
                     dropDownQuestion.ConditionBoundQuestions.Add(simpleDateQuestionVM.Insert());
                 }
+                foreach (InspectorDropDownQuestionVM inspectorDropDownQuestionVM in ConditionBoundQuestions.OfType<InspectorDropDownQuestionVM>())
+                {
+                    dropDownQuestion.ConditionBoundQuestions.Add(inspectorDropDownQuestionVM.Insert());
+                }
 
                 foreach (QuestionVM question in ConditionBoundQuestions)
                 {
                     question.question.VisibleConditions = question.VisibleConditions.Aggregate((c, n) => c + "," + n);
                 }
+            }
+            else
+            {
+                dropDownQuestion.ConditionBoundQuestions = new List<Models.QuestionnaireModels.QuestionBase>();
             }
 
             if(Answers.Count != 0)
