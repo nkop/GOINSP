@@ -4,17 +4,20 @@
         Title="GoInsp - Gebruikersbeheer" Height="350" Width="525"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Background="#3598dc">
+        Background="#3598dc"
+        x:Name="xUserControl">
     <Grid>
         <StackPanel>
-            <TextBlock FontSize="50.667" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,0,45,0" Foreground="White" RenderTransformOrigin="0.7,0.597" Text="Gebruikers GoInsp"/>
-            <WrapPanel Height="20" Width="400">
-                <Button Height="20" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}" Content="Gebruiker Toevoegen"/>
-                <Button Height="20" Width="130" Command="{Binding DeleteUserCommand}" Content="Gebruiker Verwijderen"/>
-                <TextBox x:Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+            <TextBlock FontSize="50.667" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,20,20,0" Foreground="White" RenderTransformOrigin="0.7,0.597" Text="Gebruikers beheer"/>
 
+            <WrapPanel Margin="20 0 20 0">
+                <Button Height="30" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}" Content="Gebruiker Toevoegen"/>
+                <Button Height="30" Width="130" Command="{Binding DeleteUserCommand}" Content="Gebruiker Verwijderen"/>
+                <Label Height="30" Margin="30 0 0 0" HorizontalAlignment="Right">Zoeken:</Label>
+                <TextBox x:Name="SearchBar" Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="10 0 0 0" />
             </WrapPanel>
-            <DataGrid ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}"/>
+            
+            <DataGrid Margin="20" MinHeight="250" ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -119,9 +119,17 @@ namespace GOINSP.ViewModel
 
             if (context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
-                context.Account.Add(NewAccount);
-                context.SaveChanges();
-                LoadUsers();
+                if (NewAccount.UserName != null && NewAccount.Password != null && NewAccount.Email != null &&
+                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && NewAccount.Email.Length > 3)
+                {
+                    context.Account.Add(NewAccount);
+                    context.SaveChanges();
+                    LoadUsers();
+                }
+                else
+                {
+                    MessageBox.Show("Een van de ingevoerde velden is te kort");
+                }
             }
             else
             {
@@ -133,7 +141,7 @@ namespace GOINSP.ViewModel
         {
             AccountVM tempAccount = new AccountVM();
             tempAccount = SelectedAccount;
-            if (SelectedAccount.UserName != null)
+            if (SelectedAccount.id != null)
             {
                 Models.Account AccToDelete = context.Account.Where(a => a.UserName == tempAccount.UserName).FirstOrDefault<Models.Account>();
                 context.Entry(AccToDelete).State = EntityState.Deleted;
