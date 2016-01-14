@@ -10,5 +10,13 @@ namespace GOINSP.Utility
     {
        public static Guid GebruikerID;
        public static Models.Account.Rights Rechten;
+
+
+        //Rechten:
+        //0: Default
+        //1: Externe Inspecteur
+        //2: Manager
+        //3: Administrator
+        //4: Externe Inspecteur
     }
 }
