@@ -62,7 +62,7 @@ namespace GOINSP.ViewModel
             Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
 
             IEnumerable<Account> inspecteurs = context.Account;
-            IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Distinct();
+            IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
             Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
             RaisePropertyChanged("Inspecteurs");
 
@@ -76,6 +76,8 @@ namespace GOINSP.ViewModel
 
             _selectedBedrijf = new CompanyVM();
             _selectedUser = new AccountVM();
+
+            newInspection.date = DateTime.Now;
         }
 
 
@@ -151,6 +153,9 @@ namespace GOINSP.ViewModel
             {
                 context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
+
+                Inspections = Inspections;
+                RaisePropertyChanged("Inspections");
 
                 MessageBox.Show("Opslaan is geslaagd");
             }
