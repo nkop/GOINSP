@@ -9,6 +9,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GOINSP.Models;
+using Microsoft.Practices.ServiceLocation;
 
 namespace GOINSP.ViewModel
 {
@@ -41,8 +42,11 @@ namespace GOINSP.ViewModel
 
         private void pickLocation()
         {
-            
+            LocationPickerVM picker = ServiceLocator.Current.GetInstance<LocationPickerVM>();
+            picker.NewCompanyVM = newCompany;
+            picker.Show();
         }
+
 
         private void deleteCompany()
         {

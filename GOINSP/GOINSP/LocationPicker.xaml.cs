@@ -1,4 +1,5 @@
-﻿using GOINSP.ViewModel;
+﻿using GalaSoft.MvvmLight.Messaging;
+using GOINSP.ViewModel;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,15 @@ namespace GOINSP
         public LocationPicker()
         {
             InitializeComponent();
+
+            Messenger.Default.Register<NotificationMessage>(this, (nm) =>
+            {
+                if (nm.Notification == "CloseView")
+                {
+                    if (nm.Sender == this.DataContext)
+                        this.Close();
+                }
+            });
         }
 
         private void PickerMap_MouseDoubleClick(object sender, MouseButtonEventArgs e)

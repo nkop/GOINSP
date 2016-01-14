@@ -107,7 +107,7 @@ namespace GOINSP.ViewModel
         {
             get
             {
-                return new CompanyCrudVM();
+                return ServiceLocator.Current.GetInstance<CompanyCrudVM>();
             }
         }
 

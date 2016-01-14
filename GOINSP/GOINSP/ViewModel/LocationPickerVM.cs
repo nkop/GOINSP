@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GOINSP.Models;
 using GOINSP.Models.Opendata;
 using GOINSP.Models.Opendata.HuishoudelijkAfval;
@@ -20,9 +21,23 @@ using System.Windows.Input;
 
 namespace GOINSP.ViewModel
 {
-    public class LocationPickerVM : ViewModelBase
+    public class LocationPickerVM : ViewModelBase, INavigatableViewModel
     {
         private Context context;
+
+        private NewCompanyVM newCompanyVM;
+        public NewCompanyVM NewCompanyVM
+        {
+            get
+            {
+                return newCompanyVM;
+            }
+            set
+            {
+                newCompanyVM = value;
+                RaisePropertyChanged("NewCompanyVM");
+            }
+        }
 
         private ObservableCollection<RegioS> observableRegios;
         public ObservableCollection<RegioS> ObservableRegios
@@ -38,21 +53,8 @@ namespace GOINSP.ViewModel
             }
         }
 
-        private string test;
-        public string Test
-        {
-            get
-            {   
-                return test;
-            }
-            set
-            {
-                test = value;
-                RaisePropertyChanged("Test");
-            }
-        }
-
         public ICommand AddPushPinCommand { get; set; }
+        public ICommand SaveLocationCommand { get; set; }
 
         private string longitude;
         public string Longitude
@@ -77,25 +79,32 @@ namespace GOINSP.ViewModel
             }
         }
 
-        private PostCodeDataVM postCode;
-        public PostCodeDataVM PostCode
-        {
-            get { return postCode; }
-            set
-            {
-                postCode = value;
-                RaisePropertyChanged("PostCode");
-            }
-        }
-
         public LocationPickerVM()
         {
             context = new Context();
             ObservableRegios = new ObservableCollection<RegioS>(context.HuishoudelijkAfvalRegioS.OrderBy(xy => xy.Title));
+
+            SaveLocationCommand = new RelayCommand(SaveLocation);
+        }
+
+        private void SaveLocation()
+        {
+            CloseView();
+        }
+
+        public void CleanVM()
+        {
+            NewCompanyVM.BedrijfsPostcode = null;
+            NewCompanyVM.BedrijfsAdres = null;
+            NewCompanyVM.BedrijfsWijk = null;
+            NewCompanyVM.BedrijfsNummer = null;
+            NewCompanyVM.BedrijfsGemeente = null;
         }
 
         public void GetClosestMapPoint()
         {
+            CleanVM();
+
             double LongDec = double.Parse(Longitude);
             double LatDec = double.Parse(Latitude);
 
@@ -106,56 +115,61 @@ namespace GOINSP.ViewModel
 
             List<GmapAPI> mapApiList = gmap.list;
 
-            PostCodeDataVM data = new PostCodeDataVM();
-
             foreach (GmapAPI mapApi in mapApiList)
             {
                 foreach(AddressComponent address_component in mapApi.address_components)
                 {
                     foreach(string type in address_component.types)
                     {
-                        if (type == "postal_code" && data.postcode == null)
+                        if (type == "postal_code" && NewCompanyVM.BedrijfsPostcode == null)
                         {
-                            data.postcode = address_component.long_name.Replace(" ", "");
+                            NewCompanyVM.BedrijfsPostcode = address_component.long_name.Replace(" ", "");
                         }
-                        if (type == "route" && data.street == null)
+                        if (type == "route" && NewCompanyVM.BedrijfsAdres == null)
                         {
-                            data.street = address_component.long_name;
+                            NewCompanyVM.BedrijfsAdres = address_component.long_name;
                         }
-                        if (type == "locality" && data.city == null)
+                        if (type == "locality" && NewCompanyVM.BedrijfsWijk == null)
                         {
-                            data.city = address_component.short_name;
+                            NewCompanyVM.BedrijfsWijk = address_component.short_name;
                         }
-                        if (type == "street_number" && data.street_number == null)
+                        if (type == "street_number" && NewCompanyVM.BedrijfsNummer == null)
                         {
-                            try
-                            {
-                                data.street_number = Convert.ToInt32(address_component.short_name);
-                            }
-                            catch(Exception exc)
-                            {
-
-                            }
+                            NewCompanyVM.BedrijfsNummer = address_component.short_name;
                         }
-                        if (type == "administrative_area_level_2" && data.municipality == null)
+                        if (type == "administrative_area_level_2" && NewCompanyVM.BedrijfsGemeente == null)
                         {
-                            data.municipality = address_component.short_name;
+                            NewCompanyVM.BedrijfsGemeente = address_component.short_name;
                         }
                     }
                 }
             }
 
+            NewCompanyVM.BedrijfsLon = (decimal)LongDec;
+            NewCompanyVM.BedrijfsLat = (decimal)LatDec;
+
             try
             {
-                RegioS regio = context.HuishoudelijkAfvalRegioS.Where(x => x.Title == data.municipality).First();
-                data.municipality = regio.Title;
-                data.municipality_id = regio.Key;
+                RegioS regio = context.HuishoudelijkAfvalRegioS.Where(x => x.Title == NewCompanyVM.BedrijfsGemeente).First();
+                NewCompanyVM.BedrijfsGemeente = regio.Title;
+                NewCompanyVM.BedrijfsGemeenteCode = regio.Key;
             }
             catch(Exception ex)
             {
             }
+        }
 
-            PostCode = data;
+        public void Show(INavigatableViewModel sender = null)
+        {
+            LocationPicker view = new LocationPicker();
+            view.Show();
+        }
+
+        public void CloseView()
+        {
+            Messenger.Default.Send<NotificationMessage>(
+                new NotificationMessage(this, "CloseView")
+            );
         }
     }
 }

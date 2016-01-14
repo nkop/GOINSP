@@ -147,9 +147,6 @@
     <Compile Include="CompanyCrudWindow.xaml.cs">
       <DependentUpon>CompanyCrudWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CompanyInformationWindow.xaml.cs">
-      <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\RichTextEditor.xaml.cs">
       <DependentUpon>RichTextEditor.xaml</DependentUpon>
     </Compile>
@@ -177,6 +174,7 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
@@ -303,10 +301,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BedrijfInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CompanyInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
