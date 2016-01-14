@@ -22,6 +22,8 @@ namespace GOINSP.ViewModel
         public ICommand btnNew { get; set; }
         public ICommand btnSaveNew { get; set; }
         public ICommand btnRefresh { get; set; }
+        public ICommand btnDelete { get; set; }
+        public ICommand btnPickLocation { get; set; }
 
         public CompanyCrudVM()
         {
@@ -33,6 +35,30 @@ namespace GOINSP.ViewModel
             btnNew = new RelayCommand(createNew);
             btnSaveNew = new RelayCommand<Window>(saveNew);
             btnRefresh = new RelayCommand(LoadList);
+            btnDelete = new RelayCommand(deleteCompany);
+            btnPickLocation = new RelayCommand(pickLocation);
+        }
+
+        private void pickLocation()
+        {
+            
+        }
+
+        private void deleteCompany()
+        {
+            try
+            {
+                context.Company.Remove(selectedCompany.toCompany());
+                context.SaveChanges();
+                CompanyList.Remove(selectedCompany);
+                SelectedCompany = CompanyList.First();
+                RaisePropertyChanged();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Kan dit bedrijf niet verwijderen. Het bedrijf zit gekoppeld aan een inspectie.");
+            }
+           
         }
 
         private void createNew()

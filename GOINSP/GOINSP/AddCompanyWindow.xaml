@@ -12,6 +12,9 @@
         
         <TextBlock>Bedrijfs email:</TextBlock>
         <TextBox Text="{Binding NewCompany.BedrijfsEmail}" Margin="0 0 0 10" Height="30"></TextBox>
+        
+        <TextBlock>Locatie:</TextBlock>
+        <Button Content="Kies locatie" Margin="0 0 0 20" Height="30" Command="{Binding btnPickLocation}"></Button>
 
         <Button Content="Toevoegen" Command="{Binding btnSaveNew}" CommandParameter="{Binding ElementName=AddCompany}" Height="30"></Button>
     </StackPanel>
