@@ -15,5 +15,7 @@ namespace GOINSP.Models
         public Guid companyid { get; set; }
         public string BedrijfsNaam { get; set; }
         public string BedrijfsEmail { get; set; }
+        public string BedrijfsAdres { get; set; }
+        public string BedrijfsPostcode { get; set; }
     }
 }
