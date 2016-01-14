@@ -1,0 +1,34 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="GOINSP.LocationPicker"
+        DataContext="{Binding LocationPickerModel, Source={StaticResource Locator}}"
+        Title="LocationPicker" Height="600" Width="1199" Background="#FF3598DC" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <m:Map x:Name="PickerMap" CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Padding="0" Center="51.6790508905935, 5.0618044538692, 0.0000" ZoomLevel="10" AllowDrop="True" ScaleVisibility="Hidden" MouseDoubleClick="PickerMap_MouseDoubleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" d:LayoutOverrides="Height" Margin="0" Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="True"/>
+        <TextBox x:Name="hiddenTextBoxConfirm" Text="" Width="0" Height="0" VerticalAlignment="Top" Margin="297.75,0" d:LayoutOverrides="VerticalAlignment"/>
+        <TextBox x:Name="hiddenTextBoxLong" Text="{Binding Longitude}" Width="0" Height="0" VerticalAlignment="Top"/>
+        <TextBox x:Name="hiddenTextBoxLat" Text="{Binding Latitude}" Width="0" Height="0" VerticalAlignment="Top"/>
+        <StackPanel Margin="0" Grid.Column="1" d:LayoutOverrides="Height" VerticalAlignment="Center">
+            <Border VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="7" BorderThickness="2,2,2,2" Background="White">
+                <StackPanel Margin="100,20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Straat" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.street}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Nummer" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.street_number}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Postcode" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.postcode}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Wijk" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.city}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Gemeente" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Center" Height="22" DisplayMemberPath="Title" SelectedValue="{Binding PostCode.municipality}" SelectedValuePath="Title" ItemsSource="{Binding ObservableRegios}" VerticalAlignment="Top" Width="120"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

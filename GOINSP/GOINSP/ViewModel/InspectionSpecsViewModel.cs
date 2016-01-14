@@ -1,5 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GOINSP.Models;
+using GOINSP.Utility;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
@@ -9,24 +12,73 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GOINSP.ViewModel
 {
-    public class InspectionSpecsViewModel : ViewModelBase
+    public class InspectionSpecsViewModel : ViewModelBase, INavigatableViewModel
     {
         public Context context;
-        public ObservableCollection<InspectionVM> InspectionSpecs { get; set; }
 
-        InspectionViewModel InspectionVMInstance = ServiceLocator.Current.GetInstance<InspectionViewModel>();
+        private InspectionVM inspectionSpecs;
+        public InspectionVM InspectionSpecs
+        {
+            get
+            {
+                return inspectionSpecs;
+            }
+            set
+            {
+                inspectionSpecs = value;
+                RaisePropertyChanged("InspectionSpecs");
+            }
+        }
+
+        public ICommand OpenQuestionnaireCommand { get; set; }
 
         public InspectionSpecsViewModel()
         {
-            context = new Context();
+            OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
+        }
 
+        public void SetInspection(Guid id)
+        {
             IEnumerable<Inspection> inspectie = context.Inspection;
-            IEnumerable<InspectionVM> inspectionVM = inspectie.Select(a => new InspectionVM(a)).Where(p => p.id == InspectionVMInstance.InspectionID);
-            InspectionSpecs = new ObservableCollection<InspectionVM>(inspectionVM);
-            RaisePropertyChanged("InspectionSpecs");
+            InspectionSpecs = inspectie.Select(a => new InspectionVM(a)).Where(p => p.id == id).First();
+        }
+          
+        public void Show(INavigatableViewModel sender = null)
+        {
+            InspectionSpecs window = new InspectionSpecs();
+            window.Show();
+        }
+
+        public void OpenQuestionnaire()
+        {
+            if(inspectionSpecs.questionnaire == null)
+            {
+                QuestionListVM questionListVM = ServiceLocator.Current.GetInstance<QuestionListVM>();
+                questionListVM.context = context;
+                questionListVM.CreateQuestionnaireList();
+                questionListVM.BoundInspection = InspectionSpecs;
+                questionListVM.Show(this);
+            }
+            else
+            {
+                QuestionnaireAnswerViewModel questionnaireAnswerViewModel = ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
+                questionnaireAnswerViewModel.context = context;
+                questionnaireAnswerViewModel.QuestionnaireVM = inspectionSpecs.questionnaire;
+                questionnaireAnswerViewModel.QuestionnaireVM.Context = context;
+                questionnaireAnswerViewModel.QuestionnaireVM.CheckConditionBoundQuestions();
+                questionnaireAnswerViewModel.Show(this);
+            }
+        }
+
+        public void CloseView()
+        {
+            Messenger.Default.Send<NotificationMessage>(
+                new NotificationMessage(this, "CloseView")
+            );
         }
     }
 }

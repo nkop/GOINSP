@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using GOINSP.Utility;
 
 
 namespace GOINSP.ViewModel
@@ -99,7 +100,6 @@ namespace GOINSP.ViewModel
             List<Models.Account> tempUsers = context.Account.ToList();
             Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)).Distinct());
             RaisePropertyChanged("Users");
-            
         }
 
         private void ShowAddUser()
@@ -152,7 +152,14 @@ namespace GOINSP.ViewModel
                 {
                     if (LoginPassword == account.Password)
                     {
-                        
+                        Config.GebruikerID = account.id;
+                        Config.Rechten = account.AccountRights;
+
+                        foreach (Window w in Application.Current.Windows)
+                        {
+                            w.Hide();
+                        }
+
                         MenuControl window = new MenuControl(account.AccountRights.ToString());
                         window.Show();
                     }

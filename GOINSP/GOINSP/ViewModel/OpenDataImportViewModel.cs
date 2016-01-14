@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GOINSP.Models;
 using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,11 +57,15 @@ namespace GOINSP.ViewModel
             }
         }
 
+        Context context;
+
         public OpenDataImportViewModel()
         {
             StartImportCommand = new RelayCommand<string>(StartImport);
             ProgressBarPercentage = 0;
             ButtonsEnabled = true;
+
+            context = new Context();
         }
 
         public void StartImport(string dataType)
@@ -105,6 +111,16 @@ namespace GOINSP.ViewModel
                 default:
                     break;
             }
+        }
+    }
+
+    public class ListViewData
+    {
+        public string key { get; set; }
+
+        public ListViewData(string key)
+        {
+            this.key = key;
         }
     }
 }

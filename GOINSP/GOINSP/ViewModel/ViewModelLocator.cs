@@ -14,9 +14,13 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<AccountManagementVM>();
             SimpleIoc.Default.Register<OpenDataImportViewModel>();
             SimpleIoc.Default.Register<ForgottenPasswordVM>();
+            SimpleIoc.Default.Register<LocationPickerVM>();
+            SimpleIoc.Default.Register<QuestionTemplateVM>();
+            SimpleIoc.Default.Register<QuestionListVM>();
             SimpleIoc.Default.Register<InspectionViewModel>();
             SimpleIoc.Default.Register<InspectionSpecsViewModel>();
             SimpleIoc.Default.Register<CompanyCrudVM>();
+            SimpleIoc.Default.Register<QuestionnaireAnswerViewModel>();
         }
 
         public MainViewModel Main
@@ -51,6 +55,30 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public LocationPickerVM LocationPickerModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LocationPickerVM>();
+            }
+        }
+
+        public QuestionTemplateVM QuestionTemplate
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuestionTemplateVM>();
+            }
+        }
+
+        public QuestionListVM QuestionList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuestionListVM>();
+            }
+        }
+
         public InspectionViewModel Inspection
         {
             get
@@ -63,7 +91,15 @@ namespace GOINSP.ViewModel
         {
             get
             {
-                return new InspectionSpecsViewModel();
+                return ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
+            }
+        }
+
+        public QuestionnaireAnswerViewModel QuestionnaireAnswerViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
             }
         }
 
