@@ -35,11 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
@@ -80,6 +80,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Device" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -131,6 +132,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddCompanyWindow.xaml.cs">
+      <DependentUpon>AddCompanyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
     </Compile>
@@ -141,8 +145,8 @@
       <DependentUpon>BedrijfInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="BindablePasswordBox.cs" />
-    <Compile Include="CompanyInformationWindow.xaml.cs">
-      <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
+    <Compile Include="CompanyCrudWindow.xaml.cs">
+      <DependentUpon>CompanyCrudWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RichText.xaml.cs">
       <DependentUpon>RichText.xaml</DependentUpon>
@@ -236,12 +240,14 @@
     <Compile Include="Utility\JSONImport.cs" />
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
+    <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
     <Compile Include="ViewModel\LocationPickerVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ManagInfoVM.cs" />
     <Compile Include="ViewModel\MultimediaVM.cs" />
     <Compile Include="Models\OpenData.cs" />
     <Compile Include="Models\QuestionList.cs" />
@@ -255,6 +261,7 @@
       <DependentUpon>UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MapVM.cs" />
+    <Compile Include="ViewModel\NewCompanyVM.cs" />
     <Compile Include="ViewModel\OpenDataImportViewModel.cs" />
     <Compile Include="ViewModel\OpenDataVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\RegioSVM.cs" />
@@ -284,6 +291,10 @@
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
     <Compile Include="ViewModel\ReportVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="AddCompanyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="XamlToHtmlParser\HtmlCssParser.cs" />
     <Compile Include="XamlToHtmlParser\HtmlFromXamlConverter.cs" />
     <Compile Include="XamlToHtmlParser\HtmlLexicalAnalyzer.cs" />
@@ -299,11 +310,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BedrijfInfo.xaml">
+    <Page Include="CompanyCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CompanyInformationWindow.xaml">
+    <Page Include="BedrijfInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
