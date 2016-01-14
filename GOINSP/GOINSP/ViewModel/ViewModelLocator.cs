@@ -19,7 +19,9 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<QuestionListVM>();
             SimpleIoc.Default.Register<InspectionViewModel>();
             SimpleIoc.Default.Register<InspectionSpecsViewModel>();
+            SimpleIoc.Default.Register<CompanyCrudVM>();
             SimpleIoc.Default.Register<QuestionnaireAnswerViewModel>();
+            SimpleIoc.Default.Register<ManagInfoVM>();
         }
 
         public MainViewModel Main
@@ -99,6 +101,22 @@ namespace GOINSP.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
+            }
+        }
+
+        public ManagInfoVM ManagInfoVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ManagInfoVM>();
+            }
+        }
+
+        public CompanyCrudVM CompanyCrud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CompanyCrudVM>();
             }
         }
 

@@ -6,26 +6,15 @@
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
     <Grid>
-
-        <ListView HorizontalAlignment="Left" Width="490" Height="352" ItemsSource="{Binding Inspections}" SelectedItem="{Binding selectedInspection}" Margin="10,10,0,0" VerticalAlignment="Top">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Width="145" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <Label Content="{Binding name}" />
-                        <Label Content="{Binding date}" />
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding description}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        <DataGrid Width="490" Height="325" HorizontalAlignment="Left" VerticalAlignment="Bottom" ItemsSource="{Binding Inspections}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedInspection}">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Naam" Binding="{Binding name}" />
+                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Datum" Binding="{Binding date}" />
+                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Adres" Binding="{Binding company.BedrijfsAdres}" />
+                <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Postcode" Binding="{Binding company.BedrijfsPostcode}" />
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="510,10,0,0" Command="{Binding AddInspection}" VerticalAlignment="Top" Width="75"/>
-
-
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,16,0,0" TextWrapping="Wrap" Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
