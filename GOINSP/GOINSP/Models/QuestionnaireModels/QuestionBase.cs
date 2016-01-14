@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class Question
+    public class QuestionBase
     {
-        public Question()
+        public QuestionBase()
         {
 
         }
@@ -21,5 +21,6 @@ namespace GOINSP.Models.QuestionnaireModels
         public int ListNumber { get; set; }
         public bool Visible { get; set; }
         public string VisibleConditions { get; set; }
+        public string Question { get; set; }
     }
 }

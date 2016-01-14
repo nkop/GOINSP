@@ -4,62 +4,122 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         DataContext="{Binding QuestionnaireAnswerViewModel, Source={StaticResource Locator}}"
-        Title="QuestionnaireAnswerView" Height="300" Width="300">
+        Title="QuestionnaireAnswerView" Height="700" Width="1200" Background="#FF3598DC" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
-                <Label Content="{Binding Question}" />
-                <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="FullDateTime"/>
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <Label Content="{Binding Question}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="350">
+                    <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="FullDateTime" Margin="0, 3, 0, 0"/>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleIntegerQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
-                <Label Content="{Binding Question}" />
-                <xctk:DecimalUpDown Value="{Binding Answer, Mode=TwoWay}"/>
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <Label Content="{Binding Question}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="350">
+                    <xctk:DecimalUpDown Value="{Binding Answer, Mode=TwoWay}" Margin="0, 3, 0, 0"/>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextBlockQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
-                <Label Content="{Binding Question}" />
-                <TextBox Text="{Binding Answer, Mode=TwoWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Width="330"/>
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <Label Content="{Binding Question}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="350">
+                    <TextBox Text="{Binding Answer, Mode=TwoWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Margin="0, 3, 0, 0"/>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleTextQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
-                <Label Content="{Binding Question}" />
-                <TextBox Text="{Binding Answer, Mode=TwoWay}" Width="330"/>
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <Label Content="{Binding Question}" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="350">
+                    <TextBox Text="{Binding Answer, Mode=TwoWay}" Margin="0, 3, 0, 0"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type g:InspectorDropDownQuestionVM}">
+            <StackPanel>
+                <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Width="350" >
+                        <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Width="350">
+                        <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding Answer, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:DropDownQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
-                <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
-                <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding SelectedAnswer, Mode=TwoWay}"/>
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Width="350" >
+                    <Label Content="{Binding Question}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="350">
+                    <ComboBox ItemsSource="{Binding Answers}" SelectedValue="{Binding SelectedAnswer, Mode=TwoWay}" Margin="0, 3, 0, 0"/>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:RadioQuestionVM}">
-            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}">
-                <Label Content="{Binding Question}" HorizontalAlignment="Left"/>
-                <ItemsControl ItemsSource="{Binding Answers}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton Content="{Binding Text}" GroupName="{Binding GroupName}" IsChecked="{Binding Checked}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Label Content="Anders, " HorizontalAlignment="Left" Visibility="{Binding AlternativeAnswerVisibility}"/>
-                <TextBox  Visibility="{Binding AlternativeAnswerVisibility}"/>
+            <StackPanel Visibility="{Binding Visible, Mode=TwoWay}" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <Label Content="{Binding Question}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Width="350" HorizontalAlignment="Right">
+                    <ItemsControl ItemsSource="{Binding Answers}" Margin="0, 3, 0, 0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton Content="{Binding Text}" GroupName="{Binding GroupName}" IsChecked="{Binding Checked}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Label Content="Anders, " Visibility="{Binding AlternativeAnswerVisibility}"/>
+                    <TextBox  Visibility="{Binding AlternativeAnswerVisibility}"/>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid>
-
-        <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
+        <StackPanel Margin="0" VerticalAlignment="Center">
+            <Border CornerRadius="7" BorderThickness="2,2,2,2" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Height="24" Content="Opslaan" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding SaveQuestionnaireCommand}"/>
+                        <Button Height="24" Content="Aanpassen" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding EditQuestionnaireCommand}"/>
+                        <Button Height="24" Content="Verwijder" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding DeleteQuestionnaireCommand}"/>
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20,0,20,20" BorderBrush="{x:Null}" Height="585" Width="740" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>

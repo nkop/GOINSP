@@ -57,10 +57,6 @@ namespace GOINSP.ViewModel
 
         public QuestionListVM()
         {
-            context = new Context();
-
-            CreateQuestionnaireList();
-
             EditQuestionnaireCommand = new RelayCommand(EditQuestionnaire);
             AddNewTemplateQuestionnaireCommand = new RelayCommand(AddNewTemplateQuestionnaire);
             AddNewQuestionnaireCommand = new RelayCommand(AddNewQuestionnaire);

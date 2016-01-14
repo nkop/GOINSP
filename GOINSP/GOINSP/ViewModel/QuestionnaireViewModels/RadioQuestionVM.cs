@@ -96,7 +96,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             AlternativeAnswerVisibility = ConversionHelper.BoolToVisibility(radioQuestion.AlternativeAnswerVisibility);
 
             Answers = new List<RadioAnswerVM>();
-            foreach(RadioAnswer answer in radioQuestion.Answers)
+            foreach (RadioAnswer answer in radioQuestion.Answers)
             {
                 Answers.Add(new RadioAnswerVM(answer));
             }

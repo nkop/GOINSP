@@ -17,6 +17,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         DropDownQuestionVM attachedQuestion;
         QuestionnaireVM questionnaire;
         public ICommand AddBindableQuestionCommand { get; set; }
+        public ICommand RemoveBoundDropDownQuestionCommand { get; set; }
 
         private Visibility visibility;
         public Visibility Visibility
@@ -155,6 +156,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             Clean();
 
             AddBindableQuestionCommand = new RelayCommand(AddBindableQuestion);
+            RemoveBoundDropDownQuestionCommand = new RelayCommand(RemoveBoundDropDownQuestion);
+            
             this.questionnaire = questionnaire;
         }
 
@@ -186,6 +189,15 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             {
                 if(!ConditionBoundQuestions.Contains(SelectedBindableQuestion))
                     ConditionBoundQuestions.Add(SelectedBindableQuestion);
+            }
+        }
+
+        public void RemoveBoundDropDownQuestion()
+        {
+            if (SelectedBoundQuestion != null)
+            {
+                SelectedBoundQuestion.Visible = Visibility.Visible;
+                ConditionBoundQuestions.Remove(SelectedBoundQuestion);
             }
         }
 
@@ -236,6 +248,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             Question = attachedQuestion.Question;
             Answers = new ObservableCollection<ObservableString>(attachedQuestion.Answers.Select(x => new ObservableString(x, ObservableStringCallback)).ToList());
             AnswerCount = attachedQuestion.Answers.Count;
+            ConditionBoundQuestions = null;
+            ConditionBoundQuestions = new ObservableCollection<QuestionVM>();
             ConditionBoundQuestions = new ObservableCollection<QuestionVM>(attachedQuestion.ConditionBoundQuestions);
         }
 
@@ -250,6 +264,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
                     stringList.Add(obsString.ToString());
                 }
                 attachedQuestion.Answers = stringList;
+                attachedQuestion.ConditionBoundQuestions = null;
                 attachedQuestion.ConditionBoundQuestions = new List<QuestionVM>(ConditionBoundQuestions.ToList());
                 Clean();
             }
@@ -261,6 +276,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
             Answers = new ObservableCollection<ObservableString>();
             AnswerCount = 0;
             Question = "";
+            ConditionBoundQuestions = null;
             ConditionBoundQuestions = new ObservableCollection<QuestionVM>();
             attachedQuestion = null;
         }
@@ -323,7 +339,7 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
     {
         Func<int> ObservableBoolStringCallback;
         public QuestionVM currentQuestion { get; set; }
-        bool initialized;
+
 
         private string stringObservable;
         public string StringObservable
@@ -340,6 +356,8 @@ namespace GOINSP.ViewModel.QuestionnaireAssemblerViewModels
         }
 
         private bool boolObservable;
+        private bool initialized;
+
         public bool BoolObservable
         {
             get

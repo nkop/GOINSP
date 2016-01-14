@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class DropDownQuestion : Question
+    public class DropDownQuestion : QuestionBase
     {
         public DropDownQuestion()
         {
@@ -18,9 +18,9 @@ namespace GOINSP.Models.QuestionnaireModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid DropDownQuestionID { get; set; }
-        public string Question { get; set; }
+        //public string Question { get; set; }
         public string Answers { get; set; }
         public string SelectedAnswer { get; set; }
-        public virtual List<Question> ConditionBoundQuestions { get; set; }
+        public virtual List<QuestionBase> ConditionBoundQuestions { get; set; }
     }
 }

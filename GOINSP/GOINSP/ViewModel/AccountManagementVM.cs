@@ -53,13 +53,11 @@ namespace GOINSP.ViewModel
             }
         }
 
-        private LoginAuthentication _loginauth;
 
         public AccountManagementVM()
         {
             SelectedAccount = new AccountVM();
             context = new Models.Context();
-            _loginauth = new LoginAuthentication();
 
             SelectedAccount = new AccountVM();
 
@@ -154,7 +152,8 @@ namespace GOINSP.ViewModel
                 {
                     if (LoginPassword == account.Password)
                     {
-                        _loginauth.SaveLoginId(account.id);
+                        Config.GebruikerID = account.id;
+                        Config.Rechten = account.AccountRights;
 
                         foreach (Window w in Application.Current.Windows)
                         {

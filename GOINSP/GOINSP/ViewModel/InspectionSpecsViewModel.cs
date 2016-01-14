@@ -39,8 +39,6 @@ namespace GOINSP.ViewModel
 
         public InspectionSpecsViewModel()
         {
-            context = new Context();
-
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
             OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
         }
@@ -63,6 +61,7 @@ namespace GOINSP.ViewModel
             {
                 QuestionListVM questionListVM = ServiceLocator.Current.GetInstance<QuestionListVM>();
                 questionListVM.context = context;
+                questionListVM.CreateQuestionnaireList();
                 questionListVM.BoundInspection = InspectionSpecs;
                 questionListVM.Show(this);
             }
@@ -71,6 +70,7 @@ namespace GOINSP.ViewModel
                 QuestionnaireAnswerViewModel questionnaireAnswerViewModel = ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
                 questionnaireAnswerViewModel.context = context;
                 questionnaireAnswerViewModel.QuestionnaireVM = inspectionSpecs.questionnaire;
+                questionnaireAnswerViewModel.QuestionnaireVM.Context = context;
                 questionnaireAnswerViewModel.QuestionnaireVM.CheckConditionBoundQuestions();
                 questionnaireAnswerViewModel.Show(this);
             }

@@ -35,11 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
@@ -81,6 +81,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -193,7 +194,8 @@
     <Compile Include="Models\Opendata\HuishoudelijkAfval\TData.cs" />
     <Compile Include="Models\Opendata\PostCodeData\PostCodeData.cs" />
     <Compile Include="Models\QuestionnaireModels\DropDownQuestion.cs" />
-    <Compile Include="Models\QuestionnaireModels\Question.cs" />
+    <Compile Include="Models\QuestionnaireModels\InspectorDropDownQuestion.cs" />
+    <Compile Include="Models\QuestionnaireModels\QuestionBase.cs" />
     <Compile Include="Models\QuestionnaireModels\Questionnaire.cs" />
     <Compile Include="Models\QuestionnaireModels\RadioAnswer.cs" />
     <Compile Include="Models\QuestionnaireModels\RadioQuestion.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Config.cs" />
     <Compile Include="Utility\ConversionHelper.cs" />
     <Compile Include="Utility\CSVImport.cs" />
     <Compile Include="Utility\GmapAPIImport.cs" />
@@ -258,6 +261,7 @@
     <Compile Include="ViewModel\QuestionListVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAnswerViewModel.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\IAssemblerVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\InspectorDropDownQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\RadioQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleDateTimeQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\DropDownQuestionAssemblerVM.cs" />
@@ -265,6 +269,7 @@
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextBlockQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireAssemblerViewModels\SimpleTextQuestionAssemblerVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\DropDownQuestionVM.cs" />
+    <Compile Include="ViewModel\QuestionnaireViewModels\InspectorDropDownQuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionnaireVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\QuestionVM.cs" />
     <Compile Include="ViewModel\QuestionnaireViewModels\RadioAnswerVM.cs" />

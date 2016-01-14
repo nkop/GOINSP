@@ -19,7 +19,7 @@ namespace GOINSP.Models.QuestionnaireModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid QuestionnaireID { get; set; }
 
-        public virtual List<Question> QuestionnaireCollection { get; set; }
+        public virtual List<QuestionBase> QuestionnaireCollection { get; set; }
         public bool IsTemplate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

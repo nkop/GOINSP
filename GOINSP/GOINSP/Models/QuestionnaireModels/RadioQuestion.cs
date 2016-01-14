@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class RadioQuestion : Question
+    public class RadioQuestion : QuestionBase
     {
         public RadioQuestion()
         {
@@ -18,7 +18,7 @@ namespace GOINSP.Models.QuestionnaireModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid RadioQuestionID { get; set; }
-        public string Question { get; set; }
+        //public string Question { get; set; }
         public virtual List<RadioAnswer> Answers { get; set; }
         public string SelectedAnswer { get; set; }
         public string AlternativeAnswer { get; set; }

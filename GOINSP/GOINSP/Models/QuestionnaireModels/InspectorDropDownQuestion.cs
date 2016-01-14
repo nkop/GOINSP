@@ -8,17 +8,20 @@ using System.Threading.Tasks;
 
 namespace GOINSP.Models.QuestionnaireModels
 {
-    public class SimpleIntegerQuestion : QuestionBase
+    public class InspectorDropDownQuestion : QuestionBase
     {
-        public SimpleIntegerQuestion()
+        public InspectorDropDownQuestion()
         {
 
         }
 
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid SimpleIntegerQuestionID { get; set; }
+        public Guid InspectorDropDownQuestionID { get; set; }
+        
         //public string Question { get; set; }
-        public int Answer { get; set; }
+
+        public string Answer { get; set; }
     }
 }
