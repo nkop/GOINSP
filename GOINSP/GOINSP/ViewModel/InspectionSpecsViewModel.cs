@@ -3,10 +3,12 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GOINSP.Models;
 using GOINSP.Utility;
+using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,20 @@ namespace GOINSP.ViewModel
     {
         public Context context;
 
+        private Location mapPoint;
+        public Location MapPoint
+        {
+            get
+            {
+                return mapPoint;
+            }
+            set
+            {
+                mapPoint = value;
+                RaisePropertyChanged("MapPoint");
+            }
+        }
+
         private InspectionVM inspectionSpecs;
         public InspectionVM InspectionSpecs
         {
@@ -30,12 +46,23 @@ namespace GOINSP.ViewModel
             set
             {
                 inspectionSpecs = value;
+                FillPoint();
                 RaisePropertyChanged("InspectionSpecs");
             }
         }
 
         public ICommand OpenQuestionnaireCommand { get; set; }
         public ICommand OpenEditInspection { get; set; }
+
+        public void FillPoint()
+        {
+            MapPoint = null;
+
+            if(InspectionSpecs.company != null)
+            {
+                MapPoint = new Location((double)InspectionSpecs.company.BedrijfsLat, (double)InspectionSpecs.company.BedrijfsLon);
+            }
+        }
 
         public InspectionSpecsViewModel()
         {
