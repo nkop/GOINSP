@@ -89,7 +89,7 @@ namespace GOINSP.ViewModel
             get { return companyList; }
             set { 
                 companyList = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("CompanyList");
             }
         }
 
