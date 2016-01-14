@@ -3,15 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sparrow="http://sparrowtoolkit.codeplex.com/wpf"
         Title="GoInsp - Management Informatie" Height="350" Width="525"
-        DataContext="{Binding Inspection, Source={StaticResource Locator}}"
+        DataContext="{Binding ManagInfoVM, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Background="#3598dc">
     <Grid>
         <StackPanel>
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding SelectedBedrijf.BedrijfsNaam}"></TextBlock>
-            <WrapPanel>
-                <ComboBox Margin="90" VerticalAlignment="Top" ItemsSource="{Binding BedrijfInspecties}" Width="100" Height="20"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
-                    <sparrow:SparrowChart Width="500" Height="500" Margin="90,10,0,10" Background="White">
+            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Inspecties per inspecteur"></TextBlock>
+            <WrapPanel Margin="400,0,0,0">                
+                <!--<sparrow:SparrowChart Width="500" Height="500" Margin="90,10,0,10" Background="White">
                     <sparrow:SparrowChart.XAxis>
                         <sparrow:LinearXAxis/>
                     </sparrow:SparrowChart.XAxis>
@@ -19,16 +18,31 @@
                         <sparrow:LinearYAxis/>
                     </sparrow:SparrowChart.YAxis>
                     <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
-                </sparrow:SparrowChart>
+                </sparrow:SparrowChart>-->
+                
+                <DataGrid Margin="50" Name="InspecteurInspectie" ItemsSource="{Binding ChartData}" Visibility="{Binding InspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
+                    </DataGrid.Columns>                    
+                </DataGrid>
+
+                <DataGrid Margin="50" Name="BedrijfInspectie" ItemsSource="{Binding BedrInspData}" Visibility="{Binding BedrInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Header="Bedrijf" Binding="{Binding Bedrijf.Bedrijfsnaam}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
                 <StackPanel>
-                    <TextBox Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"></TextBox>
-                    <DataGrid Margin="90"  Name="bedrijven"  ItemsSource="{Binding Bedrijven}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBedrijf}" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                   <DataGrid Margin="90"  Name="Inspecteurs"  ItemsSource="{Binding Inspecteurs}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedInspecteur}" HorizontalAlignment="Right" VerticalAlignment="Top" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding UserName}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Command="{Binding WeergeefBedrijfCommand}" Content="Weergeef bedrijf"/>
+                    <Button Command="{Binding ClearInspecteurCommand}" Content="Deselecteer Inspecteur"/>
+                    <Button Command="{Binding ShowInspCommand}" Content="Inspecties per Inspecteur" />
+                    <Button Command="{Binding ShowBedrCommand}" Content="Inspecties per Bedrijf" />
                 </StackPanel>               
 
             </WrapPanel>
