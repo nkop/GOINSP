@@ -12,6 +12,7 @@
             <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenDataImportCommand}"/>
             <Button Name="Management" Content="Management Informatie" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding ManagementInfoCommand}"/>
             <Button Content="Inspection" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenInspectionCommand}"/>
+            <Button Content="Bedrijven" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding OpenCompanyCommand}"/>
         </WrapPanel>
     </Grid>
 </Window>

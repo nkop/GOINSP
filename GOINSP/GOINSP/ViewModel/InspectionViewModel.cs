@@ -18,7 +18,7 @@ namespace GOINSP.ViewModel
     public class InspectionViewModel : ViewModelBase, INavigatableViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
-        public ObservableCollection<CompanyVM> Bedrijven { get; set; }
+        public ObservableCollection<NewCompanyVM> Bedrijven { get; set; }
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
@@ -45,7 +45,7 @@ namespace GOINSP.ViewModel
             }
         }
 
-        private CompanyVM _selectedBedrijf;
+        private NewCompanyVM _selectedBedrijf;
         private AccountVM _selectedUser;
 
         public Guid InspectionID;
@@ -60,7 +60,7 @@ namespace GOINSP.ViewModel
             RaisePropertyChanged("Inspections");
 
             List<Models.Company> companies = context.Company.ToList();
-            Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
+            Bedrijven = new ObservableCollection<NewCompanyVM>(companies.Select(c => new NewCompanyVM(c)).Distinct());
 
             IEnumerable<Account> inspecteurs = context.Account;
             IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
@@ -75,7 +75,7 @@ namespace GOINSP.ViewModel
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
 
-            _selectedBedrijf = new CompanyVM();
+            _selectedBedrijf = new NewCompanyVM();
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
@@ -114,7 +114,7 @@ namespace GOINSP.ViewModel
             set { _selectedUser = value; }
         }
 
-        public CompanyVM SelectedBedrijf
+        public NewCompanyVM SelectedBedrijf
         {
             get { return _selectedBedrijf; }
             set
