@@ -66,5 +66,10 @@ namespace GOINSP.ViewModel
             get { return company.BedrijfsPostcode; }
             set { company.BedrijfsPostcode = value; }
         }
+
+        public Models.Company ToCompany()
+        {
+            return this.company;
+        }
     }
 }

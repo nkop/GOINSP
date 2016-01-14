@@ -38,12 +38,10 @@
         <ComboBox ItemsSource="{Binding Inspecteurs}" SelectedItem="{Binding selectedUser}" DisplayMemberPath="UserName" Grid.Column="1" Grid.Row="3" Margin="10" />
 
         <TextBlock Text="Inspectie adres:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <!--<TextBox Text="{Binding Path=SelectedBedrijf.BedrijfsAdres}" Grid.Column="1" Grid.Row="4" Margin="10"></TextBox>-->
-        <TextBox Text="{Binding Path=newInspection.address}" Grid.Column="1" Grid.Row="4" Margin="10"></TextBox>
+        <TextBox Text="{Binding Path=SelectedBedrijf.BedrijfsAdres}" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Margin="10"></TextBox>
 
         <TextBlock Text="Inspectie postcode:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <!--<TextBox Text="{Binding Path=SelectedBedrijf.BedrijfsPostcode}" Grid.Column="1" Grid.Row="5" Margin="10"></TextBox>-->
-        <TextBox Text="{Binding Path=newInspection.zipcode}" Grid.Column="1" Grid.Row="5" Margin="10"></TextBox>
+        <TextBox Text="{Binding Path=SelectedBedrijf.BedrijfsPostcode}" IsReadOnly="True" Grid.Column="1" Grid.Row="5" Margin="10"></TextBox>
 
         <TextBlock Text="Inspectie Beschrijving:" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ctl:RichTextEditor Text="{Binding Path=newInspection.description, Mode=TwoWay}" Grid.Row="6" Grid.Column="2" Margin="10" />

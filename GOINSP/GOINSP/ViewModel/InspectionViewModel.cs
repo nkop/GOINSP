@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GOINSP.Models;
 using GOINSP.Utility;
 using Microsoft.Practices.ServiceLocation;
@@ -97,6 +98,16 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public InspectionVM UpdateSelectedInspection
+        {
+            get { return _selectedInspection; }
+            set
+            {
+                _selectedInspection = value;
+                OpenInspection(false);
+            }
+        }
+
         public AccountVM selectedUser
         {
             get { return _selectedUser; }
@@ -109,9 +120,6 @@ namespace GOINSP.ViewModel
             set
             {
                 _selectedBedrijf = value;
-                newInspection.address = SelectedBedrijf.BedrijfsAdres;
-                newInspection.zipcode = SelectedBedrijf.BedrijfsPostcode;
-                RaisePropertyChanged("newInspection");
                 RaisePropertyChanged("SelectedBedrijf");
             }
         }
@@ -127,8 +135,8 @@ namespace GOINSP.ViewModel
             try
             {
                 // Set foreign keys
-                _newInspection.inspectorid = selectedUser.id;
-                _newInspection.companyid = SelectedBedrijf.ID;
+                _newInspection.accountVM = selectedUser;
+                _newInspection.company = SelectedBedrijf;
 
                 // Add to database
                 context.Inspection.Add(_newInspection.toInspection());
@@ -139,11 +147,11 @@ namespace GOINSP.ViewModel
                 newInspection = new InspectionVM();
                 RaisePropertyChanged("Inspections");
 
-                MessageBox.Show("Toevoegen is geslaagd");
+                CloseView();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals. " + ex);
+                MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
             }
         }
 
@@ -154,10 +162,9 @@ namespace GOINSP.ViewModel
                 context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
-                Inspections = Inspections;
+                UpdateSelectedInspection = selectedInspection;
+                RaisePropertyChanged("UpdateSelectedInspection");
                 RaisePropertyChanged("Inspections");
-
-                MessageBox.Show("Opslaan is geslaagd");
             }
             catch (Exception)
             {
@@ -165,50 +172,39 @@ namespace GOINSP.ViewModel
             }
         }
 
-        private void LoadInspections()
-        {
-            if (SelectedBedrijf.ID != null)
-            {
-                List<Models.Inspection> inspections = context.Inspection.ToList();
-
-                foreach (Models.Inspection item in inspections)
-                {
-                    if (item.companyid == SelectedBedrijf.ID)
-                    {
-                        BedrijfInspecties.Add(new InspectionVM(item));
-                    }
-                }
-            }
-        }
-
         private void Search()
         {
             if (SearchQuota.Length >= 0)
             {
-                List<Models.Company> tempBedrijven = context.Company.ToList();
-                List<CompanyVM> tempCompanyVM = new List<CompanyVM>();
-                foreach (Models.Company item in tempBedrijven)
+                List<Models.Inspection> tempInspection = context.Inspection.ToList();
+                List<InspectionVM> tempInspectionVM = new List<InspectionVM>();
+                foreach (Models.Inspection item in tempInspection)
                 {
-                    tempCompanyVM.Add(new CompanyVM(item));
+                    tempInspectionVM.Add(new InspectionVM(item));
                 }
-                Bedrijven.Clear();
-                foreach (CompanyVM item in tempCompanyVM)
+                Inspections.Clear();
+                foreach (InspectionVM item in tempInspectionVM)
                 {
-                    if (item.Bedrijfsnaam.Contains(SearchQuota))
+                    if (item.name.Contains(SearchQuota) || item.company.BedrijfsAdres.Contains(SearchQuota) || item.company.BedrijfsPostcode.Contains(SearchQuota))
                     {
-                        Bedrijven.Add(item);
+                        Inspections.Add(item);
                     }
                 }
-                RaisePropertyChanged("Bedrijven");
+                RaisePropertyChanged("Inspections");
             }
         }
 
-        public void OpenInspection()
+        public void OpenInspection(bool show = true)
         {
-            InspectionSpecsViewModel InspectionVMInstance = ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
-            InspectionVMInstance.context = context;
-            InspectionVMInstance.SetInspection(_selectedInspection.id);
-            InspectionVMInstance.Show(this);
+            if (_selectedInspection != null)
+            {
+                InspectionSpecsViewModel InspectionVMInstance = ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
+                InspectionVMInstance.context = context;
+                InspectionVMInstance.SetInspection(_selectedInspection.id);
+
+                if (show)
+                    InspectionVMInstance.Show(this);
+            }
         }
 
         private void ShowBedrijf()
@@ -223,7 +219,9 @@ namespace GOINSP.ViewModel
 
         public void CloseView()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send<NotificationMessage>(
+                new NotificationMessage(this, "CloseView2")
+            );
         }
     }
 }

@@ -80,6 +80,7 @@ namespace GOINSP.ViewModel
         {
             EditInspection window = new EditInspection();
             window.Show();
+            CloseView();
         }
 
         public void CloseView()

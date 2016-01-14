@@ -12,9 +12,18 @@
             <Label FontWeight="Bold" FontSize="15px" Content="{Binding InspectionSpecs.name}" />
             <WrapPanel Orientation="Horizontal">
                 <WrapPanel Margin="30 0 30 0" Orientation="Vertical">
-                    <Label Content="Inspecteur: "  />
-                    <Label Content="{Binding InspectionSpecs.date}" />
-                    <Label Content="{Binding InspectionSpecs.address}" />
+                    <WrapPanel Orientation="Horizontal">
+                        <Label Content="Inspecteur: "  />
+                        <Label Content="{Binding InspectionSpecs.accountVM.UserName}" />
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal">
+                        <Label Content="Datum: "  />
+                        <Label Content="{Binding InspectionSpecs.date}" />
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal">
+                        <Label Content="Adres: "  />
+                        <Label Content="{Binding InspectionSpecs.company.BedrijfsAdres}" />
+                    </WrapPanel>
                     <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenQuestionnaireCommand}" MouseAction="LeftClick" />

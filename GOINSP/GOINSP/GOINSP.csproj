@@ -153,14 +153,8 @@
     <Compile Include="EditInspection.xaml.cs">
       <DependentUpon>EditInspection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditInspectionWindow.xaml.cs">
-      <DependentUpon>EditInspectionWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ForgottenPassword.xaml.cs">
       <DependentUpon>ForgottenPassword.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="InspectionOverviewWindow.xaml.cs">
-      <DependentUpon>InspectionOverviewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="InspectionSpecs.xaml.cs">
       <DependentUpon>InspectionSpecs.xaml</DependentUpon>
@@ -177,9 +171,17 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601121914537_companyaddress.cs" />
-    <Compile Include="Migrations\201601121914537_companyaddress.Designer.cs">
-      <DependentUpon>201601121914537_companyaddress.cs</DependentUpon>
+    <Compile Include="Migrations\201601140958254_test.cs" />
+    <Compile Include="Migrations\201601140958254_test.Designer.cs">
+      <DependentUpon>201601140958254_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601141138512_dbedit.cs" />
+    <Compile Include="Migrations\201601141138512_dbedit.Designer.cs">
+      <DependentUpon>201601141138512_dbedit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601141143558_adresremoveinspection.cs" />
+    <Compile Include="Migrations\201601141143558_adresremoveinspection.Designer.cs">
+      <DependentUpon>201601141143558_adresremoveinspection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -317,15 +319,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditInspectionWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ForgottenPassword.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="InspectionOverviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -400,8 +394,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201601121914537_companyaddress.resx">
-      <DependentUpon>201601121914537_companyaddress.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601140958254_test.resx">
+      <DependentUpon>201601140958254_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601141138512_dbedit.resx">
+      <DependentUpon>201601141138512_dbedit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601141143558_adresremoveinspection.resx">
+      <DependentUpon>201601141143558_adresremoveinspection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
