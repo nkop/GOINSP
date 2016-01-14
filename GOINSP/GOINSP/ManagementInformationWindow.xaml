@@ -9,8 +9,7 @@
     <Grid>
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Inspecties per inspecteur"></TextBlock>
-            <WrapPanel>                
-                <ComboBox Margin="90" VerticalAlignment="Top" ItemsSource="{Binding BedrijfInspecties}" Width="100" Height="20"  SelectedItem="{Binding SelectedInspectie}"></ComboBox>
+            <WrapPanel Margin="400,0,0,0">                
                 <!--<sparrow:SparrowChart Width="500" Height="500" Margin="90,10,0,10" Background="White">
                     <sparrow:SparrowChart.XAxis>
                         <sparrow:LinearXAxis/>
@@ -36,8 +35,7 @@
                 </DataGrid>
 
                 <StackPanel>
-                    <TextBox Name="SearchBar"  Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100"></TextBox>
-                    <DataGrid Margin="90"  Name="Inspecteurs"  ItemsSource="{Binding Inspecteurs}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedInspecteur}" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                   <DataGrid Margin="90"  Name="Inspecteurs"  ItemsSource="{Binding Inspecteurs}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedInspecteur}" HorizontalAlignment="Right" VerticalAlignment="Top" >
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding UserName}"/>
                         </DataGrid.Columns>
