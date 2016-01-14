@@ -175,17 +175,9 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601140958254_test.cs" />
-    <Compile Include="Migrations\201601140958254_test.Designer.cs">
-      <DependentUpon>201601140958254_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601141138512_dbedit.cs" />
-    <Compile Include="Migrations\201601141138512_dbedit.Designer.cs">
-      <DependentUpon>201601141138512_dbedit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601141143558_adresremoveinspection.cs" />
-    <Compile Include="Migrations\201601141143558_adresremoveinspection.Designer.cs">
-      <DependentUpon>201601141143558_adresremoveinspection.cs</DependentUpon>
+    <Compile Include="Migrations\201601141416512_test.cs" />
+    <Compile Include="Migrations\201601141416512_test.Designer.cs">
+      <DependentUpon>201601141416512_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -405,14 +397,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201601140958254_test.resx">
-      <DependentUpon>201601140958254_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601141138512_dbedit.resx">
-      <DependentUpon>201601141138512_dbedit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601141143558_adresremoveinspection.resx">
-      <DependentUpon>201601141143558_adresremoveinspection.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601141416512_test.resx">
+      <DependentUpon>201601141416512_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

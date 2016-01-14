@@ -83,7 +83,7 @@ namespace GOINSP.ViewModel
                     return null;
                 return new CompanyVM(inspection.company);
             }
-            set { inspection.company = value.ToCompany(); }
+            set { inspection.company = value.toCompany(); }
         }
 
         public AccountVM accountVM
