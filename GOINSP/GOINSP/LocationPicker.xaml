@@ -18,15 +18,16 @@
             <Border VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="7" BorderThickness="2,2,2,2" Background="White">
                 <StackPanel Margin="100,20" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Label Content="Straat" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.street}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsAdres}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Nummer" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.street_number}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsNummer}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Postcode" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.postcode}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsPostcode}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Wijk" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding PostCode.city}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsWijk}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Gemeente" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Center" Height="22" DisplayMemberPath="Title" SelectedValue="{Binding PostCode.municipality}" SelectedValuePath="Title" ItemsSource="{Binding ObservableRegios}" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox HorizontalAlignment="Center" Height="22" DisplayMemberPath="Title" SelectedValue="{Binding NewCompanyVM.BedrijfsGemeente}" SelectedValuePath="Title" ItemsSource="{Binding ObservableRegios}" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Opslaan" Margin="0,16,0,0" Height="26" Command="{Binding SaveLocationCommand}"></Button>
                 </StackPanel>
             </Border>
         </StackPanel>

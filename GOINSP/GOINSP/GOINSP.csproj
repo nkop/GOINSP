@@ -132,6 +132,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddCompanyWindow.xaml.cs">
+      <DependentUpon>AddCompanyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddInspection.xaml.cs">
       <DependentUpon>AddInspection.xaml</DependentUpon>
     </Compile>
@@ -142,8 +145,8 @@
       <DependentUpon>BedrijfInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="BindablePasswordBox.cs" />
-    <Compile Include="CompanyInformationWindow.xaml.cs">
-      <DependentUpon>CompanyInformationWindow.xaml</DependentUpon>
+    <Compile Include="CompanyCrudWindow.xaml.cs">
+      <DependentUpon>CompanyCrudWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RichTextEditor.xaml.cs">
       <DependentUpon>RichTextEditor.xaml</DependentUpon>
@@ -225,6 +228,7 @@
     <Compile Include="Utility\JSONImport.cs" />
     <Compile Include="Utility\RegioSImport.cs" />
     <Compile Include="ViewModel\AccountManagementVM.cs" />
+    <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
     <Compile Include="ViewModel\LocationPickerVM.cs" />
@@ -245,6 +249,7 @@
       <DependentUpon>UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MapVM.cs" />
+    <Compile Include="ViewModel\NewCompanyVM.cs" />
     <Compile Include="ViewModel\OpenDataImportViewModel.cs" />
     <Compile Include="ViewModel\OpenDataVM.cs" />
     <Compile Include="ViewModel\Opendata\HuishoudelijkAfval\RegioSVM.cs" />
@@ -274,6 +279,10 @@
     <Compile Include="ViewModel\ReportTemplateVM.cs" />
     <Compile Include="ViewModel\ReportVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="AddCompanyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="XamlToHtmlParser\HtmlCssParser.cs" />
     <Compile Include="XamlToHtmlParser\HtmlFromXamlConverter.cs" />
     <Compile Include="XamlToHtmlParser\HtmlLexicalAnalyzer.cs" />
@@ -289,11 +298,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BedrijfInfo.xaml">
+    <Page Include="CompanyCrudWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CompanyInformationWindow.xaml">
+    <Page Include="BedrijfInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
