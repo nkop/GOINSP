@@ -39,7 +39,7 @@ namespace GOINSP.Utility
             BackgroundWorker w = (BackgroundWorker)sender;
             Console.WriteLine("Syncing database");
             //Sync database
-            //syncHelper.work();
+            syncHelper.work();
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -22,6 +22,7 @@ namespace GOINSP.Utility
 
         public void SetClient()
         {
+            Console.WriteLine("Setting client");
 
             // get the description of SyncScope from the server database
             DbSyncScopeDescription scopeDesc = SqlSyncDescriptionBuilder.GetDescriptionForScope("GOINSPSyncScope", serverConn);
@@ -39,6 +40,7 @@ namespace GOINSP.Utility
 
         public void setServer()
         {
+            Console.WriteLine("Setting server");
 
             // define a new scope named MySyncScope
             DbSyncScopeDescription scopeDesc = new DbSyncScopeDescription("GOINSPSyncScope");
@@ -81,12 +83,21 @@ namespace GOINSP.Utility
             // Remove the scope.
             try
             {
+                Console.WriteLine("Deprovision server");
                 serverDepro.DeprovisionScope("GOINSPSyncScope");
                 Console.WriteLine("Server deprovisioned");
+            }
+            catch (Exception e) {
+                Console.WriteLine("Something went wrong");
+            }
+            try
+            {
+                Console.WriteLine("Deprovision client");
                 clientDepro.DeprovisionScope("GOINSPSyncScope");
                 Console.WriteLine("client deprovisioned");
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Console.WriteLine("Something went wrong");
             }
         }
@@ -94,7 +105,7 @@ namespace GOINSP.Utility
         public void work()
         {
             this.setConnection();
-            this.Sync();
+            this.sync();
 
         }
 
@@ -107,38 +118,50 @@ namespace GOINSP.Utility
         }
 
 
-        private void Sync()
+        private void sync()
         {
-
-            // create the sync orhcestrator
-            SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
-
-            // set local provider of orchestrator to a sync provider associated with the 
-            // GOINSPSyncScope in the client database
-            syncOrchestrator.LocalProvider = new SqlSyncProvider("GOINSPSyncScope", clientConn);
-
-            // set the remote provider of orchestrator to a server sync provider associated with
-            // the GOINSPSyncScope in the server database
-            syncOrchestrator.RemoteProvider = new SqlSyncProvider("GOINSPSyncScope", serverConn);
-
-
-
-            // set the direction of sync session to Upload and Download
-            syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
-
             // subscribe for errors that occur when applying changes to the client
-            ((SqlSyncProvider)syncOrchestrator.LocalProvider).ApplyChangeFailed += new EventHandler<DbApplyChangeFailedEventArgs>(Program_ApplyChangeFailed);
+            try {
+                // create the sync orhcestrator
+                SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
 
-            // execute the synchronization process
-            SyncOperationStatistics syncStats = syncOrchestrator.Synchronize();
+                // set local provider of orchestrator to a sync provider associated with the 
+                // GOINSPSyncScope in the client database
+                syncOrchestrator.LocalProvider = new SqlSyncProvider("GOINSPSyncScope", clientConn);
 
-            // print statistics
-            Console.WriteLine("Start Time: " + syncStats.SyncStartTime);
-            Console.WriteLine("Total Changes Uploaded: " + syncStats.UploadChangesTotal);
-            Console.WriteLine("Total Changes Downloaded: " + syncStats.DownloadChangesTotal);
-            Console.WriteLine("Complete Time: " + syncStats.SyncEndTime);
-            Console.WriteLine(String.Empty);
-            Console.ReadLine();
+                // set the remote provider of orchestrator to a server sync provider associated with
+                // the GOINSPSyncScope in the server database
+                syncOrchestrator.RemoteProvider = new SqlSyncProvider("GOINSPSyncScope", serverConn);
+
+
+
+                // set the direction of sync session to Upload and Download
+                syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
+
+                ((SqlSyncProvider)syncOrchestrator.LocalProvider).ApplyChangeFailed += new EventHandler<DbApplyChangeFailedEventArgs>(Program_ApplyChangeFailed);
+                // execute the synchronization process
+                SyncOperationStatistics syncStats = syncOrchestrator.Synchronize();
+                // print statistics
+                Console.WriteLine("Start Time: " + syncStats.SyncStartTime);
+                Console.WriteLine("Total Changes Uploaded: " + syncStats.UploadChangesTotal);
+                Console.WriteLine("Total Changes Downloaded: " + syncStats.DownloadChangesTotal);
+                Console.WriteLine("Complete Time: " + syncStats.SyncEndTime);
+                Console.WriteLine(String.Empty);
+            }
+            catch(Exception e)
+            {
+                // print statistics
+                Console.WriteLine("Error occured, trying to reprovision");
+                this.reprovision();
+                Console.WriteLine("Reprovision done");
+                Console.WriteLine("Retry syncing");
+                this.sync();
+
+            }
+
+            
+
+            
         }
         static void Program_ApplyChangeFailed(object sender, DbApplyChangeFailedEventArgs e)
         {
