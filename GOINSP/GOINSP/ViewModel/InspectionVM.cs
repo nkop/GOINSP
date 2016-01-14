@@ -75,15 +75,15 @@ namespace GOINSP.ViewModel
             return inspection;
         }
 
-        public CompanyVM company
+        public NewCompanyVM company
         {
             get
             {
                 if (inspection.company == null)
                     return null;
-                return new CompanyVM(inspection.company);
+                return new NewCompanyVM(inspection.company);
             }
-            set { inspection.company = value.ToCompany(); }
+            set { inspection.company = value.toCompany(); }
         }
 
         public AccountVM accountVM

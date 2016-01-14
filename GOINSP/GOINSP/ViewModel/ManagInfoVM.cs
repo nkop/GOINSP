@@ -116,7 +116,7 @@ namespace GOINSP.ViewModel
             {
                 foreach (var item in tempInspecties)
                 {
-                    BedrInspData.Add(new BedrijfInspecties(new CompanyVM(item.company), item.count));
+                    BedrInspData.Add(new BedrijfInspecties(new NewCompanyVM(item.company), item.count));
                 }
             }
             RaisePropertyChanged("BedrInspData");
@@ -143,10 +143,10 @@ namespace GOINSP.ViewModel
 
     public class BedrijfInspecties
     {
-        public CompanyVM Bedrijf {get; set;}
+        public NewCompanyVM Bedrijf { get; set; }
         public int Inspecties { get; set; }
 
-        public BedrijfInspecties(CompanyVM bedrijf, int inspecties)
+        public BedrijfInspecties(NewCompanyVM bedrijf, int inspecties)
         {
             this.Bedrijf = bedrijf;
             this.Inspecties = inspecties;
