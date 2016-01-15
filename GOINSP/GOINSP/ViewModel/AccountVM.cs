@@ -86,7 +86,6 @@ namespace GOINSP.ViewModel
                 var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
                 Config.Context.SaveChanges();
-                
             }
         }
 
