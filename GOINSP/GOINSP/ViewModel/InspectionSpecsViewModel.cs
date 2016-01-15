@@ -155,14 +155,22 @@ namespace GOINSP.ViewModel
                             </div>
                         ";
 
-                        var QuestionTable = "<table>";
+                        var QuestionTable = "Dit rapport heeft geen gekoppelde vragenlijst.";
 
-                        foreach (QuestionVM f in inspectionSpecs.questionnaire.QuestionnaireCollection)
+                        if (InspectionSpecs.questionnaire != null)
                         {
-                            QuestionTable += @"<tr><td style='width: 50%'>" + f.question.Question + @"</td><td>" + f.GetAnswer() + @"</td></tr>";
+                            QuestionTable = "<table>";
+                            InspectionSpecs.questionnaire.CheckConditionBoundQuestions();
+                            ObservableCollection<QuestionVM> SortedQuestionList = new ObservableCollection<QuestionVM>(InspectionSpecs.questionnaire.QuestionnaireCollection.OrderBy(xy => xy.ListNumber));
+
+                            foreach (QuestionVM f in SortedQuestionList)
+                            {
+                                if(f.Visible == Visibility.Visible)
+                                    QuestionTable += @"<tr><td style='width: 50%'>" + f.question.Question + @"</td><td>" + f.GetAnswer() + @"</td></tr>";
+                            }
+                            QuestionTable += @"</table>";
                         }
 
-                        QuestionTable += @"</table>";
 
                         var InfoPagina = @"<div><br /><h1>Algemene informatie:</h1><br /><br />
 
