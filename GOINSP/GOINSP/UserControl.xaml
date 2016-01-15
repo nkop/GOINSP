@@ -4,12 +4,12 @@
         Title="GoInsp - Gebruikersbeheer" Height="900" Width="750"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        x:Name="xUserControl" Background="#FF9DB2C1">
+        x:Name="xUserControl" Background="#FF288BB5">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170*"/>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="124*"/>
+            <ColumnDefinition Width="144*"/>
+            <ColumnDefinition Width="103*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="0,0,0,-154" Grid.ColumnSpan="3" Background="White">
             <TextBlock FontSize="50.667" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,20,20,0" Foreground="#597cb6" RenderTransformOrigin="0.7,0.597" Text="Gebruikers beheer"/>
@@ -39,7 +39,7 @@
                          " Margin="10 0 0 0" />
             </WrapPanel>
 
-            <DataGrid Margin="20" MinHeight="250" ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}" />
+            <DataGrid Margin="20" MinHeight="250" ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}" Height="832" />
         </StackPanel>
     </Grid>
 </Window>
