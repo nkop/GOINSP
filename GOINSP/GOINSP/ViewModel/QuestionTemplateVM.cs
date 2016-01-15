@@ -203,12 +203,9 @@ namespace GOINSP.ViewModel
             }
         }
 
-        public Context Context { get; set; }
-
         public void SetQuestionnaire(QuestionnaireVM questionnaireVM)
         {
             this.Questionnaire = questionnaireVM;
-            this.Questionnaire.Context = Context;
             this.Questionnaire.QuestionnaireCollection = new ObservableCollection<QuestionVM>(Questionnaire.QuestionnaireCollection.OrderBy(xy => xy.ListNumber));
             SetUpQuestionnaireAssembler();
         }

@@ -20,8 +20,6 @@ namespace GOINSP.ViewModel
 {
     public class InspectionSpecsViewModel : ViewModelBase, INavigatableViewModel
     {
-        public Context context;
-
         private Location mapPoint;
         public Location MapPoint
         {
@@ -72,7 +70,7 @@ namespace GOINSP.ViewModel
 
         public void SetInspection(Guid id)
         {
-            IEnumerable<Inspection> inspectie = context.Inspection;
+            IEnumerable<Inspection> inspectie = Config.Context.Inspection;
             InspectionSpecs = inspectie.Select(a => new InspectionVM(a)).Where(p => p.id == id).First();
         }
           
@@ -87,7 +85,6 @@ namespace GOINSP.ViewModel
             if(inspectionSpecs.questionnaire == null)
             {
                 QuestionListVM questionListVM = ServiceLocator.Current.GetInstance<QuestionListVM>();
-                questionListVM.context = context;
                 questionListVM.CreateQuestionnaireList();
                 questionListVM.BoundInspection = InspectionSpecs;
                 questionListVM.Show(this);
@@ -95,9 +92,7 @@ namespace GOINSP.ViewModel
             else
             {
                 QuestionnaireAnswerViewModel questionnaireAnswerViewModel = ServiceLocator.Current.GetInstance<QuestionnaireAnswerViewModel>();
-                questionnaireAnswerViewModel.context = context;
                 questionnaireAnswerViewModel.QuestionnaireVM = inspectionSpecs.questionnaire;
-                questionnaireAnswerViewModel.QuestionnaireVM.Context = context;
                 questionnaireAnswerViewModel.QuestionnaireVM.CheckConditionBoundQuestions();
                 questionnaireAnswerViewModel.Show(this);
             }

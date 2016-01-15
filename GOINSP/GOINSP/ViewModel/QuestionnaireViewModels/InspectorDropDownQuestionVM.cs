@@ -1,5 +1,6 @@
 ﻿using GOINSP.Models;
 using GOINSP.Models.QuestionnaireModels;
+using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,9 +56,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
         public InspectorDropDownQuestionVM()
         {
-            Context context = new Context();
-
-            List<Account> tempList = context.Account.ToList(); ;
+            List<Account> tempList = Config.Context.Account.ToList(); ;
             Answers = new ObservableCollection<string>(tempList.Select(x => x.UserName));
 
             inspectorDropDownQuestion = new InspectorDropDownQuestion();
@@ -67,9 +66,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         public InspectorDropDownQuestionVM(InspectorDropDownQuestion inspectorDropDownQuestion)
             : base(inspectorDropDownQuestion)
         {
-            Context context = new Context();
-
-            List<Account> tempList = context.Account.ToList(); ;
+            List<Account> tempList = Config.Context.Account.ToList(); ;
             Answers = new ObservableCollection<string>(tempList.Select(x => x.UserName));
             this.inspectorDropDownQuestion = inspectorDropDownQuestion;
 

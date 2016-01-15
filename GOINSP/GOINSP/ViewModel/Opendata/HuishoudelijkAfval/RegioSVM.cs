@@ -1,5 +1,6 @@
 ﻿using GOINSP.Models;
 using GOINSP.Models.Opendata.HuishoudelijkAfval;
+using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,10 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
     public class RegioSVM
     {        
         private RegioS regios;
-        private Context context;
 
         public RegioSVM()
         {
             regios = new RegioS();
-            context = new Context();
         }
 
         public string Key
@@ -39,8 +38,8 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
 
         public void Insert()
         {
-            context.HuishoudelijkAfvalRegioS.Add(regios);
-            context.SaveChanges();
+            Config.Context.HuishoudelijkAfvalRegioS.Add(regios);
+            Config.Context.SaveChanges();
         }
     }
 }

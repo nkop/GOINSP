@@ -10,12 +10,12 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GOINSP.Models;
 using Microsoft.Practices.ServiceLocation;
+using GOINSP.Utility;
 
 namespace GOINSP.ViewModel
 {
     public class CompanyCrudVM : ViewModelBase
     {
-        private Context context;
         private ObservableCollection<NewCompanyVM> companyList { get; set; }
         private NewCompanyVM selectedCompany { get; set; }
         private NewCompanyVM newCompany { get; set; }
@@ -28,7 +28,6 @@ namespace GOINSP.ViewModel
 
         public CompanyCrudVM()
         {
-            context = new Context();
             LoadList();
 
             NewCompany = new NewCompanyVM();
@@ -52,8 +51,8 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                context.Company.Remove(selectedCompany.toCompany());
-                context.SaveChanges();
+                Config.Context.Company.Remove(selectedCompany.toCompany());
+                Config.Context.SaveChanges();
                 CompanyList.Remove(selectedCompany);
                 SelectedCompany = CompanyList.First();
                 RaisePropertyChanged();
@@ -74,7 +73,7 @@ namespace GOINSP.ViewModel
 
         private void LoadList()
         {
-            List<Company> tempList = context.Company.ToList();
+            List<Company> tempList = Config.Context.Company.ToList();
             CompanyList = null;
             CompanyList = new ObservableCollection<NewCompanyVM>(tempList.Select(c => new NewCompanyVM(c)).Distinct());
            
@@ -85,7 +84,7 @@ namespace GOINSP.ViewModel
 
         private void save()
         {
-            context.SaveChanges();
+            Config.Context.SaveChanges();
         }
 
         public ObservableCollection<NewCompanyVM> CompanyList
@@ -118,8 +117,8 @@ namespace GOINSP.ViewModel
             {
                 try
                 {
-                    context.Company.Add(newCompany.toCompany());
-                    context.SaveChanges();
+                    Config.Context.Company.Add(newCompany.toCompany());
+                    Config.Context.SaveChanges();
                     LoadList();
                     RaisePropertyChanged("CompanyList");
                     currentWindow.Close();

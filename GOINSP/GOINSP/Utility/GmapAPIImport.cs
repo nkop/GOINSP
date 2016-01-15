@@ -16,7 +16,6 @@ namespace GOINSP.Utility
     {
         public JSONImport jsonImporter { get; set; }
         public CSVImport csvImporter { get; set; }
-        public Context context { get; set; }
         public List<GmapAPI> list = new List<GmapAPI>();
         public string lon;
         public string lat;
@@ -24,7 +23,6 @@ namespace GOINSP.Utility
         public GmapAPIImpler()
         {
             jsonImporter = new JSONImport();
-            context = new Context();
         }
 
         public void Import(IProgress<ImportProgressValues> progress)

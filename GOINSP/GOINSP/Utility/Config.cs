@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOINSP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,9 @@ namespace GOINSP.Utility
 {
     public static class Config
     {
-       public static Guid GebruikerID;
-       public static Models.Account.Rights Rechten;
+        public static Guid GebruikerID;
+        public static Models.Account.Rights Rechten;
+        public static Context Context;
 
 
         //Rechten:
