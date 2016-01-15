@@ -60,13 +60,18 @@ namespace GOINSP.ViewModel
             }
         }
 
-        public byte[] image
+        public string totalAdres
         {
-            get { return inspection.image; }
+            get { return inspection.company.BedrijfsAdres + " " + inspection.company.BedrijfsNummer; }
+        }
+
+        public Guid directory
+        {
+            get { return inspection.directory; }
             set
             {
-                inspection.image = value;
-                RaisePropertyChanged("image");
+                inspection.directory = value;
+                RaisePropertyChanged("directory");
             }
         }
 

@@ -11,6 +11,7 @@ namespace GOINSP.Utility
     {
         private SqlConnection clientConn;
         private SqlConnection serverConn;
+        private DbSyncScopeDescription scopeDesc;
 
         public void setConnection()
         {
@@ -41,7 +42,7 @@ namespace GOINSP.Utility
         private void setScopes() {
             Console.WriteLine("Setting scopes");
             // define a new scope named MySyncScope
-            DbSyncScopeDescription scopeDesc = new DbSyncScopeDescription("GOINSPSyncScope");
+            scopeDesc = new DbSyncScopeDescription("GOINSPSyncScope");
 
             // get the description of the CUSTOMER & PRODUCT table from SERVER database
             DbSyncTableDescription accountsTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Accounts", serverConn);
