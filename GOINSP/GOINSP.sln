@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOINSP", "GOINSP\GOINSP.csproj", "{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoInspTest", "GoInspTest\GoInspTest.csproj", "{F1C05FAE-BA1C-4B28-A241-00E8EAE97401}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01767BFB-C6BE-47B0-8DB6-F6AD8C71D75B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1C05FAE-BA1C-4B28-A241-00E8EAE97401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1C05FAE-BA1C-4B28-A241-00E8EAE97401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1C05FAE-BA1C-4B28-A241-00E8EAE97401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1C05FAE-BA1C-4B28-A241-00E8EAE97401}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

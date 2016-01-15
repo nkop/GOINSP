@@ -110,7 +110,7 @@ namespace GOINSP.ViewModel
             window.Show();
         }
 
-        private void CreateAccount()
+        public void CreateAccount()
         {            
             Models.Account NewAccount = new Models.Account();
             NewAccount.UserName = SelectedAccount.UserName;
@@ -143,7 +143,7 @@ namespace GOINSP.ViewModel
             LoadUsers();
         }
 
-        private void Login()
+        public void Login()
         {
             if (LoginName != null)
             {
