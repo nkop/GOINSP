@@ -49,7 +49,9 @@ namespace GOINSP.Utility
             DbSyncTableDescription accountsTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Accounts", serverConn);
             DbSyncTableDescription companiesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Companies", serverConn);
             DbSyncTableDescription inspectionTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Inspection", serverConn);
-            DbSyncTableDescription locationsTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Locations", serverConn);
+            DbSyncTableDescription postCodeDatasTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("PostCodeDatas", serverConn);
+            DbSyncTableDescription questionBasesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("QuestionBases", serverConn);
+            DbSyncTableDescription questionairesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Questionnaires", serverConn);
             DbSyncTableDescription regiosTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("RegioS", serverConn);
             DbSyncTableDescription tdatasTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("TDatas", serverConn);
 
@@ -57,7 +59,9 @@ namespace GOINSP.Utility
             scopeDesc.Tables.Add(accountsTableDesc);
             scopeDesc.Tables.Add(companiesTableDesc);
             scopeDesc.Tables.Add(inspectionTableDesc);
-            scopeDesc.Tables.Add(locationsTableDesc);
+            scopeDesc.Tables.Add(postCodeDatasTableDesc);
+            scopeDesc.Tables.Add(questionBasesTableDesc);
+            scopeDesc.Tables.Add(questionairesTableDesc);
             scopeDesc.Tables.Add(regiosTableDesc);
             scopeDesc.Tables.Add(tdatasTableDesc);
 
