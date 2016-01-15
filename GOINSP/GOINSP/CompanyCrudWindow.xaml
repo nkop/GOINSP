@@ -9,8 +9,8 @@
     <StackPanel Margin="20">
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding CompanyList}" Height="250" SelectedItem="{Binding SelectedCompany}" ColumnWidth="*" Margin="0 0 0 0" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Bedrijfsnaam"   Binding="{Binding Bedrijfsnaam} />
-                <DataGridTextColumn Header="Email" Binding="{Binding BedrijfsEmail}" />
+                <DataGridTextColumn Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding BedrijfsEmail}"/>
                 <DataGridTextColumn Header="Adres" Binding="{Binding BedrijfsAdres}" />
                 <DataGridTextColumn Header="Nr" Binding="{Binding BedrijfsNummer}" />
                 <DataGridTextColumn Header="Postcode" Binding="{Binding BedrijfsPostcode}" />
