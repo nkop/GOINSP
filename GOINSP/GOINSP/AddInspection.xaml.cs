@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 
 namespace GOINSP
 {
@@ -79,11 +81,47 @@ namespace GOINSP
                     _files.Add(filePath);
                 }
 
-                //UploadFiles(files);
+                UploadFiles(files);
             }
 
             var listbox = sender as ListBox;
             listbox.Background = new SolidColorBrush(Color.FromRgb(226, 226, 226));
         }
+
+        private void UploadFiles(string[] files)
+        {
+            try
+            {
+                //foreach (var file in files)
+                //{
+                //    FileStream filestream = new FileStream(file, FileMode.Open);
+                //    string fileName = System.IO.Path.GetFileName(file);
+
+                //    string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                //    // Combine the base folder with your specific folder....
+                //    string specificFolder = System.IO.Path.Combine(folder, "GoInspGroepB");
+
+                //    // Check if folder exists and if not, create it
+                //    if (!Directory.Exists(specificFolder))
+                //        Directory.CreateDirectory(specificFolder);
+
+                //    specificFolder = specificFolder + "/test.png";
+
+                //    using (var stream = new FileStream(specificFolder, FileMode.Create, FileAccess.Write))
+                //    {
+                //        filestream.CopyTo(stream);
+                //    }
+
+                //    Console.WriteLine("Copied.");
+
+                //}
+            }
+            catch (Exception e)
+            {
+                //Handle exceptions - file not found, access denied, no internet connection etc etc
+            }
+        }
+
     }
 }

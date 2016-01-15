@@ -168,6 +168,7 @@
     <Compile Include="ForgottenPassword.xaml.cs">
       <DependentUpon>ForgottenPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HttpRequestMessage.cs" />
     <Compile Include="InspectionSpecs.xaml.cs">
       <DependentUpon>InspectionSpecs.xaml</DependentUpon>
     </Compile>

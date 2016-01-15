@@ -140,6 +140,11 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public string totaalAdres
+        {
+            get { return company.BedrijfsAdres + " " + company.BedrijfsNummer; }
+        }
+
         public Company toCompany()
         {
             return company;

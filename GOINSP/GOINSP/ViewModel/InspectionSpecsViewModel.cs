@@ -25,6 +25,8 @@ namespace GOINSP.ViewModel
 {
     public class InspectionSpecsViewModel : ViewModelBase, INavigatableViewModel
     {
+        private InspectionViewModel inspectionviewmodel;
+
         private Location mapPoint;
         public Location MapPoint
         {
@@ -70,6 +72,8 @@ namespace GOINSP.ViewModel
 
         public InspectionSpecsViewModel()
         {
+            inspectionviewmodel = ServiceLocator.Current.GetInstance<InspectionViewModel>();
+
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
             OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
             PrintRapport = new RelayCommand(generatePDF);
@@ -109,6 +113,7 @@ namespace GOINSP.ViewModel
         {
             EditInspection window = new EditInspection();
             window.Show();
+            inspectionviewmodel.LoadAddInspection();
             CloseView();
         }
 
