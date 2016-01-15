@@ -17,6 +17,7 @@ namespace GOINSP.ViewModel
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
         public ICommand ShowInspCommand { get; set; }
         public ICommand ShowBedrCommand { get; set; }
+        public ICommand ShowGemInspCommand { get; set; }
         private AccountVM _selectedInspecteur { get; set; }
         public AccountVM SelectedInspecteur
         {
@@ -27,9 +28,19 @@ namespace GOINSP.ViewModel
                 RaisePropertyChanged("SelectedInspecteur");
             }
         }
-
+        public ObservableCollection<InspecteurInspecties> GemInspInspecteur { get; set; }
         public ObservableCollection<InspecteurInspecties> ChartData { get; set; }
         public ObservableCollection<BedrijfInspecties> BedrInspData {get; set;}
+
+        private string _gemInspectiesInspecteur;
+        public string GemInspectiesInspecteur
+        {
+            get { return _gemInspectiesInspecteur; }
+            set { 
+                _gemInspectiesInspecteur = value;
+                RaisePropertyChanged("GemInspectiesInspecteur");
+                }
+        }
 
         private Visibility _bedrInsp;
         public Visibility BedrInsp
@@ -53,33 +64,42 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private Visibility _gemInspInsp;
+        public Visibility GemInspInsp
+        {
+            get { return _gemInspInsp; }
+            set
+            {
+                _gemInspInsp = value;
+                RaisePropertyChanged("GemInspInsp");
+            }
+        }
+
         public ManagInfoVM()
         {
             context = new Models.Context();
 
-
-            List<Models.Account> tempUsers = context.Account.ToList();
-            List<Models.Account> tempInspecteurs = new List<Models.Account>();
-            foreach (Models.Account item in tempUsers)
-            {
-                if (item.AccountRights == Models.Account.Rights.ExterneInspecteur || item.AccountRights == Models.Account.Rights.InterneInspecteur)
-                {
-                    tempInspecteurs.Add(item);
-                }
-            }
-            Inspecteurs = new ObservableCollection<AccountVM>(tempInspecteurs.Select(a => new AccountVM(a)).Distinct());
-            SelectedInspecteur = new AccountVM();
-
             ShowBedrCommand = new RelayCommand(ShowBedrInsp);
             ShowInspCommand = new RelayCommand(ShowInspInsp);
+            ShowGemInspCommand = new RelayCommand(ShowGemInsp);
 
             ShowInspInsp();
+        }
+
+        private void ShowGemInsp()
+        {
+            GemInspInsp = Visibility.Visible;
+            BedrInsp = Visibility.Collapsed;
+            InspInsp = Visibility.Collapsed;
+
+            LoadGemInspData();
         }
 
         private void ShowInspInsp()
         {
             InspInsp = Visibility.Visible;
             BedrInsp = Visibility.Collapsed;
+            GemInspInsp = Visibility.Collapsed;
 
             LoadInspInspData();
         }
@@ -88,14 +108,29 @@ namespace GOINSP.ViewModel
         {
             BedrInsp = Visibility.Visible;
             InspInsp = Visibility.Collapsed;
+            GemInspInsp = Visibility.Collapsed;
 
             LoadBedrInspData();
         }
 
-
+        private void LoadGemInspData()
+        {
+            GemInspInspecteur = new ObservableCollection<InspecteurInspecties>();
+            DateTime datum = DateTime.Now.AddYears(-1);
+            var gemInspecties = context.Inspection.Where(i => i.date >= datum).GroupBy(i => i.inspector).Select(i => new { inspector = i.Key, count = i.Count() });
+            if (gemInspecties != null)
+            {
+                foreach (var item in gemInspecties)
+                {
+                    GemInspInspecteur.Add(new InspecteurInspecties(new AccountVM(item.inspector), ((double)item.count / 12)));
+                }
+            }
+            RaisePropertyChanged("GemInspInspecteur");
+        }
 
         private void LoadInspInspData()
         {
+            int sum = 0;
             ChartData = new ObservableCollection<InspecteurInspecties>();
             var tempInspecties = context.Inspection.GroupBy(p => p.inspector).Select(g => new { inspector = g.Key, count = g.Count() });
             if (tempInspecties != null)
@@ -103,9 +138,13 @@ namespace GOINSP.ViewModel
                 foreach (var item in tempInspecties)
                 {
                     ChartData.Add(new InspecteurInspecties(new AccountVM(item.inspector), item.count));
+                    sum += item.count;
                 }
             }
             RaisePropertyChanged("ChartData");
+
+            GemInspectiesInspecteur = "Gemiddeld aantal inspecties per inspecteur: ";
+            GemInspectiesInspecteur += (sum / ChartData.Count());
         }
 
         private void LoadBedrInspData()
@@ -132,9 +171,9 @@ namespace GOINSP.ViewModel
     public class InspecteurInspecties
     {
         public AccountVM Inspecteur { get; set; }
-        public int Inspecties { get; set; }
+        public double Inspecties { get; set; }
 
-        public InspecteurInspecties(AccountVM inspecteur, int inspecties)
+        public InspecteurInspecties(AccountVM inspecteur, double inspecties)
         {
             this.Inspecteur = inspecteur;
             this.Inspecties = inspecties;
