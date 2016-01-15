@@ -1,5 +1,6 @@
 ﻿using GOINSP.Models;
 using GOINSP.Models.Opendata.HuishoudelijkAfval;
+using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,10 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
     public class TDataVM
     {
         private TData tdata;
-        private Context context;
 
         public TDataVM()
         {
             tdata = new TData();
-            context = new Context();
         }
 
         public int ID
@@ -231,8 +230,8 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
 
         public void Insert() 
         {
-            context.HuishoudelijkAfvalTData.Add(tdata);
-            context.SaveChanges();
+            Config.Context.HuishoudelijkAfvalTData.Add(tdata);
+            Config.Context.SaveChanges();
         }
     }
 }

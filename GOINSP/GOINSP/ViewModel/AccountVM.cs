@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Ioc;
 using System.Data.Entity;
 using GOINSP.Models;
+using GOINSP.Utility;
 
 namespace GOINSP.ViewModel
 {
@@ -17,19 +18,16 @@ namespace GOINSP.ViewModel
     {
         
         private Account account;
-        private Context context;
 
         [PreferredConstructorAttribute]
         public AccountVM()
         {
             this.account = new Account();
-            this.context = new Context();
         }
 
         public AccountVM(Account account)
         {
             this.account = account;
-            this.context = new Context();
         }
 
         public Guid id
@@ -44,9 +42,9 @@ namespace GOINSP.ViewModel
             set { account.UserName = value;
             if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
             {
-                var entry = this.context.Entry(account);
+                var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
-                context.SaveChanges();
+                Config.Context.SaveChanges();
             }                
             }
         }
@@ -58,9 +56,9 @@ namespace GOINSP.ViewModel
             set { account.Password = value;
             if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
             {
-                var entry = this.context.Entry(account);
+                var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
-                context.SaveChanges();
+                Config.Context.SaveChanges();
             }
             }
         }
@@ -71,9 +69,9 @@ namespace GOINSP.ViewModel
             set { account.Email = value;
             if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
             {
-                var entry = this.context.Entry(account);
+                var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
-                context.SaveChanges();
+                Config.Context.SaveChanges();
             }
             
             }
@@ -85,10 +83,9 @@ namespace GOINSP.ViewModel
             set
             {
                 account.AccountRights = value;
-                var entry = this.context.Entry(account);
+                var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
-                context.SaveChanges();
-                
+                Config.Context.SaveChanges();
             }
         }
 

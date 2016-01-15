@@ -57,15 +57,11 @@ namespace GOINSP.ViewModel
             }
         }
 
-        Context context;
-
         public OpenDataImportViewModel()
         {
             StartImportCommand = new RelayCommand<string>(StartImport);
             ProgressBarPercentage = 0;
             ButtonsEnabled = true;
-
-            context = new Context();
         }
 
         public void StartImport(string dataType)
