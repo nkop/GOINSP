@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GOINSP.Models;
 using GOINSP.Utility;
+using GOINSP.ViewModel.QuestionnaireViewModels;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Maps.MapControl.WPF;
@@ -154,6 +155,15 @@ namespace GOINSP.ViewModel
                             </div>
                         ";
 
+                        var QuestionTable = "<table>";
+
+                        foreach (QuestionVM f in inspectionSpecs.questionnaire.QuestionnaireCollection)
+                        {
+                            QuestionTable += @"<tr><td style='width: 50%'>" + f.question.Question + @"</td><td>" + f.GetAnswer() + @"</td></tr>";
+                        }
+
+                        QuestionTable += @"</table>";
+
                         var InfoPagina = @"<div><br /><h1>Algemene informatie:</h1><br /><br />
 
                             <table>
@@ -192,7 +202,10 @@ namespace GOINSP.ViewModel
                             </table>
 
                         <br /><br />
-                        <h1>Rapportage</h1><br />" + inspectionSpecs.description +  @"</div>
+                        <h1>Rapportage</h1><br />" + inspectionSpecs.description +  @"<br /><br /><h1>Vragenlijst</h1>
+                        <br />
+                        " + QuestionTable + @"
+                        </div>
                         ";
 
                         var htmlletje = voorpagina + InfoPagina;
