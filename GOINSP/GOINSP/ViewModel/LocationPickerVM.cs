@@ -23,8 +23,6 @@ namespace GOINSP.ViewModel
 {
     public class LocationPickerVM : ViewModelBase, INavigatableViewModel
     {
-        private Context context;
-
         private NewCompanyVM newCompanyVM;
         public NewCompanyVM NewCompanyVM
         {
@@ -81,8 +79,7 @@ namespace GOINSP.ViewModel
 
         public LocationPickerVM()
         {
-            context = new Context();
-            ObservableRegios = new ObservableCollection<RegioS>(context.HuishoudelijkAfvalRegioS.OrderBy(xy => xy.Title));
+            ObservableRegios = new ObservableCollection<RegioS>(Config.Context.HuishoudelijkAfvalRegioS.OrderBy(xy => xy.Title));
 
             SaveLocationCommand = new RelayCommand(SaveLocation);
         }
@@ -150,7 +147,7 @@ namespace GOINSP.ViewModel
 
             try
             {
-                RegioS regio = context.HuishoudelijkAfvalRegioS.Where(x => x.Title == NewCompanyVM.BedrijfsGemeente).First();
+                RegioS regio = Config.Context.HuishoudelijkAfvalRegioS.Where(x => x.Title == NewCompanyVM.BedrijfsGemeente).First();
                 NewCompanyVM.BedrijfsGemeente = regio.Title;
                 NewCompanyVM.BedrijfsGemeenteCode = regio.Key;
             }

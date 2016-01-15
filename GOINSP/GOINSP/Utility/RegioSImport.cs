@@ -15,12 +15,10 @@ namespace GOINSP.Utility
     {
         public JSONImport jsonImporter { get; set; }
         public CSVImport csvImporter { get; set; }
-        public Context context { get; set; }
 
         public RegioSImport()
         {
             jsonImporter = new JSONImport();
-            context = new Context();
         }
 
         public void Import(IProgress<ImportProgressValues> progress)
@@ -33,8 +31,8 @@ namespace GOINSP.Utility
             list = jo.SelectToken("value", false).ToObject<List<RegioSVM>>();
 
             progress.Report(new ImportProgressValues(0, 0, ImportProgressValues.ProgressStatus.removing));
-            context.HuishoudelijkAfvalRegioS.RemoveRange(context.HuishoudelijkAfvalRegioS);
-            context.SaveChanges();
+            Config.Context.HuishoudelijkAfvalRegioS.RemoveRange(Config.Context.HuishoudelijkAfvalRegioS);
+            Config.Context.SaveChanges();
 
             int count = 0;
 

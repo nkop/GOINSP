@@ -46,6 +46,7 @@
                 <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
                     <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Width="100"></Button>
                     <Button Content="Verwijderen" Command="" Width="100"></Button>
+                    <Button Content="Printen" Margin="0 5 0 5" Command="{Binding PrintRapport}" Width="100"></Button>
                 </WrapPanel>
             </WrapPanel>
             <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" />

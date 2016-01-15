@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +14,6 @@ namespace GOINSP.ViewModel
 {
     public class ManagInfoVM : ViewModelBase
     {
-        private Models.Context context;
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
         public ICommand ShowInspCommand { get; set; }
         public ICommand ShowBedrCommand { get; set; }
@@ -72,8 +72,8 @@ namespace GOINSP.ViewModel
             {
                 _gemInspInsp = value;
                 RaisePropertyChanged("GemInspInsp");
+                }
             }
-        }
 
         public ManagInfoVM()
         {
@@ -132,7 +132,7 @@ namespace GOINSP.ViewModel
         {
             int sum = 0;
             ChartData = new ObservableCollection<InspecteurInspecties>();
-            var tempInspecties = context.Inspection.GroupBy(p => p.inspector).Select(g => new { inspector = g.Key, count = g.Count() });
+            var tempInspecties = Config.Context.Inspection.GroupBy(p => p.inspector).Select(g => new { inspector = g.Key, count = g.Count() });
             if (tempInspecties != null)
             {
                 foreach (var item in tempInspecties)
@@ -150,7 +150,7 @@ namespace GOINSP.ViewModel
         private void LoadBedrInspData()
         {
             BedrInspData = new ObservableCollection<BedrijfInspecties>();
-            var tempInspecties = context.Inspection.GroupBy(p => p.company).Select(g => new { company = g.Key, count = g.Count() });
+            var tempInspecties = Config.Context.Inspection.GroupBy(p => p.company).Select(g => new { company = g.Key, count = g.Count() });
             if (tempInspecties != null)
             {
                 foreach (var item in tempInspecties)

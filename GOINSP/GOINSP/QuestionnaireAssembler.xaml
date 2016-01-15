@@ -5,7 +5,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="911" Width="689" WindowStartupLocation="CenterScreen">
+        Title="QuestionnaireAssembler" Height="900" Width="750" WindowStartupLocation="CenterScreen">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
@@ -64,54 +64,124 @@
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="0,0,0,1">
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" SelectedItem="{Binding SelectedQuestion}" Margin="0,0,0,105" HorizontalAlignment="Left" Width="360">
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" SelectedItem="{Binding SelectedQuestion}" Margin="30,0,0,15" HorizontalAlignment="Left" Width="360">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <ComboBox HorizontalAlignment="Left" Margin="365,30,0,0" VerticalAlignment="Top" Width="306" ItemsSource="{Binding AssemblerVMList}" SelectedItem="{Binding SelectedAssembler}" DisplayMemberPath="AssemblerName">
+        <ComboBox HorizontalAlignment="Left" Margin="395,30,0,0" VerticalAlignment="Top" Width="306" ItemsSource="{Binding AssemblerVMList}" SelectedItem="{Binding SelectedAssembler}" DisplayMemberPath="AssemblerName" SelectionChanged="ComboBox_SelectionChanged">
         </ComboBox>
-        <Label Content="Vragenlijst Component" HorizontalAlignment="Left" Margin="365,4,0,0" VerticalAlignment="Top"/>
+        <Label Content="Vragenlijst Component" HorizontalAlignment="Left" Margin="395,4,0,0" VerticalAlignment="Top"  Foreground="#597cb6"/>
 
-        <StackPanel Name="SimpleIntegerQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleIntegerQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+        <StackPanel Name="SimpleIntegerQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleIntegerQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag"  Foreground="#597cb6"/>
             <TextBox Text="{Binding SimpleIntegerQuestionAssemblerVM.Question}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleIntegerQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleIntegerQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleIntegerQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleIntegerQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
 
-        <StackPanel Name="SimpleTextBlockQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleTextBlockQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+        <StackPanel Name="SimpleTextBlockQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleTextBlockQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag" Foreground="#597cb6"/>
             <TextBox Text="{Binding SimpleTextBlockQuestionAssemblerVM.Question}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextBlockQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextBlockQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextBlockQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextBlockQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
-        
-        <StackPanel Name="SimpleTextQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleTextQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+
+        <StackPanel Name="SimpleTextQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleTextQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag" Foreground="#597cb6"/>
             <TextBox Text="{Binding SimpleTextQuestionAssemblerVM.Question}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleTextQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleTextQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
 
-        <StackPanel Name="InspectorDropDownQuestionAssemblerVM" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding InspectorDropDownQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+        <StackPanel Name="InspectorDropDownQuestionAssemblerVM" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding InspectorDropDownQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag"  Foreground="#597cb6"/>
             <TextBox Text="{Binding InspectorDropDownQuestionAssemblerVM.Question}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddInspectorDropDownQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateInspectorDropDownQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddInspectorDropDownQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateInspectorDropDownQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
 
-        <StackPanel Name="SimpleDateTimeQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleDateTimeQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+        <StackPanel Name="SimpleDateTimeQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding SimpleDateTimeQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag" Foreground="#597cb6"/>
             <TextBox Text="{Binding SimpleDateTimeQuestionAssemblerVM.Question}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleDateTimeQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleDateTimeQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddSimpleDateTimeQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateSimpleDateTimeQuestionCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
 
-        <StackPanel Name="DropDownQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding DropDownQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+        <StackPanel Name="DropDownQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding DropDownQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag" Foreground="#597cb6"/>
             <TextBox Text="{Binding DropDownQuestionAssemblerVM.Question}"/>
             <Label Content="Aantal Opties" Margin="0,10,0,0"/>
             <xctk:DecimalUpDown Value="{Binding DropDownQuestionAssemblerVM.AnswerCount}"/>
@@ -122,13 +192,27 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Label Content="Bindbare Vragen" Margin="0,10,0,0"/>
+            <Label Content="Bindbare Vragen" Margin="0,10,0,0" RenderTransformOrigin="0.507,-0.538" Foreground="#597cb6"/>
             <ComboBox ItemsSource="{Binding DropDownQuestionAssemblerVM.PossibleQuestions}" SelectedItem="{Binding DropDownQuestionAssemblerVM.SelectedBindableQuestion}" DisplayMemberPath="Question"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Bind Vraag" VerticalAlignment="Bottom" Command="{Binding DropDownQuestionAssemblerVM.AddBindableQuestionCommand}"/>
-            <Label Content="Gebonde Vragen" Margin="0,10,0,0"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Bind Vraag" VerticalAlignment="Bottom" Command="{Binding DropDownQuestionAssemblerVM.AddBindableQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label Content="Gebonde Vragen" Margin="0,10,0,0" Foreground="#597cb6" />
             <ComboBox ItemsSource="{Binding DropDownQuestionAssemblerVM.ConditionBoundQuestions}" SelectedItem="{Binding DropDownQuestionAssemblerVM.SelectedBoundQuestion}" DisplayMemberPath="Question"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Verwijder Geselecteerde" VerticalAlignment="Bottom" Command="{Binding DropDownQuestionAssemblerVM.RemoveBoundDropDownQuestionCommand}"/>
-            <Label Content="Zichtbaar Condities" Margin="0,10,0,0"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Verwijder Geselecteerde" VerticalAlignment="Bottom" Command="{Binding DropDownQuestionAssemblerVM.RemoveBoundDropDownQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label Content="Zichtbaar Condities" Margin="0,10,0,0" Foreground="#597cb6" />
             <ItemsControl ItemsSource="{Binding DropDownQuestionAssemblerVM.CheckBoxAnswers}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -139,16 +223,30 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddDropDownQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateDropDownQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddDropDownQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Foreground="#fff" Command="{Binding UpdateDropDownQuestionCommand}" BorderBrush="#FF1783B1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
-        
-        <StackPanel Name="RadioQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="365,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding RadioQuestionAssemblerVM.Visibility}">
-            <Label Content="Vraag"/>
+
+        <StackPanel Name="RadioQuestionConstructor" HorizontalAlignment="Left" Height="746" Margin="395,57,0,0" VerticalAlignment="Top" Width="306" Visibility="{Binding RadioQuestionAssemblerVM.Visibility}">
+            <Label Content="Vraag" Foreground="#597cb6"/>
             <TextBox Text="{Binding RadioQuestionAssemblerVM.Question}"/>
-            <Label Content="Aantal Opties" Margin="0,10,0,0"/>
+            <Label Content="Aantal Opties" Margin="0,10,0,0"  Foreground="#597cb6"/>
             <xctk:DecimalUpDown Value="{Binding RadioQuestionAssemblerVM.AnswerCount}"/>
-            <CheckBox Content="Vrij Invoerbaar Veld" Margin="0,10,0,0" IsChecked="{Binding RadioQuestionAssemblerVM.EmptyField}"></CheckBox>
+            <CheckBox Content="Vrij Invoerbaar Veld" Foreground="#597cb6" Margin="0,10,0,0" IsChecked="{Binding RadioQuestionAssemblerVM.EmptyField}" BorderBrush="#FF1783B1"/>
             <ListBox Height="100" Margin="0,10,0,0" ItemsSource="{Binding RadioQuestionAssemblerVM.RadioAnswers}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -156,12 +254,54 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddRadioQuestionCommand}"/>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateRadioQuestionCommand}"/>
+            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddRadioQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Command="{Binding UpdateRadioQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
-        <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="0,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}"/>
-        <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="180,774,0,-19" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}"/>
-        <Button Content="Verwijder" HorizontalAlignment="Left" Margin="0,803,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding DeleteSelectedQuestionCommand}"/>
-        <Button Content="Opslaan" HorizontalAlignment="Left" Margin="0,832,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding UpdateQuestionnaireCommand}"/>
+        <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="30,774,0,0" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="210,774,0,0" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Verwijder" HorizontalAlignment="Left" Margin="30,803,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding DeleteSelectedQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Opslaan" HorizontalAlignment="Left" Margin="30,832,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding UpdateQuestionnaireCommand}" Foreground="#fff" BorderBrush="#1783b1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

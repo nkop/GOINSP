@@ -56,5 +56,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             return simpleDateQuestion;
         }
+
+        public override string GetAnswer()
+        {
+            return Answer.ToString();
+        }
     }
 }

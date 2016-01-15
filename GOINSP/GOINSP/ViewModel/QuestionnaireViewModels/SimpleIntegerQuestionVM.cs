@@ -56,5 +56,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             return simpleIntegerQuestion;
         }
+
+        public override string GetAnswer()
+        {
+            return Answer.ToString();
+        }
     }
 }
