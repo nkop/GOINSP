@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GOINSP.Utility;
 
 namespace GOINSP
 {
@@ -22,28 +23,34 @@ namespace GOINSP
         public MenuControl(string rights)
         {
             InitializeComponent();
-            if (rights == "Administrator")
+
+            if (Config.Rechten == Models.Account.Rights.Administrator)
             {
-                
+
             }
-            else if (rights == "Manager")
-            {
-                UserControl.Visibility = Visibility.Collapsed;
-            }
-            else if (rights == "ExterneInspecteur")
+            else if (Config.Rechten == Models.Account.Rights.Manager)
             {
                 UserControl.Visibility = Visibility.Collapsed;
-                Management.Visibility = Visibility.Collapsed;
             }
-            else if (rights == "InterneInspecteur")
+            else if (Config.Rechten == Models.Account.Rights.ExterneInspecteur)
             {
                 UserControl.Visibility = Visibility.Collapsed;
                 Management.Visibility = Visibility.Collapsed;
+                OpenData.Visibility = Visibility.Collapsed;
+                Bedrijven.Visibility = Visibility.Collapsed;
+            }
+            else if (Config.Rechten == Models.Account.Rights.InterneInspecteur)
+            {
+                UserControl.Visibility = Visibility.Collapsed;
+                Management.Visibility = Visibility.Collapsed;
+                OpenData.Visibility = Visibility.Collapsed;
             }
             else
             {
                 UserControl.Visibility = Visibility.Collapsed;
                 Management.Visibility = Visibility.Collapsed;
+                OpenData.Visibility = Visibility.Collapsed;
+                Bedrijven.Visibility = Visibility.Collapsed;
             }
 
         }
