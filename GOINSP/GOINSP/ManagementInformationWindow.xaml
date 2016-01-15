@@ -33,7 +33,7 @@
                             <DataGridTextColumn IsReadOnly="True" Header="Type Inspecteur" Binding="{Binding Inspecteur.AccountRights}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBlock Visibility="{Binding InspInsp}" Text="{Binding GemInspectiesInspecteur}"/>
+                    <TextBlock Margin="50" Visibility="{Binding InspInsp}" Text="{Binding GemInspectiesInspecteur}"/>
                 </StackPanel>
 
                 <DataGrid Margin="50" Name="BedrijfInspectie" ItemsSource="{Binding BedrInspData}" Visibility="{Binding BedrInsp}" CanUserAddRows="False" AutoGenerateColumns="False">

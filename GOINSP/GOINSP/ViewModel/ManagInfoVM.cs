@@ -77,8 +77,6 @@ namespace GOINSP.ViewModel
 
         public ManagInfoVM()
         {
-            context = new Models.Context();
-
             ShowBedrCommand = new RelayCommand(ShowBedrInsp);
             ShowInspCommand = new RelayCommand(ShowInspInsp);
             ShowGemInspCommand = new RelayCommand(ShowGemInsp);
@@ -117,7 +115,7 @@ namespace GOINSP.ViewModel
         {
             GemInspInspecteur = new ObservableCollection<InspecteurInspecties>();
             DateTime datum = DateTime.Now.AddYears(-1);
-            var gemInspecties = context.Inspection.Where(i => i.date >= datum).GroupBy(i => i.inspector).Select(i => new { inspector = i.Key, count = i.Count() });
+            var gemInspecties = Config.Context.Inspection.Where(i => i.date >= datum).GroupBy(i => i.inspector).Select(i => new { inspector = i.Key, count = i.Count() });
             if (gemInspecties != null)
             {
                 foreach (var item in gemInspecties)
