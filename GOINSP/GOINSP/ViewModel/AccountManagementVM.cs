@@ -22,6 +22,7 @@ namespace GOINSP.ViewModel
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
+        public Models.Account.Rights newRights { get; set; }
 
         public ObservableCollection<AccountVM> Users { get; set; }
 
@@ -98,7 +99,7 @@ namespace GOINSP.ViewModel
         private void LoadUsers()
         {
             List<Models.Account> tempUsers = context.Account.ToList();
-            Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)).Distinct());
+            Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)));
             RaisePropertyChanged("Users");
         }
 
@@ -116,6 +117,7 @@ namespace GOINSP.ViewModel
             NewAccount.UserName = SelectedAccount.UserName;
             NewAccount.Password = SelectedAccount.Password;
             NewAccount.Email = SelectedAccount.Email;
+            NewAccount.AccountRights = newRights;
 
             if (context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
