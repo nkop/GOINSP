@@ -1,5 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GOINSP.Models;
+using GOINSP.Utility;
 using Microsoft.Practices.ServiceLocation;
 
 namespace GOINSP.ViewModel
@@ -8,6 +10,8 @@ namespace GOINSP.ViewModel
     {
         public ViewModelLocator()
         {
+            Config.Context = new Context();
+
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();

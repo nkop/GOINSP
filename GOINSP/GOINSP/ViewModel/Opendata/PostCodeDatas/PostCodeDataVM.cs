@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GOINSP.Models;
 using GOINSP.Models.Opendata.PostCodeData;
+using GOINSP.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,10 @@ namespace GOINSP.ViewModel.Opendata.PostCodeDatas
     public class PostCodeDataVM : ViewModelBase
     {
         private PostCodeData postCodeData;
-        private Context context;
 
         public PostCodeDataVM()
         {
             postCodeData = new PostCodeData();
-            context = new Context();
         }
 
         public Guid PostCodeID
@@ -162,8 +161,8 @@ namespace GOINSP.ViewModel.Opendata.PostCodeDatas
 
         public void Insert()
         {
-            context.PostCodeData.Add(postCodeData);
-            context.SaveChanges();
+            Config.Context.PostCodeData.Add(postCodeData);
+            Config.Context.SaveChanges();
         }
     }
 }

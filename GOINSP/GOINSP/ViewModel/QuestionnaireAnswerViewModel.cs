@@ -18,8 +18,6 @@ namespace GOINSP.ViewModel
 {
     public class QuestionnaireAnswerViewModel : ViewModelBase, INavigatableViewModel
     {
-        public Context context { get; set; }
-
         public ICommand SaveQuestionnaireCommand { get; set; }
         public ICommand EditQuestionnaireCommand { get; set; }
         public ICommand DeleteQuestionnaireCommand { get; set; }
@@ -52,8 +50,8 @@ namespace GOINSP.ViewModel
             {
                 if (QuestionnaireVM != null)
                 {
-                    context.Questionnaire.Remove(questionnaireVM.GetQuestionnaire());
-                    context.SaveChanges();
+                    Config.Context.Questionnaire.Remove(questionnaireVM.GetQuestionnaire());
+                    Config.Context.SaveChanges();
                     CloseView();
                 }
             }
@@ -73,7 +71,6 @@ namespace GOINSP.ViewModel
             if(QuestionnaireVM != null)
             {
                 QuestionTemplateVM questionTemplateVM = ServiceLocator.Current.GetInstance<QuestionTemplateVM>();
-                questionTemplateVM.Context = context;
                 questionTemplateVM.SetQuestionnaire(QuestionnaireVM);
                 questionTemplateVM.Show(this);
                 CloseView();

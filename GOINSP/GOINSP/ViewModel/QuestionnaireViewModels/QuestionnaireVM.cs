@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using GOINSP.Models.QuestionnaireModels;
 using System.Data.Entity.Infrastructure;
+using GOINSP.Utility;
 
 namespace GOINSP.ViewModel.QuestionnaireViewModels
 {
     public class QuestionnaireVM : ViewModelBase
     {
-        public Context Context { get; set; }
         private Questionnaire questionnaire;
 
         private ObservableCollection<QuestionVM> questionnaireCollection;
@@ -190,23 +190,23 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         public void Update()
         {
             PrepareForCRUD();
-            Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Modified;
-            Context.SaveChanges();
+            Config.Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Modified;
+            Config.Context.SaveChanges();
         }
 
         public void Duplicate()
         {
             PrepareForCRUD();
-            Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Detached;
-            Context.Questionnaire.Add(questionnaire);
-            Context.SaveChanges();
+            Config.Context.Entry(questionnaire).State = System.Data.Entity.EntityState.Detached;
+            Config.Context.Questionnaire.Add(questionnaire);
+            Config.Context.SaveChanges();
         }
 
         public void Insert()
         {
             PrepareForCRUD();
-            Context.Questionnaire.Add(questionnaire);
-            Context.SaveChanges();
+            Config.Context.Questionnaire.Add(questionnaire);
+            Config.Context.SaveChanges();
         }
     }
 }
