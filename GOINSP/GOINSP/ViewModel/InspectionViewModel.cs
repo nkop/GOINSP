@@ -20,10 +20,20 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
         public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
+        private ObservableCollection<NewCompanyVM> bedrijven; 
+        public ObservableCollection<NewCompanyVM> Bedrijven { 
+            get
+            {
+                return bedrijven;
+            }
+            set
+            {
+                bedrijven = value;
+                RaisePropertyChanged("Bedrijven");
+            }
+        }
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
-
-        public Context context;
 
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
@@ -36,7 +46,7 @@ namespace GOINSP.ViewModel
 
         private string _searchQuota { get; set; }
 
-        private CompanyVM _selectedBedrijf;
+        private NewCompanyVM _selectedBedrijf;
         private AccountVM _selectedUser;
         private InspectionTypeVM _selectedtype;
 
@@ -44,25 +54,15 @@ namespace GOINSP.ViewModel
 
         public InspectionViewModel()
         {
-            context = new Context();
-
-            IEnumerable<Inspection> inspectie = context.Inspection;
+            IEnumerable<Inspection> inspectie = Config.Context.Inspection;
             IEnumerable<InspectionVM> inspectionVM = inspectie.Select(a => new InspectionVM(a));
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
-
-            List<Models.Company> companies = context.Company.ToList();
-            Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
 
             IEnumerable<InspectionType> inspectiontype = context.Inspectiontype;
             IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
             TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
             RaisePropertyChanged("TypeInspectie");
-
-            IEnumerable<Account> inspecteurs = context.Account;
-            IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
-            Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
-            RaisePropertyChanged("Inspecteurs");
 
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
@@ -73,6 +73,7 @@ namespace GOINSP.ViewModel
             _selectedInspection = new InspectionVM();
             _selectedtype = new InspectionTypeVM();
             _selectedBedrijf = new CompanyVM();
+            _selectedBedrijf = new NewCompanyVM();
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
@@ -87,6 +88,17 @@ namespace GOINSP.ViewModel
                 RaisePropertyChanged("SearchQuota");
                 Search();
             }
+        }
+
+        public void LoadAddInspection()
+        {
+            List<Company> companies = Config.Context.Company.ToList();
+            Bedrijven = new ObservableCollection<NewCompanyVM>(companies.Select(c => new NewCompanyVM(c)));
+
+            IEnumerable<Account> inspecteurs = Config.Context.Account;
+            IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
+            Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
+            RaisePropertyChanged("Inspecteurs");
         }
 
         public InspectionVM newInspection
@@ -121,7 +133,7 @@ namespace GOINSP.ViewModel
             set { _selectedUser = value; }
         }
 
-        public CompanyVM SelectedBedrijf
+        public NewCompanyVM SelectedBedrijf
         {
             get { return _selectedBedrijf; }
             set
@@ -145,6 +157,7 @@ namespace GOINSP.ViewModel
         {
             AddInspection window = new AddInspection();
             window.Show();
+            LoadAddInspection();
         }
 
         private void Save()
@@ -157,8 +170,8 @@ namespace GOINSP.ViewModel
                 _newInspection.InspectiontypeVM = SelectedType;
 
                 // Add to database
-                context.Inspection.Add(_newInspection.toInspection());
-                context.SaveChanges();
+                Config.Context.Inspection.Add(_newInspection.toInspection());
+                Config.Context.SaveChanges();
 
                 // Add to view
                 Inspections.Add(_newInspection);
@@ -177,8 +190,8 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
+                Config.Context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
+                Config.Context.SaveChanges();
 
                 UpdateSelectedInspection = selectedInspection;
                 RaisePropertyChanged("UpdateSelectedInspection");
@@ -196,7 +209,7 @@ namespace GOINSP.ViewModel
         {
             if (SearchQuota.Length >= 0)
             {
-                List<Models.Inspection> tempInspection = context.Inspection.ToList();
+                List<Models.Inspection> tempInspection = Config.Context.Inspection.ToList();
                 List<InspectionVM> tempInspectionVM = new List<InspectionVM>();
                 foreach (Models.Inspection item in tempInspection)
                 {
@@ -219,7 +232,6 @@ namespace GOINSP.ViewModel
             if (_selectedInspection != null)
             {
                 InspectionSpecsViewModel InspectionVMInstance = ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
-                InspectionVMInstance.context = context;
                 InspectionVMInstance.SetInspection(_selectedInspection.id);
 
                 if (show)

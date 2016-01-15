@@ -12,7 +12,9 @@
                 <DataGridTextColumn Header="Bedrijfsnaam" Binding="{Binding Bedrijfsnaam}" />
                 <DataGridTextColumn Header="Email" Binding="{Binding BedrijfsEmail}" />
                 <DataGridTextColumn Header="Adres" Binding="{Binding BedrijfsAdres}" />
+                <DataGridTextColumn Header="Nr" Binding="{Binding BedrijfsNummer}" />
                 <DataGridTextColumn Header="Postcode" Binding="{Binding BedrijfsPostcode}" />
+                <DataGridTextColumn Header="Wijk" Binding="{Binding BedrijfsWijk}" />
             </DataGrid.Columns>
         </DataGrid>
 

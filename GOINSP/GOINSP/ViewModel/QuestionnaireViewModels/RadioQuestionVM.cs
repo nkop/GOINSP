@@ -108,5 +108,20 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
             return radioQuestion;
         }
+
+        public override string GetAnswer()
+        {
+            if(AlternativeAnswer == "")
+            {
+                foreach(RadioAnswerVM answer in Answers)
+                {
+                    if(answer.Checked)
+                    {
+                        return answer.Text;
+                    }
+                }
+            }
+            return AlternativeAnswer;
+        }
     }
 }

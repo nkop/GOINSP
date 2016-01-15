@@ -22,12 +22,11 @@ namespace GOINSP.ViewModel
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
+        public Models.Account.Rights newRights { get; set; }
 
         public ObservableCollection<AccountVM> Users { get; set; }
 
         public ObservableCollection<String> Rights { get; set; }
-
-        Models.Context context;
 
         private string _loginname { get; set; }
         public string LoginName
@@ -57,9 +56,6 @@ namespace GOINSP.ViewModel
         public AccountManagementVM()
         {
             SelectedAccount = new AccountVM();
-            context = new Models.Context();
-
-            SelectedAccount = new AccountVM();
 
             LoginCommand = new RelayCommand(Login);
             VergetenCommand = new RelayCommand(ForgottenPass);
@@ -77,7 +73,7 @@ namespace GOINSP.ViewModel
         {
             if (SearchQuota.Length >= 0)
             {
-                List<Models.Account> tempUsers = context.Account.ToList();
+                List<Models.Account> tempUsers = Config.Context.Account.ToList();
                 List<AccountVM> tempUsersVM = new List<AccountVM>();
                 foreach (Models.Account item in tempUsers)
                 {
@@ -97,8 +93,8 @@ namespace GOINSP.ViewModel
 
         private void LoadUsers()
         {
-            List<Models.Account> tempUsers = context.Account.ToList();
-            Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)).Distinct());
+            List<Models.Account> tempUsers = Config.Context.Account.ToList();
+            Users = new ObservableCollection<AccountVM>(tempUsers.Select(a => new AccountVM(a)));
             RaisePropertyChanged("Users");
         }
 
@@ -116,12 +112,21 @@ namespace GOINSP.ViewModel
             NewAccount.UserName = SelectedAccount.UserName;
             NewAccount.Password = SelectedAccount.Password;
             NewAccount.Email = SelectedAccount.Email;
+            NewAccount.AccountRights = newRights;
 
-            if (context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
+            if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
-                context.Account.Add(NewAccount);
-                context.SaveChanges();
-                LoadUsers();
+                if (NewAccount.UserName != null && NewAccount.Password != null && NewAccount.Email != null &&
+                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && NewAccount.Email.Length > 3)
+                {
+                    Config.Context.Account.Add(NewAccount);
+                    Config.Context.SaveChanges();
+                    LoadUsers();
+                }
+                else
+                {
+                    MessageBox.Show("Een van de ingevoerde velden is te kort");
+                }
             }
             else
             {
@@ -133,11 +138,11 @@ namespace GOINSP.ViewModel
         {
             AccountVM tempAccount = new AccountVM();
             tempAccount = SelectedAccount;
-            if (SelectedAccount.UserName != null)
+            if (SelectedAccount.id != null)
             {
-                Models.Account AccToDelete = context.Account.Where(a => a.UserName == tempAccount.UserName).FirstOrDefault<Models.Account>();
-                context.Entry(AccToDelete).State = EntityState.Deleted;
-                context.SaveChanges();
+                Models.Account AccToDelete = Config.Context.Account.Where(a => a.UserName == tempAccount.UserName).FirstOrDefault<Models.Account>();
+                Config.Context.Entry(AccToDelete).State = EntityState.Deleted;
+                Config.Context.SaveChanges();
             }
             SelectedAccount = null;
             LoadUsers();
@@ -147,7 +152,7 @@ namespace GOINSP.ViewModel
         {
             if (LoginName != null)
             {
-                Models.Account account = context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
+                Models.Account account = Config.Context.Account.Where(a => a.UserName == LoginName).FirstOrDefault();
                 if (account != null)
                 {
                     if (LoginPassword == account.Password)

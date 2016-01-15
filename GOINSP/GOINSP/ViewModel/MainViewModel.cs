@@ -13,6 +13,7 @@ namespace GOINSP.ViewModel
         public ICommand OpenDataImportCommand { get; set; }
         public ICommand OpenInspectionCommand { get; set; }
         public ICommand ManagementInfoCommand { get; set; }
+        public ICommand OpenCompanyCommand { get; set; }
 
         public MainViewModel()
         {
@@ -23,6 +24,13 @@ namespace GOINSP.ViewModel
             UserControlCommand = new RelayCommand(ShowUserControl);
             OpenDataImportCommand = new RelayCommand(ShowOpenDataImport);
             OpenInspectionCommand = new RelayCommand(ShowInspectionOverview);
+            OpenCompanyCommand = new RelayCommand(showCompanyCrud);
+        }
+
+        private void showCompanyCrud()
+        {
+            CompanyCrudWindow companyCrudWindow = new CompanyCrudWindow();
+            companyCrudWindow.Show();
         }
 
         private void ShowUserControl()

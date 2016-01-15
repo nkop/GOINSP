@@ -10,13 +10,13 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Net.Mail;
 using System.Collections;
+using GOINSP.Utility;
 
 namespace GOINSP.ViewModel
 {
     public class ForgottenPasswordVM : ViewModelBase
     {
         private Models.Account account;
-        private Models.Context context;
         private string _username;
         private string _email;
         public ICommand SubmitPassword { get; set; }
@@ -25,7 +25,6 @@ namespace GOINSP.ViewModel
         public ForgottenPasswordVM()
         {
             this.account = new Models.Account();
-            this.context = new Models.Context();
 
             SubmitPassword = new RelayCommand(askNewPassword);
         }
@@ -46,7 +45,7 @@ namespace GOINSP.ViewModel
         {
             try
             {
-                IEnumerable<Models.Account> account = context.Account;
+                IEnumerable<Models.Account> account = Config.Context.Account;
                 IEnumerable<AccountVM> AccountViewModel = account.Select(a => new AccountVM(a)).Where(p => p.UserName == _username && p.Email == _email);
 
                 SendMail(AccountViewModel.First().Email, AccountViewModel);
@@ -88,7 +87,7 @@ namespace GOINSP.ViewModel
             try
             {
                 account.First().Password = password;
-                context.SaveChanges();
+                Config.Context.SaveChanges();
             }
             catch (Exception)
             {

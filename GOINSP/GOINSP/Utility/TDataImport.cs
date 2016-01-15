@@ -15,12 +15,10 @@ namespace GOINSP.Utility
     {
         public JSONImport jsonImporter { get; set; }
         public CSVImport csvImporter { get; set; }
-        public Context context { get; set; }
 
         public TDataImport()
         {
             jsonImporter = new JSONImport();
-            context = new Context();
         }
 
         public void Import(IProgress<ImportProgressValues> progress)
@@ -33,8 +31,8 @@ namespace GOINSP.Utility
             list = jo.SelectToken("value", false).ToObject<List<TDataVM>>();
 
             progress.Report(new ImportProgressValues(0, 0, ImportProgressValues.ProgressStatus.removing));
-            context.HuishoudelijkAfvalTData.RemoveRange(context.HuishoudelijkAfvalTData);
-            context.SaveChanges();
+            Config.Context.HuishoudelijkAfvalTData.RemoveRange(Config.Context.HuishoudelijkAfvalTData);
+            Config.Context.SaveChanges();
 
             int count = 0;
 

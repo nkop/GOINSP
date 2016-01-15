@@ -3,21 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:w="clr-namespace:GOINSP"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
-        Title="GoInsp - Gebruiker toevoegen" Height="300" Width="300"
+        Title="GoInsp - Gebruiker toevoegen" Height="400" Width="300"
         Background="#3598dc">
-    <Grid>
-        <StackPanel>
-            <TextBlock>Gebruikersnaam</TextBlock>
-            <TextBox Text="{Binding SelectedAccount.UserName}"></TextBox>
-            <TextBlock Text="Wachtwoord"/>
-            <w:BindablePasswordBox Password="{Binding SelectedAccount.Password}"/>
-            <TextBlock Text="E-Mail"/>
-            <TextBox Text="{Binding SelectedAccount.Email}"></TextBox>
-            <!--<TextBlock Text="Gebruikerstype"/>
-            <ComboBox IsEditable="True" ItemsSource="{Binding Rights}"  SelectedValue="{Binding SelectedAccount.AccountRights, Mode=TwoWay}"
-                      Text="{Binding SelectedAccount.AccountRights, UpdateSourceTrigger=LostFocus}"></ComboBox>-->
-            <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}"/>
+    
+    
+        <StackPanel Margin="20">
+            <TextBlock Height="20">Gebruikersnaam</TextBlock>
+            <TextBox Text="{Binding SelectedAccount.UserName}" Height="30" Margin="0 0 0 10"></TextBox>
+            <TextBlock Text="Wachtwoord" Height="20" />
+        <w:BindablePasswordBox Password="{Binding SelectedAccount.Password}" Height="30" Margin="0 0 0 10" />
+            <TextBlock Text="E-Mail" Height="20"/>
+        <TextBox Text="{Binding SelectedAccount.Email}" Height="30" Margin="0 0 0 10"></TextBox>
+            <TextBlock Text="Gebruikerstype"/>
+        <ComboBox ItemsSource="{Binding Rights}" SelectedItem="{Binding newRights}"></ComboBox>
+        <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}" Height="30" Margin="0 10 0 0" />
             
         </StackPanel>
-    </Grid>
 </Window>
