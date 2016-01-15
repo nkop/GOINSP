@@ -18,6 +18,7 @@ namespace GOINSP.ViewModel
         public ICommand ShowInspCommand { get; set; }
         public ICommand ShowBedrCommand { get; set; }
         public ICommand ShowGemInspCommand { get; set; }
+        public ICommand ShowTypeInspCommand { get; set; }
         private AccountVM _selectedInspecteur { get; set; }
         public AccountVM SelectedInspecteur
         {
@@ -31,6 +32,7 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspecteurInspecties> GemInspInspecteur { get; set; }
         public ObservableCollection<InspecteurInspecties> ChartData { get; set; }
         public ObservableCollection<BedrijfInspecties> BedrInspData {get; set;}
+        public ObservableCollection<InspectieTypeInspecties> TypeInspData { get; set; } 
 
         private string _gemInspectiesInspecteur;
         public string GemInspectiesInspecteur
@@ -42,6 +44,17 @@ namespace GOINSP.ViewModel
                 }
         }
 
+        private Visibility _typeInsp;
+        public Visibility TypeInsp
+        {
+            get { return _typeInsp; }
+            set
+            {
+                _typeInsp = value;
+                RaisePropertyChanged("TypeInsp");
+            }
+        }
+        
         private Visibility _bedrInsp;
         public Visibility BedrInsp
         {
@@ -80,12 +93,24 @@ namespace GOINSP.ViewModel
             ShowBedrCommand = new RelayCommand(ShowBedrInsp);
             ShowInspCommand = new RelayCommand(ShowInspInsp);
             ShowGemInspCommand = new RelayCommand(ShowGemInsp);
+            ShowTypeInspCommand = new RelayCommand(ShowTypeInsp);
 
             ShowInspInsp();
         }
 
+        private void ShowTypeInsp()
+        {
+            TypeInsp = Visibility.Visible;
+            GemInspInsp = Visibility.Collapsed;
+            BedrInsp = Visibility.Collapsed;
+            InspInsp = Visibility.Collapsed;
+
+            LoadTypeInspData();
+        }
+
         private void ShowGemInsp()
         {
+            TypeInsp = Visibility.Collapsed;
             GemInspInsp = Visibility.Visible;
             BedrInsp = Visibility.Collapsed;
             InspInsp = Visibility.Collapsed;
@@ -95,6 +120,7 @@ namespace GOINSP.ViewModel
 
         private void ShowInspInsp()
         {
+            TypeInsp = Visibility.Collapsed;
             InspInsp = Visibility.Visible;
             BedrInsp = Visibility.Collapsed;
             GemInspInsp = Visibility.Collapsed;
@@ -104,6 +130,7 @@ namespace GOINSP.ViewModel
 
         private void ShowBedrInsp()
         {
+            TypeInsp = Visibility.Collapsed;
             BedrInsp = Visibility.Visible;
             InspInsp = Visibility.Collapsed;
             GemInspInsp = Visibility.Collapsed;
@@ -142,7 +169,9 @@ namespace GOINSP.ViewModel
             RaisePropertyChanged("ChartData");
 
             GemInspectiesInspecteur = "Gemiddeld aantal inspecties per inspecteur: ";
-            GemInspectiesInspecteur += (sum / ChartData.Count());
+            int amount = ChartData.Count();
+            if (amount == 0) amount = 1;
+            GemInspectiesInspecteur += (sum / amount);
         }
 
         private void LoadBedrInspData()
@@ -157,6 +186,20 @@ namespace GOINSP.ViewModel
                 }
             }
             RaisePropertyChanged("BedrInspData");
+        }
+
+        private void LoadTypeInspData()
+        {
+            TypeInspData = new ObservableCollection<InspectieTypeInspecties>();
+            var tempInspecties = Config.Context.Inspection.GroupBy(i => i.inspectiontype).Select(i => new { type = i.Key, count = i.Count() });
+            if (tempInspecties != null)
+            {
+                foreach (var item in tempInspecties)        
+                {
+                    TypeInspData.Add(new InspectieTypeInspecties(new InspectionTypeVM(item.type), item.count));
+                }
+            }
+            RaisePropertyChanged("TypeInspData");
         }
 
 
@@ -187,6 +230,19 @@ namespace GOINSP.ViewModel
         {
             this.Bedrijf = bedrijf;
             this.Inspecties = inspecties;
+        }
+    }
+
+    public class InspectieTypeInspecties
+    {
+        public InspectionTypeVM Type{ get; set; }
+
+        public int Inspecties { get; set; }
+
+        public InspectieTypeInspecties(InspectionTypeVM Type, int Inspecties)
+        {
+            this.Type = Type;
+            this.Inspecties = Inspecties;
         }
     }
 }
