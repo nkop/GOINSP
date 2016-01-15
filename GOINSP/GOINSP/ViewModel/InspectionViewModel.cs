@@ -20,6 +20,8 @@ namespace GOINSP.ViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
 
+        private List<Bijlage> _bijlages;
+
         private Guid dir;
         public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
         private ObservableCollection<NewCompanyVM> bedrijven; 
@@ -43,6 +45,8 @@ namespace GOINSP.ViewModel
         public ICommand WeergeefBedrijfCommand { get; set; }
 
         public ICommand UploadButton { get; set; }
+
+        public ICommand RemoveButton { get; set; }
 
         private InspectionVM _newInspection;
 
@@ -148,6 +152,16 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public List<Bijlage> Bijlages
+        {
+            get { return _bijlages; }
+            set
+            {
+                _bijlages = value;
+                RaisePropertyChanged("Bijlages");
+            }
+        }
+
         public string Filenames
         {
             get { return _fileNames; }
@@ -241,6 +255,68 @@ namespace GOINSP.ViewModel
                 }
                 RaisePropertyChanged("Inspections");
             }
+        }
+
+        public void searchBijlage()
+        {
+            Console.WriteLine(selectedInspection.directory);
+
+            string map = selectedInspection.directory.ToString();
+
+            if (map != "00000000-0000-0000-0000-000000000000")
+            {
+                List<Bijlage> templist = new List<Bijlage>();
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + map);
+                DirectoryInfo d = new DirectoryInfo(specificFolder);
+
+                foreach (var file in d.GetFiles())
+                {
+                    string tmpExtension = "";
+                    switch (Path.GetExtension(file.ToString()).ToLower())
+                    {
+                        case ".jpg":
+                            tmpExtension = "JPG (*.jpg)";
+                            break;
+                        case ".jpeg":
+                            tmpExtension = "JPG (*.jpeg)";
+                            break;
+                        case ".png":
+                            tmpExtension = "PNG (*.png)";
+                            break;
+                        case ".gif":
+                            tmpExtension = "GIF (*.gif)";
+                            break;
+                        case ".mp3":
+                            tmpExtension = "MP3 (*.mp3)";
+                            break;
+                        case ".mp4":
+                            tmpExtension = "MP4 (*.mp4)";
+                            break;
+                        case ".mov":
+                            tmpExtension = "MOV (*.mov)";
+                            break;
+                        default:
+                            break;
+                    }
+
+
+
+                    Bijlage tmp = new Bijlage();
+                    tmp.FileName = file.ToString();
+                    tmp.Extension = tmpExtension;
+
+                    templist.Add(tmp);
+                }
+
+                Bijlages = templist;
+            }
+            else
+            {
+                MessageBox.Show("Er zijn geen bijlagen gevonden");
+            }
+
+            Console.WriteLine("OKAY!");
         }
 
         public void OpenInspection(bool show = true)

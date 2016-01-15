@@ -4,7 +4,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:w="clr-namespace:GOINSP.Utility"
-        Title="GoInsp - Inspectie wijzigen" Height="650" Width="800"
+        Title="GoInsp - Inspectie wijzigen" Height="863.433" Width="800"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
@@ -22,6 +22,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -34,7 +35,7 @@
 
         <TextBlock Text="Type" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ComboBox ItemsSource="{Binding TypeInspectie}" SelectedItem="{Binding SelectedType}" DisplayMemberPath="type" SelectedValuePath="id" SelectedValue="{Binding Path=selectedInspection.InspectiontypeVM.id, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="10" />
-        
+
         <TextBlock Text="Bedrijf" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ComboBox ItemsSource="{Binding Bedrijven}" SelectedItem="{Binding SelectedBedrijf}" DisplayMemberPath="Bedrijfsnaam" SelectedValuePath="ID" SelectedValue="{Binding Path=selectedInspection.company.ID}" Grid.Column="1" Grid.Row="3" Margin="10" />
 
@@ -50,6 +51,15 @@
         <TextBlock Text="Inspectie Beschrijving:" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ctl:RichTextEditor Text="{Binding Path=selectedInspection.description, Mode=TwoWay}" Grid.Row="7" Grid.Column="2" Margin="10" />
 
-        <Button Content="Opslaan" Margin="10" Command="{Binding UpdateInspection}" Grid.Row="8" Grid.Column="1"></Button>
+        <TextBlock Text="Bijlagen:" Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
+        <DataGrid Width="632" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="1" ItemsSource="{Binding Bijlages}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}" Margin="10,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Bestandsnaam" Binding="{Binding FileName}" />
+                <DataGridTextColumn IsReadOnly="True" Width="0.5*" Header="Bestandstype" Binding="{Binding Extension}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Grid.Row="9" Margin="10,10,523,10" Command="{Binding UploadButton}">Bijlage toevoegen</Button>
+        <Button Grid.Column="1" Grid.Row="9" Margin="134,10,399,10" Command="{Binding RemoveButton}">Bijlage verwijderen</Button>
+        <Button Content="Opslaan" Margin="10" Command="{Binding UpdateInspection}" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"></Button>
     </Grid>
 </Window>
