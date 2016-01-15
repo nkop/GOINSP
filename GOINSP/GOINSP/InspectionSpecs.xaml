@@ -24,6 +24,10 @@
                         <Label Content="Adres: "  />
                         <Label Content="{Binding InspectionSpecs.company.BedrijfsAdres}" />
                     </WrapPanel>
+                    <WrapPanel Orientation="Horizontal">
+                        <Label Content="Type: "  />
+                        <Label Content="{Binding InspectionSpecs.InspectiontypeVM.type}" />
+                    </WrapPanel>
                     <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenQuestionnaireCommand}" MouseAction="LeftClick" />
