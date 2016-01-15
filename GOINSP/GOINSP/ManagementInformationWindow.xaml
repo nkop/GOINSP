@@ -8,24 +8,33 @@
         Background="#3598dc">
     <Grid>
         <StackPanel>
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Inspecties per inspecteur"></TextBlock>
-            <WrapPanel Margin="400,0,0,0">                
-                <!--<sparrow:SparrowChart Width="500" Height="500" Margin="90,10,0,10" Background="White">
-                    <sparrow:SparrowChart.XAxis>
-                        <sparrow:LinearXAxis/>
-                    </sparrow:SparrowChart.XAxis>
-                    <sparrow:SparrowChart.YAxis>
-                        <sparrow:LinearYAxis/>
-                    </sparrow:SparrowChart.YAxis>
-                    <sparrow:LineSeries Points="0,1,1,2,2,3,3,4"/>
-                </sparrow:SparrowChart>-->
+            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Management Overzicht"></TextBlock>
+            <WrapPanel Margin="400,0,0,0">
                 
-                <DataGrid Margin="50" Name="InspecteurInspectie" ItemsSource="{Binding ChartData}" Visibility="{Binding InspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                <DataGrid Margin="50" Name="bla" ItemsSource="{Binding ChartData}" Visibility="Collapsed" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
                         <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
-                    </DataGrid.Columns>                    
+                    </DataGrid.Columns>
                 </DataGrid>
+
+                <DataGrid Margin="50" Name="GemInspPerMaandPerInspecteur" ItemsSource="{Binding GemInspInspecteur}" Visibility="{Binding GemInspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel>
+                    <DataGrid Margin="50" Name="InspecteurInspectie" ItemsSource="{Binding ChartData}" Visibility="{Binding InspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
+                            <DataGridTextColumn IsReadOnly="True" Header="Type Inspecteur" Binding="{Binding Inspecteur.AccountRights}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Margin="50" Visibility="{Binding InspInsp}" Text="{Binding GemInspectiesInspecteur}"/>
+                </StackPanel>
 
                 <DataGrid Margin="50" Name="BedrijfInspectie" ItemsSource="{Binding BedrInspData}" Visibility="{Binding BedrInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
@@ -33,16 +42,14 @@
                         <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
                     </DataGrid.Columns>
                 </DataGrid>
+                
+                
 
                 <StackPanel>
-                   <DataGrid Margin="90"  Name="Inspecteurs"  ItemsSource="{Binding Inspecteurs}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedInspecteur}" HorizontalAlignment="Right" VerticalAlignment="Top" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding UserName}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button Command="{Binding ClearInspecteurCommand}" Content="Deselecteer Inspecteur"/>
+
                     <Button Command="{Binding ShowInspCommand}" Content="Inspecties per Inspecteur" />
                     <Button Command="{Binding ShowBedrCommand}" Content="Inspecties per Bedrijf" />
+                    <Button Command="{Binding ShowGemInspCommand}" Content="Gemiddeld aantal inspecties per inspecteur per maand" />
                 </StackPanel>               
 
             </WrapPanel>

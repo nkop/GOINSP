@@ -24,5 +24,6 @@ namespace GOINSP.Models
         public virtual Account inspector { get; set; }
         public virtual Company company { get; set; }
         public virtual Questionnaire questionnaire { get; set; }
+        public virtual InspectionType inspectiontype { get; set; }
     }
 }
