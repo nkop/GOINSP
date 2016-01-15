@@ -206,6 +206,10 @@ namespace GOINSP.ViewModel
         {
             try
             {
+                _selectedInspection.accountVM = selectedUser;
+                _selectedInspection.company = SelectedBedrijf;
+                _selectedInspection.InspectiontypeVM = SelectedType;
+
                 Config.Context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
                 Config.Context.SaveChanges();
 

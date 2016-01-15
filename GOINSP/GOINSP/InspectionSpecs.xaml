@@ -23,7 +23,7 @@
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
                         <Label Content="Adres: "  />
-                        <Label Content="{Binding InspectionSpecs.company.BedrijfsAdres}" />
+                        <Label Content="{Binding InspectionSpecs.company.totaalAdres}" />
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
                         <Label Content="Type: "  />

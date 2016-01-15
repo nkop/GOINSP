@@ -10,7 +10,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Naam" Binding="{Binding name}" />
                 <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Datum" Binding="{Binding date}" />
-                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Adres" Binding="{Binding company.BedrijfsAdres}" />
+                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Adres" Binding="{Binding totalAdres}" />
                 <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Postcode" Binding="{Binding company.BedrijfsPostcode}" />
             </DataGrid.Columns>
         </DataGrid>
