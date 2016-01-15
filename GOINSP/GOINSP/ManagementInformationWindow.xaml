@@ -8,7 +8,7 @@
         Background="#3598dc">
     <Grid>
         <StackPanel>
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Inspecties per inspecteur"></TextBlock>
+            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Management Overzicht"></TextBlock>
             <WrapPanel Margin="400,0,0,0">
                 
                 <DataGrid Margin="50" Name="bla" ItemsSource="{Binding ChartData}" Visibility="Collapsed" CanUserAddRows="False" AutoGenerateColumns="False">
