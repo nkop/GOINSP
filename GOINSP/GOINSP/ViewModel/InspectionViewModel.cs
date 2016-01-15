@@ -18,7 +18,6 @@ namespace GOINSP.ViewModel
     public class InspectionViewModel : ViewModelBase, INavigatableViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
-        public ObservableCollection<CompanyVM> Bedrijven { get; set; }
         public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
         private ObservableCollection<NewCompanyVM> bedrijven; 
         public ObservableCollection<NewCompanyVM> Bedrijven { 
@@ -59,7 +58,7 @@ namespace GOINSP.ViewModel
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
 
-            IEnumerable<InspectionType> inspectiontype = context.Inspectiontype;
+            IEnumerable<InspectionType> inspectiontype = Config.Context.Inspectiontype;
             IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
             TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
             RaisePropertyChanged("TypeInspectie");
@@ -72,7 +71,6 @@ namespace GOINSP.ViewModel
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
             _selectedtype = new InspectionTypeVM();
-            _selectedBedrijf = new CompanyVM();
             _selectedBedrijf = new NewCompanyVM();
             _selectedUser = new AccountVM();
 
