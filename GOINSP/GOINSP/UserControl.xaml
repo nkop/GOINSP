@@ -17,15 +17,7 @@
                 <TextBox x:Name="SearchBar" Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="10 0 0 0" />
             </WrapPanel>
             
-            <DataGrid Margin="20" MinHeight="250" ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}"/>
-
-            <DataGrid ItemsSource="{Binding Users}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccount}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Header="Gebruikersnaam" Binding="{Binding UserName}" />
-                    <DataGridTextColumn IsReadOnly="True" Header="Email" Binding="{Binding Email}" />
-                    <DataGridTextColumn IsReadOnly="True" Header="Accountrechten" Binding="{Binding AccountRights}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid Margin="20" MinHeight="250" ItemsSource="{Binding Users}" DisplayMemberPath="Gebruikersnaam" CanUserAddRows="False"  AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}" />
         </StackPanel>
     </Grid>
 </Window>

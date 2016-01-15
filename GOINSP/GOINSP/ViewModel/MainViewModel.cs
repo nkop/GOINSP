@@ -29,8 +29,8 @@ namespace GOINSP.ViewModel
 
         private void showCompanyCrud()
         {
-            _userControlWindow = new CompanyCrudWindow();
-            _userControlWindow.Show();
+            CompanyCrudWindow companyCrudWindow = new CompanyCrudWindow();
+            companyCrudWindow.Show();
         }
 
         private void ShowUserControl()

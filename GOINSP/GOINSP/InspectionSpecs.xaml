@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         Title="GoInsp - Inspectie details" Height="600" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
@@ -36,7 +37,11 @@
                     </TextBlock>
                 </WrapPanel>
 
-                <Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />
+                <m:Map x:Name="PickerMap" CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Padding="0" Center="{Binding MapPoint}" ZoomLevel="15" ScaleVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="False">
+                    <m:Pushpin m:MapLayer.Position="{Binding MapPoint}"></m:Pushpin>
+                </m:Map>
+
+                <!--<Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />-->
                 
                 <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
                     <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Width="100"></Button>
