@@ -59,7 +59,18 @@ namespace GOINSP.ViewModel
             
             if (Config.Rechten == Models.Account.Rights.ExterneInspecteur)
             {
-                inspectionVM = inspectie.Select(a => new InspectionVM(a)).Where(a => a.accountVM.id == Config.GebruikerID);
+                List<Inspection> allInsp = inspectie.ToList();
+                List<Inspection> sad = inspectie.Where(x => x.inspector.id == Config.GebruikerID).ToList();
+                List<Inspection> inspections = new List<Inspection>();
+                List<Company> asd = sad.Select(x => x.company).ToList();
+                foreach(Company company in asd)
+                {
+                    sad.AddRange(allInsp.Where(x => x.company == company).ToList().Distinct());
+                }
+
+                sad = sad.Distinct().ToList();
+
+                inspectionVM = sad.Select(a => new InspectionVM(a));
             }
             else
             {
