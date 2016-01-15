@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Microsoft.Synchronization.Data.SqlServer;
 using Microsoft.Synchronization.Data;
 using System.Configuration;
+using System.Data;
 
 namespace GOINSP.Utility
 {
@@ -144,6 +145,17 @@ namespace GOINSP.Utility
 
         private void sync()
         {
+            try
+            {
+                serverConn.Open();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Can't connect");
+            }
+            if (serverConn.State == ConnectionState.Open)
+            {
+                serverConn.Close();
             // subscribe for errors that occur when applying changes to the client
             try {
                 Console.WriteLine("Set new orchestrator");
@@ -187,6 +199,11 @@ namespace GOINSP.Utility
                 this.sync();
 
             }
+            }
+            else
+            {
+                Console.WriteLine("No Connection");
+            } 
 
             
 
