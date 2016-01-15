@@ -166,5 +166,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
             return dropDownQuestion;
         }
+
+        public override string GetAnswer()
+        {
+            return SelectedAnswer;
+        }
     }
 }

@@ -121,10 +121,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
                     }
                 }
             }
-            else
-            {
-                return AlternativeAnswer;
-            }
+            return AlternativeAnswer;
         }
     }
 }
