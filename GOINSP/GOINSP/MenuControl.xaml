@@ -10,7 +10,7 @@
             <RowDefinition Height="244*"/>
             <RowDefinition Height="625*"/>
         </Grid.RowDefinitions>
-        <TextBlock FontSize="64" HorizontalAlignment="Center" Margin="181,19,180,81" Foreground="#597cb6" Grid.RowSpan="2">Menu GoInsp</TextBlock>
+        <TextBlock FontSize="64" HorizontalAlignment="Center" Margin="180,150,180,0" Foreground="#597cb6" Grid.RowSpan="2">Menu GoInsp</TextBlock>
         <WrapPanel Height="100" HorizontalAlignment="Center" Margin="48,139.854,48,385" Grid.Row="1">
             <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top" Width="109" Height="59" Command="{Binding UserControlCommand}" Foreground="#fff">
                 <Button.Background>
