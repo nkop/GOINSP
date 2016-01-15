@@ -54,7 +54,19 @@ namespace GOINSP.ViewModel
         public InspectionViewModel()
         {
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
-            IEnumerable<InspectionVM> inspectionVM = inspectie.Select(a => new InspectionVM(a));
+
+            IEnumerable<InspectionVM> inspectionVM  = null; 
+            
+            if (Config.Rechten == Models.Account.Rights.ExterneInspecteur)
+            {
+                inspectionVM = inspectie.Select(a => new InspectionVM(a)).Where(a => a.accountVM.id == Config.GebruikerID);
+            }
+            else
+            {
+                inspectionVM = inspectie.Select(a => new InspectionVM(a));
+            }
+
+            
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
 
