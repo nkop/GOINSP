@@ -60,13 +60,13 @@ namespace GOINSP.ViewModel
             }
         }
 
-        public byte[] image
+        public Guid directory
         {
-            get { return inspection.image; }
+            get { return inspection.directory; }
             set
             {
-                inspection.image = value;
-                RaisePropertyChanged("image");
+                inspection.directory = value;
+                RaisePropertyChanged("directory");
             }
         }
 

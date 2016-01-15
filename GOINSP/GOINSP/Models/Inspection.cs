@@ -19,7 +19,7 @@ namespace GOINSP.Models
         [Column(TypeName = "datetime2")]
         public DateTime date { get; set; }
         public string description { get; set; }
-        public byte[] image { get; set; }
+        public Guid directory { get; set; }
 
         public virtual Account inspector { get; set; }
         public virtual Company company { get; set; }
