@@ -69,5 +69,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             if (question.VisibleConditions != null)
                 this.VisibleConditions = question.VisibleConditions.Split(',').ToList();
         }
+
+        public abstract string GetAnswer();
     }
 }

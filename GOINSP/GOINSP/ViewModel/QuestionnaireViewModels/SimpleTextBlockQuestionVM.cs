@@ -56,5 +56,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             return simpleTextBlockQuestion;
         }
+
+        public override string GetAnswer()
+        {
+            return Answer;
+        }
     }
 }

@@ -78,5 +78,10 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
         {
             return inspectorDropDownQuestion;
         }
+
+        public override string GetAnswer()
+        {
+            return Answer;
+        }
     }
 }
