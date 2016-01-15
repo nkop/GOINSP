@@ -59,7 +59,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <Label Content="Anders, " HorizontalAlignment="Left" Visibility="{Binding AlternativeAnswerVisibility}"/>
-                <TextBox  Visibility="{Binding AlternativeAnswerVisibility}"/>
+                <TextBox Text="{Binding AlternativeAnswer}" Visibility="{Binding AlternativeAnswerVisibility}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>

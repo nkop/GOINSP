@@ -4,7 +4,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:w="clr-namespace:GOINSP.Utility"
-        Title="GoInsp - Inspectie toevoegen" Height="800" Width="800"
+        Title="GoInsp - Inspectie toevoegen" Height="700" Width="800"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
@@ -22,9 +22,8 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="200"></RowDefinition>
-            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Inspectie naam:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
@@ -51,30 +50,12 @@
         <TextBlock Text="Inspectie Beschrijving:" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ctl:RichTextEditor Text="{Binding Path=newInspection.description, Mode=TwoWay}" Grid.Row="7" Grid.Column="2" Margin="10" />
 
-        <ListBox ItemsSource="{Binding Path=Files}" Grid.Row="8" Name="DropBox" Grid.ColumnSpan="2" AllowDrop="True" Drop="DropBox_Drop" DragOver="DropBox_DragOver" DragLeave="DropBox_DragLeave" Background="#FFE2E2E2" Margin="10" FontSize="10"></ListBox>
-
+        <TextBlock Text="Bijlagen toevoegen:" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
+        <TextBox Text="{Binding Filenames}" IsReadOnly="True" Grid.Column="1" Grid.Row="8" Margin="10,10,116,10" ></TextBox>
+        <Button Grid.Column="1" Grid.Row="8" Margin="541,10,10,10" Command="{Binding UploadButton}">Bladeren</Button>
+        
         <Button Content="Toevoegen" Margin="10" Command="{Binding SaveInspection}" Grid.Row="9" Grid.ColumnSpan="2"></Button>
 
-        <StatusBar Grid.Row="10" Grid.ColumnSpan="2">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto" MinWidth="100"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem>
-                <TextBlock Name="StatusIndicator" Text="Ready"></TextBlock>
-            </StatusBarItem>
-            <StatusBarItem Grid.Column="1">
-                <ProgressBar Width="100" Height="20" Name="ProgressBar"/>
-            </StatusBarItem>
-        </StatusBar>
+        
     </Grid>
 </Window>

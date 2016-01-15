@@ -111,7 +111,7 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
 
         public override string GetAnswer()
         {
-            if(AlternativeAnswer == "")
+            if (AlternativeAnswer == "" || AlternativeAnswer == null)
             {
                 foreach(RadioAnswerVM answer in Answers)
                 {

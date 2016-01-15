@@ -39,7 +39,7 @@ namespace GOINSP.ViewModel
             btnPickLocation = new RelayCommand(pickLocation);
         }
 
-        private void pickLocation()
+        public void pickLocation()
         {
             LocationPickerVM picker = ServiceLocator.Current.GetInstance<LocationPickerVM>();
             picker.NewCompanyVM = newCompany;

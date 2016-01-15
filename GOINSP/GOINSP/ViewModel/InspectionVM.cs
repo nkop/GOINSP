@@ -65,6 +65,16 @@ namespace GOINSP.ViewModel
             get { return inspection.company.BedrijfsAdres + " " + inspection.company.BedrijfsNummer; }
         }
 
+        public Guid directory
+        {
+            get { return inspection.directory; }
+            set
+            {
+                inspection.directory = value;
+                RaisePropertyChanged("directory");
+            }
+        }
+
         public Inspection toInspection()
         {
             return inspection;
