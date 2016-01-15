@@ -19,6 +19,7 @@ namespace GOINSP.ViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
         public ObservableCollection<CompanyVM> Bedrijven { get; set; }
+        public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
@@ -34,19 +35,10 @@ namespace GOINSP.ViewModel
         private InspectionVM _selectedInspection;
 
         private string _searchQuota { get; set; }
-        public string SearchQuota
-        {
-            get { return _searchQuota; }
-            set
-            {
-                _searchQuota = value;
-                RaisePropertyChanged("SearchQuota");
-                Search();
-            }
-        }
 
         private CompanyVM _selectedBedrijf;
         private AccountVM _selectedUser;
+        private InspectionTypeVM _selectedtype;
 
         public Guid InspectionID;
 
@@ -62,6 +54,11 @@ namespace GOINSP.ViewModel
             List<Models.Company> companies = context.Company.ToList();
             Bedrijven = new ObservableCollection<CompanyVM>(companies.Select(c => new CompanyVM(c)).Distinct());
 
+            IEnumerable<InspectionType> inspectiontype = context.Inspectiontype;
+            IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
+            TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
+            RaisePropertyChanged("TypeInspectie");
+
             IEnumerable<Account> inspecteurs = context.Account;
             IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
             Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
@@ -74,13 +71,23 @@ namespace GOINSP.ViewModel
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
-
+            _selectedtype = new InspectionTypeVM();
             _selectedBedrijf = new CompanyVM();
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
         }
 
+        public string SearchQuota
+        {
+            get { return _searchQuota; }
+            set
+            {
+                _searchQuota = value;
+                RaisePropertyChanged("SearchQuota");
+                Search();
+            }
+        }
 
         public InspectionVM newInspection
         {
@@ -124,6 +131,16 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public InspectionTypeVM SelectedType
+        {
+            get { return _selectedtype; }
+            set
+            {
+                _selectedtype = value;
+                RaisePropertyChanged("SelectedType");
+            }
+        }
+
         private void Add()
         {
             AddInspection window = new AddInspection();
@@ -137,6 +154,7 @@ namespace GOINSP.ViewModel
                 // Set foreign keys
                 _newInspection.accountVM = selectedUser;
                 _newInspection.company = SelectedBedrijf;
+                _newInspection.InspectiontypeVM = SelectedType;
 
                 // Add to database
                 context.Inspection.Add(_newInspection.toInspection());
@@ -165,6 +183,8 @@ namespace GOINSP.ViewModel
                 UpdateSelectedInspection = selectedInspection;
                 RaisePropertyChanged("UpdateSelectedInspection");
                 RaisePropertyChanged("Inspections");
+
+                CloseView();
             }
             catch (Exception)
             {
@@ -185,7 +205,7 @@ namespace GOINSP.ViewModel
                 Inspections.Clear();
                 foreach (InspectionVM item in tempInspectionVM)
                 {
-                    if (item.name.Contains(SearchQuota) || item.company.BedrijfsAdres.Contains(SearchQuota) || item.company.BedrijfsPostcode.Contains(SearchQuota))
+                    if (item.name.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsAdres.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsPostcode.ToLower().Contains(SearchQuota.ToLower()))
                     {
                         Inspections.Add(item);
                     }

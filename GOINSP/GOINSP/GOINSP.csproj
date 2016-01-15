@@ -179,11 +179,20 @@
     <Compile Include="Migrations\201601141416512_test.Designer.cs">
       <DependentUpon>201601141416512_test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601151041308_type.cs" />
+    <Compile Include="Migrations\201601151041308_type.Designer.cs">
+      <DependentUpon>201601151041308_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601151044358_typeins.cs" />
+    <Compile Include="Migrations\201601151044358_typeins.Designer.cs">
+      <DependentUpon>201601151044358_typeins.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Inspection.cs" />
+    <Compile Include="Models\InspectionType.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Multimedia.cs" />
@@ -235,6 +244,7 @@
     <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\CompanyVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectionTypeVM.cs" />
     <Compile Include="ViewModel\LocationPickerVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
@@ -399,6 +409,12 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201601141416512_test.resx">
       <DependentUpon>201601141416512_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601151041308_type.resx">
+      <DependentUpon>201601151041308_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601151044358_typeins.resx">
+      <DependentUpon>201601151044358_typeins.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

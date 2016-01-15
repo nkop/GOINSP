@@ -97,6 +97,17 @@ namespace GOINSP.ViewModel
             set { inspection.inspector = value.ToAccount(); }
         }
 
+        public InspectionTypeVM InspectiontypeVM
+        {
+            get
+            {
+                if (inspection.inspectiontype == null)
+                    return null;
+                return new InspectionTypeVM(inspection.inspectiontype);
+            }
+            set { inspection.inspectiontype = value.toInspectionType(); }
+        }
+
         public QuestionnaireVM questionnaire
         {
             get {

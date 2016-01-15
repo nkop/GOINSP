@@ -16,6 +16,7 @@ namespace GOINSP.Models
         public DbSet<TData> HuishoudelijkAfvalTData { get; set; }
         public DbSet<RegioS> HuishoudelijkAfvalRegioS { get; set; }
         public DbSet<Inspection> Inspection { get; set; }
+        public DbSet<InspectionType> Inspectiontype { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<PostCodeData> PostCodeData { get; set; }
