@@ -38,10 +38,8 @@ namespace GOINSP.Utility
             Console.ReadLine();
         }
 
-        public void setServer()
-        {
-            Console.WriteLine("Setting server");
-
+        private void setScopes() {
+            Console.WriteLine("Setting scopes");
             // define a new scope named MySyncScope
             DbSyncScopeDescription scopeDesc = new DbSyncScopeDescription("GOINSPSyncScope");
 
@@ -65,6 +63,11 @@ namespace GOINSP.Utility
             scopeDesc.Tables.Add(regiosTableDesc);
             scopeDesc.Tables.Add(tdatasTableDesc);
 
+        }
+
+        public void setServer()
+        {
+            Console.WriteLine("Setting server");
             // create a server scope provisioning object based on the MySyncScope
             SqlSyncScopeProvisioning serverProvision = new SqlSyncScopeProvisioning(serverConn, scopeDesc);
 
@@ -78,11 +81,10 @@ namespace GOINSP.Utility
             Console.ReadLine();
         }
 
-        private void deprovision()
+        private void deprovisionRemote()
         {
             // Remove the retail customer scope from the Sql Server client database.
             SqlSyncScopeDeprovisioning serverDepro = new SqlSyncScopeDeprovisioning(serverConn);
-            SqlSyncScopeDeprovisioning clientDepro = new SqlSyncScopeDeprovisioning(clientConn);
 
             // Remove the scope.
             try
@@ -94,6 +96,12 @@ namespace GOINSP.Utility
             catch (Exception e) {
                 Console.WriteLine("Something went wrong");
             }
+        }
+
+        private void deprovisionLocal()
+        {
+            SqlSyncScopeDeprovisioning clientDepro = new SqlSyncScopeDeprovisioning(clientConn);
+
             try
             {
                 Console.WriteLine("Deprovision client");
@@ -108,7 +116,9 @@ namespace GOINSP.Utility
 
         public void work()
         {
+            Console.WriteLine("Setting connection");
             this.setConnection();
+            Console.WriteLine("Starting the sync method");
             this.sync();
 
         }
@@ -116,34 +126,48 @@ namespace GOINSP.Utility
         public void reprovision()
         {
             this.setConnection();
-            this.deprovision();
+            this.setScopes();
+            this.deprovisionLocal();
+            this.deprovisionRemote();
             this.setServer();
             this.SetClient();
         }
 
+        public void reprovisionLocal()
+        {
+            this.setConnection();
+            this.setScopes();
+            this.deprovisionLocal();
+            this.SetClient();
+        }
 
         private void sync()
         {
             // subscribe for errors that occur when applying changes to the client
             try {
+                Console.WriteLine("Set new orchestrator");
                 // create the sync orhcestrator
                 SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
 
                 // set local provider of orchestrator to a sync provider associated with the 
                 // GOINSPSyncScope in the client database
+                Console.WriteLine("Set localprovider");
                 syncOrchestrator.LocalProvider = new SqlSyncProvider("GOINSPSyncScope", clientConn);
 
                 // set the remote provider of orchestrator to a server sync provider associated with
                 // the GOINSPSyncScope in the server database
+                Console.WriteLine("Set remoteprovider");
                 syncOrchestrator.RemoteProvider = new SqlSyncProvider("GOINSPSyncScope", serverConn);
 
 
 
                 // set the direction of sync session to Upload and Download
+                Console.WriteLine("Set direction");
                 syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
-
+                Console.WriteLine("Set eventhandler");
                 ((SqlSyncProvider)syncOrchestrator.LocalProvider).ApplyChangeFailed += new EventHandler<DbApplyChangeFailedEventArgs>(Program_ApplyChangeFailed);
                 // execute the synchronization process
+                Console.WriteLine("Sync action");
                 SyncOperationStatistics syncStats = syncOrchestrator.Synchronize();
                 // print statistics
                 Console.WriteLine("Start Time: " + syncStats.SyncStartTime);
@@ -155,8 +179,8 @@ namespace GOINSP.Utility
             catch(Exception e)
             {
                 // print statistics
-                Console.WriteLine("Error occured, trying to reprovision");
-                this.reprovision();
+                Console.WriteLine("Error occured, trying to reprovision locally");
+                this.reprovisionLocal();
                 Console.WriteLine("Reprovision done");
                 Console.WriteLine("Retry syncing");
                 this.sync();

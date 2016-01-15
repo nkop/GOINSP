@@ -1,30 +1,58 @@
 ﻿<Window x:Class="GOINSP.QuestionListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="QuestionListWindow" Height="562" Width="580"
+        Title="QuestionListWindow" Height="900" Width="750"
         DataContext="{Binding QuestionList, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Background="#fff">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid ItemsSource="{Binding ObservableQuestionnaireCollection}" CanUserAddRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire}" AutoGenerateColumns="False" Margin="0,0,0,29">
+        <DataGrid ItemsSource="{Binding ObservableQuestionnaireCollection}" BorderBrush="#FF1783B1" CanUserAddRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionnaire}" AutoGenerateColumns="False" Margin="30,25,0,55" Foreground="#597cb6">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="2*"/>
                 <DataGridTextColumn Header="Aantal Vragen" Binding="{Binding QuestionCount}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" Margin="0,0,0,58">
-            <Label Content="Geselecteerde Vragenlijst" FontWeight="Bold"/>
-            <Label Content="Naam"/>
-            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Name}" Width="274"/>
-            <Label Content="Omschrijving"/>
-            <TextBox Height="100" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Description}" VerticalScrollBarVisibility="Visible" Width="274"/>
-            <Button Height="29" Margin="0, 10, 0, 0" Content="Pas De Geselecteerde Vragenlijs Aan" Command="{Binding EditQuestionnaireCommand}"/>
+        <StackPanel Grid.Column="1" Margin="0,25,0,154">
+            <Label Content="Geselecteerde Vragenlijst" FontWeight="Bold" Foreground="#597cb6" Margin="40, 15, 40, 0"/>
+            <Label Content="Naam" Foreground="#597cb6" Margin="40, 15, 40, 0"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedQuestionnaire.Name}"  BorderBrush="#FF1783B1" Margin="40, 0, 40, 0"/>
+            <Label Content="Omschrijving" Foreground="#597cb6" Margin="40, 0, 40, 0"/>
+            <TextBox Height="100" TextWrapping="Wrap"  BorderBrush="#FF1783B1" Margin="40, 00, 40, 0" Text="{Binding SelectedQuestionnaire.Description}" VerticalScrollBarVisibility="Visible" />
+            <Button Height="29" Margin="40, 15, 40, 0"  BorderBrush="#FF1783B1" Content="Pas De Geselecteerde Vragenlijs Aan" Command="{Binding EditQuestionnaireCommand}" Foreground="#fff">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
-        <Button Height="29" Content="Maak Nieuwe Template Vragenlijst" Command="{Binding AddNewTemplateQuestionnaireCommand}" VerticalAlignment="Bottom"/>
-        <Button Height="29" Content="Gebruik De Geselecteerde Template" Command="{Binding DuplicateCurrentTemplateCommand}" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,0,29"/>
-        <Button Height="29" Content="Maak Nieuwe Vragenlijst Voor De Inspectie" Command="{Binding AddNewQuestionnaireCommand}" Grid.Column="1" VerticalAlignment="Bottom"/>
+        <Button Height="29" Content="Maak Nieuwe Template Vragenlijst" BorderBrush="#FF1783B1" Foreground="#fff" Command="{Binding AddNewTemplateQuestionnaireCommand}" VerticalAlignment="Bottom" Margin="30, 15, 0, 15">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Height="29" Content="Gebruik De Geselecteerde Template"  BorderBrush="#FF1783B1" Foreground="#fff" Command="{Binding DuplicateCurrentTemplateCommand}" Grid.Column="1" VerticalAlignment="Bottom" Margin="40,0,40,55"> 
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Height="29" Content="Maak Nieuwe Vragenlijst Voor De Inspectie" BorderBrush="#FF1783B1" Foreground="#fff" Command="{Binding AddNewQuestionnaireCommand}" Grid.Column="1" VerticalAlignment="Bottom" Margin="40, 15, 40, 15">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

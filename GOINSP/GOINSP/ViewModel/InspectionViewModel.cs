@@ -18,6 +18,7 @@ namespace GOINSP.ViewModel
     public class InspectionViewModel : ViewModelBase, INavigatableViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
+        public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
         private ObservableCollection<NewCompanyVM> bedrijven; 
         public ObservableCollection<NewCompanyVM> Bedrijven { 
             get
@@ -43,19 +44,10 @@ namespace GOINSP.ViewModel
         private InspectionVM _selectedInspection;
 
         private string _searchQuota { get; set; }
-        public string SearchQuota
-        {
-            get { return _searchQuota; }
-            set
-            {
-                _searchQuota = value;
-                RaisePropertyChanged("SearchQuota");
-                Search();
-            }
-        }
 
         private NewCompanyVM _selectedBedrijf;
         private AccountVM _selectedUser;
+        private InspectionTypeVM _selectedtype;
 
         public Guid InspectionID;
 
@@ -66,6 +58,11 @@ namespace GOINSP.ViewModel
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
 
+            IEnumerable<InspectionType> inspectiontype = Config.Context.Inspectiontype;
+            IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
+            TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
+            RaisePropertyChanged("TypeInspectie");
+
             AddInspection = new RelayCommand(Add);
             SaveInspection = new RelayCommand(Save);
             UpdateInspection = new RelayCommand(Update);
@@ -73,11 +70,22 @@ namespace GOINSP.ViewModel
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
-
+            _selectedtype = new InspectionTypeVM();
             _selectedBedrijf = new NewCompanyVM();
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
+        }
+
+        public string SearchQuota
+        {
+            get { return _searchQuota; }
+            set
+            {
+                _searchQuota = value;
+                RaisePropertyChanged("SearchQuota");
+                Search();
+            }
         }
 
         public void LoadAddInspection()
@@ -133,6 +141,16 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public InspectionTypeVM SelectedType
+        {
+            get { return _selectedtype; }
+            set
+            {
+                _selectedtype = value;
+                RaisePropertyChanged("SelectedType");
+            }
+        }
+
         private void Add()
         {
             AddInspection window = new AddInspection();
@@ -147,6 +165,7 @@ namespace GOINSP.ViewModel
                 // Set foreign keys
                 _newInspection.accountVM = selectedUser;
                 _newInspection.company = SelectedBedrijf;
+                _newInspection.InspectiontypeVM = SelectedType;
 
                 // Add to database
                 Config.Context.Inspection.Add(_newInspection.toInspection());
@@ -175,6 +194,8 @@ namespace GOINSP.ViewModel
                 UpdateSelectedInspection = selectedInspection;
                 RaisePropertyChanged("UpdateSelectedInspection");
                 RaisePropertyChanged("Inspections");
+
+                CloseView();
             }
             catch (Exception)
             {
@@ -195,7 +216,7 @@ namespace GOINSP.ViewModel
                 Inspections.Clear();
                 foreach (InspectionVM item in tempInspectionVM)
                 {
-                    if (item.name.Contains(SearchQuota) || item.company.BedrijfsAdres.Contains(SearchQuota) || item.company.BedrijfsPostcode.Contains(SearchQuota))
+                    if (item.name.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsAdres.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsPostcode.ToLower().Contains(SearchQuota.ToLower()))
                     {
                         Inspections.Add(item);
                     }
