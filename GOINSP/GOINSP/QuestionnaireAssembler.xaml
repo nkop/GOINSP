@@ -71,7 +71,7 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <ComboBox HorizontalAlignment="Left" Margin="395,30,0,0" VerticalAlignment="Top" Width="306" ItemsSource="{Binding AssemblerVMList}" SelectedItem="{Binding SelectedAssembler}" DisplayMemberPath="AssemblerName" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox HorizontalAlignment="Left" Margin="395,30,0,0" VerticalAlignment="Top" Width="306" ItemsSource="{Binding AssemblerVMList}" SelectedItem="{Binding SelectedAssembler}" DisplayMemberPath="AssemblerName">
         </ComboBox>
         <Label Content="Vragenlijst Component" HorizontalAlignment="Left" Margin="395,4,0,0" VerticalAlignment="Top"  Foreground="#597cb6"/>
 

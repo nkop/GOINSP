@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,15 @@ namespace GOINSP
         public EditInspection()
         {
             InitializeComponent();
+
+            Messenger.Default.Register<NotificationMessage>(this, (nm) =>
+            {
+                if (nm.Notification == "CloseView2")
+                {
+                    if (nm.Sender == this.DataContext)
+                        this.Close();
+                }
+            });
         }
     }
 }

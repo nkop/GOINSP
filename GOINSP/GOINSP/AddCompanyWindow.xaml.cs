@@ -23,6 +23,7 @@ namespace GOINSP
         {
             InitializeComponent();
             Closing += AddCompanyWindow_Closing;
+            this.DataContext = this;
         }
 
         void AddCompanyWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -183,11 +183,11 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Inspection.cs" />
+    <Compile Include="Models\InspectionType.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Multimedia.cs" />
     <Compile Include="Models\Opendata\GmapAPI.cs" />
@@ -237,6 +237,7 @@
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectionTypeVM.cs" />
     <Compile Include="ViewModel\LocationPickerVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
     <Compile Include="ViewModel\InspectionViewModel.cs" />
