@@ -11,9 +11,9 @@
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Management Overzicht"></TextBlock>
             <WrapPanel Margin="400,0,0,0">
                 
-                <DataGrid Margin="50" Name="bla" ItemsSource="{Binding ChartData}" Visibility="Collapsed" CanUserAddRows="False" AutoGenerateColumns="False">
+                <DataGrid Margin="50" Name="bla" ItemsSource="{Binding TypeInspData}" Visibility="{Binding TypeInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Inspectie Type" Binding="{Binding Type.type}"/>
                         <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -50,6 +50,7 @@
                     <Button Command="{Binding ShowInspCommand}" Content="Inspecties per Inspecteur" />
                     <Button Command="{Binding ShowBedrCommand}" Content="Inspecties per Bedrijf" />
                     <Button Command="{Binding ShowGemInspCommand}" Content="Gemiddeld aantal inspecties per inspecteur per maand" />
+                    <Button Command="{Binding ShowTypeInspCommand}" Content="Aantal inspecties per inspectietype"/>
                 </StackPanel>               
 
             </WrapPanel>
