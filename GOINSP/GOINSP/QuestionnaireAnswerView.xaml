@@ -83,7 +83,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <Label Content="Anders, " Visibility="{Binding AlternativeAnswerVisibility}"/>
-                    <TextBox  Visibility="{Binding AlternativeAnswerVisibility}"/>
+                    <TextBox Text="{Binding AlternativeAnswer}" Visibility="{Binding AlternativeAnswerVisibility}"/>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
