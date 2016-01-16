@@ -26,6 +26,7 @@ namespace GOINSP.ViewModel
             SimpleIoc.Default.Register<CompanyCrudVM>();
             SimpleIoc.Default.Register<QuestionnaireAnswerViewModel>();
             SimpleIoc.Default.Register<ManagInfoVM>();
+            SimpleIoc.Default.Register<TDataViewModel>();
         }
 
         public MainViewModel Main
@@ -121,6 +122,14 @@ namespace GOINSP.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CompanyCrudVM>();
+            }
+        }
+
+        public TDataViewModel TDataViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TDataViewModel>();
             }
         }
 

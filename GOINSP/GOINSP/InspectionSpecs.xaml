@@ -39,6 +39,11 @@
                             <MouseBinding Command="{Binding OpenRapportage}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
+                    <TextBlock Text="Huishoudelijk afval" TextDecorations="Underline" Margin="6 0 0 0">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding OpenAfvalCommand}" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </WrapPanel>
 
                 <m:Map x:Name="PickerMap" CredentialsProvider="6ul3wIbTzn5LT7yjxpI2~uLiY5U0SRIjJ5O_VS-Y_YQ~AndIPnWA1UenaMKsoVD0GDdau2QeDLw0Eh68IFPO_vSwNk1O_tHP-5NPH5nSp4s9" Padding="0" Center="{Binding MapPoint}" ZoomLevel="15" ScaleVisibility="Hidden" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="False">
