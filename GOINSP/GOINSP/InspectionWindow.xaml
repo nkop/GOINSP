@@ -14,7 +14,7 @@
                 <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Postcode" Binding="{Binding company.BedrijfsPostcode}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="510,10,0,0" Command="{Binding AddInspection}" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="510,10,0,0" Command="{Binding AddInspection}" Visibility="{Binding AddInspectionVisibility}" VerticalAlignment="Top" Width="75"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="10,16,0,0" TextWrapping="Wrap" Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

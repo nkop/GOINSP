@@ -37,6 +37,21 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
+        private Visibility addInspectionVisibility;
+        public Visibility AddInspectionVisibility
+        {
+            get
+            {
+                return addInspectionVisibility;
+            }
+            set
+            {
+                addInspectionVisibility = value;
+                RaisePropertyChanged("AddInspectionVisibility");
+            }
+        }
+
+
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
         public ICommand UpdateInspection { get; set; }
@@ -82,6 +97,12 @@ namespace GOINSP.ViewModel
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
+
+            AddInspectionVisibility = Visibility.Collapsed;
+            if (Config.Rechten == Account.Rights.Manager || Config.Rechten == Account.Rights.Administrator)
+            {
+                AddInspectionVisibility = Visibility.Visible;
+            }
         }
 
         public string SearchQuota
