@@ -23,7 +23,7 @@
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
                         <Label Content="Adres: "  />
-                        <Label Content="{Binding InspectionSpecs.company.BedrijfsAdres}" />
+                        <Label Content="{Binding InspectionSpecs.company.totaalAdres}" />
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
                         <Label Content="Type: "  />
@@ -37,6 +37,11 @@
                     <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenRapportage}" MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <TextBlock Text="Huishoudelijk afval" TextDecorations="Underline" Margin="6 0 0 0">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding OpenAfvalCommand}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
                 </WrapPanel>

@@ -18,6 +18,11 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
             tdata = new TData();
         }
 
+        public TDataVM(TData tdata)
+        {
+            this.tdata = tdata;
+        }
+
         public int ID
         {
             get { return tdata.ID; }
@@ -34,6 +39,10 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
         {
             get { return tdata.Perioden; }
             set { tdata.Perioden = value.Trim(); }
+        }
+
+        public string PeriodenFormatted { 
+            get { return Perioden.Substring(0, 4); }
         }
 
         public int? TotaalHuishoudelijkAfval_1
