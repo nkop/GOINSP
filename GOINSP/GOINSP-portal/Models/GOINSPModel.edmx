@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GOINSPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="AccountRights" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="companyid" />
+          </Key>
+          <Property Name="companyid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BedrijfsNaam" Type="nvarchar(max)" />
+          <Property Name="BedrijfsEmail" Type="nvarchar(max)" />
+          <Property Name="BedrijfsAdres" Type="nvarchar(max)" />
+          <Property Name="BedrijfsPostcode" Type="nvarchar(max)" />
+          <Property Name="BedrijfsNummer" Type="nvarchar(max)" />
+          <Property Name="BedrijfsGemeente" Type="nvarchar(max)" />
+          <Property Name="BedrijfsWijk" Type="nvarchar(max)" />
+          <Property Name="BedrijfsGemeenteCode" Type="nvarchar(max)" />
+          <Property Name="BedrijfsLat" Type="decimal" Precision="15" Scale="13" Nullable="false" />
+          <Property Name="BedrijfsLon" Type="decimal" Precision="15" Scale="13" Nullable="false" />
+          <Property Name="BedrijfsPortalKey" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="GOINSPModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GOINSPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountRights" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="companyid" />
+          </Key>
+          <Property Name="companyid" Type="Guid" Nullable="false" />
+          <Property Name="BedrijfsNaam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsAdres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsPostcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsNummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsGemeente" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsWijk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsGemeenteCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedrijfsLat" Type="Decimal" Precision="15" Scale="13" Nullable="false" />
+          <Property Name="BedrijfsLon" Type="Decimal" Precision="15" Scale="13" Nullable="false" />
+          <Property Name="BedrijfsPortalKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="GOINSPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GOINSPModelStoreContainer" CdmEntityContainer="GOINSPEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="GOINSPModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AccountRights" ColumnName="AccountRights" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="GOINSPModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="BedrijfsPortalKey" ColumnName="BedrijfsPortalKey" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="BedrijfsNaam" ColumnName="BedrijfsNaam" />
+                <ScalarProperty Name="BedrijfsEmail" ColumnName="BedrijfsEmail" />
+                <ScalarProperty Name="BedrijfsAdres" ColumnName="BedrijfsAdres" />
+                <ScalarProperty Name="BedrijfsPostcode" ColumnName="BedrijfsPostcode" />
+                <ScalarProperty Name="BedrijfsNummer" ColumnName="BedrijfsNummer" />
+                <ScalarProperty Name="BedrijfsGemeente" ColumnName="BedrijfsGemeente" />
+                <ScalarProperty Name="BedrijfsWijk" ColumnName="BedrijfsWijk" />
+                <ScalarProperty Name="BedrijfsGemeenteCode" ColumnName="BedrijfsGemeenteCode" />
+                <ScalarProperty Name="BedrijfsLat" ColumnName="BedrijfsLat" />
+                <ScalarProperty Name="BedrijfsLon" ColumnName="BedrijfsLon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
