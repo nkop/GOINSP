@@ -59,6 +59,7 @@ namespace GOINSP.ViewModel
         public ICommand OpenQuestionnaireCommand { get; set; }
         public ICommand OpenEditInspection { get; set; }
         public ICommand PrintRapport { get; set; }
+        public ICommand OpenAfvalCommand { get; set; }
 
         public void FillPoint()
         {
@@ -77,6 +78,14 @@ namespace GOINSP.ViewModel
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
             OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
             PrintRapport = new RelayCommand(generatePDF);
+            OpenAfvalCommand = new RelayCommand(OpenAfval);
+        }
+
+        public void OpenAfval()
+        {
+            TDataViewModel tDataViewModel = ServiceLocator.Current.GetInstance<TDataViewModel>();
+            tDataViewModel.GMCode = InspectionSpecs.company.BedrijfsGemeenteCode;
+            tDataViewModel.Show(this);
         }
 
         public void SetInspection(Guid id)

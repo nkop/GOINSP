@@ -31,15 +31,26 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Center" Foreground="#597cb6" >Bedrijsnaam:</TextBlock>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedCompany.Bedrijfsnaam}" Margin="0 0 0 10" Height="30" />
+            <TextBlock Grid.Column="0" Grid.Row="0" Height="30" VerticalAlignment="Center" Foreground="#597cb6" FontWeight="Bold" >Aanpassen</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Height="30" VerticalAlignment="Center" Foreground="#597cb6" >Bedrijsnaam:</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedCompany.Bedrijfsnaam}" Margin="0 0 0 10" Height="30" />
 
-            <TextBlock Grid.Column="0" Grid.Row="1" Height="30" VerticalAlignment="Center" Foreground="#597cb6" >Bedrijfsemail:</TextBlock>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedCompany.BedrijfsEmail}" Margin="0 0 0 10" Height="30" />
+            <TextBlock Grid.Column="0" Grid.Row="2" Height="30" VerticalAlignment="Center" Foreground="#597cb6" >Bedrijfsemail:</TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedCompany.BedrijfsEmail}" Margin="0 0 0 10" Height="30" />
 
-            <Button Content="Opslaan" Command="{Binding btnSave}" Grid.Column="1" Grid.Row="2" Height="30" Foreground="#fff" >
+            <Button Content="Locatie" Command="{Binding btnPickLocationEdit}" Grid.Column="1" Grid.Row="4" Height="30" Foreground="#fff" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#37aef1" Offset="0"/>
+                        <GradientStop Color="#288bb5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Opslaan" Command="{Binding btnSave}" Grid.Column="1" Grid.Row="5" Height="30" Foreground="#fff" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#37aef1" Offset="0"/>
