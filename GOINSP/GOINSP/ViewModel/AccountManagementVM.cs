@@ -28,6 +28,8 @@ namespace GOINSP.ViewModel
 
         public ObservableCollection<String> Rights { get; set; }
 
+        public string Email { get; set; }
+
         private string _loginname { get; set; }
         public string LoginName
         {
@@ -113,7 +115,7 @@ namespace GOINSP.ViewModel
             Models.Account NewAccount = new Models.Account();
             NewAccount.UserName = SelectedAccount.UserName;
             NewAccount.Password = SelectedAccount.Password;
-            NewAccount.Email = SelectedAccount.Email;
+            NewAccount.Email = Email;
             NewAccount.AccountRights = newRights;
 
             if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
