@@ -199,7 +199,7 @@ namespace GOINSP.ViewModel
             }
             else
             {
-                MessageBox.Show("Er zijn geen bijlagen gevonden");
+                //
             }
             
         }
