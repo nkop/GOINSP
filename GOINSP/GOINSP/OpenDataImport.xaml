@@ -3,11 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         DataContext="{Binding OpenDataImport, Source={StaticResource Locator}}"
-        Title="GoInsp - Data Importeren" Height="300" Width="302" WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Title="GoInsp - Data Importeren" Height="300" Width="300" WindowStartupLocation="CenterScreen"
+        Background="#fff">
     <Grid>
-        <Button Content="Importeer Afval Data" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}"/>
-        <Button Content="Importeer Regio Data" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios" IsEnabled="{Binding ButtonsEnabled}"/>
+        <Button Content="Importeer Afval Data" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="tdata" IsEnabled="{Binding ButtonsEnabled}" Foreground="#fff">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Importeer Regio Data" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="272" Height="47" Command="{Binding StartImportCommand}" CommandParameter="regios" IsEnabled="{Binding ButtonsEnabled}" Foreground="#fff" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <ProgressBar HorizontalAlignment="Left" Height="30" Margin="10,229,0,0" VerticalAlignment="Top" Width="272" Value="{Binding ProgressBarPercentage}"/>
         <Label Content="{Binding ProgressLabelText}" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top"/>
     </Grid>

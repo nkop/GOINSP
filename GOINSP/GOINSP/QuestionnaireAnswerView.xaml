@@ -4,7 +4,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         DataContext="{Binding QuestionnaireAnswerViewModel, Source={StaticResource Locator}}"
-        Title="QuestionnaireAnswerView" Height="700" Width="1200" Background="#FF3598DC" WindowStartupLocation="CenterScreen">
+        Title="QuestionnaireAnswerView" Height="900" Width="750" Background="#fff" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
