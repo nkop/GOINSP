@@ -31,7 +31,6 @@ namespace GOINSP.ViewModel
             }
         }
 
-        public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         
 
@@ -59,19 +58,19 @@ namespace GOINSP.ViewModel
 
         public Guid InspectionID;
 
-        public InspectionViewModel()
+        public void CreateInspections()
         {
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
 
-            IEnumerable<InspectionVM> inspectionVM  = null; 
-            
+            IEnumerable<InspectionVM> inspectionVM = null;
+
             if (Config.Rechten == Models.Account.Rights.ExterneInspecteur)
             {
                 List<Inspection> AllInspections = inspectie.ToList();
                 List<Inspection> InspectionsForUser = inspectie.Where(x => x.inspector.id == Config.GebruikerID).ToList();
                 List<Inspection> inspections = new List<Inspection>();
                 List<Company> Companies = InspectionsForUser.Select(x => x.company).ToList();
-                foreach(Company company in Companies)
+                foreach (Company company in Companies)
                 {
                     InspectionsForUser.AddRange(AllInspections.Where(x => x.company == company).ToList().Distinct());
                 }
@@ -96,13 +95,15 @@ namespace GOINSP.ViewModel
             {
                 AddInspectionVisibility = Visibility.Visible;
             }
-            
+
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
+        }
 
-            IEnumerable<InspectionType> inspectiontype = Config.Context.Inspectiontype;
-            IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
-            TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
+        public InspectionViewModel()
+        {
+            CreateInspections();
+
             RaisePropertyChanged("TypeInspectie");
 
             AddInspection = new RelayCommand(Add);
@@ -152,23 +153,21 @@ namespace GOINSP.ViewModel
             }
         }
 
-
         public void OpenInspection(bool show = true)
         {
             if (_selectedInspection != null)
             {
                 InspectionSpecsViewModel InspectionVMInstance = ServiceLocator.Current.GetInstance<InspectionSpecsViewModel>();
                 InspectionVMInstance.SetInspection(_selectedInspection.id);
-
-                if (show)
-                    InspectionVMInstance.Show(this);
+                InspectionVMInstance.Show(this);
+                CloseView();
             }
         }
 
-
         public void Show(INavigatableViewModel sender = null)
         {
-            InspectionViewModel view = new InspectionViewModel();
+            CreateInspections();
+            InspectionWindow view = new InspectionWindow();
             view.Show();
         }
 
@@ -178,7 +177,5 @@ namespace GOINSP.ViewModel
                 new NotificationMessage(this, "CloseView")
             );
         }
-
-
     }
 }

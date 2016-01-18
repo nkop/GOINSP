@@ -29,6 +29,7 @@ namespace GOINSP.ViewModel
         private Guid dir;
 
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
+        public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
 
         private InspectionVM _inspection;
         public InspectionVM Inspection
@@ -166,19 +167,23 @@ namespace GOINSP.ViewModel
                 // Add to view
                 Inspection = new InspectionVM();
                 RaisePropertyChanged("Inspections");
-
-                CloseView();
             }
             catch (Exception)
             {
                 MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
             }
+
+            CloseView();
         }
 
         public void LoadAddInspection()
         {
             List<Company> companies = Config.Context.Company.ToList();
             Bedrijven = new ObservableCollection<NewCompanyVM>(companies.Select(c => new NewCompanyVM(c)));
+
+            IEnumerable<InspectionType> inspectiontype = Config.Context.Inspectiontype;
+            IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
+            TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
 
             IEnumerable<Account> inspecteurs = Config.Context.Account;
             IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
@@ -190,7 +195,7 @@ namespace GOINSP.ViewModel
         {
             if (selectedBijlage.FileName != null || selectedBijlage != null)
             {
-                String map = Inspection.directory.ToString();
+                String map = dir.ToString();
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string specificFolder = Path.Combine(folder, @"GoInspGroepB/" + map);
                 DirectoryInfo d = new DirectoryInfo(specificFolder);
@@ -226,58 +231,51 @@ namespace GOINSP.ViewModel
         {
             Bijlages = new List<Bijlage>();
 
-            string map = Inspection.directory.ToString();
+            string map = dir.ToString();
 
-            if (map != "00000000-0000-0000-0000-000000000000")
+            List<Bijlage> templist = new List<Bijlage>();
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string specificFolder = Path.Combine(folder, "GoInspGroepB/" + map);
+            DirectoryInfo d = new DirectoryInfo(specificFolder);
+
+            foreach (var file in d.GetFiles())
             {
-                List<Bijlage> templist = new List<Bijlage>();
-                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + map);
-                DirectoryInfo d = new DirectoryInfo(specificFolder);
-
-                foreach (var file in d.GetFiles())
+                string tmpExtension = "";
+                switch (Path.GetExtension(file.ToString()).ToLower())
                 {
-                    string tmpExtension = "";
-                    switch (Path.GetExtension(file.ToString()).ToLower())
-                    {
-                        case ".jpg":
-                            tmpExtension = "JPG (*.jpg)";
-                            break;
-                        case ".jpeg":
-                            tmpExtension = "JPG (*.jpeg)";
-                            break;
-                        case ".png":
-                            tmpExtension = "PNG (*.png)";
-                            break;
-                        case ".gif":
-                            tmpExtension = "GIF (*.gif)";
-                            break;
-                        case ".mp3":
-                            tmpExtension = "MP3 (*.mp3)";
-                            break;
-                        case ".mp4":
-                            tmpExtension = "MP4 (*.mp4)";
-                            break;
-                        case ".mov":
-                            tmpExtension = "MOV (*.mov)";
-                            break;
-                        default:
-                            break;
-                    }
-
-                    Bijlage tmp = new Bijlage();
-                    tmp.FileName = file.ToString();
-                    tmp.Extension = tmpExtension;
-
-                    templist.Add(tmp);
+                    case ".jpg":
+                        tmpExtension = "JPG (*.jpg)";
+                        break;
+                    case ".jpeg":
+                        tmpExtension = "JPG (*.jpeg)";
+                        break;
+                    case ".png":
+                        tmpExtension = "PNG (*.png)";
+                        break;
+                    case ".gif":
+                        tmpExtension = "GIF (*.gif)";
+                        break;
+                    case ".mp3":
+                        tmpExtension = "MP3 (*.mp3)";
+                        break;
+                    case ".mp4":
+                        tmpExtension = "MP4 (*.mp4)";
+                        break;
+                    case ".mov":
+                        tmpExtension = "MOV (*.mov)";
+                        break;
+                    default:
+                        break;
                 }
 
-                Bijlages = templist;
+                Bijlage tmp = new Bijlage();
+                tmp.FileName = file.ToString();
+                tmp.Extension = tmpExtension;
+
+                templist.Add(tmp);
             }
-            else
-            {
-                MessageBox.Show("Er zijn geen bijlagen gevonden");
-            }
+
+            Bijlages = templist;
 
             Console.WriteLine("OKAY!");
         }
@@ -295,12 +293,13 @@ namespace GOINSP.ViewModel
 
                 RaisePropertyChanged("Inspections");
 
-                CloseView();
             }
             catch (Exception)
             {
                 MessageBox.Show("Er is iets fout gegaan, probeer het nogmaals.");
             }
+
+            CloseView();
         }
 
         private void ShowBedrijf()
@@ -362,11 +361,7 @@ namespace GOINSP.ViewModel
             }
 
 
-            if (Inspection != null)
-            {
-                searchBijlage();
-            }
-
+            searchBijlage();
         }
 
         public void Show(INavigatableViewModel sender = null)
@@ -380,6 +375,7 @@ namespace GOINSP.ViewModel
         {
             if(LastSender != null)
                 LastSender.Show();
+
             Messenger.Default.Send<NotificationMessage>(
                 new NotificationMessage(this, "CloseView")
             );

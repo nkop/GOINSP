@@ -248,10 +248,11 @@ namespace GOINSP.ViewModel
 
         public void OpenEditInspectionWindow()
         {
-            InspectionViewModel inspection = ServiceLocator.Current.GetInstance<InspectionViewModel>();
-            EditInspection window = new EditInspection();
-            searchBijlagen();
-            window.Show();
+            InspectieEditViewModel inspectieEditViewModel = ServiceLocator.Current.GetInstance<InspectieEditViewModel>();
+            inspectieEditViewModel.LoadAddInspection();
+            inspectieEditViewModel.Inspection = InspectionSpecs;
+            inspectieEditViewModel.Show(this);
+
             CloseView();
         }
 
