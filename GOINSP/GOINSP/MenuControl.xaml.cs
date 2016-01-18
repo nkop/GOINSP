@@ -20,7 +20,7 @@ namespace GOINSP
     /// </summary>
     public partial class MenuControl : Window
     {
-        public MenuControl(string rights)
+        public MenuControl()
         {
             InitializeComponent();
 

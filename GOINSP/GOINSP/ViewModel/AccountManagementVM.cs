@@ -167,7 +167,7 @@ namespace GOINSP.ViewModel
                             w.Hide();
                         }
 
-                        MenuControl window = new MenuControl(account.AccountRights.ToString());
+                        MenuControl window = new MenuControl();
                         window.Show();
                     }
                     else
