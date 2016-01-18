@@ -24,6 +24,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-
-    </StackPanel>
+            
+        </StackPanel>
 </Window>

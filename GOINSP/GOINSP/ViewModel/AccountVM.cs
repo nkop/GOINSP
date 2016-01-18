@@ -40,7 +40,7 @@ namespace GOINSP.ViewModel
         {
             get { return account.UserName; }
             set { account.UserName = value;
-            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
+            if (this.UserName != null && this.Password != null && this.Email != null)
             {
                 var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
@@ -54,7 +54,7 @@ namespace GOINSP.ViewModel
 
             get { return account.Password; }
             set { account.Password = value;
-            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
+            if (this.UserName != null && this.Password != null && this.Email != null)
             {
                 var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;
@@ -67,7 +67,7 @@ namespace GOINSP.ViewModel
         {
             get { return account.Email; }
             set { account.Email = value;
-            if (this.UserName != null && this.Password != null && this.Email != null && this.AccountRights != Account.Rights.Default)
+            if (this.UserName != null && this.Password != null && this.Email != null)
             {
                 var entry = Config.Context.Entry(account);
                 entry.State = EntityState.Modified;

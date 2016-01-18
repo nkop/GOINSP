@@ -24,5 +24,14 @@ namespace GOINSP
             InitializeComponent();
         }
 
+        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if ((string)e.Column.Header == "id" || (string)e.Column.Header == "Password")
+            {
+                e.Cancel = true;
+            }
+
+        }
+
     }
 }
