@@ -26,7 +26,7 @@ namespace GOINSP
 
             Messenger.Default.Register<NotificationMessage>(this, (nm) =>
             {
-                if (nm.Notification == "CloseView2")
+                if (nm.Notification == "CloseView")
                 {
                     if (nm.Sender == this.DataContext)
                         this.Close();

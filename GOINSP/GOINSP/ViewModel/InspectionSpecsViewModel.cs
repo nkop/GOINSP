@@ -250,9 +250,8 @@ namespace GOINSP.ViewModel
         {
             InspectionViewModel inspection = ServiceLocator.Current.GetInstance<InspectionViewModel>();
             EditInspection window = new EditInspection();
-            inspection.searchBijlage();
+            searchBijlagen();
             window.Show();
-            inspectionviewmodel.LoadAddInspection();
             CloseView();
         }
 

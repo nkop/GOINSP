@@ -175,9 +175,6 @@
     <Compile Include="AddCompanyWindow.xaml.cs">
       <DependentUpon>AddCompanyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddInspection.xaml.cs">
-      <DependentUpon>AddInspection.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
@@ -215,19 +212,6 @@
     </Compile>
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601121914537_companyaddress.cs" />
-    <Compile Include="Migrations\201601121914537_companyaddress.Designer.cs">
-      <DependentUpon>201601121914537_companyaddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601141416512_test.cs" />
-    <Compile Include="Migrations\201601151041308_type.cs" />
-    <Compile Include="Migrations\201601151041308_type.Designer.cs">
-      <DependentUpon>201601151041308_type.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601151044358_typeins.cs" />
-    <Compile Include="Migrations\201601151044358_typeins.Designer.cs">
-      <DependentUpon>201601151044358_typeins.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -288,6 +272,7 @@
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectieEditViewModel.cs" />
     <Compile Include="ViewModel\InspectionTypeVM.cs" />
     <Compile Include="ViewModel\LocationPickerVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
@@ -349,10 +334,6 @@
     <Compile Include="XamlToHtmlParser\HtmlSchema.cs" />
     <Compile Include="XamlToHtmlParser\HtmlTokenType.cs" />
     <Compile Include="XamlToHtmlParser\HtmlToXamlConverter.cs" />
-    <Page Include="AddInspection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -456,18 +437,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201601121914537_companyaddress.resx">
-      <DependentUpon>201601121914537_companyaddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601141416512_test.resx">
-      <DependentUpon>201601141416512_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601151041308_type.resx">
-      <DependentUpon>201601151041308_type.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601151044358_typeins.resx">
-      <DependentUpon>201601151044358_typeins.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
