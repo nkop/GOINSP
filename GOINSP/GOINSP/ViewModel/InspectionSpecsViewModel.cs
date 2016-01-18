@@ -41,6 +41,20 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private Visibility editInspectionVisibility;
+        public Visibility EditInspectionVisibility
+        {
+            get
+            {
+                return editInspectionVisibility;
+            }
+            set
+            {
+                editInspectionVisibility = value;
+                RaisePropertyChanged("AddInspectionVisibility");
+            }
+        }
+
         private InspectionVM inspectionSpecs;
         public InspectionVM InspectionSpecs
         {
@@ -52,6 +66,7 @@ namespace GOINSP.ViewModel
             {
                 inspectionSpecs = value;
                 FillPoint();
+                CheckPermissions();
                 RaisePropertyChanged("InspectionSpecs");
             }
         }
@@ -68,6 +83,18 @@ namespace GOINSP.ViewModel
             if(InspectionSpecs.company != null)
             {
                 MapPoint = new Location((double)InspectionSpecs.company.BedrijfsLat, (double)InspectionSpecs.company.BedrijfsLon);
+            }
+        }
+
+        public void CheckPermissions()
+        {
+            EditInspectionVisibility = Visibility.Visible;
+            if(InspectionSpecs.accountVM != null && Config.Rechten == Account.Rights.ExterneInspecteur)
+            {
+                if(InspectionSpecs.accountVM.id != Config.GebruikerID)
+                {
+                    EditInspectionVisibility = Visibility.Collapsed;
+                }
             }
         }
 
