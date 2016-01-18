@@ -4,19 +4,26 @@
         xmlns:w="clr-namespace:GOINSP"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
         Title="GoInsp - Gebruiker toevoegen" Height="400" Width="300"
-        Background="#3598dc">
+        Background="#fff">
     
     
         <StackPanel Margin="20">
-            <TextBlock Height="20">Gebruikersnaam</TextBlock>
+        <TextBlock Height="20" Foreground="#597cb6">Gebruikersnaam</TextBlock>
             <TextBox Text="{Binding SelectedAccount.UserName}" Height="30" Margin="0 0 0 10"></TextBox>
-            <TextBlock Text="Wachtwoord" Height="20" />
+        <TextBlock Text="Wachtwoord" Height="20" Foreground="#597cb6" />
         <w:BindablePasswordBox Password="{Binding SelectedAccount.Password}" Height="30" Margin="0 0 0 10" />
-            <TextBlock Text="E-Mail" Height="20"/>
+        <TextBlock Text="E-Mail" Height="20" Foreground="#597cb6"/>
         <TextBox Text="{Binding SelectedAccount.Email}" Height="30" Margin="0 0 0 10"></TextBox>
-            <TextBlock Text="Gebruikerstype"/>
+        <TextBlock Text="Gebruikerstype" Height="20" Foreground="#597cb6"/>
         <ComboBox ItemsSource="{Binding Rights}" SelectedItem="{Binding newRights}"></ComboBox>
-        <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}" Height="30" Margin="0 10 0 0" />
-            
-        </StackPanel>
+        <Button Content="Maak account aan" Command="{Binding CreateAccountCommand}" Height="30" Margin="0 10 0 0" Foreground="#fff" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+    </StackPanel>
 </Window>

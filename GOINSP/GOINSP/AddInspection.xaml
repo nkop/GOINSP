@@ -4,10 +4,10 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:w="clr-namespace:GOINSP.Utility"
-        Title="GoInsp - Inspectie toevoegen" Height="700" Width="800"
+        Title="GoInsp - Inspectie toevoegen" Height="600" Width="750"
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Background="#fff">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"></ColumnDefinition>
@@ -26,35 +26,49 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Inspectie naam:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <TextBox Text="{Binding Path=newInspection.name}" Grid.Column="1" Grid.Row="0" Margin="10"></TextBox>
+        <TextBlock Text="Inspectie naam:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <TextBox Text="{Binding Path=newInspection.name}" Grid.Column="1" Grid.Row="0" Margin="8"></TextBox>
 
-        <TextBlock Text="Inspectie datum:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <xctk:DateTimePicker Value="{Binding Path=newInspection.date}" Format="FullDateTime" Grid.Column="1" Grid.Row="1" Margin="10"/>
+        <TextBlock Text="Inspectie datum:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <xctk:DateTimePicker Value="{Binding Path=newInspection.date}" Format="FullDateTime" Grid.Column="1" Grid.Row="1" Margin="8"/>
 
-        <TextBlock Text="Type" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <ComboBox ItemsSource="{Binding TypeInspectie}" SelectedItem="{Binding SelectedType}" DisplayMemberPath="type" Grid.Column="1" Grid.Row="2" Margin="10" />
+        <TextBlock Text="Type" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <ComboBox ItemsSource="{Binding TypeInspectie}" SelectedItem="{Binding SelectedType}" DisplayMemberPath="type" Grid.Column="1" Grid.Row="2" Margin="8" />
+
+        <TextBlock Text="Bedrijf" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <ComboBox ItemsSource="{Binding Bedrijven}" SelectedItem="{Binding SelectedBedrijf}" DisplayMemberPath="Bedrijfsnaam" Grid.Column="1" Grid.Row="3" Margin="8" />
+
+        <TextBlock Text="Inspecteur" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <ComboBox ItemsSource="{Binding Inspecteurs}" SelectedItem="{Binding selectedUser}" DisplayMemberPath="UserName" Grid.Column="1" Grid.Row="4" Margin="8" />
+
+        <TextBlock Text="Inspectie adres:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <TextBox Text="{Binding Path=SelectedBedrijf.totaalAdres, Mode=OneWay}" IsReadOnly="True" Grid.Column="1" Grid.Row="5" Margin="8"></TextBox>
+
+        <TextBlock Text="Inspectie postcode:" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <TextBox Text="{Binding Path=SelectedBedrijf.BedrijfsPostcode}" IsReadOnly="True" Grid.Column="1" Grid.Row="6" Margin="8"></TextBox>
+
+        <TextBlock Text="Inspectie Beschrijving:" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6" ></TextBlock>
+        <ctl:RichTextEditor Text="{Binding Path=newInspection.description, Mode=TwoWay}" Grid.Row="7" Grid.Column="2" Margin="8" />
+
+        <TextBlock Text="Bijlagen toevoegen:" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#597cb6"></TextBlock>
+        <TextBox Text="{Binding Filenames}" IsReadOnly="True" Grid.Column="1" Grid.Row="8" Margin="10,8,116,8" ></TextBox>
+        <Button Grid.Column="1" Grid.Row="8" Margin="500,8,8,8" Command="{Binding UploadButton}" Foreground="#fff">Bladeren
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         
-        <TextBlock Text="Bedrijf" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <ComboBox ItemsSource="{Binding Bedrijven}" SelectedItem="{Binding SelectedBedrijf}" DisplayMemberPath="Bedrijfsnaam" Grid.Column="1" Grid.Row="3" Margin="10" />
-
-        <TextBlock Text="Inspecteur" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <ComboBox ItemsSource="{Binding Inspecteurs}" SelectedItem="{Binding selectedUser}" DisplayMemberPath="UserName" Grid.Column="1" Grid.Row="4" Margin="10" />
-
-        <TextBlock Text="Inspectie adres:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <TextBox Text="{Binding Path=SelectedBedrijf.totaalAdres, Mode=OneWay}" IsReadOnly="True" Grid.Column="1" Grid.Row="5" Margin="10"></TextBox>
-
-        <TextBlock Text="Inspectie postcode:" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <TextBox Text="{Binding Path=SelectedBedrijf.BedrijfsPostcode}" IsReadOnly="True" Grid.Column="1" Grid.Row="6" Margin="10,9.5,10,9"></TextBox>
-
-        <TextBlock Text="Inspectie Beschrijving:" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <ctl:RichTextEditor Text="{Binding Path=newInspection.description, Mode=TwoWay}" Grid.Row="7" Grid.Column="2" Margin="10" />
-
-        <TextBlock Text="Bijlagen toevoegen:" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
-        <TextBox Text="{Binding Filenames}" IsReadOnly="True" Grid.Column="1" Grid.Row="8" Margin="10,10,116,10" ></TextBox>
-        <Button Grid.Column="1" Grid.Row="8" Margin="541,10,10,10" Command="{Binding UploadButton}">Bladeren</Button>
-        
-        <Button Content="Toevoegen" Margin="10" Command="{Binding SaveInspection}" Grid.Row="9" Grid.ColumnSpan="2"></Button>
+        <Button Content="Toevoegen" Margin="8" Command="{Binding SaveInspection}" Grid.Row="9" Grid.ColumnSpan="2" Foreground="#fff">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
         
     </Grid>
