@@ -1,4 +1,4 @@
-﻿<Window x:Class="GOINSP.InspectionSpecs"
+<Window x:Class="GOINSP.InspectionSpecs"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
@@ -13,7 +13,7 @@
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <Grid Margin="10">
         <StackPanel>
             <Label FontWeight="Bold" FontSize="15px" Content="{Binding InspectionSpecs.name}" />
@@ -57,7 +57,7 @@
                 </m:Map>
 
                 <!--<Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />-->
-                
+
                 <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
                     <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Visibility="{Binding EditInspectionVisibility}" Width="100"></Button>
                     <Button Content="Verwijderen" Command="" Width="100" Visibility="{Binding EditInspectionVisibility}"></Button>
@@ -65,7 +65,7 @@
                 </WrapPanel>
             </WrapPanel>
             <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" />
-            
+
             <TextBlock FontSize="20">Bijlagen:</TextBlock>
             <DataGrid Width="662" Height="325" HorizontalAlignment="Left" VerticalAlignment="Bottom" ItemsSource="{Binding filesList}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}">
                 <DataGrid.Columns>

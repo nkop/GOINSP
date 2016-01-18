@@ -39,13 +39,8 @@
                          " Margin="10 0 0 0" />
             </WrapPanel>
 
-            
-            <DataGrid ItemsSource="{Binding Users}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccount}" Margin="20">
-            <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="Gebruikersnaam" Binding="{Binding UserName}" />
-                <DataGridTextColumn IsReadOnly="True" Header="Email" Binding="{Binding Email}" />
-                <DataGridTextColumn IsReadOnly="True" Header="Accountrechten" Binding="{Binding AccountRights}" />
-            </DataGrid.Columns>
+
+            <DataGrid ItemsSource="{Binding Users}" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" CanUserAddRows="False" AutoGenerateColumns="True" SelectedItem="{Binding SelectedAccount}" Margin="20">
             </DataGrid>
         </StackPanel>
     </Grid>

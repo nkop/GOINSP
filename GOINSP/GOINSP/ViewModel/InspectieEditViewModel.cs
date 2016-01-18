@@ -194,6 +194,9 @@ namespace GOINSP.ViewModel
             IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
             TypeInspectie = new ObservableCollection<InspectionTypeVM>(inspectiontypeVM);
 
+            dir = Inspection.directory;
+            searchBijlage();
+
             IEnumerable<Account> inspecteurs = Config.Context.Account;
             IEnumerable<AccountVM> accountVM = inspecteurs.Select(c => new AccountVM(c)).Where(x => x.AccountRights == Models.Account.Rights.ExterneInspecteur || x.AccountRights == Models.Account.Rights.InterneInspecteur);
             Inspecteurs = new ObservableCollection<AccountVM>(accountVM);
@@ -289,6 +292,7 @@ namespace GOINSP.ViewModel
                 Bijlages = templist;
             }
 
+            RaisePropertyChanged("Bijlages");
             Console.WriteLine("OKAY!");
         }
 
@@ -339,7 +343,7 @@ namespace GOINSP.ViewModel
             {
                 string filenames = "";
 
-                if (Inspection.id.ToString() == "00000000-0000-0000-0000-000000000000")
+                if (Inspection.directory.ToString() == "00000000-0000-0000-0000-000000000000")
                 {
                     dir = Guid.NewGuid();
                 }
@@ -352,7 +356,7 @@ namespace GOINSP.ViewModel
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
                 // Combine the base folder with your specific folder....
-                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
+                string specificFolder = Path.Combine(folder, "GoInspGroepB\\" + dir);
                 string naam;
 
                 // Check if folder exists and if not, create it
@@ -365,8 +369,10 @@ namespace GOINSP.ViewModel
                     filenames += file + ", ";
                     naam = Path.GetFileName(file);
 
-                    File.Copy(file, specificFolder + "/" + naam);
-
+                    if (!File.Exists(specificFolder + "\\" + naam))
+                        File.Copy(file, specificFolder + "\\" + naam);
+                    else
+                        MessageBox.Show("Dit bestand zit al gekoppelt.");
                 }
 
                 Filenames = filenames;
@@ -385,9 +391,6 @@ namespace GOINSP.ViewModel
 
         public void CloseView()
         {
-            if(LastSender != null)
-                LastSender.Show();
-
             Messenger.Default.Send<NotificationMessage>(
                 new NotificationMessage(this, "CloseView")
             );

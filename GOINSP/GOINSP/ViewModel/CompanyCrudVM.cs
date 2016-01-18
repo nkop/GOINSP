@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GOINSP.Models;
 using Microsoft.Practices.ServiceLocation;
 using GOINSP.Utility;
+using System.Text.RegularExpressions;
 
 namespace GOINSP.ViewModel
 {
@@ -89,9 +90,32 @@ namespace GOINSP.ViewModel
             RaisePropertyChanged();
         }
 
+        public bool isEmail(string strIn)
+        {
+            try
+            {
+                return Regex.IsMatch(strIn,
+                      @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                      @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
         private void save()
         {
-            Config.Context.SaveChanges();
+            if (!isEmail(selectedCompany.BedrijfsEmail))
+            {
+                MessageBox.Show("Vul a.u.b. een geldig e-mailadres in.");
+                return;
+            }
+            else
+            {
+                Config.Context.SaveChanges();
+            }
         }
 
         public ObservableCollection<NewCompanyVM> CompanyList
@@ -120,7 +144,7 @@ namespace GOINSP.ViewModel
 
         private void saveNew(Window currentWindow)
         {
-            if (newCompany.Bedrijfsnaam != null && newCompany.BedrijfsEmail != null)
+            if (newCompany.Bedrijfsnaam != null && newCompany.BedrijfsEmail != null && isEmail(newCompany.BedrijfsEmail))
             {
                 try
                 {
@@ -137,7 +161,7 @@ namespace GOINSP.ViewModel
             }
             else
             {
-                MessageBox.Show("Er moet iets ingevuld zijn.");
+                MessageBox.Show("Er is iets mis gegaan, controleer uw data en probeer het nogmaals.");
             }
         }
 

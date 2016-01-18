@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GOINSP.Utility;
+using System.Text.RegularExpressions;
 
 
 namespace GOINSP.ViewModel
@@ -19,6 +20,8 @@ namespace GOINSP.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand VergetenCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
+
+        private AddUserWindow window;
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
@@ -27,6 +30,8 @@ namespace GOINSP.ViewModel
         public ObservableCollection<AccountVM> Users { get; set; }
 
         public ObservableCollection<String> Rights { get; set; }
+
+        public string Email { get; set; }
 
         private string _loginname { get; set; }
         public string LoginName
@@ -104,8 +109,24 @@ namespace GOINSP.ViewModel
         {
             SelectedAccount = null;
             SelectedAccount = new AccountVM();
-            AddUserWindow window = new AddUserWindow();
+            window = new AddUserWindow();
             window.Show();
+        }
+
+
+        public bool isEmail(string strIn)
+        {
+            try
+            {
+                return Regex.IsMatch(strIn,
+                      @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                      @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
         }
 
         private void CreateAccount()
@@ -113,26 +134,37 @@ namespace GOINSP.ViewModel
             Models.Account NewAccount = new Models.Account();
             NewAccount.UserName = SelectedAccount.UserName;
             NewAccount.Password = SelectedAccount.Password;
-            NewAccount.Email = SelectedAccount.Email;
-            NewAccount.AccountRights = newRights;
 
-            if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
+            if (!isEmail(Email))
             {
-                if (NewAccount.UserName != null && NewAccount.Password != null && NewAccount.Email != null &&
-                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && NewAccount.Email.Length > 3)
-                {
-                    Config.Context.Account.Add(NewAccount);
-                    Config.Context.SaveChanges();
-                    LoadUsers();
-                }
-                else
-                {
-                    MessageBox.Show("Een van de ingevoerde velden is te kort");
-                }
+                MessageBox.Show("Vul a.u.b. een geldig e-mailadres in.");
+                return;
             }
             else
             {
-                MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                NewAccount.Email = Email;
+                NewAccount.AccountRights = newRights;
+
+                if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
+                {
+                    if (NewAccount.UserName != null && NewAccount.Password != null && Email != null &&
+                        NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && Email.Length > 3)
+                    {
+                        Email = "";
+                        Config.Context.Account.Add(NewAccount);
+                        Config.Context.SaveChanges();
+                        window.Close();
+                        LoadUsers();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Een van de ingevoerde velden is te kort");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                }
             }
         }
 
@@ -140,11 +172,16 @@ namespace GOINSP.ViewModel
         {
             AccountVM tempAccount = new AccountVM();
             tempAccount = SelectedAccount;
-            if (SelectedAccount.id != null)
+            if (SelectedAccount != null && SelectedAccount.id.ToString() != "00000000-0000-0000-0000-000000000000")
             {
+
                 Models.Account AccToDelete = Config.Context.Account.Where(a => a.UserName == tempAccount.UserName).FirstOrDefault<Models.Account>();
                 Config.Context.Entry(AccToDelete).State = EntityState.Deleted;
                 Config.Context.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("U dient eerst een gebruiker te selecteren.");
             }
             SelectedAccount = null;
             LoadUsers();
@@ -167,7 +204,7 @@ namespace GOINSP.ViewModel
                             w.Hide();
                         }
 
-                        MenuControl window = new MenuControl(account.AccountRights.ToString());
+                        MenuControl window = new MenuControl();
                         window.Show();
                     }
                     else
