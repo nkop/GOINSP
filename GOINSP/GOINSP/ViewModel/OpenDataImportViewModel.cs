@@ -78,7 +78,7 @@ namespace GOINSP.ViewModel
 
             task.ContinueWith((doneTask) =>
             {
-                ProgressLabelText = "Done importing!";
+                ProgressLabelText = "Klaar met importeren";
                 ButtonsEnabled = true;
             });
         }
@@ -94,15 +94,19 @@ namespace GOINSP.ViewModel
             {
                 case ImportProgressValues.ProgressStatus.downloading:
                     ProgressBarPercentage = 0;
-                    ProgressLabelText = "Downloading records...";
+                    ProgressLabelText = "Downloaden van nieuwe velden";
                     break;
                 case ImportProgressValues.ProgressStatus.removing:
                     ProgressBarPercentage = 0;
-                    ProgressLabelText = "Cleaning old records...";
+                    ProgressLabelText = "Opschonen van oude velden";
                     break;
                 case ImportProgressValues.ProgressStatus.inserting:
                     ProgressBarPercentage = (int)(((float)progress.MinProgress/(float)progress.MaxProgress)*100);
-                    ProgressLabelText = "Importing record " + progress.MinProgress + " of " + progress.MaxProgress+"...";
+                    ProgressLabelText = "Veld " + progress.MinProgress + " van " + progress.MaxProgress+" aan het importeren";
+                    break;
+                case ImportProgressValues.ProgressStatus.saving:
+                    ProgressBarPercentage = 100;
+                    ProgressLabelText = "Velden opslaan";
                     break;
                 default:
                     break;

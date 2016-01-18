@@ -20,23 +20,30 @@
         <Border BorderBrush="White" CornerRadius="7" BorderThickness="2,2,2,2" Height="250" Width="400" Grid.ColumnSpan="4" Margin="58,34,59,35">
             <StackPanel Height="250" Width="400" Background="White">
                 <TextBlock FontSize="18" TextAlignment="Center" Padding="10"><Run Text="Login"/></TextBlock>
-                <TextBlock Margin="100, 0, 0, 5"><Run Text="Gebruikersnaam:"/></TextBlock>
+                <TextBlock Margin="100, 0, 0, 5" Foreground="#597cb6"><Run Text="Gebruikersnaam:"/></TextBlock>
                 <WrapPanel>
                     <TextBox FontSize="18" HorizontalAlignment="Center" Height="25" Width="200" Margin="100,0,0,5" Text="{Binding LoginName}"/>
                 </WrapPanel>
-                <TextBlock Margin="100, 0, 0, 5"><Run Text="Wachtwoord:"/></TextBlock>
+                <TextBlock Margin="100, 0, 0, 5" Foreground="#597cb6"><Run Text="Wachtwoord:"/></TextBlock>
                 <WrapPanel>
                     <w:BindablePasswordBox Password="{Binding LoginPassword}" HorizontalAlignment="Left" Margin="100,0,0,5" VerticalAlignment="Bottom" Width="200" Height="25"/>
                 </WrapPanel>
                 <WrapPanel>
-                    <Button IsDefault="True" Height="24" Width="150" HorizontalAlignment="Center" Command="{Binding LoginCommand}" Content="Login" Margin="120 10 0 0"/>
+                    <Button IsDefault="True" Height="24" Width="150" HorizontalAlignment="Center" Command="{Binding LoginCommand}" Content="Login" Margin="120 10 0 0" Foreground="#fff">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </WrapPanel>
-                <TextBlock Text="Wachtwoord vergeten?" TextDecorations="Underline" Margin="135,10,0,0" HorizontalAlignment="Left" Width="130" VerticalAlignment="Top">
+                <TextBlock Text="Wachtwoord vergeten?" TextDecorations="Underline" Margin="135,10,0,0" HorizontalAlignment="Left" Width="130" VerticalAlignment="Top" Foreground="#597cb6" >
                     <TextBlock.InputBindings>
                         <MouseBinding Command="{Binding VergetenCommand}" MouseAction="LeftClick" />
                     </TextBlock.InputBindings>
                 </TextBlock>
-                <TextBlock Text="Help" TextDecorations="Underline" Margin="0,10,135,0" HorizontalAlignment="Right" Width="130">
+                <TextBlock Text="Help" TextDecorations="Underline" Margin="0,10,135,0" HorizontalAlignment="Right" Width="130" Foreground="#597cb6" >
                     <TextBlock.InputBindings>
                         <MouseBinding Command="{Binding VergetenCommand}" MouseAction="LeftClick" />
                     </TextBlock.InputBindings>

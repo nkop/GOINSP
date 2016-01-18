@@ -23,7 +23,8 @@ namespace GOINSP.Utility
         {
             removing,
             downloading,
-            inserting
+            inserting,
+            saving
         }
     }
 }

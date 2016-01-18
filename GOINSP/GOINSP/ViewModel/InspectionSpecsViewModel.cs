@@ -28,6 +28,35 @@ namespace GOINSP.ViewModel
         private InspectionViewModel inspectionviewmodel;
 
         private Location mapPoint;
+        private List<Bijlage> _filsList;
+        private Bijlage _selectedBijlage;
+        public string dir;
+        
+        public List<Bijlage> filesList
+        {
+            get
+            {
+                return _filsList;
+            }
+            set
+            {
+                _filsList = value;
+                RaisePropertyChanged("filesList");
+            }
+        }
+
+        public Bijlage selectedBijlage
+        {
+            get
+            {
+                return _selectedBijlage;
+            }
+            set
+            {
+                _selectedBijlage = value;
+                openBijlage();
+            }
+        }
         public Location MapPoint
         {
             get
@@ -38,6 +67,20 @@ namespace GOINSP.ViewModel
             {
                 mapPoint = value;
                 RaisePropertyChanged("MapPoint");
+            }
+        }
+
+        private Visibility editInspectionVisibility;
+        public Visibility EditInspectionVisibility
+        {
+            get
+            {
+                return editInspectionVisibility;
+            }
+            set
+            {
+                editInspectionVisibility = value;
+                RaisePropertyChanged("AddInspectionVisibility");
             }
         }
 
@@ -52,6 +95,7 @@ namespace GOINSP.ViewModel
             {
                 inspectionSpecs = value;
                 FillPoint();
+                CheckPermissions();
                 RaisePropertyChanged("InspectionSpecs");
             }
         }
@@ -68,6 +112,18 @@ namespace GOINSP.ViewModel
             if(InspectionSpecs.company != null)
             {
                 MapPoint = new Location((double)InspectionSpecs.company.BedrijfsLat, (double)InspectionSpecs.company.BedrijfsLon);
+            }
+        }
+
+        public void CheckPermissions()
+        {
+            EditInspectionVisibility = Visibility.Visible;
+            if(InspectionSpecs.accountVM != null && Config.Rechten == Account.Rights.ExterneInspecteur)
+            {
+                if(InspectionSpecs.accountVM.id != Config.GebruikerID)
+                {
+                    EditInspectionVisibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -88,10 +144,82 @@ namespace GOINSP.ViewModel
             tDataViewModel.Show(this);
         }
 
+        public void searchBijlagen()
+        {
+            filesList = new List<Bijlage>();
+            dir = inspectionSpecs.directory.ToString();
+
+            if (dir != "00000000-0000-0000-0000-000000000000")
+            {
+                List<Bijlage> templist = new List<Bijlage>();
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
+                DirectoryInfo d = new DirectoryInfo(specificFolder);
+
+                foreach (var file in d.GetFiles())
+                {
+                    string tmpExtension = "";
+                    switch (Path.GetExtension(file.ToString()).ToLower())
+                    {
+                        case ".jpg":
+                            tmpExtension = "JPG (*.jpg)";
+                            break;
+                        case ".jpeg":
+                            tmpExtension = "JPG (*.jpeg)";
+                            break;
+                        case ".png":
+                            tmpExtension = "PNG (*.png)";
+                            break;
+                        case ".gif":
+                            tmpExtension = "GIF (*.gif)";
+                            break;
+                        case ".mp3":
+                            tmpExtension = "MP3 (*.mp3)";
+                            break;
+                        case ".mp4":
+                            tmpExtension = "MP4 (*.mp4)";
+                            break;
+                        case ".mov":
+                            tmpExtension = "MOV (*.mov)";
+                            break;
+                        default:
+                            break;
+                    }
+
+
+
+                    Bijlage tmp = new Bijlage();
+                    tmp.FileName = file.ToString();
+                    tmp.Extension = tmpExtension;
+
+                    templist.Add(tmp);
+                }
+
+                filesList = templist;
+            }
+            else
+            {
+                MessageBox.Show("Er zijn geen bijlagen gevonden");
+            }
+            
+        }
+
+        public void openBijlage()
+        {
+            if (_selectedBijlage != null)
+            {
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
+                System.Diagnostics.Process.Start(specificFolder + @"/" + _selectedBijlage.FileName);
+            }
+        }
+
         public void SetInspection(Guid id)
         {
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
             InspectionSpecs = inspectie.Select(a => new InspectionVM(a)).Where(p => p.id == id).First();
+
+            searchBijlagen();
         }
           
         public void Show(INavigatableViewModel sender = null)
@@ -120,7 +248,9 @@ namespace GOINSP.ViewModel
 
         public void OpenEditInspectionWindow()
         {
+            InspectionViewModel inspection = ServiceLocator.Current.GetInstance<InspectionViewModel>();
             EditInspection window = new EditInspection();
+            inspection.searchBijlage();
             window.Show();
             inspectionviewmodel.LoadAddInspection();
             CloseView();
@@ -185,6 +315,34 @@ namespace GOINSP.ViewModel
                             QuestionTable += @"</table>";
                         }
 
+                        var Bijlagen = "Dit Rapport heeft geen bijlagen.";
+
+                        if (inspectionSpecs.directory.ToString() != "00000000-0000-0000-0000-000000000000")
+                        {
+                            Bijlagen = "";
+                            string mappie = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                            string speciaalmappie = Path.Combine(mappie, "GoInspGroepB/" + dir);
+                            DirectoryInfo d = new DirectoryInfo(speciaalmappie);
+
+
+
+                            foreach (var file in d.GetFiles())
+                            {
+                                if (Path.GetExtension(file.ToString()).ToLower() == ".jpg" || Path.GetExtension(file.ToString()).ToLower() == ".jpeg"
+                                    || Path.GetExtension(file.ToString()).ToLower() == ".png" || Path.GetExtension(file.ToString()).ToLower() == ".gif")
+                                {
+                                    Bijlagen += "<img src='" + speciaalmappie + "/" + file + @"' /><br />" + file + "<br />";
+                                }
+                                else
+                                {
+                                    Bijlagen += file + "<br />";
+                                }
+                                
+                                
+                            }
+                        }
+
+                        Console.WriteLine(Bijlagen);
 
                         var InfoPagina = @"<div><br /><h1>Algemene informatie:</h1><br /><br />
 
@@ -227,6 +385,9 @@ namespace GOINSP.ViewModel
                         <h1>Rapportage</h1><br />" + inspectionSpecs.description +  @"<br /><br /><h1>Vragenlijst</h1>
                         <br />
                         " + QuestionTable + @"
+                        <br /><br />
+                        <h1>Bijlagen</h1><br />
+                        " + Bijlagen + @"
                         </div>
                         ";
 

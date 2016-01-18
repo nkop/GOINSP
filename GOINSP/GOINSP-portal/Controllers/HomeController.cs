@@ -110,7 +110,7 @@ namespace GOINSP_portal.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("NOT FOUND" + e.ToString());
+                Console.WriteLine("Niet gevonden" + e.ToString());
             }
         }
     }
