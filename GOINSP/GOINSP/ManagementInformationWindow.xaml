@@ -74,7 +74,7 @@
                 <StackPanel>
                 <DataGrid Margin="50" Name="BedrijfInspectie" ItemsSource="{Binding BedrInspData}" Visibility="{Binding BedrInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" Header="Bedrijf" Binding="{Binding Bedrijf.Bedrijfsnaam}"/>
+                        <DataGridTextColumn Width="100"  IsReadOnly="True" Header="Bedrijf" Binding="{Binding Bedrijf.Bedrijfsnaam}"/>
                         <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
                     </DataGrid.Columns>
                 </DataGrid>

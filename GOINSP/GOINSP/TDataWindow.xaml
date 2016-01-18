@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:GOINSP"
         DataContext="{Binding TDataViewModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="Afval Data" Height="350.299" Width="411.377" WindowStartupLocation="CenterScreen">
+        Title="Afval Data" Height="600" Width="750" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Margin="10, 0, 10, 0">
-            <Label>Periode</Label>
+            <Label Foreground="#597cb6">Periode</Label>
             <ComboBox x:Name="comboBox" ItemsSource="{Binding TDataCollection}" SelectedItem="{Binding SelectedTData}" DisplayMemberPath="PeriodenFormatted" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-            <DataGrid x:Name="dataGrid" ItemsSource="{Binding GridData}" Margin="0, 10, 0, 0" AutoGenerateColumns="False" Height="260">
+            <DataGrid x:Name="dataGrid" Foreground="#597cb6" ItemsSource="{Binding GridData}" Margin="0, 10, 0, 0" AutoGenerateColumns="False" Height="493">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Veld" Width="1*" Binding="{Binding StringOne}"/>
                     <DataGridTextColumn Header="Waarde" Width="1*" Binding="{Binding StringTwo}"/>

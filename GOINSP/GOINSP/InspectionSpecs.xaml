@@ -6,7 +6,7 @@
         Title="GoInsp - Inspectie details" Height="737.313" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Background="#fff">
     
     <Grid Margin="10">
         <StackPanel>
@@ -14,32 +14,32 @@
             <WrapPanel Orientation="Horizontal">
                 <WrapPanel Margin="30 0 30 0" Orientation="Vertical">
                     <WrapPanel Orientation="Horizontal">
-                        <Label Content="Inspecteur: "  />
+                        <Label Content="Inspecteur: " Foreground="#597cb6"/>
                         <Label Content="{Binding InspectionSpecs.accountVM.UserName}" />
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
-                        <Label Content="Datum: "  />
-                        <Label Content="{Binding InspectionSpecs.date}" />
+                        <Label Content="Datum: " Foreground="#597cb6"/>
+                        <Label Content="{Binding InspectionSpecs.date}"/>
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
-                        <Label Content="Adres: "  />
+                        <Label Content="Adres: " Foreground="#597cb6" />
                         <Label Content="{Binding InspectionSpecs.company.totaalAdres}" />
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal">
-                        <Label Content="Type: "  />
+                        <Label Content="Type: " Foreground="#597cb6"/>
                         <Label Content="{Binding InspectionSpecs.InspectiontypeVM.type}" />
                     </WrapPanel>
-                    <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0">
+                    <TextBlock Text="Vragenlijst" TextDecorations="Underline" Margin="6 0 0 0" Foreground="#597cb6">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenQuestionnaireCommand}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
-                    <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0">
+                    <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0" Foreground="#597cb6">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenRapportage}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
-                    <TextBlock Text="Huishoudelijk afval" TextDecorations="Underline" Margin="6 0 0 0">
+                    <TextBlock Text="Huishoudelijk afval" TextDecorations="Underline" Margin="6 0 0 0" Foreground="#597cb6">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenAfvalCommand}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
@@ -53,9 +53,30 @@
                 <!--<Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />-->
                 
                 <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
-                    <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Visibility="{Binding EditInspectionVisibility}" Width="100"></Button>
-                    <Button Content="Verwijderen" Command="" Width="100" Visibility="{Binding EditInspectionVisibility}"></Button>
-                    <Button Content="Printen" Margin="0 5 0 5" Command="{Binding PrintRapport}" Width="100"></Button>
+                    <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Foreground="#fff" Visibility="{Binding EditInspectionVisibility}" Width="130" BorderBrush="#FF1783B1">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="Verwijderen" Command="" Width="130" Visibility="{Binding EditInspectionVisibility}" Foreground="#fff" BorderBrush="#FF1783B1" >
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="Printen" Margin="0 5 0 5" Command="{Binding PrintRapport}" Width="130" Foreground="#fff" BorderBrush="#FF1783B1">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </WrapPanel>
             </WrapPanel>
             <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" />

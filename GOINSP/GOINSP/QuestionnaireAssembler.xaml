@@ -5,7 +5,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="900" Width="750" WindowStartupLocation="CenterScreen" Background="#fff">
+        Title="QuestionnaireAssembler" Height="615" Width="750" WindowStartupLocation="CenterScreen" Background="#fff">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
@@ -64,14 +64,14 @@
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="0,0,0,1">
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Foreground="#597cb6" SelectedItem="{Binding SelectedQuestion}" Margin="30,0,0,15" HorizontalAlignment="Left" Width="360">
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Foreground="#597cb6" SelectedItem="{Binding SelectedQuestion}" Margin="20,10,0,128" HorizontalAlignment="Left" Width="360">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <ComboBox HorizontalAlignment="Left" Margin="395,30,0,0" VerticalAlignment="Top" Width="306" ItemsSource="{Binding AssemblerVMList}" SelectedItem="{Binding SelectedAssembler}" DisplayMemberPath="AssemblerName">
+        <ComboBox HorizontalAlignment="Left" Margin="35,30,0,0" VerticalAlignment="Top" Width="306" ItemsSource="{Binding AssemblerVMList}" SelectedItem="{Binding SelectedAssembler}" DisplayMemberPath="AssemblerName">
         </ComboBox>
         <Label Content="Vragenlijst Component" HorizontalAlignment="Left" Margin="395,4,0,0" VerticalAlignment="Top"  Foreground="#597cb6"/>
 
@@ -223,7 +223,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Height="30" Margin="0,10,0,0" Content="Toevoegen" Command="{Binding AddDropDownQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button Height="30" Margin="0,5,0,0" Content="Toevoegen" Command="{Binding AddDropDownQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#37aef1" Offset="0"/>
@@ -231,7 +231,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button Height="30" Margin="0,10,0,0" Content="Update" VerticalAlignment="Bottom" Foreground="#fff" Command="{Binding UpdateDropDownQuestionCommand}" BorderBrush="#FF1783B1">
+            <Button Height="30" Margin="0,6,0,0" Content="Update" VerticalAlignment="Bottom" Foreground="#fff" Command="{Binding UpdateDropDownQuestionCommand}" BorderBrush="#FF1783B1">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#37aef1" Offset="0"/>
@@ -271,7 +271,7 @@
                 </Button.Background>
             </Button>
         </StackPanel>
-        <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="30,774,0,0" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+        <Button Content="Omhoog ^" HorizontalAlignment="Left" Height="29" Margin="20,470,0,0" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionUpCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#37aef1" Offset="0"/>
@@ -279,7 +279,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="210,774,0,0" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+        <Button Content="Omlaag v" HorizontalAlignment="Left" Height="29" Margin="200,470,0,0" VerticalAlignment="Top" Width="180" Command="{Binding MoveSelectedQuestionDownCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#37aef1" Offset="0"/>
@@ -287,7 +287,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Verwijder" HorizontalAlignment="Left" Margin="30,803,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding DeleteSelectedQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+        <Button Content="Verwijder" HorizontalAlignment="Left" Margin="20,505,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding DeleteSelectedQuestionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#37aef1" Offset="0"/>
@@ -295,7 +295,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Opslaan" HorizontalAlignment="Left" Margin="30,832,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding UpdateQuestionnaireCommand}" Foreground="#fff" BorderBrush="#1783b1">
+        <Button Content="Opslaan" HorizontalAlignment="Left" Margin="20,540,0,0" VerticalAlignment="Top" Width="360" Height="29" Command="{Binding UpdateQuestionnaireCommand}" Foreground="#fff" BorderBrush="#1783b1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#37aef1" Offset="0"/>
