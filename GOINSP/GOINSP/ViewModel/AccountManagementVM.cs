@@ -19,6 +19,8 @@ namespace GOINSP.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand VergetenCommand { get; set; }
         public ICommand CreateAccountCommand { get; set; }
+
+        private AddUserWindow window;
         public ICommand ShowAddUserCommand { get; set; }
         public ICommand DeleteUserCommand { get; set; }
         public AccountVM SelectedAccount { get; set; }
@@ -106,7 +108,7 @@ namespace GOINSP.ViewModel
         {
             SelectedAccount = null;
             SelectedAccount = new AccountVM();
-            AddUserWindow window = new AddUserWindow();
+            window = new AddUserWindow();
             window.Show();
         }
 
@@ -120,11 +122,13 @@ namespace GOINSP.ViewModel
 
             if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
-                if (NewAccount.UserName != null && NewAccount.Password != null && NewAccount.Email != null &&
-                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && NewAccount.Email.Length > 3)
+                if (NewAccount.UserName != null && NewAccount.Password != null && Email != null &&
+                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && Email.Length > 3)
                 {
+                    Email = "";
                     Config.Context.Account.Add(NewAccount);
                     Config.Context.SaveChanges();
+                    window.Close();
                     LoadUsers();
                 }
                 else
