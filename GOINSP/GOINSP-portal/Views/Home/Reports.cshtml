@@ -1,16 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Reports";
+    ViewBag.Title = "Rapporten";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
 <div class="row">
     <div class="col-md-12">
         <table id="reports" class="table display">
             <thead>
-            <th>Report name</th>
-            <th>Report date</th>
+            <th>Rapport naam</th>
+            <th>Rapport datum</th>
             </thead>
             @foreach (var file in ViewBag.files)
             {
@@ -34,7 +33,12 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('#reports').DataTable();
+            $('#reports').DataTable({
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.10/i18n/Dutch.json"
+                }
+
+            });
         });
     </script>
 }
