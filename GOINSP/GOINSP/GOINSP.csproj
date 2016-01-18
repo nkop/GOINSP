@@ -260,6 +260,7 @@
     <Compile Include="Utility\Config.cs" />
     <Compile Include="Utility\ConversionHelper.cs" />
     <Compile Include="Utility\CSVImport.cs" />
+    <Compile Include="Utility\FTPUploader.cs" />
     <Compile Include="Utility\GmapAPIImport.cs" />
     <Compile Include="Utility\ImportProgressValues.cs" />
     <Compile Include="Utility\INavigatableViewModel.cs" />

@@ -430,7 +430,9 @@ namespace GOINSP.ViewModel
 
             var testFile = System.IO.Path.Combine(specificFolder, filename);
             System.IO.File.WriteAllBytes(testFile, bytes);
-
+            //Upload
+            FTPUploader ftp = new FTPUploader();
+            ftp.upload(inspectionSpecs.company.toCompany(), testFile, inspectionSpecs.toInspection());
             System.Diagnostics.Process.Start(testFile);
         }
     }

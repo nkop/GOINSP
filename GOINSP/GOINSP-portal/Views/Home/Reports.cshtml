@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewBag.Title = "Rapporten";
 }
 <h2>@ViewBag.Title</h2>
@@ -19,7 +19,7 @@
                         var lastpart = (String)file.Split('-')[2];
                         var day = lastpart.Substring(0, 2);
                         var month = lastpart.Substring(2, 2);
-                        var year = lastpart.Substring(4, 2);
+                        var year = lastpart.Substring(4, 4);
                         var date = day + "-" + month + "-" + year;
                         } 
                     @date</td>
@@ -41,4 +41,4 @@
             });
         });
     </script>
-}
+    }
