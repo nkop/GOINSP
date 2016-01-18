@@ -23,6 +23,7 @@ namespace GOINSP.ViewModel
         public ICommand SaveInspection { get; set; }
         public ICommand UpdateInspection { get; set; }
         public ICommand WeergeefBedrijfCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public INavigatableViewModel LastSender { get; set; }
 
@@ -136,6 +137,14 @@ namespace GOINSP.ViewModel
             RemoveButton = new RelayCommand(removeBijlage);
             UpdateInspection = new RelayCommand(UpdateOrSave);
             WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+        }
+
+        private void CloseWindow()
+        {
+            Inspection = new InspectionVM();
+            if (LastSender != null)
+                LastSender.Show();
         }
 
         private void UpdateOrSave()
@@ -193,7 +202,7 @@ namespace GOINSP.ViewModel
 
         public void removeBijlage()
         {
-            if (selectedBijlage.FileName != null || selectedBijlage != null)
+            if (selectedBijlage != null && selectedBijlage.FileName != null)
             {
                 String map = dir.ToString();
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -233,49 +242,52 @@ namespace GOINSP.ViewModel
 
             string map = dir.ToString();
 
-            List<Bijlage> templist = new List<Bijlage>();
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string specificFolder = Path.Combine(folder, "GoInspGroepB/" + map);
-            DirectoryInfo d = new DirectoryInfo(specificFolder);
-
-            foreach (var file in d.GetFiles())
+            if (map != "00000000-0000-0000-0000-000000000000")
             {
-                string tmpExtension = "";
-                switch (Path.GetExtension(file.ToString()).ToLower())
+                List<Bijlage> templist = new List<Bijlage>();
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + map);
+                DirectoryInfo d = new DirectoryInfo(specificFolder);
+
+                foreach (var file in d.GetFiles())
                 {
-                    case ".jpg":
-                        tmpExtension = "JPG (*.jpg)";
-                        break;
-                    case ".jpeg":
-                        tmpExtension = "JPG (*.jpeg)";
-                        break;
-                    case ".png":
-                        tmpExtension = "PNG (*.png)";
-                        break;
-                    case ".gif":
-                        tmpExtension = "GIF (*.gif)";
-                        break;
-                    case ".mp3":
-                        tmpExtension = "MP3 (*.mp3)";
-                        break;
-                    case ".mp4":
-                        tmpExtension = "MP4 (*.mp4)";
-                        break;
-                    case ".mov":
-                        tmpExtension = "MOV (*.mov)";
-                        break;
-                    default:
-                        break;
+                    string tmpExtension = "";
+                    switch (Path.GetExtension(file.ToString()).ToLower())
+                    {
+                        case ".jpg":
+                            tmpExtension = "JPG (*.jpg)";
+                            break;
+                        case ".jpeg":
+                            tmpExtension = "JPG (*.jpeg)";
+                            break;
+                        case ".png":
+                            tmpExtension = "PNG (*.png)";
+                            break;
+                        case ".gif":
+                            tmpExtension = "GIF (*.gif)";
+                            break;
+                        case ".mp3":
+                            tmpExtension = "MP3 (*.mp3)";
+                            break;
+                        case ".mp4":
+                            tmpExtension = "MP4 (*.mp4)";
+                            break;
+                        case ".mov":
+                            tmpExtension = "MOV (*.mov)";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    Bijlage tmp = new Bijlage();
+                    tmp.FileName = file.ToString();
+                    tmp.Extension = tmpExtension;
+
+                    templist.Add(tmp);
                 }
 
-                Bijlage tmp = new Bijlage();
-                tmp.FileName = file.ToString();
-                tmp.Extension = tmpExtension;
-
-                templist.Add(tmp);
+                Bijlages = templist;
             }
-
-            Bijlages = templist;
 
             Console.WriteLine("OKAY!");
         }

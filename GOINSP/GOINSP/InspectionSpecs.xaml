@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="GoInsp - Inspectie details" Height="737.313" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     
     <Grid Margin="10">
         <StackPanel>

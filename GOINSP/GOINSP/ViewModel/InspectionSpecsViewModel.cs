@@ -27,10 +27,13 @@ namespace GOINSP.ViewModel
     {
         private InspectionViewModel inspectionviewmodel;
 
+        public INavigatableViewModel LastSender { get; set; }
+
         private Location mapPoint;
         private List<Bijlage> _filsList;
         private Bijlage _selectedBijlage;
         public string dir;
+        bool reOpen;
         
         public List<Bijlage> filesList
         {
@@ -104,6 +107,7 @@ namespace GOINSP.ViewModel
         public ICommand OpenEditInspection { get; set; }
         public ICommand PrintRapport { get; set; }
         public ICommand OpenAfvalCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public void FillPoint()
         {
@@ -131,10 +135,20 @@ namespace GOINSP.ViewModel
         {
             inspectionviewmodel = ServiceLocator.Current.GetInstance<InspectionViewModel>();
 
+            reOpen = true;
+
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
             OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
             PrintRapport = new RelayCommand(generatePDF);
             OpenAfvalCommand = new RelayCommand(OpenAfval);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+        }
+
+        private void CloseWindow()
+        {
+            if (LastSender != null && reOpen)
+                LastSender.Show();
+            reOpen = true;
         }
 
         public void OpenAfval()
@@ -224,6 +238,8 @@ namespace GOINSP.ViewModel
           
         public void Show(INavigatableViewModel sender = null)
         {
+            if (sender != null)
+                LastSender = sender;
             InspectionSpecs window = new InspectionSpecs();
             window.Show();
         }
@@ -252,7 +268,7 @@ namespace GOINSP.ViewModel
             inspectieEditViewModel.LoadAddInspection();
             inspectieEditViewModel.Inspection = InspectionSpecs;
             inspectieEditViewModel.Show(this);
-
+            reOpen = false;
             CloseView();
         }
 

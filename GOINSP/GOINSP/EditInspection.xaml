@@ -4,10 +4,16 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:w="clr-namespace:GOINSP.Utility"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="GoInsp - Inspectie wijzigen" Height="863.433" Width="800"
         DataContext="{Binding InspectieEditViewModel, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#3598dc">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"></ColumnDefinition>
