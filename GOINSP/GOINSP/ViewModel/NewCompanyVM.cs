@@ -164,7 +164,7 @@ namespace GOINSP.ViewModel
 
         private string CreatePassword(int len)
         {
-            string[] valid = { "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "1234567890" };
+            string[] valid = { "abcdefghijklmnopqrstuvwxyz", "1234567890" };
             RNGCryptoServiceProvider rndGen = new RNGCryptoServiceProvider();
 
             byte[] random = new byte[len];
@@ -176,10 +176,10 @@ namespace GOINSP.ViewModel
 
                 for (int i = 0; i < random.Length; i++)
                 {
-                    selected[i] = random[i] % 3;
+                    selected[i] = random[i] % 2;
                 }
             }
-            while (selected.Distinct().Count() != 3);
+            while (selected.Distinct().Count() != 2);
 
             rndGen.GetNonZeroBytes(random);
 

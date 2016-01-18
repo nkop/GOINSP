@@ -33,9 +33,7 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspecteurInspecties> ChartData { get; set; }
         public ObservableCollection<BedrijfInspecties> BedrInspData {get; set;}
         public ObservableCollection<InspectieTypeInspecties> TypeInspData { get; set; }
-
-        public List<KeyValuePair<string, int>> TypeInspKV { get; set; }
-
+        
         private string _gemInspectiesInspecteur;
         public string GemInspectiesInspecteur
         {
@@ -193,14 +191,12 @@ namespace GOINSP.ViewModel
         private void LoadTypeInspData()
         {
             TypeInspData = new ObservableCollection<InspectieTypeInspecties>();
-            TypeInspKV = new List<KeyValuePair<string, int>>();
             var tempInspecties = Config.Context.Inspection.GroupBy(i => i.inspectiontype).Select(i => new { type = i.Key, count = i.Count() });
             if (tempInspecties != null)
             {
                 foreach (var item in tempInspecties)        
                 {
                     TypeInspData.Add(new InspectieTypeInspecties(new InspectionTypeVM(item.type), item.count));
-                    TypeInspKV.Add(new KeyValuePair<string, int>(item.type.type, item.count));
                 }
             }            
             RaisePropertyChanged("TypeInspData");

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-        Title="GoInsp - Inspectie details" Height="600" Width="700"
+        Title="GoInsp - Inspectie details" Height="737.313" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#fff">
@@ -79,7 +79,15 @@
                     </Button>
                 </WrapPanel>
             </WrapPanel>
-            <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" Foreground="#597cb6" Height="369"/>
+            <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" />
+            
+            <TextBlock FontSize="20">Bijlagen:</TextBlock>
+            <DataGrid Width="662" Height="325" HorizontalAlignment="Left" VerticalAlignment="Bottom" ItemsSource="{Binding filesList}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Bestandsnaam" Binding="{Binding FileName}" />
+                    <DataGridTextColumn IsReadOnly="True" Width="0.5*" Header="Bestandstype" Binding="{Binding Extension}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </Window>

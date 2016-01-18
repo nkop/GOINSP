@@ -29,6 +29,7 @@ namespace GOINSP_portal.Controllers
         {
             string company = form["company"];
             string key = form["key"];
+            
 
             Company cmp = db.Companies.Where(c => c.BedrijfsNaam == company && c.BedrijfsPortalKey == key).FirstOrDefault();
             if (cmp != null)
@@ -109,7 +110,7 @@ namespace GOINSP_portal.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("NOT FOUND" + e.ToString());
+                Console.WriteLine("Niet gevonden" + e.ToString());
             }
         }
     }

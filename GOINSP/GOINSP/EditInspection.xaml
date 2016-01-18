@@ -36,7 +36,7 @@
         <TextBlock Text="Inspectie datum:"  Foreground="#597cb6" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <xctk:DateTimePicker Value="{Binding Path=selectedInspection.date}" Format="FullDateTime" Grid.Column="1" Grid.Row="1" Margin="8"/>
 
-
+        
         <TextBlock Text="Type" Foreground="#597cb6" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ComboBox ItemsSource="{Binding TypeInspectie}" SelectedItem="{Binding SelectedType}" DisplayMemberPath="type" SelectedValuePath="id" SelectedValue="{Binding Path=selectedInspection.InspectiontypeVM.id, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="8" />
 
@@ -63,7 +63,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        
+
         <TextBlock Text="Bijlagen:" Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <DataGrid Width="632" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="1" ItemsSource="{Binding Bijlages}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}" Margin="10,0,0,10">
             <DataGrid.Columns>
