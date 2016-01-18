@@ -144,9 +144,12 @@ namespace GOINSP.ViewModel
                 Inspections.Clear();
                 foreach (InspectionVM item in tempInspectionVM)
                 {
-                    if (item.name.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsAdres.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsPostcode.ToLower().Contains(SearchQuota.ToLower()))
+                    if (item.company.BedrijfsAdres != null && item.company.BedrijfsPostcode != null)
                     {
-                        Inspections.Add(item);
+                        if (item.name.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsAdres.ToLower().Contains(SearchQuota.ToLower()) || item.company.BedrijfsPostcode.ToLower().Contains(SearchQuota.ToLower()))
+                        {
+                            Inspections.Add(item);
+                        }
                     }
                 }
                 RaisePropertyChanged("Inspections");
