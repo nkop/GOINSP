@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GOINSP.Utility;
+using System.Text.RegularExpressions;
 
 
 namespace GOINSP.ViewModel
@@ -112,33 +113,58 @@ namespace GOINSP.ViewModel
             window.Show();
         }
 
+
+        public bool isEmail(string strIn)
+        {
+            try
+            {
+                return Regex.IsMatch(strIn,
+                      @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                      @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
         private void CreateAccount()
         {            
             Models.Account NewAccount = new Models.Account();
             NewAccount.UserName = SelectedAccount.UserName;
             NewAccount.Password = SelectedAccount.Password;
-            NewAccount.Email = Email;
-            NewAccount.AccountRights = newRights;
 
-            if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
+            if (!isEmail(Email))
             {
-                if (NewAccount.UserName != null && NewAccount.Password != null && Email != null &&
-                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && Email.Length > 3)
-                {
-                    Email = "";
-                    Config.Context.Account.Add(NewAccount);
-                    Config.Context.SaveChanges();
-                    window.Close();
-                    LoadUsers();
-                }
-                else
-                {
-                    MessageBox.Show("Een van de ingevoerde velden is te kort");
-                }
+                MessageBox.Show("Vul a.u.b. een geldig e-mailadres in.");
+                return;
             }
             else
             {
-                MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                NewAccount.Email = Email;
+                NewAccount.AccountRights = newRights;
+
+                if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
+                {
+                    if (NewAccount.UserName != null && NewAccount.Password != null && Email != null &&
+                        NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && Email.Length > 3)
+                    {
+                        Email = "";
+                        Config.Context.Account.Add(NewAccount);
+                        Config.Context.SaveChanges();
+                        window.Close();
+                        LoadUsers();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Een van de ingevoerde velden is te kort");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                }
             }
         }
 
