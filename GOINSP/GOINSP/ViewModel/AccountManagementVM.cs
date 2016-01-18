@@ -120,9 +120,10 @@ namespace GOINSP.ViewModel
 
             if (Config.Context.Account.Where(a => a.UserName == SelectedAccount.UserName).FirstOrDefault<Models.Account>() == null)
             {
-                if (NewAccount.UserName != null && NewAccount.Password != null && NewAccount.Email != null &&
-                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && NewAccount.Email.Length > 3)
+                if (NewAccount.UserName != null && NewAccount.Password != null && Email != null &&
+                    NewAccount.UserName.Length > 3 && NewAccount.Password.Length > 3 && Email.Length > 3)
                 {
+                    Email = "";
                     Config.Context.Account.Add(NewAccount);
                     Config.Context.SaveChanges();
                     LoadUsers();
