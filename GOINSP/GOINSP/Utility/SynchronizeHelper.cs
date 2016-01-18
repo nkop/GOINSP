@@ -13,6 +13,7 @@ namespace GOINSP.Utility
         private SqlConnection clientConn;
         private SqlConnection serverConn;
         private DbSyncScopeDescription scopeDesc;
+        private int tryCount;
 
         public void setConnection()
         {
@@ -25,95 +26,135 @@ namespace GOINSP.Utility
         public void SetClient()
         {
             Console.WriteLine("Setting client");
+            try {
+                // get the description of SyncScope from the server database
+                DbSyncScopeDescription scopeDesc = SqlSyncDescriptionBuilder.GetDescriptionForScope("GOINSPSyncScope", serverConn);
 
-            // get the description of SyncScope from the server database
-            DbSyncScopeDescription scopeDesc = SqlSyncDescriptionBuilder.GetDescriptionForScope("GOINSPSyncScope", serverConn);
-
-            // create server provisioning object based on the SyncScope
-            SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(clientConn, scopeDesc);
+                // create server provisioning object based on the SyncScope
+                SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(clientConn, scopeDesc);
 
 
-            // starts the provisioning process
-            clientProvision.Apply();
+                // starts the provisioning process
+                clientProvision.Apply();
 
-            Console.WriteLine("Client Successfully Provisioned.");
-            Console.ReadLine();
+                Console.WriteLine("Client Successfully Provisioned.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Setting client failed: " + e.ToString());
+            };
+
         }
 
-        private void setScopes() {
+        private void setScopes()
+        {
             Console.WriteLine("Setting scopes");
             // define a new scope named MySyncScope
-            scopeDesc = new DbSyncScopeDescription("GOINSPSyncScope");
+            try
+            {
+                scopeDesc = new DbSyncScopeDescription("GOINSPSyncScope");
 
-            // get the description of the CUSTOMER & PRODUCT table from SERVER database
-            DbSyncTableDescription accountsTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Accounts", serverConn);
-            DbSyncTableDescription companiesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Companies", serverConn);
-            DbSyncTableDescription inspectionTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Inspection", serverConn);
-            DbSyncTableDescription postCodeDatasTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("PostCodeDatas", serverConn);
-            DbSyncTableDescription questionBasesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("QuestionBases", serverConn);
-            DbSyncTableDescription questionairesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Questionnaires", serverConn);
-            DbSyncTableDescription regiosTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("RegioS", serverConn);
-            DbSyncTableDescription tdatasTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("TDatas", serverConn);
+                // get the description of the CUSTOMER & PRODUCT table from SERVER database
+                DbSyncTableDescription accountsTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Accounts", serverConn);
+                DbSyncTableDescription companiesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Companies", serverConn);
+                DbSyncTableDescription inspectionTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Inspection", serverConn);
+                DbSyncTableDescription inspectionTypesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("InspectionTypes", serverConn);
+                DbSyncTableDescription postCodeDatasTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("PostCodeDatas", serverConn);
+                DbSyncTableDescription questionBasesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("QuestionBases", serverConn);
+                DbSyncTableDescription questionairesTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("Questionnaires", serverConn);
+                DbSyncTableDescription regiosTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("RegioS", serverConn);
+                DbSyncTableDescription tdatasTableDesc = SqlSyncDescriptionBuilder.GetDescriptionForTable("TDatas", serverConn);
 
-            // add the table description to the sync scope definition
-            scopeDesc.Tables.Add(accountsTableDesc);
-            scopeDesc.Tables.Add(companiesTableDesc);
-            scopeDesc.Tables.Add(inspectionTableDesc);
-            scopeDesc.Tables.Add(postCodeDatasTableDesc);
-            scopeDesc.Tables.Add(questionBasesTableDesc);
-            scopeDesc.Tables.Add(questionairesTableDesc);
-            scopeDesc.Tables.Add(regiosTableDesc);
-            scopeDesc.Tables.Add(tdatasTableDesc);
+                // add the table description to the sync scope definition
+                scopeDesc.Tables.Add(accountsTableDesc);
+                scopeDesc.Tables.Add(companiesTableDesc);
+                scopeDesc.Tables.Add(inspectionTableDesc);
+                scopeDesc.Tables.Add(inspectionTypesTableDesc);
+                scopeDesc.Tables.Add(postCodeDatasTableDesc);
+                scopeDesc.Tables.Add(questionBasesTableDesc);
+                scopeDesc.Tables.Add(questionairesTableDesc);
+                scopeDesc.Tables.Add(regiosTableDesc);
+                scopeDesc.Tables.Add(tdatasTableDesc);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Provisioning failed: " + e.ToString());
+            };
 
         }
 
         public void setServer()
         {
+
             Console.WriteLine("Setting server");
-            // create a server scope provisioning object based on the MySyncScope
-            SqlSyncScopeProvisioning serverProvision = new SqlSyncScopeProvisioning(serverConn, scopeDesc);
+            try
+            {
+                // create a server scope provisioning object based on the MySyncScope
+                SqlSyncScopeProvisioning serverProvision = new SqlSyncScopeProvisioning(serverConn, scopeDesc);
 
-            // skipping the creation of table since table already exists on server
-            serverProvision.SetCreateTableDefault(DbSyncCreationOption.CreateOrUseExisting);
+                // skipping the creation of table since table already exists on server
+                serverProvision.SetCreateTableDefault(DbSyncCreationOption.CreateOrUseExisting);
 
-            // start the provisioning process
-            serverProvision.Apply();
+                // start the provisioning process
+                serverProvision.Apply();
 
-            Console.WriteLine("Server Successfully Provisioned.");
-            Console.ReadLine();
+                Console.WriteLine("Server Successfully Provisioned.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Setting server failed: " + e.ToString());
+            };
+
         }
 
         private void deprovisionRemote()
         {
-            // Remove the retail customer scope from the Sql Server client database.
-            SqlSyncScopeDeprovisioning serverDepro = new SqlSyncScopeDeprovisioning(serverConn);
-
-            // Remove the scope.
             try
             {
-                Console.WriteLine("Deprovision server");
-                serverDepro.DeprovisionScope("GOINSPSyncScope");
-                Console.WriteLine("Server deprovisioned");
+                // Remove the retail customer scope from the Sql Server client database.
+                SqlSyncScopeDeprovisioning serverDepro = new SqlSyncScopeDeprovisioning(serverConn);
+
+                // Remove the scope.
+                try
+                {
+                    Console.WriteLine("Deprovision server");
+                    serverDepro.DeprovisionScope("GOINSPSyncScope");
+                    Console.WriteLine("Server deprovisioned");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Something went wrong");
+                }
             }
-            catch (Exception e) {
-                Console.WriteLine("Something went wrong");
-            }
+            catch (Exception e)
+            {
+                Console.WriteLine("deprovisioning server failed: " + e.ToString());
+            };
+
         }
 
         private void deprovisionLocal()
         {
-            SqlSyncScopeDeprovisioning clientDepro = new SqlSyncScopeDeprovisioning(clientConn);
-
             try
             {
-                Console.WriteLine("Deprovision client");
-                clientDepro.DeprovisionScope("GOINSPSyncScope");
-                Console.WriteLine("client deprovisioned");
+                SqlSyncScopeDeprovisioning clientDepro = new SqlSyncScopeDeprovisioning(clientConn);
+
+                try
+                {
+                    Console.WriteLine("Deprovision client");
+                    clientDepro.DeprovisionScope("GOINSPSyncScope");
+                    Console.WriteLine("client deprovisioned");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Something went wrong");
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Something went wrong");
-            }
+                Console.WriteLine("Deprovisioning client failed: " + e.ToString());
+            };
+
         }
 
         public void work()
@@ -121,6 +162,7 @@ namespace GOINSP.Utility
             Console.WriteLine("Setting connection");
             this.setConnection();
             Console.WriteLine("Starting the sync method");
+            tryCount = 0;
             this.sync();
 
         }
@@ -156,58 +198,63 @@ namespace GOINSP.Utility
             if (serverConn.State == ConnectionState.Open)
             {
                 serverConn.Close();
-            // subscribe for errors that occur when applying changes to the client
-            try {
-                Console.WriteLine("Set new orchestrator");
-                // create the sync orhcestrator
-                SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
+                // subscribe for errors that occur when applying changes to the client
+                try
+                {
+                    Console.WriteLine("Set new orchestrator");
+                    // create the sync orhcestrator
+                    SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
 
-                // set local provider of orchestrator to a sync provider associated with the 
-                // GOINSPSyncScope in the client database
-                Console.WriteLine("Set localprovider");
-                syncOrchestrator.LocalProvider = new SqlSyncProvider("GOINSPSyncScope", clientConn);
+                    // set local provider of orchestrator to a sync provider associated with the 
+                    // GOINSPSyncScope in the client database
+                    Console.WriteLine("Set localprovider");
+                    syncOrchestrator.LocalProvider = new SqlSyncProvider("GOINSPSyncScope", clientConn);
 
-                // set the remote provider of orchestrator to a server sync provider associated with
-                // the GOINSPSyncScope in the server database
-                Console.WriteLine("Set remoteprovider");
-                syncOrchestrator.RemoteProvider = new SqlSyncProvider("GOINSPSyncScope", serverConn);
+                    // set the remote provider of orchestrator to a server sync provider associated with
+                    // the GOINSPSyncScope in the server database
+                    Console.WriteLine("Set remoteprovider");
+                    syncOrchestrator.RemoteProvider = new SqlSyncProvider("GOINSPSyncScope", serverConn);
 
 
 
-                // set the direction of sync session to Upload and Download
-                Console.WriteLine("Set direction");
-                syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
-                Console.WriteLine("Set eventhandler");
-                ((SqlSyncProvider)syncOrchestrator.LocalProvider).ApplyChangeFailed += new EventHandler<DbApplyChangeFailedEventArgs>(Program_ApplyChangeFailed);
-                // execute the synchronization process
-                Console.WriteLine("Sync action");
-                SyncOperationStatistics syncStats = syncOrchestrator.Synchronize();
-                // print statistics
-                Console.WriteLine("Start Time: " + syncStats.SyncStartTime);
-                Console.WriteLine("Total Changes Uploaded: " + syncStats.UploadChangesTotal);
-                Console.WriteLine("Total Changes Downloaded: " + syncStats.DownloadChangesTotal);
-                Console.WriteLine("Complete Time: " + syncStats.SyncEndTime);
-                Console.WriteLine(String.Empty);
-            }
-            catch(Exception e)
-            {
-                // print statistics
-                Console.WriteLine("Error occured, trying to reprovision locally");
-                this.reprovisionLocal();
-                Console.WriteLine("Reprovision done");
-                Console.WriteLine("Retry syncing");
-                this.sync();
+                    // set the direction of sync session to Upload and Download
+                    Console.WriteLine("Set direction");
+                    syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
+                    Console.WriteLine("Set eventhandler");
+                    ((SqlSyncProvider)syncOrchestrator.LocalProvider).ApplyChangeFailed += new EventHandler<DbApplyChangeFailedEventArgs>(Program_ApplyChangeFailed);
+                    // execute the synchronization process
+                    Console.WriteLine("Sync action");
+                    SyncOperationStatistics syncStats = syncOrchestrator.Synchronize();
+                    // print statistics
+                    Console.WriteLine("Start Time: " + syncStats.SyncStartTime);
+                    Console.WriteLine("Total Changes Uploaded: " + syncStats.UploadChangesTotal);
+                    Console.WriteLine("Total Changes Downloaded: " + syncStats.DownloadChangesTotal);
+                    Console.WriteLine("Complete Time: " + syncStats.SyncEndTime);
+                    Console.WriteLine(String.Empty);
+                }
+                catch (Exception e)
+                {
+                    // print statistics
+                    Console.WriteLine("Error occured, trying to reprovision locally");
+                    this.reprovisionLocal();
+                    Console.WriteLine("Reprovision done");
+                    Console.WriteLine("Retry syncing");
+                    if (tryCount < 3)
+                    {
+                        tryCount++;
+                        this.sync();
+                    }
 
-            }
+                }
             }
             else
             {
                 Console.WriteLine("No Connection");
-            } 
+            }
 
-            
 
-            
+
+
         }
         static void Program_ApplyChangeFailed(object sender, DbApplyChangeFailedEventArgs e)
         {
