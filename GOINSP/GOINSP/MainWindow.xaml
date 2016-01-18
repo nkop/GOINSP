@@ -43,11 +43,6 @@
                         <MouseBinding Command="{Binding VergetenCommand}" MouseAction="LeftClick" />
                     </TextBlock.InputBindings>
                 </TextBlock>
-                <TextBlock Text="Help" TextDecorations="Underline" Margin="0,10,135,0" HorizontalAlignment="Right" Width="130" Foreground="#597cb6" >
-                    <TextBlock.InputBindings>
-                        <MouseBinding Command="{Binding VergetenCommand}" MouseAction="LeftClick" />
-                    </TextBlock.InputBindings>
-                </TextBlock>
             </StackPanel>
         </Border>
         <Label x:Name="GOINSP" Content="GOINSP" HorizontalAlignment="Left" Margin="142,-66,0,0" VerticalAlignment="Top" Foreground="White" FontSize="64" Grid.ColumnSpan="4"/>
