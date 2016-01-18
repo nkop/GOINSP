@@ -240,7 +240,6 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
         public void Insert() 
         {
             Config.Context.HuishoudelijkAfvalTData.Add(tdata);
-            Config.Context.SaveChanges();
         }
     }
 }
