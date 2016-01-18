@@ -80,13 +80,15 @@ namespace GOINSP.ViewModel
                     tempUsersVM.Add(new AccountVM(item));
                 }
                 Users.Clear();
+
                 foreach (AccountVM item in tempUsersVM)
                 {
-                    if (item.UserName.Contains(SearchQuota) || item.Email.Contains(SearchQuota))
+                    if (item.UserName.ToLower().Contains(SearchQuota.ToLower()) || item.Email.ToLower().Contains(SearchQuota.ToLower()))
                     {
                         Users.Add(item);
                     }
                 }
+
                 RaisePropertyChanged("Users");
             }
         }
