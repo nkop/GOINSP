@@ -142,11 +142,16 @@ namespace GOINSP.ViewModel
         {
             AccountVM tempAccount = new AccountVM();
             tempAccount = SelectedAccount;
-            if (SelectedAccount.id != null)
+            if (SelectedAccount != null && SelectedAccount.id.ToString() != "00000000-0000-0000-0000-000000000000")
             {
+
                 Models.Account AccToDelete = Config.Context.Account.Where(a => a.UserName == tempAccount.UserName).FirstOrDefault<Models.Account>();
                 Config.Context.Entry(AccToDelete).State = EntityState.Deleted;
                 Config.Context.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("U dient eerst een gebruiker te selecteren.");
             }
             SelectedAccount = null;
             LoadUsers();
