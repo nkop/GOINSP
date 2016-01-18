@@ -1,5 +1,6 @@
 namespace GOINSP.Migrations
 {
+    using Utility;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -11,10 +12,17 @@ namespace GOINSP.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+            ContextKey = "GOINSP.Models.Context";
         }
 
         protected override void Seed(GOINSP.Models.Context context)
         {
+            SynchronizeHelper syncHelper = new SynchronizeHelper();
+            syncHelper.reprovisionLocal();
+
+            //reprovision remote server use with care
+            //syncHelper.reprovision();
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

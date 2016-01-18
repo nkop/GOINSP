@@ -79,9 +79,13 @@ namespace GOINSP.ViewModel
 
         public LocationPickerVM()
         {
-            ObservableRegios = new ObservableCollection<RegioS>(Config.Context.HuishoudelijkAfvalRegioS.OrderBy(xy => xy.Title));
-
+            SetData();
             SaveLocationCommand = new RelayCommand(SaveLocation);
+        }
+
+        public void SetData()
+        {
+            ObservableRegios = new ObservableCollection<RegioS>(Config.Context.HuishoudelijkAfvalRegioS.OrderBy(xy => xy.Title));
         }
 
         private void SaveLocation()
@@ -158,6 +162,7 @@ namespace GOINSP.ViewModel
 
         public void Show(INavigatableViewModel sender = null)
         {
+            SetData();
             LocationPicker view = new LocationPicker();
             view.Show();
         }

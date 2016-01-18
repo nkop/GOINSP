@@ -7,6 +7,7 @@ using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace GOINSP.ViewModel
     public class InspectionViewModel : ViewModelBase, INavigatableViewModel
     {
         public ObservableCollection<InspectionVM> Inspections { get; set; }
+
+        private Guid dir;
         public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
         private ObservableCollection<NewCompanyVM> bedrijven; 
         public ObservableCollection<NewCompanyVM> Bedrijven { 
@@ -34,10 +37,27 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
+        private Visibility addInspectionVisibility;
+        public Visibility AddInspectionVisibility
+        {
+            get
+            {
+                return addInspectionVisibility;
+            }
+            set
+            {
+                addInspectionVisibility = value;
+                RaisePropertyChanged("AddInspectionVisibility");
+            }
+        }
+
+
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
         public ICommand UpdateInspection { get; set; }
         public ICommand WeergeefBedrijfCommand { get; set; }
+
+        public ICommand UploadButton { get; set; }
 
         private InspectionVM _newInspection;
 
@@ -46,6 +66,7 @@ namespace GOINSP.ViewModel
         private string _searchQuota { get; set; }
 
         private NewCompanyVM _selectedBedrijf;
+        private string _fileNames;
         private AccountVM _selectedUser;
         private InspectionTypeVM _selectedtype;
 
@@ -54,7 +75,41 @@ namespace GOINSP.ViewModel
         public InspectionViewModel()
         {
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
-            IEnumerable<InspectionVM> inspectionVM = inspectie.Select(a => new InspectionVM(a));
+
+            IEnumerable<InspectionVM> inspectionVM  = null; 
+            
+            if (Config.Rechten == Models.Account.Rights.ExterneInspecteur)
+            {
+                List<Inspection> AllInspections = inspectie.ToList();
+                List<Inspection> InspectionsForUser = inspectie.Where(x => x.inspector.id == Config.GebruikerID).ToList();
+                List<Inspection> inspections = new List<Inspection>();
+                List<Company> Companies = InspectionsForUser.Select(x => x.company).ToList();
+                foreach(Company company in Companies)
+                {
+                    InspectionsForUser.AddRange(AllInspections.Where(x => x.company == company).ToList().Distinct());
+                }
+
+                InspectionsForUser = InspectionsForUser.Distinct().ToList();
+
+                inspectionVM = InspectionsForUser.Select(a => new InspectionVM(a));
+            }
+            else if (Config.Rechten == Models.Account.Rights.InterneInspecteur)
+            {
+                List<Inspection> AllInspections = inspectie.ToList();
+                List<Inspection> InspectionsForUser = inspectie.Where(x => x.inspector.id == Config.GebruikerID).ToList();
+                inspectionVM = InspectionsForUser.Select(a => new InspectionVM(a));
+            }
+            else
+            {
+                inspectionVM = inspectie.Select(a => new InspectionVM(a));
+            }
+
+            AddInspectionVisibility = Visibility.Collapsed;
+            if (Config.Rechten == Account.Rights.Manager || Config.Rechten == Account.Rights.Administrator)
+            {
+                AddInspectionVisibility = Visibility.Visible;
+            }
+            
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
 
@@ -67,6 +122,7 @@ namespace GOINSP.ViewModel
             SaveInspection = new RelayCommand(Save);
             UpdateInspection = new RelayCommand(Update);
             WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
+            UploadButton = new RelayCommand(selectFile);
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
@@ -75,6 +131,7 @@ namespace GOINSP.ViewModel
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
+
         }
 
         public string SearchQuota
@@ -141,6 +198,16 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public string Filenames
+        {
+            get { return _fileNames; }
+            set
+            {
+                _fileNames = value;
+                RaisePropertyChanged("Filenames");
+            }
+        }
+
         public InspectionTypeVM SelectedType
         {
             get { return _selectedtype; }
@@ -166,6 +233,7 @@ namespace GOINSP.ViewModel
                 _newInspection.accountVM = selectedUser;
                 _newInspection.company = SelectedBedrijf;
                 _newInspection.InspectiontypeVM = SelectedType;
+                _newInspection.directory = dir;
 
                 // Add to database
                 Config.Context.Inspection.Add(_newInspection.toInspection());
@@ -188,6 +256,10 @@ namespace GOINSP.ViewModel
         {
             try
             {
+                _selectedInspection.accountVM = selectedUser;
+                _selectedInspection.company = SelectedBedrijf;
+                _selectedInspection.InspectiontypeVM = SelectedType;
+
                 Config.Context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
                 Config.Context.SaveChanges();
 
@@ -252,6 +324,52 @@ namespace GOINSP.ViewModel
             Messenger.Default.Send<NotificationMessage>(
                 new NotificationMessage(this, "CloseView2")
             );
+        }
+
+        public void selectFile()
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|MP3 Files (*.mp3)|*.mp3|MP4 Files (*.mp4)|*.mp4|MOV Files (*.mov)|*.mov";
+
+            dlg.Multiselect = true;
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                string filenames = "";
+
+                dir = Guid.NewGuid();
+
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                // Combine the base folder with your specific folder....
+                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
+                string naam;
+
+                // Check if folder exists and if not, create it
+                if (!Directory.Exists(specificFolder))
+                    Directory.CreateDirectory(specificFolder);
+
+                foreach (String file in dlg.FileNames)
+                {
+                    Console.WriteLine(file);
+                    filenames += file + ", ";
+                    naam = Path.GetFileName(file);
+
+                    File.Copy(file, specificFolder + "/" + naam);
+
+                }
+
+                Filenames = filenames;
+            }
         }
     }
 }
