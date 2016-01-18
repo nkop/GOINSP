@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sparrow="http://sparrowtoolkit.codeplex.com/wpf"
+        xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         Title="GoInsp - Management Informatie" Height="350" Width="525"
         DataContext="{Binding ManagInfoVM, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
@@ -10,21 +12,47 @@
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Management Overzicht"></TextBlock>
             <WrapPanel Margin="400,0,0,0">
+
+
+                <DVC:Chart Name="TypeInspChart" Width="700" Height="400" Title="Aantal inspecties per inspectietype" Visibility="{Binding TypeInsp}">
+                    <DVC:Chart.Series>
+                        <DVC:BarSeries Title="Aantal inspecties per inspectietype" ItemsSource="{Binding TypeInspData}" IndependentValueBinding="{Binding Path=Type.type}" DependentValueBinding="{Binding Path=Inspecties}">
+                        </DVC:BarSeries>
+                    </DVC:Chart.Series>
+                </DVC:Chart>
+                    
+                <StackPanel>
+                <DataGrid Margin="50" Name="bla" ItemsSource="{Binding TypeInspData}" Visibility="{Binding TypeInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Header="Inspectie Type" Binding="{Binding Type.type}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                </StackPanel>
+
+                <DVC:Chart Name="GemInspPerMaandPerInspChart" Width="700" Height="400" Title="Gemiddeld aantal inspecties per inspecteur per maand" Visibility="{Binding GemInspInsp}">
+                    <DVC:Chart.Series>
+                        <DVC:BarSeries Title="Gemiddeld aantal inspecties per maand per inspecteur" ItemsSource="{Binding GemInspInspecteur}" IndependentValueBinding="{Binding Path=Inspecteur.UserName}" DependentValueBinding="{Binding Path=Inspecties}">
+                        </DVC:BarSeries>
+                    </DVC:Chart.Series>
+                </DVC:Chart>
+
+                <StackPanel>
+                    <DataGrid Margin="50" Name="GemInspPerMaandPerInspecteur" ItemsSource="{Binding GemInspInspecteur}" Visibility="{Binding GemInspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <DVC:Chart Name="InspecteurInspectieChart" Width="700" Height="400" Title="Aantal inspecties per inspecteur" Visibility="{Binding InspInsp}">
+                    <DVC:Chart.Series>
+                        <DVC:BarSeries Title="Aantal inspecties per inspecteur" ItemsSource="{Binding ChartData}" IndependentValueBinding="{Binding Path=Inspecteur.UserName}" DependentValueBinding="{Binding Path=Inspecties}">
+                        </DVC:BarSeries>
+                    </DVC:Chart.Series>
+                </DVC:Chart>
                 
-                <DataGrid Margin="50" Name="bla" ItemsSource="{Binding ChartData}" Visibility="Collapsed" CanUserAddRows="False" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
-                        <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <DataGrid Margin="50" Name="GemInspPerMaandPerInspecteur" ItemsSource="{Binding GemInspInspecteur}" Visibility="{Binding GemInspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" Header="Inspecteur" Binding="{Binding Inspecteur.UserName}"/>
-                        <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-
                 <StackPanel>
                     <DataGrid Margin="50" Name="InspecteurInspectie" ItemsSource="{Binding ChartData}" Visibility="{Binding InspInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
                         <DataGrid.Columns>
@@ -33,16 +61,24 @@
                             <DataGridTextColumn IsReadOnly="True" Header="Type Inspecteur" Binding="{Binding Inspecteur.AccountRights}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBlock Margin="50" Visibility="{Binding InspInsp}" Text="{Binding GemInspectiesInspecteur}"/>
+                    <!--<TextBlock Margin="50" Visibility="{Binding InspInsp}" Text="{Binding GemInspectiesInspecteur}"/>-->
                 </StackPanel>
 
+                <DVC:Chart Name="BedrijfInspectieChart" Width="700" Height="400" Title="Aantal inspecties per bedrijf" Visibility="{Binding BedrInsp}">
+                    <DVC:Chart.Series>
+                        <DVC:BarSeries Title="Aantal inspecties per inspecteur" ItemsSource="{Binding BedrInspData}" IndependentValueBinding="{Binding Path=Bedrijf.Bedrijfsnaam}" DependentValueBinding="{Binding Path=Inspecties}">
+                        </DVC:BarSeries>
+                    </DVC:Chart.Series>
+                </DVC:Chart>
+
+                <StackPanel>
                 <DataGrid Margin="50" Name="BedrijfInspectie" ItemsSource="{Binding BedrInspData}" Visibility="{Binding BedrInsp}" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn IsReadOnly="True" Header="Bedrijf" Binding="{Binding Bedrijf.Bedrijfsnaam}"/>
                         <DataGridTextColumn IsReadOnly="True" Header="Aantal Inspecties" Binding="{Binding Inspecties}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                
+                </StackPanel>
                 
 
                 <StackPanel>
@@ -50,6 +86,7 @@
                     <Button Command="{Binding ShowInspCommand}" Content="Inspecties per Inspecteur" />
                     <Button Command="{Binding ShowBedrCommand}" Content="Inspecties per Bedrijf" />
                     <Button Command="{Binding ShowGemInspCommand}" Content="Gemiddeld aantal inspecties per inspecteur per maand" />
+                    <Button Command="{Binding ShowTypeInspCommand}" Content="Aantal inspecties per inspectietype"/>
                 </StackPanel>               
 
             </WrapPanel>

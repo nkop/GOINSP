@@ -25,6 +25,8 @@ namespace GOINSP.ViewModel
 {
     public class InspectionSpecsViewModel : ViewModelBase, INavigatableViewModel
     {
+        private InspectionViewModel inspectionviewmodel;
+
         private Location mapPoint;
         private List<Bijlage> _filsList;
         private Bijlage _selectedBijlage;
@@ -68,6 +70,20 @@ namespace GOINSP.ViewModel
             }
         }
 
+        private Visibility editInspectionVisibility;
+        public Visibility EditInspectionVisibility
+        {
+            get
+            {
+                return editInspectionVisibility;
+            }
+            set
+            {
+                editInspectionVisibility = value;
+                RaisePropertyChanged("AddInspectionVisibility");
+            }
+        }
+
         private InspectionVM inspectionSpecs;
         public InspectionVM InspectionSpecs
         {
@@ -79,6 +95,7 @@ namespace GOINSP.ViewModel
             {
                 inspectionSpecs = value;
                 FillPoint();
+                CheckPermissions();
                 RaisePropertyChanged("InspectionSpecs");
             }
         }
@@ -86,6 +103,7 @@ namespace GOINSP.ViewModel
         public ICommand OpenQuestionnaireCommand { get; set; }
         public ICommand OpenEditInspection { get; set; }
         public ICommand PrintRapport { get; set; }
+        public ICommand OpenAfvalCommand { get; set; }
 
         public void FillPoint()
         {
@@ -97,11 +115,33 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public void CheckPermissions()
+        {
+            EditInspectionVisibility = Visibility.Visible;
+            if(InspectionSpecs.accountVM != null && Config.Rechten == Account.Rights.ExterneInspecteur)
+            {
+                if(InspectionSpecs.accountVM.id != Config.GebruikerID)
+                {
+                    EditInspectionVisibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         public InspectionSpecsViewModel()
         {
+            inspectionviewmodel = ServiceLocator.Current.GetInstance<InspectionViewModel>();
+
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
             OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
             PrintRapport = new RelayCommand(generatePDF);
+            OpenAfvalCommand = new RelayCommand(OpenAfval);
+        }
+
+        public void OpenAfval()
+        {
+            TDataViewModel tDataViewModel = ServiceLocator.Current.GetInstance<TDataViewModel>();
+            tDataViewModel.GMCode = InspectionSpecs.company.BedrijfsGemeenteCode;
+            tDataViewModel.Show(this);
         }
 
         public void searchBijlagen()
@@ -208,6 +248,7 @@ namespace GOINSP.ViewModel
             EditInspection window = new EditInspection();
             inspection.searchBijlage();
             window.Show();
+            inspectionviewmodel.LoadAddInspection();
             CloseView();
         }
 

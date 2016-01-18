@@ -4,7 +4,7 @@
         Title="GoInsp - Gebruikersbeheer" Height="900" Width="750"
         DataContext="{Binding Account, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        x:Name="xUserControl" Background="#FF288BB5">
+        x:Name="xUserControl" Background="#fff">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="124*"/>
@@ -15,7 +15,7 @@
             <TextBlock FontSize="50.667" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,20,20,0" Foreground="#597cb6" RenderTransformOrigin="0.7,0.597" Text="Gebruikers beheer"/>
 
             <WrapPanel Margin="20 0 20 0">
-                <Button Height="30" Width="130" Margin="0,0,10,0" Command="{Binding ShowAddUserCommand}" Content="Gebruiker Toevoegen" Foreground="#fff" >
+                <Button Height="30" Width="130" Margin="0,0,10,0" BorderBrush="#FF1783B1" Command="{Binding ShowAddUserCommand}" Content="Gebruiker Toevoegen" Foreground="#fff" >
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#37aef1" Offset="0"/>
@@ -26,7 +26,7 @@
 
 
 
-                <Button Height="30" Width="130" Command="{Binding DeleteUserCommand}" Content="Gebruiker Verwijderen" Foreground="#fff">
+                <Button Height="30" Width="130" BorderBrush="#FF1783B1" Command="{Binding DeleteUserCommand}" Content="Gebruiker Verwijderen" Foreground="#fff">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#37aef1" Offset="0"/>
@@ -35,11 +35,12 @@
                     </Button.Background>
                 </Button>
                 <Label Height="30" Margin="30 0 0 0" HorizontalAlignment="Right" Content="Zoeken:" Background="White" Foreground="#597cb6"/>
-                <TextBox x:Name="SearchBar" Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="180
+                <TextBox x:Name="SearchBar" BorderBrush="#FF1783B1" Text="{Binding SearchQuota, UpdateSourceTrigger=PropertyChanged}" Width="180
                          " Margin="10 0 0 0" />
             </WrapPanel>
+
             
-            <DataGrid ItemsSource="{Binding Users}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccount}">
+            <DataGrid ItemsSource="{Binding Users}" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccount}" Margin="20">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="Gebruikersnaam" Binding="{Binding UserName}" />
                 <DataGridTextColumn IsReadOnly="True" Header="Email" Binding="{Binding Email}" />

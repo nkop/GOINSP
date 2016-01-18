@@ -8,6 +8,7 @@ namespace GOINSP.Utility
     {
             private BackgroundWorker worker;
         private SynchronizeHelper syncHelper;
+        private Boolean busy = false;
 
         public SyncWorker()
         {
@@ -26,6 +27,7 @@ namespace GOINSP.Utility
             Timer timer = new Timer(60000);
             timer.Elapsed += timer_Elapsed;
             timer.Start();
+            worker.RunWorkerAsync();
         }
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -36,10 +38,19 @@ namespace GOINSP.Utility
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker w = (BackgroundWorker)sender;
-            Console.WriteLine("Syncing database");
-            //Sync database
-            //syncHelper.work();
+            if (!busy)
+            {
+                busy = true;
+                BackgroundWorker w = (BackgroundWorker)sender;
+                Console.WriteLine("Syncing database");
+                //Sync database
+                syncHelper.work();
+                busy = false;
+            }
+            else
+            {
+                Console.WriteLine("Syncing busy");
+            }
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

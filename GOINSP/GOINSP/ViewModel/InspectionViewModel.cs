@@ -39,6 +39,21 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> BedrijfInspecties { get; set; }
         public ObservableCollection<AccountVM> Inspecteurs { get; set; }
 
+        private Visibility addInspectionVisibility;
+        public Visibility AddInspectionVisibility
+        {
+            get
+            {
+                return addInspectionVisibility;
+            }
+            set
+            {
+                addInspectionVisibility = value;
+                RaisePropertyChanged("AddInspectionVisibility");
+            }
+        }
+
+
         public ICommand AddInspection { get; set; }
         public ICommand SaveInspection { get; set; }
         public ICommand UpdateInspection { get; set; }
@@ -64,7 +79,41 @@ namespace GOINSP.ViewModel
         public InspectionViewModel()
         {
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
-            IEnumerable<InspectionVM> inspectionVM = inspectie.Select(a => new InspectionVM(a));
+
+            IEnumerable<InspectionVM> inspectionVM  = null; 
+            
+            if (Config.Rechten == Models.Account.Rights.ExterneInspecteur)
+            {
+                List<Inspection> AllInspections = inspectie.ToList();
+                List<Inspection> InspectionsForUser = inspectie.Where(x => x.inspector.id == Config.GebruikerID).ToList();
+                List<Inspection> inspections = new List<Inspection>();
+                List<Company> Companies = InspectionsForUser.Select(x => x.company).ToList();
+                foreach(Company company in Companies)
+                {
+                    InspectionsForUser.AddRange(AllInspections.Where(x => x.company == company).ToList().Distinct());
+                }
+
+                InspectionsForUser = InspectionsForUser.Distinct().ToList();
+
+                inspectionVM = InspectionsForUser.Select(a => new InspectionVM(a));
+            }
+            else if (Config.Rechten == Models.Account.Rights.InterneInspecteur)
+            {
+                List<Inspection> AllInspections = inspectie.ToList();
+                List<Inspection> InspectionsForUser = inspectie.Where(x => x.inspector.id == Config.GebruikerID).ToList();
+                inspectionVM = InspectionsForUser.Select(a => new InspectionVM(a));
+            }
+            else
+            {
+                inspectionVM = inspectie.Select(a => new InspectionVM(a));
+            }
+
+            AddInspectionVisibility = Visibility.Collapsed;
+            if (Config.Rechten == Account.Rights.Manager || Config.Rechten == Account.Rights.Administrator)
+            {
+                AddInspectionVisibility = Visibility.Visible;
+            }
+            
             Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
 
@@ -86,6 +135,7 @@ namespace GOINSP.ViewModel
             _selectedUser = new AccountVM();
 
             newInspection.date = DateTime.Now;
+
         }
 
         public string SearchQuota
@@ -220,6 +270,10 @@ namespace GOINSP.ViewModel
         {
             try
             {
+                _selectedInspection.accountVM = selectedUser;
+                _selectedInspection.company = SelectedBedrijf;
+                _selectedInspection.InspectiontypeVM = SelectedType;
+
                 Config.Context.Entry(selectedInspection.toInspection()).State = System.Data.Entity.EntityState.Modified;
                 Config.Context.SaveChanges();
 

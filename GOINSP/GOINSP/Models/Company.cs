@@ -14,6 +14,7 @@ namespace GOINSP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid companyid { get; set; }
         public string BedrijfsNaam { get; set; }
+        public string BedrijfsPortalKey { get; set; }
         public string BedrijfsEmail { get; set; }
         public string BedrijfsAdres { get; set; }
         public string BedrijfsPostcode { get; set; }

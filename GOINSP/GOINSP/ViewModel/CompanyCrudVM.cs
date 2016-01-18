@@ -25,6 +25,7 @@ namespace GOINSP.ViewModel
         public ICommand btnRefresh { get; set; }
         public ICommand btnDelete { get; set; }
         public ICommand btnPickLocation { get; set; }
+        public ICommand btnPickLocationEdit { get; set; }
 
         public CompanyCrudVM()
         {
@@ -37,6 +38,7 @@ namespace GOINSP.ViewModel
             btnRefresh = new RelayCommand(LoadList);
             btnDelete = new RelayCommand(deleteCompany);
             btnPickLocation = new RelayCommand(pickLocation);
+            btnPickLocationEdit = new RelayCommand(pickLocationEdit);
         }
 
         public void pickLocation()
@@ -45,8 +47,13 @@ namespace GOINSP.ViewModel
             picker.NewCompanyVM = newCompany;
             picker.Show();
         }
-
-
+        public void pickLocationEdit()
+        {
+            LocationPickerVM picker = ServiceLocator.Current.GetInstance<LocationPickerVM>();
+            picker.NewCompanyVM = SelectedCompany;
+            picker.Show();
+        }
+        
         private void deleteCompany()
         {
             try

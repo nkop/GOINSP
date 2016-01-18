@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<div class="container-full">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Login</div>
+                    <div class="panel-body">
+                        @if (string.IsNullOrEmpty(ViewBag.Error))
+                        {
+                            @:&nbsp;
+                        }
+                        else
+                        {
+                            @:<div class="alert alert-danger" role="alert">
+                            @:@ViewBag.Error
+                            @:</div>
+                        }
+                        <h3></h3>
+                        <form class="form-horizontal" role="form" action="" method="POST">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Company</label>
+                                <div class="col-md-6">
+                                    <input name="company" class="form-control" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Key</label>
+                                <div class="col-md-6">
+                                    <input name="key" class="form-control" type="password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button class="btn btn-primary" style="margin-right: 15px;" type="submit">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -60,6 +60,11 @@ namespace GOINSP.ViewModel
             }
         }
 
+        public string totalAdres
+        {
+            get { return inspection.company.BedrijfsAdres + " " + inspection.company.BedrijfsNummer; }
+        }
+
         public Guid directory
         {
             get { return inspection.directory; }
