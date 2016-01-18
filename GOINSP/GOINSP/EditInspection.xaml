@@ -4,7 +4,10 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:ctl="clr-namespace:GOINSP.Controls"
         xmlns:w="clr-namespace:GOINSP.Utility"
+
         Title="GoInsp - Inspectie wijzigen" Height="600" Width="750"
+
+
         DataContext="{Binding Inspection, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
         Background="#fff">
@@ -22,6 +25,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -31,6 +35,7 @@
 
         <TextBlock Text="Inspectie datum:"  Foreground="#597cb6" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <xctk:DateTimePicker Value="{Binding Path=selectedInspection.date}" Format="FullDateTime" Grid.Column="1" Grid.Row="1" Margin="8"/>
+
 
         <TextBlock Text="Type" Foreground="#597cb6" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
         <ComboBox ItemsSource="{Binding TypeInspectie}" SelectedItem="{Binding SelectedType}" DisplayMemberPath="type" SelectedValuePath="id" SelectedValue="{Binding Path=selectedInspection.InspectiontypeVM.id, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="8" />
@@ -58,5 +63,16 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        
+        <TextBlock Text="Bijlagen:" Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
+        <DataGrid Width="632" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="1" ItemsSource="{Binding Bijlages}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}" Margin="10,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Bestandsnaam" Binding="{Binding FileName}" />
+                <DataGridTextColumn IsReadOnly="True" Width="0.5*" Header="Bestandstype" Binding="{Binding Extension}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Grid.Row="9" Margin="10,10,523,10" Command="{Binding UploadButton}">Bijlage toevoegen</Button>
+        <Button Grid.Column="1" Grid.Row="9" Margin="134,10,399,10" Command="{Binding RemoveButton}">Bijlage verwijderen</Button>
+        <Button Content="Opslaan" Margin="10" Command="{Binding UpdateInspection}" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"></Button>
     </Grid>
 </Window>
