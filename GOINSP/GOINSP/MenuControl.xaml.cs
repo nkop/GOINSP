@@ -24,8 +24,6 @@ namespace GOINSP
         {
             InitializeComponent();
 
-            MessageBox.Show(Config.Rechten.ToString());
-
             if (Config.Rechten == Models.Account.Rights.Administrator)
             {
 
