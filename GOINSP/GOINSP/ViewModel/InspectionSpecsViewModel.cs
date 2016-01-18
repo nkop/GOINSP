@@ -301,7 +301,7 @@ namespace GOINSP.ViewModel
 
                         var QuestionTable = "Dit rapport heeft geen gekoppelde vragenlijst.";
 
-                        if (InspectionSpecs.questionnaire != null)
+                        if (InspectionSpecs.questionnaire != null && inspectionSpecs.questionnaire.QuestionnaireCollection.Count != 0)
                         {
                             QuestionTable = "<table>";
                             InspectionSpecs.questionnaire.CheckConditionBoundQuestions();
@@ -430,7 +430,9 @@ namespace GOINSP.ViewModel
 
             var testFile = System.IO.Path.Combine(specificFolder, filename);
             System.IO.File.WriteAllBytes(testFile, bytes);
-
+            //Upload
+            FTPUploader ftp = new FTPUploader();
+            ftp.upload(inspectionSpecs.company.toCompany(), testFile, inspectionSpecs.toInspection());
             System.Diagnostics.Process.Start(testFile);
         }
     }
