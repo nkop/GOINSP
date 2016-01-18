@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GOINSP.Models;
 using GalaSoft.MvvmLight;
+using System.Security.Cryptography;
 
 namespace GOINSP.ViewModel
 {
@@ -15,6 +16,7 @@ namespace GOINSP.ViewModel
         public NewCompanyVM()
         {
             company = new Company();
+            company.BedrijfsPortalKey = CreatePassword(6);
         }
 
         public NewCompanyVM(Company company)
@@ -55,6 +57,16 @@ namespace GOINSP.ViewModel
             {
                 company.BedrijfsAdres = value;
                 RaisePropertyChanged("BedrijfsAdres");
+            }
+        }
+
+        public string BedrijfsPortalKey
+        {
+            get { return company.BedrijfsPortalKey; }
+            set
+            {
+                company.BedrijfsPortalKey = value;
+                RaisePropertyChanged("BedrijfsPortalKey");
             }
         }
 
@@ -148,6 +160,36 @@ namespace GOINSP.ViewModel
         public Company toCompany()
         {
             return company;
+        }
+
+        private string CreatePassword(int len)
+        {
+            string[] valid = { "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "1234567890" };
+            RNGCryptoServiceProvider rndGen = new RNGCryptoServiceProvider();
+
+            byte[] random = new byte[len];
+            int[] selected = new int[len];
+
+            do
+            {
+                rndGen.GetNonZeroBytes(random);
+
+                for (int i = 0; i < random.Length; i++)
+                {
+                    selected[i] = random[i] % 3;
+                }
+            }
+            while (selected.Distinct().Count() != 3);
+
+            rndGen.GetNonZeroBytes(random);
+
+            string res = "";
+
+            for (int i = 0; i < len; i++)
+            {
+                res += valid[selected[i]][random[i] % valid[selected[i]].Length];
+            }
+            return res;
         }
     }
 }

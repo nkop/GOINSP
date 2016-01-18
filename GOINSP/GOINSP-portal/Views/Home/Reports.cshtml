@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+<div class="row">
+    <div class="col-md-12">
+        <table id="reports" class="table display">
+            <thead>
+            <th>Report name</th>
+            <th>Report date</th>
+            </thead>
+            @foreach (var file in ViewBag.files)
+            {
+                <tr>
+                    <td>@Html.ActionLink(((String)file.Split('-')[0] + " " +(String)file.Split('-')[1]), "DownloadFile", "Home", new { file = (String)file }, null)</td>
+                    <td>@{
+                        var lastpart = (String)file.Split('-')[2];
+                        var day = lastpart.Substring(0, 2);
+                        var month = lastpart.Substring(2, 2);
+                        var year = lastpart.Substring(4, 2);
+                        var date = day + "-" + month + "-" + year;
+                        } 
+                    @date</td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#reports').DataTable();
+        });
+    </script>
+}
