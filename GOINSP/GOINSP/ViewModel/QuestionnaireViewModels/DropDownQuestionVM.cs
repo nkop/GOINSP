@@ -98,7 +98,8 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
             : base(dropDownQuestion)
         {
             this.dropDownQuestion = dropDownQuestion;
-            Answers = dropDownQuestion.Answers.Split(',').ToList();
+            if(dropDownQuestion.Answers != null)
+                Answers = dropDownQuestion.Answers.Split(',').ToList();
         }
 
         public void CompileConditionBoundQuestions(List<QuestionVM> originalQuestionList)
