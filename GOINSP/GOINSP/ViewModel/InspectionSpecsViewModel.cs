@@ -106,6 +106,7 @@ namespace GOINSP.ViewModel
 
         public void searchBijlagen()
         {
+            filesList = new List<Bijlage>();
             dir = inspectionSpecs.directory.ToString();
 
             if (dir != "00000000-0000-0000-0000-000000000000")
@@ -165,9 +166,12 @@ namespace GOINSP.ViewModel
 
         public void openBijlage()
         {
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
-            System.Diagnostics.Process.Start(specificFolder + @"/" + _selectedBijlage.FileName);
+            if (_selectedBijlage != null)
+            {
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
+                System.Diagnostics.Process.Start(specificFolder + @"/" + _selectedBijlage.FileName);
+            }
         }
 
         public void SetInspection(Guid id)

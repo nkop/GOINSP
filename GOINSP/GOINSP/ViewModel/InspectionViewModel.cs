@@ -21,6 +21,7 @@ namespace GOINSP.ViewModel
         public ObservableCollection<InspectionVM> Inspections { get; set; }
 
         private List<Bijlage> _bijlages;
+        private Bijlage _selectedBijlage;
 
         private Guid dir;
         public ObservableCollection<InspectionTypeVM> TypeInspectie { get; set; }
@@ -78,6 +79,7 @@ namespace GOINSP.ViewModel
             UpdateInspection = new RelayCommand(Update);
             WeergeefBedrijfCommand = new RelayCommand(ShowBedrijf);
             UploadButton = new RelayCommand(selectFile);
+            RemoveButton = new RelayCommand(removeBijlage);
 
             _newInspection = new InspectionVM();
             _selectedInspection = new InspectionVM();
@@ -123,6 +125,18 @@ namespace GOINSP.ViewModel
             {
                 _selectedInspection = value;
                 OpenInspection();
+            }
+        }
+
+        public Bijlage selectedBijlage
+        {
+            get
+            {
+                return _selectedBijlage;
+            }
+            set
+            {
+                _selectedBijlage = value;
             }
         }
 
@@ -259,7 +273,7 @@ namespace GOINSP.ViewModel
 
         public void searchBijlage()
         {
-            Console.WriteLine(selectedInspection.directory);
+            Bijlages = new List<Bijlage>();
 
             string map = selectedInspection.directory.ToString();
 
@@ -299,8 +313,6 @@ namespace GOINSP.ViewModel
                         default:
                             break;
                     }
-
-
 
                     Bijlage tmp = new Bijlage();
                     tmp.FileName = file.ToString();
@@ -348,6 +360,42 @@ namespace GOINSP.ViewModel
             );
         }
 
+        public void removeBijlage()
+        {
+            if (selectedBijlage.FileName != null || selectedBijlage != null)
+            {
+                String map = _selectedInspection.directory.ToString();
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string specificFolder = Path.Combine(folder, @"GoInspGroepB/" + map);
+                DirectoryInfo d = new DirectoryInfo(specificFolder);
+
+
+                foreach (var bestand in d.GetFiles())
+                {
+                    string fileName = Path.GetFileName (bestand.FullName);
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine(selectedBijlage.FileName);
+                    Console.WriteLine("");
+
+
+                    if (fileName == selectedBijlage.FileName)
+                    {
+                        File.Delete(bestand.FullName);
+                        Console.WriteLine("Bestand verwijderd: " + specificFolder + "/" + selectedBijlage.FileName);
+                    }
+
+                }
+
+                searchBijlage();
+            }
+            else
+            {
+                MessageBox.Show("U heeft geen bijlage geselecteerd.");
+            }
+        }
+
         public void selectFile()
         {
             // Create OpenFileDialog 
@@ -368,7 +416,15 @@ namespace GOINSP.ViewModel
             {
                 string filenames = "";
 
-                dir = Guid.NewGuid();
+                if (selectedInspection == null)
+                {
+                    dir = Guid.NewGuid();
+                }
+                else
+                {
+                    dir = selectedInspection.directory;
+                }
+                
 
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
@@ -392,6 +448,13 @@ namespace GOINSP.ViewModel
 
                 Filenames = filenames;
             }
+
+
+            if (selectedInspection != null)
+            {
+                searchBijlage();
+            }
+
         }
     }
 }
