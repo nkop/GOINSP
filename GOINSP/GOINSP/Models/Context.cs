@@ -45,6 +45,7 @@ namespace GOINSP.Models
             modelBuilder.Entity<Company>().Property(x => x.BedrijfsLon).HasPrecision(15, 13);
             modelBuilder.Entity<PostCodeData>().Property(x => x.rd_x).HasPrecision(31, 20);
             modelBuilder.Entity<PostCodeData>().Property(x => x.rd_y).HasPrecision(31, 20);
+            modelBuilder.Entity<Inspection>().HasRequired(x => x.inspectiontype);
         }
         
     }
