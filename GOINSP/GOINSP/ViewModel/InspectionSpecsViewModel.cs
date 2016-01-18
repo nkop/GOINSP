@@ -301,7 +301,7 @@ namespace GOINSP.ViewModel
 
                         var QuestionTable = "Dit rapport heeft geen gekoppelde vragenlijst.";
 
-                        if (InspectionSpecs.questionnaire != null)
+                        if (InspectionSpecs.questionnaire != null && inspectionSpecs.questionnaire.QuestionnaireCollection.Count != 0)
                         {
                             QuestionTable = "<table>";
                             InspectionSpecs.questionnaire.CheckConditionBoundQuestions();
