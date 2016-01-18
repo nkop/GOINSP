@@ -5,17 +5,31 @@
         x:Name="AddCompany"
         DataContext="{Binding CompanyCrud, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Background="#fff">
     <StackPanel Margin="20">
-        <TextBlock>Naam:</TextBlock>
+        <TextBlock Foreground="#597cb6">Naam:</TextBlock>
         <TextBox Text="{Binding NewCompany.Bedrijfsnaam}" Margin="0 0 0 10" Height="30"></TextBox>
-        
-        <TextBlock>Bedrijfs email:</TextBlock>
-        <TextBox Text="{Binding NewCompany.BedrijfsEmail}" Margin="0 0 0 10" Height="30"></TextBox>
-        
-        <TextBlock>Locatie:</TextBlock>
-        <Button Content="Kies locatie" Margin="0 0 0 20" Height="30" Command="{Binding btnPickLocation}"></Button>
 
-        <Button Content="Toevoegen" Command="{Binding btnSaveNew}" CommandParameter="{Binding ElementName=AddCompany}" Height="30"></Button>
+        <TextBlock Foreground="#597cb6">Bedrijfs email:</TextBlock>
+        <TextBox Text="{Binding NewCompany.BedrijfsEmail}" Margin="0 0 0 10" Height="30"></TextBox>
+
+        <TextBlock Foreground="#597cb6">Locatie:</TextBlock>
+        <Button Content="Kies locatie" Margin="0 0 0 20" Height="30" Command="{Binding btnPickLocation}" Foreground="#fff">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Button Content="Toevoegen" Command="{Binding btnSaveNew}" CommandParameter="{Binding ElementName=AddCompany}" Height="30" Foreground="#fff">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </StackPanel>
 </Window>

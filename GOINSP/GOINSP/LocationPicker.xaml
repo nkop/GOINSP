@@ -4,7 +4,7 @@
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="GOINSP.LocationPicker"
         DataContext="{Binding LocationPickerModel, Source={StaticResource Locator}}"
-        Title="LocationPicker" Height="600" Width="1199" Background="#FF3598DC" WindowStartupLocation="CenterScreen">
+        Title="LocationPicker" Height="900" Width="750" Background="#fff" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,17 +17,24 @@
         <StackPanel Margin="0" Grid.Column="1" d:LayoutOverrides="Height" VerticalAlignment="Center">
             <Border VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="7" BorderThickness="2,2,2,2" Background="White">
                 <StackPanel Margin="100,20" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Label Content="Straat" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsAdres}" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Nummer" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsNummer}" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Postcode" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsPostcode}" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Wijk" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsWijk}" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Gemeente" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Center" Height="22" DisplayMemberPath="Title" SelectedValue="{Binding NewCompanyVM.BedrijfsGemeente}" SelectedValuePath="Title" ItemsSource="{Binding ObservableRegios}" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="Opslaan" Margin="0,16,0,0" Height="26" Command="{Binding SaveLocationCommand}"></Button>
+                    <Label Content="Straat" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#597cb6" />
+                    <TextBox HorizontalAlignment="Center" BorderBrush="#FF1783B1" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsAdres}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Nummer" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#597cb6" />
+                    <TextBox HorizontalAlignment="Center" BorderBrush="#FF1783B1" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsNummer}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Postcode" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#597cb6" />
+                    <TextBox HorizontalAlignment="Center" BorderBrush="#FF1783B1" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsPostcode}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Wijk" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#597cb6" />
+                    <TextBox HorizontalAlignment="Center" BorderBrush="#FF1783B1" Height="22" TextWrapping="Wrap" Text="{Binding NewCompanyVM.BedrijfsWijk}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Gemeente" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#597cb6" />
+                    <ComboBox HorizontalAlignment="Center" BorderBrush="#FF1783B1" Height="22" DisplayMemberPath="Title" SelectedValue="{Binding NewCompanyVM.BedrijfsGemeente}" SelectedValuePath="Title" ItemsSource="{Binding ObservableRegios}" VerticalAlignment="Top" Width="120" Foreground="#597cb6" />
+                    <Button Content="Opslaan" BorderBrush="#FF1783B1" Margin="0,16,0,0" Height="26" Command="{Binding SaveLocationCommand}" Foreground="#fff">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </StackPanel>
             </Border>
         </StackPanel>

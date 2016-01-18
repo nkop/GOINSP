@@ -39,7 +39,6 @@ namespace GOINSP.ViewModel.Opendata.HuishoudelijkAfval
         public void Insert()
         {
             Config.Context.HuishoudelijkAfvalRegioS.Add(regios);
-            Config.Context.SaveChanges();
         }
     }
 }

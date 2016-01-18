@@ -216,12 +216,8 @@
     <Compile Include="MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601181056151_rommel.cs" />
-    <Compile Include="Migrations\201601181056151_rommel.Designer.cs">
-      <DependentUpon>201601181056151_rommel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Bijlage.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Inspection.cs" />

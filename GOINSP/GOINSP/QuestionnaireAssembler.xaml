@@ -5,7 +5,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="QuestionnaireAssembler" Height="900" Width="750" WindowStartupLocation="CenterScreen">
+        Title="QuestionnaireAssembler" Height="900" Width="750" WindowStartupLocation="CenterScreen" Background="#fff">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
@@ -64,7 +64,7 @@
         </DataTemplate>
     </Window.Resources>
     <Grid Margin="0,0,0,1">
-        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" SelectedItem="{Binding SelectedQuestion}" Margin="30,0,0,15" HorizontalAlignment="Left" Width="360">
+        <ListBox ItemsSource="{Binding Questionnaire.QuestionnaireCollection}" Foreground="#597cb6" SelectedItem="{Binding SelectedQuestion}" Margin="30,0,0,15" HorizontalAlignment="Left" Width="360">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

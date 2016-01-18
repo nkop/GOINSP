@@ -42,6 +42,8 @@ namespace GOINSP.Utility
                 count++;
                 progress.Report(new ImportProgressValues(count, list.Count, ImportProgressValues.ProgressStatus.inserting));
             }
+            progress.Report(new ImportProgressValues(0, 0, ImportProgressValues.ProgressStatus.saving));
+            Config.Context.SaveChanges();
         }
     }
 }
