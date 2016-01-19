@@ -4,7 +4,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         DataContext="{Binding QuestionnaireAnswerViewModel, Source={StaticResource Locator}}"
-        Title="QuestionnaireAnswerView" Height="600" Width="750" Background="#fff" WindowStartupLocation="CenterScreen">
+        Title="QuestionnaireAnswerView" Height="600" Width="1000" Background="#fff" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
@@ -90,14 +90,14 @@
     </Window.Resources>
     <Grid>
         <StackPanel Margin="0" VerticalAlignment="Center">
-            <Border CornerRadius="7" BorderThickness="2,2,2,2" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="511" Margin="34,20" Width="674">
+            <Border CornerRadius="7" BorderThickness="2,2,2,2" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="511" Margin="34,20" Width="800">
                 <StackPanel>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Button Height="24" Content="Opslaan" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding SaveQuestionnaireCommand}"/>
                         <Button Height="24" Content="Aanpassen" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding EditQuestionnaireCommand}"/>
                         <Button Height="24" Content="Verwijder" Margin="0,10,10,0" HorizontalAlignment="Right" Width="65" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF3598DC" Command="{Binding DeleteQuestionnaireCommand}"/>
                     </StackPanel>
-                    <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20,0,20,20" BorderBrush="{x:Null}"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListBox ItemsSource="{Binding QuestionnaireVM.QuestionnaireCollection}" Margin="20,0,20,20" BorderBrush="{x:Null}" Height="511" MaxHeight="511" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="Focusable" Value="False"/>

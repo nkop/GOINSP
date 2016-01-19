@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <ApplicationInsightsResourceId>/subscriptions/01f56370-95e3-4bd7-a8d0-118534249644/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/GOINSP-portal</ApplicationInsightsResourceId>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -145,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>GOINSPModel.tt</DependentUpon>
     </Compile>

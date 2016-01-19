@@ -175,9 +175,6 @@
     <Compile Include="AddCompanyWindow.xaml.cs">
       <DependentUpon>AddCompanyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddInspection.xaml.cs">
-      <DependentUpon>AddInspection.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
@@ -276,6 +273,7 @@
     <Compile Include="ViewModel\AccountManagementVM.cs" />
     <Compile Include="ViewModel\CompanyCrudVM.cs" />
     <Compile Include="ViewModel\ForgottenPasswordVM.cs" />
+    <Compile Include="ViewModel\InspectieEditViewModel.cs" />
     <Compile Include="ViewModel\InspectionTypeVM.cs" />
     <Compile Include="ViewModel\LocationPickerVM.cs" />
     <Compile Include="ViewModel\InspectionSpecsViewModel.cs" />
@@ -337,10 +335,6 @@
     <Compile Include="XamlToHtmlParser\HtmlSchema.cs" />
     <Compile Include="XamlToHtmlParser\HtmlTokenType.cs" />
     <Compile Include="XamlToHtmlParser\HtmlToXamlConverter.cs" />
-    <Page Include="AddInspection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

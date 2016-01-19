@@ -27,10 +27,13 @@ namespace GOINSP.ViewModel
     {
         private InspectionViewModel inspectionviewmodel;
 
+        public INavigatableViewModel LastSender { get; set; }
+
         private Location mapPoint;
         private List<Bijlage> _filsList;
         private Bijlage _selectedBijlage;
         public string dir;
+        bool reOpen;
         
         public List<Bijlage> filesList
         {
@@ -94,7 +97,6 @@ namespace GOINSP.ViewModel
             set
             {
                 inspectionSpecs = value;
-                FillPoint();
                 CheckPermissions();
                 RaisePropertyChanged("InspectionSpecs");
             }
@@ -104,6 +106,7 @@ namespace GOINSP.ViewModel
         public ICommand OpenEditInspection { get; set; }
         public ICommand PrintRapport { get; set; }
         public ICommand OpenAfvalCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public void FillPoint()
         {
@@ -131,10 +134,20 @@ namespace GOINSP.ViewModel
         {
             inspectionviewmodel = ServiceLocator.Current.GetInstance<InspectionViewModel>();
 
+            reOpen = true;
+
             OpenQuestionnaireCommand = new RelayCommand(OpenQuestionnaire);
             OpenEditInspection = new RelayCommand(OpenEditInspectionWindow);
             PrintRapport = new RelayCommand(generatePDF);
             OpenAfvalCommand = new RelayCommand(OpenAfval);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+        }
+
+        private void CloseWindow()
+        {
+            if (LastSender != null && reOpen)
+                LastSender.Show();
+            reOpen = true;
         }
 
         public void OpenAfval()
@@ -155,44 +168,46 @@ namespace GOINSP.ViewModel
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string specificFolder = Path.Combine(folder, "GoInspGroepB/" + dir);
                 DirectoryInfo d = new DirectoryInfo(specificFolder);
-
-                foreach (var file in d.GetFiles())
+                if (d.Exists)
                 {
-                    string tmpExtension = "";
-                    switch (Path.GetExtension(file.ToString()).ToLower())
+                    foreach (var file in d.GetFiles())
                     {
-                        case ".jpg":
-                            tmpExtension = "JPG (*.jpg)";
-                            break;
-                        case ".jpeg":
-                            tmpExtension = "JPG (*.jpeg)";
-                            break;
-                        case ".png":
-                            tmpExtension = "PNG (*.png)";
-                            break;
-                        case ".gif":
-                            tmpExtension = "GIF (*.gif)";
-                            break;
-                        case ".mp3":
-                            tmpExtension = "MP3 (*.mp3)";
-                            break;
-                        case ".mp4":
-                            tmpExtension = "MP4 (*.mp4)";
-                            break;
-                        case ".mov":
-                            tmpExtension = "MOV (*.mov)";
-                            break;
-                        default:
-                            break;
+                        string tmpExtension = "";
+                        switch (Path.GetExtension(file.ToString()).ToLower())
+                        {
+                            case ".jpg":
+                                tmpExtension = "JPG (*.jpg)";
+                                break;
+                            case ".jpeg":
+                                tmpExtension = "JPG (*.jpeg)";
+                                break;
+                            case ".png":
+                                tmpExtension = "PNG (*.png)";
+                                break;
+                            case ".gif":
+                                tmpExtension = "GIF (*.gif)";
+                                break;
+                            case ".mp3":
+                                tmpExtension = "MP3 (*.mp3)";
+                                break;
+                            case ".mp4":
+                                tmpExtension = "MP4 (*.mp4)";
+                                break;
+                            case ".mov":
+                                tmpExtension = "MOV (*.mov)";
+                                break;
+                            default:
+                                break;
+                        }
+
+
+
+                        Bijlage tmp = new Bijlage();
+                        tmp.FileName = file.ToString();
+                        tmp.Extension = tmpExtension;
+
+                        templist.Add(tmp);
                     }
-
-
-
-                    Bijlage tmp = new Bijlage();
-                    tmp.FileName = file.ToString();
-                    tmp.Extension = tmpExtension;
-
-                    templist.Add(tmp);
                 }
 
                 filesList = templist;
@@ -218,12 +233,15 @@ namespace GOINSP.ViewModel
         {
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
             InspectionSpecs = inspectie.Select(a => new InspectionVM(a)).Where(p => p.id == id).First();
-
-            searchBijlagen();
         }
           
         public void Show(INavigatableViewModel sender = null)
         {
+            if (sender != null)
+                LastSender = sender;
+
+            searchBijlagen();
+            FillPoint();
             InspectionSpecs window = new InspectionSpecs();
             window.Show();
         }
@@ -248,11 +266,11 @@ namespace GOINSP.ViewModel
 
         public void OpenEditInspectionWindow()
         {
-            InspectionViewModel inspection = ServiceLocator.Current.GetInstance<InspectionViewModel>();
-            EditInspection window = new EditInspection();
-            inspection.searchBijlage();
-            window.Show();
-            inspectionviewmodel.LoadAddInspection();
+            InspectieEditViewModel inspectieEditViewModel = ServiceLocator.Current.GetInstance<InspectieEditViewModel>();
+            inspectieEditViewModel.Inspection = InspectionSpecs;
+            inspectieEditViewModel.LoadAddInspection();
+            inspectieEditViewModel.Show(this);
+            reOpen = false;
             CloseView();
         }
 
