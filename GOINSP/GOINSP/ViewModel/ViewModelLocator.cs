@@ -84,6 +84,8 @@ namespace GOINSP.ViewModel
         {
             get
             {
+                //Return QuestionListVM
+                //Deze regel commentaar wordt u aangeboden door Tim
                 return ServiceLocator.Current.GetInstance<QuestionListVM>();
             }
         }
