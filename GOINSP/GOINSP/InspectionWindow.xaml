@@ -14,7 +14,7 @@
                 <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Postcode" Binding="{Binding company.BedrijfsPostcode}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="160,20,0,20" Height="23" Foreground="#fff" Command="{Binding AddInspection}" Visibility="{Binding AddInspectionVisibility}" VerticalAlignment="Top" Width="120">
+        <Button Content="Toevoegen" HorizontalAlignment="Left" Margin="160,23,0,0" Height="23" Foreground="#fff" Command="{Binding AddInspection}" Visibility="{Binding AddInspectionVisibility}" VerticalAlignment="Top" Width="120">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#37aef1" Offset="0"/>

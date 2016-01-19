@@ -40,11 +40,6 @@
                             <MouseBinding Command="{Binding OpenQuestionnaireCommand}" MouseAction="LeftClick" />
                         </TextBlock.InputBindings>
                     </TextBlock>
-                    <TextBlock Text="Rapportage" TextDecorations="Underline" Margin="6 0 0 0">
-                        <TextBlock.InputBindings>
-                            <MouseBinding Command="{Binding OpenRapportage}" MouseAction="LeftClick" />
-                        </TextBlock.InputBindings>
-                    </TextBlock>
                     <TextBlock Text="Huishoudelijk afval" TextDecorations="Underline" Margin="6 0 0 0">
                         <TextBlock.InputBindings>
                             <MouseBinding Command="{Binding OpenAfvalCommand}" MouseAction="LeftClick" />
@@ -67,7 +62,7 @@
             <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" />
 
             <TextBlock FontSize="20">Bijlagen:</TextBlock>
-            <DataGrid Width="662" Height="325" HorizontalAlignment="Left" VerticalAlignment="Bottom" ItemsSource="{Binding filesList}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}">
+            <DataGrid Width="662" Height="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" ItemsSource="{Binding filesList}" CanUserAddRows="False" AutoGenerateColumns="False" SelectedItem="{Binding selectedBijlage}">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Width="1.5*" Header="Bestandsnaam" Binding="{Binding FileName}" />
                     <DataGridTextColumn IsReadOnly="True" Width="0.5*" Header="Bestandstype" Binding="{Binding Extension}" />

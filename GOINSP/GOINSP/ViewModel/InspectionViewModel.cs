@@ -91,7 +91,7 @@ namespace GOINSP.ViewModel
             }
 
             AddInspectionVisibility = Visibility.Collapsed;
-            if (Config.Rechten == Account.Rights.Manager || Config.Rechten == Account.Rights.Administrator)
+            if (Config.Rechten == Account.Rights.Manager || Config.Rechten == Account.Rights.Administrator || Config.Rechten == Account.Rights.InterneInspecteur)
             {
                 AddInspectionVisibility = Visibility.Visible;
             }
