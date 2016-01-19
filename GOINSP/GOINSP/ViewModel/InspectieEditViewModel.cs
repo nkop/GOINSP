@@ -131,8 +131,6 @@ namespace GOINSP.ViewModel
             _selectedBedrijf = new NewCompanyVM();
             _selectedUser = new AccountVM();
 
-            Inspection.date = DateTime.Now;
-
             UploadButton = new RelayCommand(selectFile);
             RemoveButton = new RelayCommand(removeBijlage);
             UpdateInspection = new RelayCommand(UpdateOrSave);
@@ -194,6 +192,11 @@ namespace GOINSP.ViewModel
         {
             List<Company> companies = Config.Context.Company.ToList();
             Bedrijven = new ObservableCollection<NewCompanyVM>(companies.Select(c => new NewCompanyVM(c)));
+
+            if(Inspection.date == DateTime.FromBinary(0))
+            {
+                Inspection.date = DateTime.Now;
+            }
 
             IEnumerable<InspectionType> inspectiontype = Config.Context.Inspectiontype;
             IEnumerable<InspectionTypeVM> inspectiontypeVM = inspectiontype.Select(a => new InspectionTypeVM(a));
@@ -354,6 +357,7 @@ namespace GOINSP.ViewModel
                 if (Inspection.directory.ToString() == "00000000-0000-0000-0000-000000000000")
                 {
                     dir = Guid.NewGuid();
+                    Inspection.directory = dir;
                 }
                 else
                 {
