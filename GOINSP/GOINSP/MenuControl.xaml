@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
         <TextBlock FontSize="64" HorizontalAlignment="Center" Margin="181,50,181,20" Foreground="#597cb6" Width="380">Menu GoInsp</TextBlock>
         <WrapPanel HorizontalAlignment="Center" Margin="-5,80,-22,80" Grid.Row="1" Width="769">
-            <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding UserControlCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button Name="UserControl"  Content="Gebruikers beheer" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding UserControlCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#37aef1" Offset="0"/>
@@ -36,7 +36,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button Content="Inspection" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenInspectionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button Content="Inspecties" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenInspectionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#37aef1" Offset="0"/>
