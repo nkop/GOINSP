@@ -167,6 +167,11 @@ namespace GOINSP.ViewModel
                 Inspection.accountVM = selectedUser;
                 Inspection.company = SelectedBedrijf;
                 Inspection.InspectiontypeVM = SelectedType;
+
+                if (Inspection.directory.ToString() == "00000000-0000-0000-0000-000000000000")
+                {
+                    dir = Guid.NewGuid();
+                }
                 Inspection.directory = dir;
 
                 // Add to database
@@ -251,6 +256,9 @@ namespace GOINSP.ViewModel
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string specificFolder = Path.Combine(folder, "GoInspGroepB/" + map);
                 DirectoryInfo d = new DirectoryInfo(specificFolder);
+
+                if (!Directory.Exists(specificFolder))
+                    Directory.CreateDirectory(specificFolder);
 
                 foreach (var file in d.GetFiles())
                 {
