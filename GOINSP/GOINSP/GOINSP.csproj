@@ -475,6 +475,15 @@
     <Resource Include="Controls\Images\paragraphleftjustify.png" />
     <Resource Include="Controls\Images\paragraphrightjustify.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\photo_link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\photo_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\photo_delete.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

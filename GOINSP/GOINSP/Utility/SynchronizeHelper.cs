@@ -251,10 +251,6 @@ namespace GOINSP.Utility
             {
                 Console.WriteLine("No Connection");
             }
-
-
-
-
         }
         static void Program_ApplyChangeFailed(object sender, DbApplyChangeFailedEventArgs e)
         {
