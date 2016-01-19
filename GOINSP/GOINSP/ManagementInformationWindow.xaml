@@ -102,7 +102,7 @@
 
             <DVC:Chart BorderThickness="0" Margin="50, 0, 0, 0" Name="BedrijfInspectieChart" Width="850" Height="450" Title="Aantal inspecties per bedrijf" Visibility="{Binding BedrInsp}">
                     <DVC:Chart.Series>
-                        <DVC:BarSeries Title="Aantal inspecties per inspecteur" ItemsSource="{Binding BedrInspData}" IndependentValueBinding="{Binding Path=Bedrijf.Bedrijfsnaam}" DependentValueBinding="{Binding Path=Inspecties}">
+                        <DVC:BarSeries Title="Aantal inspecties per bedrijf" ItemsSource="{Binding BedrInspData}" IndependentValueBinding="{Binding Path=Bedrijf.Bedrijfsnaam}" DependentValueBinding="{Binding Path=Inspecties}">
                         </DVC:BarSeries>
                     </DVC:Chart.Series>
                 </DVC:Chart>
