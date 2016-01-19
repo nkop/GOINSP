@@ -7,7 +7,7 @@
         Title="GoInsp - Inspectie details" Height="737.313" Width="700"
         DataContext="{Binding InspectionSpecs, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Background="#fff">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
@@ -54,9 +54,32 @@
                 <!--<Image Width="150" Source="https://lh3.googleusercontent.com/MOf9Kxxkj7GvyZlTZOnUzuYv0JAweEhlxJX6gslQvbvlhLK5_bSTK6duxY2xfbBsj43H=w300" Height="150" HorizontalAlignment="Left" />-->
 
                 <WrapPanel Orientation="Vertical" Margin="30 50 0 0">
-                    <Button Content="Aanpassen" Margin="0 0 0 5" Command="{Binding OpenEditInspection}" Visibility="{Binding EditInspectionVisibility}" Width="100"></Button>
-                    <Button Content="Verwijderen" Command="" Width="100" Visibility="{Binding EditInspectionVisibility}"></Button>
-                    <Button Content="Printen" Margin="0 5 0 5" Command="{Binding PrintRapport}" Width="100"></Button>
+                    <Button Content="Aanpassen" HorizontalAlignment="Center" Margin="0 0 0 5" Height="23" Foreground="#fff" Command="{Binding OpenEditInspection}" Visibility="{Binding EditInspectionVisibility}" VerticalAlignment="Top" Width="120">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Content="Verwijderen" HorizontalAlignment="Center" Margin="0 0 0 5" Height="23" Foreground="#fff" Command="{Binding deleteInspection}"  Visibility="{Binding EditInspectionVisibility}" VerticalAlignment="Top" Width="120">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Content="Printen" HorizontalAlignment="Center" Margin="0 0 0 5" Height="23" Foreground="#fff" Command="{Binding PrintRapport}"   VerticalAlignment="Top" Width="120">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#37aef1" Offset="0"/>
+                                <GradientStop Color="#288bb5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </WrapPanel>
             </WrapPanel>
             <ctl:RichText Text="{Binding Path=InspectionSpecs.description, Mode=TwoWay}" Margin="10" />
