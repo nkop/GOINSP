@@ -162,8 +162,11 @@ namespace GOINSP.ViewModel
             {
                 foreach (var item in tempInspecties)
                 {
-                    ChartData.Add(new InspecteurInspecties(new AccountVM(item.inspector), item.count));
-                    sum += item.count;
+                    if(item.inspector != null)
+                    {
+                        ChartData.Add(new InspecteurInspecties(new AccountVM(item.inspector), item.count));
+                        sum += item.count;
+                    }
                 }
             }
             RaisePropertyChanged("ChartData");
@@ -182,7 +185,10 @@ namespace GOINSP.ViewModel
             {
                 foreach (var item in tempInspecties)
                 {
-                    BedrInspData.Add(new BedrijfInspecties(new NewCompanyVM(item.company), item.count));
+                    if(item.company != null)
+                    {
+                        BedrInspData.Add(new BedrijfInspecties(new NewCompanyVM(item.company), item.count));
+                    }
                 }
             }
             RaisePropertyChanged("BedrInspData");
