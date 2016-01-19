@@ -8,7 +8,7 @@
         Title="GoInsp - Inspectie wijzigen" Height="863.433" Width="800"
         DataContext="{Binding InspectieEditViewModel, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen"
-        Background="#3598dc">
+        Background="#fff">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />
@@ -64,8 +64,32 @@
                 <DataGridTextColumn IsReadOnly="True" Width="0.5*" Header="Bestandstype" Binding="{Binding Extension}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="1" Grid.Row="9" Margin="10,10,523,10" Command="{Binding UploadButton}">Bijlage toevoegen</Button>
-        <Button Grid.Column="1" Grid.Row="9" Margin="134,10,399,10" Command="{Binding RemoveButton}">Bijlage verwijderen</Button>
-        <Button Content="Opslaan" Margin="10" Command="{Binding UpdateInspection}" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"></Button>
+
+        <Button Content="Bijlage toevoegen" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="9" Margin="10,10,523,10" Height="23" Foreground="#fff" Command="{Binding UploadButton}"  VerticalAlignment="Top" Width="110">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Button Content="Bijlage verwijderen" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="9" Margin="134,10,399,10" Command="{Binding RemoveButton}"  Height="23" Foreground="#fff"  VerticalAlignment="Top" Width="110">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Button Content="Opslaan" HorizontalAlignment="Left" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Margin="10"  Command="{Binding UpdateInspection}"  Height="23" Foreground="#fff"  VerticalAlignment="Top" Width="240">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

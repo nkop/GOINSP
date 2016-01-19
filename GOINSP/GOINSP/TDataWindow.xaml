@@ -13,8 +13,8 @@
             <ComboBox x:Name="comboBox" ItemsSource="{Binding TDataCollection}" SelectedItem="{Binding SelectedTData}" DisplayMemberPath="PeriodenFormatted" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
             <DataGrid x:Name="dataGrid" Foreground="#597cb6" ItemsSource="{Binding GridData}" Margin="0, 10, 0, 0" AutoGenerateColumns="False" Height="493">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Veld" Width="1*" Binding="{Binding StringOne}"/>
-                    <DataGridTextColumn Header="Waarde" Width="1*" Binding="{Binding StringTwo}"/>
+                    <DataGridTextColumn Header="Veld" Width="1*" Binding="{Binding StringOne}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Waarde" Width="1*" Binding="{Binding StringTwo}" IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
