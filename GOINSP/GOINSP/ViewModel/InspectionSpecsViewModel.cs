@@ -352,20 +352,20 @@ namespace GOINSP.ViewModel
                             DirectoryInfo d = new DirectoryInfo(speciaalmappie);
 
 
-
-                            foreach (var file in d.GetFiles())
+                            if (d.Exists)
                             {
-                                if (Path.GetExtension(file.ToString()).ToLower() == ".jpg" || Path.GetExtension(file.ToString()).ToLower() == ".jpeg"
-                                    || Path.GetExtension(file.ToString()).ToLower() == ".png" || Path.GetExtension(file.ToString()).ToLower() == ".gif")
+                                foreach (var file in d.GetFiles())
                                 {
-                                    Bijlagen += "<img src='" + speciaalmappie + "/" + file + @"' /><br />" + file + "<br />";
+                                    if (Path.GetExtension(file.ToString()).ToLower() == ".jpg" || Path.GetExtension(file.ToString()).ToLower() == ".jpeg"
+                                        || Path.GetExtension(file.ToString()).ToLower() == ".png" || Path.GetExtension(file.ToString()).ToLower() == ".gif")
+                                    {
+                                        Bijlagen += "<img src='" + speciaalmappie + "/" + file + @"' /><br />" + file + "<br />";
+                                    }
+                                    else
+                                    {
+                                        Bijlagen += file + "<br />";
+                                    }
                                 }
-                                else
-                                {
-                                    Bijlagen += file + "<br />";
-                                }
-                                
-                                
                             }
                         }
 

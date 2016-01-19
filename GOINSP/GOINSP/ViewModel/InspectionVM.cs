@@ -62,7 +62,17 @@ namespace GOINSP.ViewModel
 
         public string totalAdres
         {
-            get { return inspection.company.BedrijfsAdres + " " + inspection.company.BedrijfsNummer; }
+            get { 
+                
+                if (inspection.company != null)
+                {
+                    return inspection.company.BedrijfsAdres + " " + inspection.company.BedrijfsNummer;
+                }
+                else
+                {
+                    return "Onbekend";
+                }
+                 }
         }
 
         public Guid directory

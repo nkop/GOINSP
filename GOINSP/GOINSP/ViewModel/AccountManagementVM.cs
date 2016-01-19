@@ -88,9 +88,12 @@ namespace GOINSP.ViewModel
 
                 foreach (AccountVM item in tempUsersVM)
                 {
-                    if (item.UserName.ToLower().Contains(SearchQuota.ToLower()) || item.Email.ToLower().Contains(SearchQuota.ToLower()))
+                    if (item.UserName != null && item.Email != null)
                     {
-                        Users.Add(item);
+                        if (item.UserName.ToLower().Contains(SearchQuota.ToLower()) || item.Email.ToLower().Contains(SearchQuota.ToLower()))
+                        {
+                            Users.Add(item);
+                        }
                     }
                 }
 
