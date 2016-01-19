@@ -58,8 +58,9 @@ namespace GOINSP.ViewModel
 
         public Guid InspectionID;
 
-        public void CreateInspections()
+        public void CreateInspectionsPermissions()
         {
+
             IEnumerable<Inspection> inspectie = Config.Context.Inspection;
 
             IEnumerable<InspectionVM> inspectionVM = null;
@@ -89,6 +90,12 @@ namespace GOINSP.ViewModel
             {
                 inspectionVM = inspectie.Select(a => new InspectionVM(a));
             }
+            Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
+        }
+
+        public void CreateInspections()
+        {
+            CreateInspectionsPermissions();
 
             AddInspectionVisibility = Visibility.Collapsed;
             if (Config.Rechten == Account.Rights.Manager || Config.Rechten == Account.Rights.Administrator || Config.Rechten == Account.Rights.InterneInspecteur)
@@ -96,7 +103,6 @@ namespace GOINSP.ViewModel
                 AddInspectionVisibility = Visibility.Visible;
             }
 
-            Inspections = new ObservableCollection<InspectionVM>(inspectionVM);
             RaisePropertyChanged("Inspections");
         }
 
@@ -135,11 +141,12 @@ namespace GOINSP.ViewModel
         {
             if (SearchQuota.Length >= 0)
             {
-                List<Models.Inspection> tempInspection = Config.Context.Inspection.ToList();
+                CreateInspectionsPermissions();
+
                 List<InspectionVM> tempInspectionVM = new List<InspectionVM>();
-                foreach (Models.Inspection item in tempInspection)
+                foreach (InspectionVM item in Inspections)
                 {
-                    tempInspectionVM.Add(new InspectionVM(item));
+                    tempInspectionVM.Add(item);
                 }
                 Inspections.Clear();
                 foreach (InspectionVM item in tempInspectionVM)
