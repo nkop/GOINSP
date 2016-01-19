@@ -5,53 +5,51 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Background="#fff">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="189*"/>
-            <RowDefinition Height="380*"/>
-        </Grid.RowDefinitions>
+    <StackPanel>
         <TextBlock FontSize="64" HorizontalAlignment="Center" Margin="181,50,181,20" Foreground="#597cb6" Width="380">Menu GoInsp</TextBlock>
-        <WrapPanel HorizontalAlignment="Center" Margin="-5,80,-22,80" Grid.Row="1" Width="769">
-            <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding UserControlCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#37aef1" Offset="0"/>
-                        <GradientStop Color="#288bb5" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenDataImportCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#37aef1" Offset="0"/>
-                        <GradientStop Color="#288bb5" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Name="Management" Content="Management Informatie" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding ManagementInfoCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#37aef1" Offset="0"/>
-                        <GradientStop Color="#288bb5" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Content="Inspection" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenInspectionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#37aef1" Offset="0"/>
-                        <GradientStop Color="#288bb5" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Name="Bedrijven" Content="Bedrijven" HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenCompanyCommand}" Foreground="#fff">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#37aef1" Offset="0"/>
-                        <GradientStop Color="#288bb5" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-        </WrapPanel>
-    </Grid>
+    <StackPanel Margin="0, 200, 0, 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+        <Button Name="UserControl"  Content="User Control" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding UserControlCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="OpenData" Content="Open-Data Import" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenDataImportCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="Management" Content="Management Informatie" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding ManagementInfoCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Inspection" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenInspectionCommand}" Foreground="#fff" BorderBrush="#FF1783B1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Name="Bedrijven" Content="Bedrijven" HorizontalAlignment="Center" Margin="5,0,5,0" VerticalAlignment="Top" Width="140" Height="55" Command="{Binding OpenCompanyCommand}" Foreground="#fff">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#37aef1" Offset="0"/>
+                    <GradientStop Color="#288bb5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+    </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </Window>
