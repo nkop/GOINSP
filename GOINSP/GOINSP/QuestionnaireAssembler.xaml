@@ -5,7 +5,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{Binding QuestionTemplate, Source={StaticResource Locator}}"
-        Title="Vragenlijst Templates" Height="871.512" Width="750" WindowStartupLocation="CenterScreen" Background="#fff">
+        Title="GoInsp - Vragenlijst Templates" Height="871.512" Width="750" WindowStartupLocation="CenterScreen" Background="#fff">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" />

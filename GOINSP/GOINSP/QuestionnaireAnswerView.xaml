@@ -4,7 +4,7 @@
         xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:g="clr-namespace:GOINSP.ViewModel.QuestionnaireViewModels"
         DataContext="{Binding QuestionnaireAnswerViewModel, Source={StaticResource Locator}}"
-        Title="Vragenlijst" Height="600" Width="1000" Background="#fff" WindowStartupLocation="CenterScreen">
+        Title="GoInsp - Vragenlijst" Height="600" Width="1000" Background="#fff" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type g:SimpleDateTimeQuestionVM}">
