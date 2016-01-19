@@ -107,6 +107,7 @@ namespace GOINSP.ViewModel
         public ICommand PrintRapport { get; set; }
         public ICommand OpenAfvalCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
+        public ICommand deleteInspection { get; set; }
 
         public void FillPoint()
         {
@@ -141,6 +142,7 @@ namespace GOINSP.ViewModel
             PrintRapport = new RelayCommand(generatePDF);
             OpenAfvalCommand = new RelayCommand(OpenAfval);
             CloseWindowCommand = new RelayCommand(CloseWindow);
+            deleteInspection = new RelayCommand(DeleteInspection);
         }
 
         private void CloseWindow()
@@ -148,6 +150,13 @@ namespace GOINSP.ViewModel
             if (LastSender != null && reOpen)
                 LastSender.Show();
             reOpen = true;
+        }
+
+        private void DeleteInspection()
+        {
+            Config.Context.Inspection.Remove(inspectionSpecs.toInspection());
+            Config.Context.SaveChanges();
+            CloseView();
         }
 
         public void OpenAfval()
