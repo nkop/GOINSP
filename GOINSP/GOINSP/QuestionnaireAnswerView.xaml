@@ -15,6 +15,13 @@
                 <StackPanel Orientation="Vertical" Width="350">
                     <xctk:DateTimePicker Value="{Binding Answer, Mode=TwoWay}" Format="FullDateTime" Margin="0, 3, 0, 0"/>
                 </StackPanel>
+                <StackPanel Orientation="Vertical" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Margin="0, 3, 0, 0" Width="16" Height="16" BorderBrush="{x:Null}" Command="{Binding AddPictureToQuestion}" CommandParameter="{Binding QuestionID}" Foreground="{x:Null}" OpacityMask="{x:Null}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Images/photo_add.png" Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type g:SimpleIntegerQuestionVM}">

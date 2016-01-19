@@ -14,6 +14,14 @@ namespace GOINSP.ViewModel.QuestionnaireViewModels
     {
         public QuestionBase question { get; set; }
 
+        public Guid QuestionID
+        {
+            get
+            {
+                return question.QuestionID;
+            }
+        }
+
         public int ListNumber
         {
             get
