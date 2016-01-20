@@ -18,26 +18,31 @@ namespace GOINSP.Utility
 
             FtpDirectoryExists(("ftp://marijnsimons.nl/" + cmp.companyid.ToString().ToUpper() + "/"), user, pwd);
             // Get the object used to communicate with the server.
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://marijnsimons.nl/" + cmp.companyid.ToString().ToUpper() + "/" + "Inspection-" + insp.name + "-" + insp.date.ToString("ddMMyyyy") + ".pdf");
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.UseBinary = true;
-            request.KeepAlive = false;
-            // This example assumes the FTP site uses anonymous logon.
-            request.Credentials = new NetworkCredential(user, pwd);
+            try {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://marijnsimons.nl/" + cmp.companyid.ToString().ToUpper() + "/" + "Inspection-" + insp.name + "-" + insp.date.ToString("ddMMyyyy") + ".pdf");
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.UseBinary = true;
+                request.KeepAlive = false;
+                // This example assumes the FTP site uses anonymous logon.
+                request.Credentials = new NetworkCredential(user, pwd);
 
-            // Copy the contents of the file to the request stream.
-            byte[] fileContents = File.ReadAllBytes(fileLocation);
+                // Copy the contents of the file to the request stream.
+                byte[] fileContents = File.ReadAllBytes(fileLocation);
 
-            request.ContentLength = fileContents.Length;
-            using (Stream s = request.GetRequestStream())
+                request.ContentLength = fileContents.Length;
+                using (Stream s = request.GetRequestStream())
+                {
+                    s.Write(fileContents, 0, fileContents.Length);
+                }
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+
+                Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+
+                response.Close();
+            } catch(Exception e)
             {
-                s.Write(fileContents, 0, fileContents.Length);
+                Console.WriteLine("You are offline, not possible to upload");
             }
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-
-            Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-
-            response.Close();
             
         }
 
