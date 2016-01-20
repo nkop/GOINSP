@@ -109,48 +109,49 @@ namespace GOINSP.ViewModel
             double LongDec = double.Parse(Longitude);
             double LatDec = double.Parse(Latitude);
 
-            GmapAPIImpler gmap = new GmapAPIImpler();
-            gmap.lat = LatDec.ToString().Replace(',', '.');
-            gmap.lon = LongDec.ToString().Replace(',', '.');
-            gmap.Import(null);
-
-            List<GmapAPI> mapApiList = gmap.list;
-
-            foreach (GmapAPI mapApi in mapApiList)
+            try
             {
-                foreach(AddressComponent address_component in mapApi.address_components)
+
+                GmapAPIImpler gmap = new GmapAPIImpler();
+                gmap.lat = LatDec.ToString().Replace(',', '.');
+                gmap.lon = LongDec.ToString().Replace(',', '.');
+                gmap.Import(null);
+
+                List<GmapAPI> mapApiList = gmap.list;
+
+                foreach (GmapAPI mapApi in mapApiList)
                 {
-                    foreach(string type in address_component.types)
+                    foreach(AddressComponent address_component in mapApi.address_components)
                     {
-                        if (type == "postal_code" && NewCompanyVM.BedrijfsPostcode == null)
+                        foreach(string type in address_component.types)
                         {
-                            NewCompanyVM.BedrijfsPostcode = address_component.long_name.Replace(" ", "");
-                        }
-                        if (type == "route" && NewCompanyVM.BedrijfsAdres == null)
-                        {
-                            NewCompanyVM.BedrijfsAdres = address_component.long_name;
-                        }
-                        if (type == "locality" && NewCompanyVM.BedrijfsWijk == null)
-                        {
-                            NewCompanyVM.BedrijfsWijk = address_component.short_name;
-                        }
-                        if (type == "street_number" && NewCompanyVM.BedrijfsNummer == null)
-                        {
-                            NewCompanyVM.BedrijfsNummer = address_component.short_name;
-                        }
-                        if (type == "administrative_area_level_2" && NewCompanyVM.BedrijfsGemeente == null)
-                        {
-                            NewCompanyVM.BedrijfsGemeente = address_component.short_name;
+                            if (type == "postal_code" && NewCompanyVM.BedrijfsPostcode == null)
+                            {
+                                NewCompanyVM.BedrijfsPostcode = address_component.long_name.Replace(" ", "");
+                            }
+                            if (type == "route" && NewCompanyVM.BedrijfsAdres == null)
+                            {
+                                NewCompanyVM.BedrijfsAdres = address_component.long_name;
+                            }
+                            if (type == "locality" && NewCompanyVM.BedrijfsWijk == null)
+                            {
+                                NewCompanyVM.BedrijfsWijk = address_component.short_name;
+                            }
+                            if (type == "street_number" && NewCompanyVM.BedrijfsNummer == null)
+                            {
+                                NewCompanyVM.BedrijfsNummer = address_component.short_name;
+                            }
+                            if (type == "administrative_area_level_2" && NewCompanyVM.BedrijfsGemeente == null)
+                            {
+                                NewCompanyVM.BedrijfsGemeente = address_component.short_name;
+                            }
                         }
                     }
                 }
-            }
 
-            NewCompanyVM.BedrijfsLon = (decimal)LongDec;
-            NewCompanyVM.BedrijfsLat = (decimal)LatDec;
+                NewCompanyVM.BedrijfsLon = (decimal)LongDec;
+                NewCompanyVM.BedrijfsLat = (decimal)LatDec;
 
-            try
-            {
                 RegioS regio = Config.Context.HuishoudelijkAfvalRegioS.Where(x => x.Title == NewCompanyVM.BedrijfsGemeente).First();
                 NewCompanyVM.BedrijfsGemeente = regio.Title;
                 NewCompanyVM.BedrijfsGemeenteCode = regio.Key;
