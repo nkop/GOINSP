@@ -24,7 +24,9 @@ namespace GOINSP.Utility
             removing,
             downloading,
             inserting,
-            saving
+            saving,
+            error,
+            done
         }
     }
 }

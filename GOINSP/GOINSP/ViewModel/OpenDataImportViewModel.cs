@@ -78,7 +78,6 @@ namespace GOINSP.ViewModel
 
             task.ContinueWith((doneTask) =>
             {
-                ProgressLabelText = "Klaar met importeren";
                 ButtonsEnabled = true;
             });
         }
@@ -107,6 +106,14 @@ namespace GOINSP.ViewModel
                 case ImportProgressValues.ProgressStatus.saving:
                     ProgressBarPercentage = 100;
                     ProgressLabelText = "Velden opslaan";
+                    break;
+                case ImportProgressValues.ProgressStatus.error:
+                    ProgressBarPercentage = 0;
+                    ProgressLabelText = "Er is een fout opgetreden";
+                    break;
+                case ImportProgressValues.ProgressStatus.done:
+                    ProgressBarPercentage = 100;
+                    ProgressLabelText = "Klaar met importeren";
                     break;
                 default:
                     break;
